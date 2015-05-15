@@ -1,0 +1,64 @@
+<script src="js/prototype.js" type="text/javascript"></script>
+<script src="js/scriptaculous.js?load=effects" type="text/javascript"></script>
+<script src="ieupdate.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<link href="web.css" rel="stylesheet" />
+<link href="textstyles_nf.css" rel="stylesheet" media="screen"/>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="style1">
+		<tr>
+		  <td valign="top" width="480" align="center" >
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+             <td width="480" align="center"  >
+			<center>
+			 <div style="display:{show_palyer};">
+			 <div id="flowplayerholder" style="text-align:center">
+        <p class="heading">This will be replaced by the player.</p>
+        <script type="text/javascript">
+// <![CDATA[
+var fo = new SWFObject("swf/FlowPlayerDark.swf", "FlowPlayer", "420px", "390px", "7", "#ffffff", true);
+// need this next line for local testing, it's optional if your swf is on the same domain as your html page
+fo.addParam("allowScriptAccess", "always");
+fo.addVariable("config", "{ countryCode: 'fi', playList: [ {overlayId: 'play' }, { url: '{url}' } ], initialScale: 'scale',  fullScreenScriptURL: 'fullscreen.js' }");
+fo.write("flowplayerholder");
+// ]]>
+</script>
+   </div>
+   </div>
+   </center>
+   
+   <div style="display:{show_youtub}; text-align:center">
+   
+    <object width="420" height="385"><param name="movie" value="{url}"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="{url}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="420" height="385"></embed></object>
+   </div>
+   <div style="text-align:center; width:420px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:13px; padding-top:5px"> {desc} </div>
+   </td>
+            </tr>
+			
+			<tr><td height="30">&nbsp;</td></tr>
+			
+			<tr><td align="center"><div style="border:2px solid #000000; width:420px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">
+			
+			<div style=" font-family:Verdana, Arial, Helvetica, sans-serif; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:13px; text-align:center; height:300px">
+			<b>OPTIONAL - DISCUSSION BLOG</b></div>
+			
+			</div></td></tr>
+          </table>
+
+		  </td>
+			<td  valign="top">
+							</div>
+			
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			
+				<!-- BEGIN AccessBlockList -->
+            <tr><td width="110" rowspan="2" valign="top">
+				<div style="padding:3px" ><a href="change_video.php?act=video_list&v_id={v_id}" class="rvts84">{video_thumb}<!--<img src="images/vipd_logo_sm.jpg" border="0" />--></a></div></td><td bgcolor="#ededed" height="20"><strong><a href="change_video.php?act=video_list&v_id={v_id}" style=" text-decoration:none; color:#000000; font-size:13px; font-family:Verdana, Arial; padding:5px ">{v_title}</a></strong></td>
+			</tr><tr><td align="left" valign="top" style="font-size:13px; font-family:Verdana, Arial; padding:3px" >{vid_description}</td></tr>
+			<tr><td align="left" colspan="2" height="10" ></td></tr>
+                 <!-- END AccessBlockList -->
+				
+			</table><br></td>
+		</tr>
+</table>
+

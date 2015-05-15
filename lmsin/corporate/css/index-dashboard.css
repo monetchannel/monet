@@ -1,0 +1,249 @@
+html{
+	
+}
+body{
+	font-family: myriad pro;
+}
+@font-face {
+    font-family: 'Myriad pro';
+    src: url('../fonts/MyriadPro-Light.otf') format('otf'),
+	url('../fonts/myriadpro-light-webfont.woff') format('woff'),
+	url('../fonts/myriadpro-light-webfont.eot') format('eot'),
+    url('../fonts/myriadpro-light-webfon.ttf') format('truetype'),
+    url('../fonts/myriadpro-light-webfon.svg#webfontFHzvtkso') format('svg');
+}
+.bg-top{
+	background-color:#50587b;  
+}
+#nav {
+  width: 100%;
+  position:static;
+  top:-80px;
+}
+
+#nav.affix {
+	position: fixed;
+	top: 0;
+	z-index: 1021;
+	-webkit-transition: all .6s ease-in-out;
+	-moz-transition: all .6s ease-in-out;
+  	-o-transition: all .6s ease-in-out;
+	transition: all .6s ease-in-out;
+}
+.fixed-pos{
+	position: fixed;
+	margin-top: 80px !important;
+	z-index: 1021;
+	background-color:#fff;
+	border-bottom: 2px solid #0fbcc0;
+        width: 79.2%;
+}
+.bottom-pos{
+	position: relative;
+	top: 440px;
+}
+.navbar-default {
+    background-color: #0fbcc0;
+}
+.navbar{
+	margin-bottom:0;
+	border-radius:0;
+	border:1px solid #50587B;
+	min-height: 35px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+	background-color:#009397;
+	color:#fff;
+}
+.video-icon{
+	background:url('../images/videomanager.png')no-repeat;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-brand {
+    height: 35px;
+    padding: 8px;
+	outline:none;
+}
+.navbar-nav > li > a {
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+.navbar-right li a img{
+	float:left;
+}
+.top-right-icon{
+	padding-top:0 !important;;
+}
+.top-right-icon:hover, .top-right-icon:hover{
+	background-color: transparent !important;
+}
+.navbar-default .navbar-toggle {
+	border-color: #0fbcc0;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background-color: #0fbcc0;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #ffffff;
+}
+.bg-color{
+	background:#f1f1f1;
+}
+.align-center{
+    padding-bottom: 1%;
+    text-align: center;
+}
+.sidebar-nav .img-responsive{
+	display:inline-block;
+	margin-right: 8%;
+}
+.pull-right {
+    margin-top: 2%;
+}
+.margin-bottom{
+	margin-bottom:1%;
+}
+.margin-top{
+	margin-top:1%;
+}
+.search-query{
+	border:1px solid #aaa;
+	padding:5px;
+}
+.search-btn{
+	background:url('../images/go.png')no-repeat;
+	border:none;
+	height: 37px;
+    position: relative;
+    top: -2px;
+    width: 58px;
+	padding: 20px;
+}
+.input-group .form-control {
+    width: 70%;
+}
+.float-left{
+	float: left;
+    font-size: 12px;
+    text-align: center;
+    width: 25%;
+}
+.clear{
+	clear:both;
+}
+
+
+.circle-box{
+	border: 5px solid #84c556;
+    border-radius: 50%;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+    width: 150px;
+}
+.circle-middle{
+	background-color: #84c556;
+    border-radius: 50%;
+    height: 140px;
+    padding: 20px;
+    width: 140px;
+}
+.circle-inner{
+	background-color: #fff;
+    border: 5px solid #84c556;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+.gray-bg{
+	background-color:#F3F3F4;
+}
+.row-right{
+	border-right:2px solid #17BCBD;
+}
+.row-top{
+	border-top:2px solid #17BCBD;
+}
+.circle-graph{
+	text-align: center;
+}
+.circle-face img{
+	margin: 0 auto;
+    position: relative;
+	top: -92px;
+}
+.full-size{
+	width:98.2%;
+}
+
+
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 84%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+         min-height: 5%;
+      }
+      #footer {
+       
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      #wrap > .container {
+		padding-top: 15px;
+      }
+      
+      #timeline-section{
+          overflow : hidden;
+      }  
+      
+      #timeline-section .timeline-steps{
+          width: 5000px;
+          overflow:auto;
+          padding-bottom: 50px;
+      }
+	  
+     @media (max-width: 370px) {
+        .top-logo {
+          width:93%;
+        }
+      }
+	@media (max-width: 1000px) {
+        .text-align {
+          text-align:center;
+        }
+      }

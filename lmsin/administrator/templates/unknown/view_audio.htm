@@ -1,0 +1,118 @@
+<script>
+function del_schedule(a)
+{
+            if(confirm("Are you sure you want to delete the selected Audio File ?"))
+            { 
+            
+				this.document.frm.act.value="delete_audio";
+				this.document.frm.af_id.value=a;
+                this.document.frm.submit();
+            }
+}
+function set_order(f,o)
+{
+	
+	frm.orderby.value=f;
+	frm.order.value=o;
+	frm.submit();
+}
+
+function nb(a)
+{
+	frm.st_pos.value=a;
+	frm.submit();
+}
+
+
+</script>
+<script language="javascript" src="cynets_tables.js"></script>
+<form name="frm" method="POST" action="audio_files.php">	
+     <center>
+	  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="89%" id="AutoNumber1">
+        <tr>
+          <td width="100%" style="border-top-style: none; border-top-width: medium">
+       <p align="center"><b>
+          <font face="Verdana, Arial, Helvetica, sans-serif">
+          View Audio</font></b></p>
+          <p align="center">
+      <font face="Verdana" size="2">{msg}</font></p>
+       <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" bordercolor="#000000" id="mytable" style="border-collapse:collapse">
+         <tr>
+           <td width="284"><p align="left"><font face="Verdana" size="2" color="#5A619E"><b> <font color="#5A619E"> <a style="text-decoration: none" href="audio_files.php?act=add_audio"> <font face="Verdana, Arial, Helvetica, sans-serif">Add Audio Files</font></a></font></b></p></td>
+           <td width="284"><p align="left">
+             <input type="text" name="rel_val" size="20" value="{rel_val}" />
+             <input type="submit" value="GO" name="GO" />
+           </p></td>
+           {HF1}
+           <td width="306"><p align="right"><font face="Verdana" style="font-size: 9pt">&nbsp; {nb_text}</font></p></td>
+         </tr>
+         <tr>
+           <td height="19" style="border-left-color: #C0C0C0; border-left-width: 1; border-right-color: #C0C0C0; border-right-width: 1; border-bottom-color:#C0C0C0; border-bottom-width:1" colspan="3"><font color="#000000"> </font> </td>
+         </tr>
+       </table>
+       
+       <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber1">
+        
+        <tr>
+          <td width="100%" style="border-top-style: none; border-top-width: medium">
+          
+          <table width="100%"  cellpadding="0" cellspacing="0" border="0" id="schlist" >
+	<tr bgcolor="#C0C0C0">
+	<td bgcolor="#C0C0C0" width="244" align="left" height="25">
+        <font face="Verdana" size="2"><a href="javascript: set_order('af_artist_name','{af_artist_name_order}')"><b>&nbsp;Artist Name</b></a></font></td>
+	<td bgcolor="#C0C0C0" width="278" align="left">
+        <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('af_album_name','{af_album_name_order}')">Album Name</a></b></font></td>		
+	<td bgcolor="#C0C0C0" width="283" align="left">
+        <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('af_publisher','{af_publisher_order}')">Publisher Name</a></b></font></td>		
+	<td bgcolor="#C0C0C0" width="150" align="left">
+        <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('af_year','{af_year_order}')">Date</a></b></font></td>		
+
+	<td bgcolor="#C0C0C0" width="150">
+        <p align="center"><font face="Verdana" size="2"><b>
+        Action</b></font></td>
+   </tr>	
+      <!-- BEGIN AccessBlockList --> {HF1}
+   <tr>
+	<td width="244" height="25">
+        <font face="Verdana" size="2">&nbsp;{af_artist_name}</font></td>
+	<td width="278">
+        <font face="Verdana" size="2">&nbsp;{af_album_name}</font></td>
+	<td width="283">
+        <font face="Verdana" size="2">&nbsp;{af_publisher}</font></td>
+	<td width="150">
+        <font face="Verdana" size="2">&nbsp;{af_year}</font></td>
+	<td width="150">
+        <p align="center"><font face="Verdana" size="2">
+        <a href="audio_files.php?act=edit_audio&af_id={af_id}">
+        <font color="#000000">Edit</font></a> <span style="display:{hide_del}">|
+        <a href="Javascript: del_schedule({af_id})"><font color="#000000">Del</font></a></span> 
+        </td>
+	</tr>
+	
+	
+	<!-- END AccessBlockList --> {HF1}
+		
+	  </table>
+       </td>
+        </tr>
+       </table>
+
+        </td>
+        </tr>
+       </table>
+      
+  </center>
+    </div>
+	<font face="Verdana">
+	<input type="hidden" name="act" value="{act}">
+	<input type="hidden" name="st_pos" value="{st_pos}">
+    </font>
+    <input type="hidden" name="af_id" value="{af_id}">
+     <input type="hidden" name="order" value="{order}">
+     <input type="hidden" name="orderby" value="{orderby}">
+</form>
+
+ <script>
+<!--
+cynets_tables('schlist',0,0);
+-->   </script>

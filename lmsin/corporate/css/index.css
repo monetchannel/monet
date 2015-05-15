@@ -1,0 +1,347 @@
+html{
+	
+}
+body{
+	font-family: myriad pro;
+}
+@font-face {
+    font-family: 'Myriad pro';
+    src: url(../fonts/myriadpro-light-webfont.ttf),
+	url('../fonts/myriadpro-light-webfont.woff') format('woff'),
+	url('../fonts/myriadpro-light-webfont.eot') format('eot'),
+    url('../fonts/myriadpro-light-webfon.ttf') format('truetype'),
+    url('../fonts/myriadpro-light-webfon.svg#webfontFHzvtkso') format('svg');
+}
+.navbar-default {
+    background-color: #50597b;
+}
+.navbar{
+	margin-bottom:0;
+	border-radius:0;
+	border:none;
+	
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+	background-color:#1F263E;
+	color:#fff;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-brand{
+	padding:1%;
+}
+.navbar-right li a img{
+	float:left;
+}
+.top-right-icon{
+	padding-top:0 !important;;
+}
+.top-right-icon:hover, .top-right-icon:hover{
+	background-color: transparent !important;
+}
+.navbar-default .navbar-toggle {
+	border-color: #1f263e;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background-color: #1f263e;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #ffffff;
+}
+.bg-color{
+	background:#94DBFF;
+}
+.align-center{
+    padding-bottom: 1%;
+    text-align: center;
+}
+.color-meg{
+	color:#11a8ab;
+	font-family: Myriad pro;
+    font-size: 60px;
+}
+.color-yellow{
+	color:#f0a233;
+	font-family: Myriad pro;
+    font-size: 50px;
+	margin-top: -2%;
+	font-style: italic;
+}
+
+.left-bottom{
+	
+}
+.image-width{
+	width:570px;
+}
+.left-bottom .img-responsive {
+    margin: 0 auto;
+}
+.login-box{
+	background:url("../images/box.png");
+}
+.login-top{
+	 width: 100%;
+}
+.login-top a{
+	background:url("../images/up_btn.png");
+	float:left;
+}
+.clear{
+	clear:both;
+}
+.login-text{
+	background: none repeat scroll 0 0 #cc314b;
+    color: #fff;
+    padding: 2%;
+	margin-top: 5px;
+    text-align: center;
+	cursor: pointer;
+}
+.login-text:hover, .login-text:focus{
+	background:#9e293c;
+}
+.active-tab{
+	background:#9e293c;
+}
+.login-text span{ 
+	font-size:20px;
+}
+.authantication-form{
+	background:#e64c66;
+	margin-top:2px;
+}
+.login-title{
+	color: #fff;
+    font-size: 18px;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    padding-top: 1%;
+}
+.form-input{
+	background: none repeat scroll 0 0 #ece9ec;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px;
+    margin-bottom: 3%;
+    width: 90%;
+	padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-input-select{
+	color:#999;
+}
+.styled-select {
+    background: url("../images/dropdown.png") no-repeat scroll 0 0 transparent;
+    height: 40px;
+    overflow: hidden;
+    width: 90%;
+	margin-bottom: 3%;
+	border:none;
+	background: none repeat scroll 0 0 #ece9ec;
+}
+.styled-select select {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    border-radius: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+	padding: 6px 12px;
+}
+.form-input:focus{
+	box-shadow: none;
+}
+.form-signin{
+	text-align:center;
+}
+.btn-primary {
+    background: url("../images/signupbtn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+	padding: 1.5% 4%;
+}
+.btn-primary:active {
+    background: url("../images/signupbtn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.footer-icons{
+	margin-top:1px;
+}
+@media (max-width: 767px) { 
+    .navbar-brand {
+        padding: 0;        
+    }
+
+    .navbar-brand img {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+}
+@media (max-width: 1500px) {
+	.color-meg{
+		font-size: 55px;
+	}
+	.color-yellow{
+		font-size: 45px;
+	}
+	.image-width{
+		width: 525px;
+	}
+}
+@media (max-width: 1400px) {
+	.color-meg{
+		font-size: 50px;
+	}
+	.color-yellow{
+		font-size: 40px;
+	}
+	.image-width{
+		width:505px;
+	}
+}
+@media (max-width: 1300px) {
+	.color-meg{
+		font-size: 45px;
+	}
+	.color-yellow{
+		font-size: 35px;
+	}
+	.image-width{
+		width:475px;
+	}
+}
+@media (max-width: 992px) {
+	 .login-text {
+		padding:1%;
+	}
+	.authantication-form{
+		margin-top: 5px;
+	}
+	.color-meg{
+		font-size: 40px;
+	}
+	.color-yellow{
+		font-size: 30px;
+	}
+	.image-width{
+		width:470px;
+	}
+}
+@media (max-width: 768px) {
+	.color-meg{
+		font-size: 40px;
+	}
+	.color-yellow{
+		font-size: 30px;
+	}
+}
+@media (max-width: 500px) {
+	.color-meg{
+		font-size: 35px;
+	}
+	.color-yellow{
+		font-size: 25px;
+	}
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+/* Sticky footer styles
+-------------------------------------------------- */
+
+#footer {
+  	position: relative;
+  	bottom: 0;
+  	width: 100%;
+  	/* Set the fixed height of the footer here */
+}
+#footer p{
+	color:#fff;
+}
+.pager {
+    margin: 10px 0;
+}
+.pager li > a, .pager li > span {
+    border: medium none;
+}
+.pager li > a, .pager li > span {
+    background-color: rgba(0, 0, 0, 0);
+}
+.pager li > a, .pager li > span{
+	border:none;
+}
+.pager li > a:hover, .pager li > span:focus{
+	background-color:#fff;
+}
+.pager li > a:hover, .pager li > a:focus{
+	background-color:rgba(0, 0, 0, 0) !important;
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+
+#footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+
+
+.btn-input {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+	margin-bottom:3%;
+}
+
+.btn-input .btn.form-control {
+    text-align: left;
+}
+
+.btn-input .btn.form-control span:first-child {
+   left: 10px;
+   overflow: hidden;
+   position: absolute;
+   right: 25px;
+}
+.form-control{
+	background: none repeat scroll 0 0 #ece9ec;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.btn-input .btn.form-control .caret {
+   margin-top: -1px;
+   position: absolute;
+   right: 10px;
+   top: 50%;
+}
+.dropdown-menu{
+	width:100%;
+}
+.caret{
+	background:url("../images/dropdownicon.png")no-repeat;
+	width:17px;
+	height:15px;
+	border-left:none;
+    border-right:none;
+    border-top:none;
+}
+.btn-input .btn.form-control .caret{
+	right: 5px;
+    top: 35%;
+}

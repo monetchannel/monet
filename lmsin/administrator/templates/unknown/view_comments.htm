@@ -1,0 +1,130 @@
+<script>
+function disapprove(a)
+{
+            if(confirm("Are you sure you want to disapprove the selected comment?"))
+            { 
+				this.document.comment_frm.act.value="disapprove_comment";
+				this.document.comment_frm.vc_id.value=a;
+                this.document.comment_frm.submit();
+            }
+}
+function approve(a)
+{
+            if(confirm("Are you sure you want to approve the selected comment?"))
+            { 
+				this.document.comment_frm.act.value="approve_comment";
+				this.document.comment_frm.vc_id.value=a;
+                this.document.comment_frm.submit();
+            }
+}
+function set_order(f,o)
+{
+	
+	this.document.comment_frm.orderby.value=f;
+	this.document.comment_frm.order.value=o;
+	this.document.comment_frm.submit();
+}
+function nb(a)
+{
+	this.document.comment_frm.act.value="view_comments";
+	this.document.comment_frm.st_pos.value=a;
+	this.document.comment_frm.submit();
+}
+function del_comments(a)
+{
+	if(confirm("Are you sure you want to delete the selected comment?"))
+    {
+		this.document.comment_frm.act.value="del_comments";
+		this.document.comment_frm.vc_id.value=a;
+		this.document.comment_frm.submit();
+	}
+}
+</script>
+<script language="javascript" src="cynets_tables.js"></script>
+<form name="comment_frm" method="POST" action="video_comments.php">	
+     <center>
+	  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="89%" id="AutoNumber1">
+        <tr>
+          <td width="100%" style="border-top-style: none; border-top-width: medium">
+       <p align="center"><b>
+          <font face="Verdana, Arial, Helvetica, sans-serif">
+          View {approve} Video Comments</font></b></p>
+          <p align="center">
+      <font face="Verdana" size="2">{msg}</font></p>
+       <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" bordercolor="#000000" id="mytable" style="border-collapse:collapse">
+         <tr>
+           <td><p align="left">&nbsp;</p></td>
+           
+           {HF1}
+           <td width="306"><p align="right"><font face="Verdana" style="font-size: 9pt">&nbsp; {nb_text}</font></p></td>
+         </tr>
+         <tr>
+           <td height="19" style="border-left-color: #C0C0C0; border-left-width: 1; border-right-color: #C0C0C0; border-right-width: 1; border-bottom-color:#C0C0C0; border-bottom-width:1" colspan="2"><font color="#000000"> </font> </td>
+         </tr>
+       </table>
+       
+       <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" id="AutoNumber1">
+        
+        <tr>
+          <td width="100%" style="border-top-style: none; border-top-width: medium">
+          
+          <table width="100%"  cellpadding="0" cellspacing="0" border="0" id="comments_table" >
+	<tr bgcolor="#C0C0C0" align="center">
+	<td bgcolor="#C0C0C0" width="112" align="left" height="25">
+        <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('vc_name','{vc_name_order}')">Name</a></b></font></td>
+	<td bgcolor="#C0C0C0" width="189" align="left"><font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('video.v_title','{video.v_title_order}')">Video Title</a></b></font></td>
+	<td bgcolor="#C0C0C0" width="177" align="left"><font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('vc_email','{vc_email_order}')">Email Address</a></b></font></td>
+	<td width="312" align="left" bgcolor="#C0C0C0">
+	  <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('vc_comment','{vc_comment_order}')">Comment</a></b></font>
+	 </td>		
+	<td bgcolor="#C0C0C0" width="179" align="left">
+	  <font face="Verdana" size="2"><b>&nbsp;<a href="javascript: set_order('vc_date','{vc_date_order}')">Date</a></b></font></td>		
+
+	<td bgcolor="#C0C0C0" width="136">
+        <p align="center"><font face="Verdana" size="2"><b>
+        Action</b></font></td>
+   </tr>	
+      <!-- BEGIN AccessBlockList --> {HF1}
+   <tr>
+	<td width="112" height="25">
+        <font face="Verdana" size="2">&nbsp;{vc_name}</font></td>
+	<td width="189"><font face="Verdana" size="2">&nbsp;{v_title}</font></td>
+	<td width="177"><font face="Verdana" size="2">&nbsp;{vc_email}</font></td>
+	<td>
+	  <font face="Verdana" size="2">&nbsp;{vc_comment}</font>
+	  <font face="Verdana" size="2">&nbsp;</font></td>
+	<td width="179">
+	  <font face="Verdana" size="2">&nbsp;{vc_date}</font></td>
+	<td width="136">
+        <p align="center"><font face="Verdana" size="2">
+        <a href="javascript: approve('{vc_id}')"  style="display:{approve_hide}">
+        <font color="#000000">Approved</font></a>  <a href="javascript: disapprove('{vc_id}')"><font color="#000000" style="display:{disapprove_hide}">Unapproved</font></a> <span style="display:{hide_del}">| <a href="Javascript: del_comments('{vc_id}')"><font color="#000000">Del</font></a></span></font></td>
+	</tr>
+	<!-- END AccessBlockList --> {HF1}
+		
+	  </table>
+       </td>
+        </tr>
+       </table>
+
+        </td>
+        </tr>
+       </table>
+      
+  </center>
+    </div>
+	<font face="Verdana">
+	<input type="hidden" name="act" value="{act}">
+	<input type="hidden" name="st_pos" value="{st_pos}">
+    </font>
+    <input type="hidden" name="vc_id" value="{vc_id}">
+     <input type="hidden" name="order" value="{order}">
+     <input type="hidden" name="orderby" value="{orderby}">
+     <input type="hidden" name="app" value="{app}">
+</form>
+
+ <script>
+<!--
+cynets_tables('comments_table',0,0);
+-->
+   </script>

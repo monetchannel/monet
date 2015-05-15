@@ -1,0 +1,9 @@
+.vheading    { color: #FFFFFF; font-family: Verdana; font-size: 10pt; font-weight: bold; 
+               float: left; background-color: #0FBEF2 }
+.vheading a:link       { color: #FFFFFF }
+.vheading a:active     { color: #00BAF4 }
+.vheading a:visited    { color: #FFFFFF }
+
+.vmnu        { font-family: Verdana; font-size: 10pt; color: #00B9F2; font-weight: bold}
+
+

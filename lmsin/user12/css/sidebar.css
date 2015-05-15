@@ -1,0 +1,196 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 280px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 280px;
+	top:80px;
+    width: 0;
+    height: 100%;
+    margin-left: -280px;
+    margin-top:-20px;
+    overflow-y: auto;
+    background:#ececec;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 280px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -280px;
+}
+
+/* Selected Styles */
+
+.campaigns-selected, .user-selected, .analysis-selected, .account-selected{
+	background-color:#FFF;
+	display: block;
+    text-decoration: none;
+   	outline:none;
+	font-size:16px;
+}
+
+li.campaign-selected img.test
+{
+	background-image:url(../images/user_ov.png);
+	background-position:left top ;
+	background-size:66px 67px;
+	z-index:2000;
+}
+
+/* Selected styles */
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 280px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: 17px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-indent: 20px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+   	outline:none;
+	font-size:16px;
+}
+.sidebar-nav li.selected a {
+    text-decoration: none;
+    color: #e64b64;
+}
+
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+	color:#e64b64;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+.nav-menu-text {
+    color: #01aff6 !important;
+    float: left;
+    padding-right: 10px;
+	font-size: 17px;
+}
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+.sub-nav a{
+	font-size:16px !important;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+#nav-close {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    padding-right: 10px;
+}
+#accordionTwo{
+	margin-left: -5%;
+}
+.table thead:first-child tr:first-child th {
+    background-color: #3f4663;
+    border: medium none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+.second-td{
+	vertical-align: middle !important;
+}
+.third-td{
+	vertical-align: middle !important;
+}
+.sub-nav {
+    border-bottom: medium none !important;
+    list-style: none outside none;
+    margin-left: 0 !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+}
+.text-align{
+	text-align:center;
+}
+.field-label{
+	vertical-align: middle !important;
+}
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 280px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 280px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}

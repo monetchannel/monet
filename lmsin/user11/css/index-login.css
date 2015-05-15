@@ -1,0 +1,426 @@
+html{
+	
+}
+body{
+	font-family: myriad pro;
+}
+@font-face {
+    font-family: 'Myriad pro';
+    src: url('../fonts/MyriadPro-Light.otf') format('otf'),
+	url('../fonts/myriadpro-light-webfont.woff') format('woff'),
+	url('../fonts/myriadpro-light-webfont.eot') format('eot'),
+    url('../fonts/myriadpro-light-webfon.ttf') format('truetype'),
+    url('../fonts/myriadpro-light-webfon.svg#webfontFHzvtkso') format('svg');
+}
+.navbar-default {
+    background-color: #50597b;
+}
+.navbar{
+	margin-bottom:0;
+	border-radius:0;
+	border:none;
+	
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+	background-color:#1F263E;
+	color:#fff;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-brand{
+	padding:1%;
+}
+.navbar-right li a img{
+	float:left;
+}
+.top-right-icon{
+	padding-top:0 !important;;
+}
+.top-right-icon:hover, .top-right-icon:hover{
+	background-color: transparent !important;
+}
+.navbar-default .navbar-toggle {
+	border-color: #1f263e;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background-color: #1f263e;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #ffffff;
+}
+.bg-color{
+	background:#edf1f4;
+}
+.align-center{
+    padding-bottom: 1%;
+    text-align: center;
+}
+.color-meg{
+	color:#11a8ab;
+	font-family: Myriad pro;
+    font-size: 50px;
+}
+.color-yellow{
+	color:#f0a233;
+	font-family: Myriad pro;
+    font-size: 40px;
+	margin-top: -2%;
+	font-style: italic;
+}
+.fb-log{
+	background: none repeat scroll 0 0 #45619d;
+    border-radius: 4px;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    padding: 2px;
+}
+.fb-log:hover, .fb-log:active{
+	color: #fff !important;
+	cursor:pointer;
+	text-decoration:none;
+}
+.fb-icon{
+	background: url("../images/fb.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-right: 1px solid #2d4c82;
+    display: inline-block;
+    height: 48px;
+    vertical-align: middle;
+    width: 52px;
+}
+.fb-text{
+	color: #fff;
+}
+.margin-top{
+	margin-top:1%;
+}
+.fb-text:hover, .fb-text:active{
+	color:#fff;
+}
+
+.left-bottom{
+	
+}
+.image-width{
+	width:500px;
+}
+.left-bottom .img-responsive {
+    margin: 0 auto;
+}
+.login-box{
+	background:url("../images/box.png");
+}
+.login-top{
+	 width: 100%;
+}
+.login-top a{
+	background:url("../images/up_btn.png");
+	float:left;
+}
+.clear{
+	clear:both;
+}
+.login-text{
+	background: #8adcf4;
+    color: #fff;
+    padding: 2%;
+	margin-top: 5px;
+    text-align: center;
+	cursor: pointer;
+}
+.login-text:hover, .login-text:focus{
+	background:#4fb2d1;
+}
+.active-tab{
+	background:#4fb2d1;
+}
+.login-text span{ 
+	font-size:20px;
+}
+.authantication-form{
+	background:#8adcf4;
+	margin-top:2px;
+}
+.login-title{
+	color: #fff;
+    font-size: 18px;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    padding-top: 1%;
+}
+.form-input{
+	background: #f4fcff;
+    border: 1px solid #ccc;
+    border-radius:6px;
+    box-shadow: none;
+    height: 40px;
+    margin-bottom: 6%;
+    width: 90%;
+	padding: 6px 12px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-input-select{
+	color:#999;
+}
+.styled-select {
+    background-color:#f4fcff;
+    height: 40px;
+    overflow: hidden;
+    width: 90%;
+	
+	border-radius:6px;
+	margin-bottom: 6%;
+}
+.styled-select select {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    border-radius: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+	padding: 6px 12px;
+}
+.form-input:focus{
+	box-shadow: none;
+}
+.form-signin{
+	text-align:center;
+}
+.btn-primary {
+    background:#4fb2d1;
+    border: 1px solid #3fa2c1;
+	font-weight: bold;
+	padding:7px;
+}
+.btn-primary:hover, .btn-primary:active {
+    background: #3a9dbc !important;
+}
+
+@media (max-width: 767px) { 
+    .navbar-brand {
+        padding: 0;        
+    }
+
+    .navbar-brand img {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+}
+@media (max-width: 1500px) {
+	.color-meg{
+		font-size: 55px;
+	}
+	.color-yellow{
+		font-size: 45px;
+	}
+	.image-width{
+		width: 525px;
+	}
+}
+@media (max-width: 1400px) {
+	.color-meg{
+		font-size: 50px;
+	}
+	.color-yellow{
+		font-size: 40px;
+	}
+	.image-width{
+		width:505px;
+	}
+}
+@media (max-width: 1300px) {
+	.color-meg{
+		font-size: 45px;
+	}
+	.color-yellow{
+		font-size: 35px;
+	}
+	.image-width{
+		width:475px;
+	}
+}
+@media (max-width: 992px) {
+	 .login-text {
+		padding:1%;
+	}
+	.authantication-form{
+		margin-top: 5px;
+	}
+	.color-meg{
+		font-size: 40px;
+	}
+	.color-yellow{
+		font-size: 30px;
+	}
+	.image-width{
+		width:470px;
+	}
+}
+@media (max-width: 768px) {
+	.color-meg{
+		font-size: 40px;
+	}
+	.color-yellow{
+		font-size: 30px;
+	}
+}
+@media (max-width: 500px) {
+	.color-meg{
+		font-size: 35px;
+	}
+	.color-yellow{
+		font-size: 25px;
+	}
+	.pager {
+		padding:3%;
+	}
+	.img-responsive {
+		margin: 0 auto;
+	}
+	.top-logo {
+		width: 93%;
+	}
+}
+
+.pager {
+    margin: 0px 0;
+}
+.pager li > a, .pager li > span {
+    border: medium none;
+}
+.pager li > a, .pager li > span {
+    background-color: rgba(0, 0, 0, 0);
+}
+.pager li > a, .pager li > span{
+	border:none;
+}
+.pager li > a:hover, .pager li > span:focus{
+	background-color:#fff;
+}
+.pager li > a:hover, .pager li > a:focus{
+	background-color:rgba(0, 0, 0, 0) !important;
+}
+
+
+.btn-input {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+	margin-bottom:5%;
+}
+
+.btn-input .btn.form-control {
+    text-align: left;
+}
+
+.btn-input .btn.form-control span:first-child {
+   left: 10px;
+   overflow: hidden;
+   position: absolute;
+   right: 25px;
+}
+.form-control{
+	background: #f4fcff;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-control:hover , .form-control:active {
+	background: #f4fcff !important;
+}
+.btn-input .btn.form-control .caret {
+   margin-top: -1px;
+   position: absolute;
+   right: 10px;
+   top: 50%;
+}
+.dropdown-menu{
+	width:100%;
+}
+.checkbox{
+	font-size:11px;
+}
+.checked {
+    background: url("../images/checked.jpg") no-repeat scroll 0 50% transparent;
+    cursor: pointer;
+    height: 21px;
+    width: 22px;
+	display: block;
+    float: left;
+}
+.checkbox1 {
+    background: url("../images/uncheked.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 21px;
+    width: 22px;
+	display: block;
+    float: left;
+}
+.caret{
+	background:url("../images/dorpdown.png")no-repeat;
+	width:17px;
+	height:15px;
+	border-left:none;
+    border-right:none;
+    border-top:none;
+}
+.btn-input .btn.form-control .caret{
+	right: 5px;
+    top: 35%;
+}
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 84%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+         min-height: 15%;
+      }
+      #footer {
+       
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+     a{
+		outline:none !important;
+	 }
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      

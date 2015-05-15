@@ -1,0 +1,152 @@
+.mheading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10pt;
+	color: #7A95C5;
+}
+.newheading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #003063;
+	text-decoration: underline;
+}
+
+.sideheading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #004392;
+}
+
+.invoicematter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #333333;
+}
+.theading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #3375D9;
+
+}
+.sheading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #FFFFFF;
+}
+
+.topheading{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #E8E8E7;
+	font-weight: bold;
+	font-size: 10pt;
+	color: #41410E;
+}
+.toptd{
+	background-color: #B0ADA7;
+}
+.heading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #666666;
+}
+
+.linktp {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #FFFFFF;
+	}
+.seplinktp {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #666666;
+	text-decoration: underline;
+	}
+
+.grid_heading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #263F58;
+}
+
+.theading {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #D6D6D6;
+	font-weight: bold;
+	font-size: 8pt;
+	color: #ffffff;
+}
+
+.linkcolor {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #7A95C5;
+}
+
+.matter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #666666;
+	left: 5px;
+	clip:  rect(auto auto auto 5px);
+}
+
+.inpt
+{
+	BACKGROUND-COLOR: #ffffff;
+	BORDER-BOTTOM: #263F58 1px solid;
+	BORDER-LEFT: #263F58 1px solid;
+	BORDER-RIGHT: #263F58 1px solid;
+	BORDER-TOP: #263F58 1px solid;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 10px;
+}
+
+.lst
+{
+	BACKGROUND-COLOR: #ffffff;
+	BORDER-BOTTOM: #263F58 1px solid;
+	BORDER-LEFT: #263F58 1px solid;
+	BORDER-RIGHT: #263F58 1px solid;
+	BORDER-TOP: #263F58 1px solid;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 10px;
+}
+
+.check
+{
+	BACKGROUND-COLOR: #ffffff;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 8px;
+}
+
+SELECT
+{
+	BACKGROUND-COLOR: #ffffff;
+	BORDER-BOTTOM: #263F58 1px solid;
+	BORDER-LEFT: #263F58 1px solid;
+	BORDER-RIGHT: #263F58 1px solid;
+	BORDER-TOP: #263F58 1px solid;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 10px;
+}
+
+.Submit
+{
+    BACKGROUND-COLOR: #E3E8F7;
+    BORDER-BOTTOM: black 1px;
+    BORDER-LEFT: black 1px;
+    BORDER-RIGHT: black 1px;
+    BORDER-TOP: black 1px;
+    COLOR: 003063;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: capitalize
+}

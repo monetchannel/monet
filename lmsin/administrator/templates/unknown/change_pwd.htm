@@ -1,0 +1,74 @@
+<script>
+function chk_pass()
+{
+	if(this.document.frm.sa_new_pwd.value!= this.document.frm.sa_conf_pwd.value)
+	{
+		alert("Password and confirm password are not same !");
+   		return false;        
+	}
+	if(this.document.frm.sa_old_pwd.value=="" || this.document.frm.sa_new_pwd.value=="" || this.document.frm.sa_conf_pwd.value=="" )
+	{
+		alert("Please first enter all * marked fields to continue!");
+		return false;        
+	}
+	else
+	{	
+		return true;
+	}
+}
+</script>
+<form name="frm" method="POST" action="index.php" onSubmit="return chk_pass()">
+<input type="hidden" name="act" value="update_password">
+<center>
+<table width="80%" border="1" cellpadding="2" class="admin-text" style="border-collapse: collapse" bordercolor="#C0C0C0">
+    <tr> 
+      <td>
+<table width="100%" border="0" cellpadding="2" class="admin-text" style="border-collapse: collapse" bordercolor="#111111">
+    <tr> 
+      <td valign="top" align="center" colspan="2">
+      <font face="Verdana" style="font-weight: 700" color="#00B9F2">Change Password</font><p>
+      <font size="2" face="Verdana">
+      {msg}<br>
+&nbsp;</font></td>
+    </tr>
+    <tr>
+    <td width="50%"><font face="Verdana" size="2">Old Password*
+    </font> </td>
+    <td valign="top" width="50%"> 
+        <font face="Verdana"> 
+        <input name="sa_old_pwd" size="30"  tabindex="1" value="{sa_old_pwd}" type="password"></font></td>
+    </tr>
+    <tr>
+    <td><font face="Verdana" size="2">New Password*
+    </font> </td>
+    <td valign="top"> 
+        <font face="Verdana"> 
+        <input name="sa_new_pwd" size="30"  tabindex="2" value="{sa_new_pwd}" type="password"><span style="font-size: 8pt">
+        </span></font>
+    </td>
+    </tr>
+    <tr> 
+    <td><font face="Verdana" size="2">Confirm Password*
+    </font> </td>
+    <td valign="top"> 
+        <font face="Verdana"> 
+        <input name="sa_conf_pwd" size="30"  tabindex="3" value="{sa_conf_pwd}" type="password"></font></td>
+    </tr>
+    <tr align="center"> 
+    <td valign="top" colspan="2"> 
+        <p align="left"> 
+        <font face="Verdana"> 
+        <br>
+        <input type="submit" name="Submit" value="Change Password&gt;&gt;" tabindex="4"><span style="font-size: 8pt">
+        </span></font>
+    </td>
+    </tr>
+</table>
+    </td>
+    </tr>
+</table>
+<script>
+this.document.frm.sa_old_pwd.focus();
+</script>
+</center>
+</form>

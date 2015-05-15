@@ -1,0 +1,18 @@
+RewriteEngine On
+
+# stuff to let through (ignore)
+RewriteCond %{REQUEST_URI} "/new/"
+RewriteRule (.*) $1 [L]
+
+
+RewriteRule ^reset_password/(.*) /forgot_password.php?act=reset_password&fp_key=$1&%{QUERY_STRING} [QSA,L]
+
+# Adding slashes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+RewriteRule (.*)([^/])$ http://corporate.monetchannel.com/$1$2/ [R=301,L]
+
+RewriteRule ^(.*)/(.*)/(.*) /corporate/index.php?company_url=$1&Admin=$2%{QUERY_STRING} 
+
+RewriteRule ^(.*)/(.*)$ /index.php?company_url=$1&%{QUERY_STRING}

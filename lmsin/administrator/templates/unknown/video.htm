@@ -1,0 +1,24 @@
+<script src="js/prototype.js" type="text/javascript"></script>
+<script src="js/scriptaculous.js?load=effects" type="text/javascript"></script>
+<script src="ieupdate.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<link href="web.css" rel="stylesheet" />
+<!--body start -->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td  align="center" ><div id="flowplayerholder"><p class="heading">This will be replaced by the player.</p>
+<script type="text/javascript">
+// <![CDATA[
+var fo = new SWFObject("swf/FlowPlayerDark.swf", "FlowPlayer", "226px", "160px", "7", "#ffffff", true);
+// need this next line for local testing, it's optional if your swf is on the same domain as your html page
+fo.addParam("allowScriptAccess", "always");
+fo.addVariable("config", "{ countryCode: 'fi', playList: [ {overlayId: 'play' }, { url: '{path}' } ], initialScale: 'scale',  fullScreenScriptURL: 'fullscreen.js' }");
+fo.write("flowplayerholder");
+// ]]>
+</script></div><br></td>
+</tr></table>
+<!--body end -->
+
+
+

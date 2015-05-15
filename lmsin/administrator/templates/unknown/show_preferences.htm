@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="{SERVER_ADMIN_PATH}admin-style.css" type="text/css">
+<script>
+function chk_pass()
+{
+	if(this.document.frm.sa_from_name.value=="" || this.document.frm.sa_from_email.value=="" || this.document.frm.sa_site_name.value=="" ||
+	   this.document.frm.sa_to_name.value=="" || this.document.frm.sa_to_email.value=="" || this.document.frm.sa_nrpp.value=="")
+	{
+		alert("Please first enter all * marked fields");
+		return false;        
+	}
+	else
+	{	
+		return true;
+	}
+}
+function show_options()
+{
+	if(document.getElementById('sa_random_play1').checked==true)
+		document.getElementById('rand_option').style.display='';
+	else
+		document.getElementById('rand_option').style.display='none';
+}
+</script>
+
+<form name="frm" method="GET" action="index.php" onSubmit="return chk_pass()">
+        <input type="hidden" name="act" value="update_preferences">
+        
+    <div align="center">
+      <center>
+<table width="87%" border="1" cellpadding="2" class="admin-text" style="border-collapse: collapse" bordercolor="#C0C0C0" height="224">
+    <tr> 
+      <td>
+
+<table width="100%" border="0" cellpadding="2" class="admin-text" style="border-collapse: collapse" bordercolor="#111111" height="224">
+    <tr> 
+      <td valign="top" align="center" colspan="2" height="15">
+      <b><font face="Verdana" color="#111111">Edit Preferences</font></b><p>
+      <font face="Verdana" size="2">
+      {msg}</font><br>
+&nbsp;</td>
+    </tr>
+    <tr>
+    <td width="45%" height="1" align="right"><font face="Verdana" size="2">From Name*
+    </font> </td>
+    <td valign="top" width="55%" height="1"> 
+        <font face="Verdana"> 
+        <input name="sa_from_name" size="30"  tabindex="1" value="{sa_from_name}">
+        </font>
+    </td>
+    </tr>
+    <tr> 
+    <td width="45%" height="19" align="right"><font face="Verdana" size="2">From Email*
+    </font> </td>
+    <td valign="top" width="55%" height="19"> 
+        <font face="Verdana"> 
+        <input name="sa_from_email" size="30"  tabindex="2" value="{sa_from_email}"></font></td>
+    </tr>
+    <tr> 
+    <td width="45%" height="19" align="right"><font face="Verdana" size="2">Site Name*
+    </font> </td>
+    <td valign="top" width="55%" height="19"> 
+        <font face="Verdana"> 
+        <input name="sa_site_name" size="30"  tabindex="3" value="{sa_site_name}"></font></td>
+    </tr>
+    <tr> 
+    <td width="45%" height="19" align="right"><font face="Verdana" size="2">To Name*
+    </font> </td>
+    <td valign="top" width="55%" height="19"> 
+        <font face="Verdana"> 
+        <input name="sa_to_name" size="30"  tabindex="4" value="{sa_to_name}"></font></td>
+    </tr>
+    <tr> 
+    <td width="45%" height="19" align="right"><font face="Verdana" size="2">To Email*
+    </font> </td>
+    <td valign="top" width="55%" height="19"> 
+        <font face="Verdana"> 
+        <input name="sa_to_email" size="30]"  tabindex="5" value="{sa_to_email}"></font></td>
+    </tr>
+    <tr> 
+    <td width="45%" height="19" align="right"><font face="Verdana" size="2">Num Rows Per Page*
+    </font> </td>
+    <td valign="top" width="55%" height="19"> 
+        <font face="Verdana"> 
+        <input name="sa_nrpp" size="30"  tabindex="6" value="{sa_nrpp}"><span style="font-size: 8pt">
+        </span></font>
+    </td>
+    </tr>
+    <tr>
+      <td height="19" align="right"><font size="2" face="Verdana">Random Play </font></td>
+      <td valign="top" height="19">&nbsp;<font face="Verdana" size="2"><input type="radio" id="sa_random_play1" name="sa_random_play" value="1" {sa_random_play_1} onclick="show_options()"/> On  <input onclick="show_options()" type="radio" name="sa_random_play" id="sa_random_play2" value="0" {sa_random_play_0}/> Off</font></td>
+    </tr>
+   {option_data}
+    <tr align="center"> 
+    <td valign="top" colspan="2" height="23"> 
+       
+        <font face="Verdana"> 
+        <br>
+        <input type="submit" name="Submit" value="Change Settings&gt;&gt;" tabindex="7"><span style="font-size: 8pt">
+        </span></font>
+    </td>
+    </tr>
+</table>
+    </td>
+    </tr>
+</table>
+</center>
+</div>
+<p>&nbsp;</p>
+</form>
+<p>&nbsp;</p>

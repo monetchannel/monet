@@ -1,0 +1,27 @@
+<form action="index.php" method="post" enctype="multipart/form-data"  name="frm3"  onsubmit="javascript :return check()"  >
+  <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px">
+    <tr>
+      <td colspan="2" style="border-bottom:#333333 solid 1px" id="textb">Import
+        Bill</td>
+	</tr>
+    
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    
+	<tr>
+      <td ><span class="text">Import File:</span></td>
+      <td><input type="file" name="file" id="file" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+	<tr>
+      <td colspan="2" align="center"><input type="submit" name="Import" value="Import"  />&nbsp;&nbsp;&nbsp;<input type="button" name="Colse" value="Close" onclick="javascript:win.hide()" /></td>
+    </tr>
+  
+  </table>
+  <input name="import" type="hidden" id="import" value="1" />
+  <input name="act" type="hidden" id="act" value="{act}" />
+</form>
