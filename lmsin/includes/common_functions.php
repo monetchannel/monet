@@ -61,6 +61,17 @@ function addCampaignQuestions($qSetCollection, $campaignId, $contentId){
     }
 }
 
+function insertCampaignQuestions($questionsCollection, $campaignId, $contentId){
+    if(count($questionsCollection)>0){
+        foreach ($questionsCollection as $questionid){
+            $insQuery = "insert into map_camp_question (map_camp_id, map_q_id, map_c_id) "
+                           . "values ('".$campaignId."', '".$questionid."', '".$contentId."')";
+            mysql_query($insQuery) or die(mysql_error());
+        }
+    }
+}
+
+
 function getAllSetQuestions($setid){
     $questionsArray = array(); 
     $campaign_questions_schema = mysql_query("SELECT map_question_id FROM map_question_set where map_set_id = '".$setid."'");
