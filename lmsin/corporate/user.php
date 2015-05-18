@@ -1,5 +1,5 @@
 <?php
-include ("../../includes/common.php");
+include ("../includes/common.php");
 init();
 //.........................................
 sajax_export("user_view","user_add","user_edit","user_update","user_save","user_del","invites_view","chk_email_exist");
@@ -19,6 +19,7 @@ if(fe($_REQUEST[act]))
    die();
 }
 user_index();
+//user_view("user.view","","map_company_user_id","",0,10,1,"","","","","");
 die();
 
 ########################################
@@ -231,12 +232,18 @@ else{
 	}
 	
 	$cond=$cond.")";
+        if($cond = "AND ()") $cond = "";
 	
-	
+	$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email FROM users u JOIN map_company_user m ON 
+               u.user_id = m.map_user_id WHERE m.map_company_id=$_COOKIE[CompanyId] $cond GROUP BY u.user_id ORDER BY $orderby $order";  // Vivek Verma
+        
+        
 	//$SQL= "SELECT * FROM users WHERE user_company_id='$_COOKIE[CompanyId]' $cond GROUP BY user_id ORDER BY $orderby $order";
-        $SQL= "SELECT u.* FROM users u JOIN map_company_user m ON 
-               u.user_id = m.map_user_id WHERE m.map_company_id='$_COOKIE[CompanyId]' $cond GROUP BY u.user_id ORDER BY $orderby $order";         
-      
+        //$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email FROM users u JOIN map_company_user m ON 
+          //     u.user_id = m.map_user_id WHERE m.map_company_id='$_COOKIE[CompanyId]' $cond GROUP BY u.user_id ORDER BY $orderby $order";  
+        
+        //echo $SQL;
+	
 	$tot_rows= eq($SQL,$rs);
    	get_nb_text_multi($tot_rows,"User",$st_pos_p,$con_limit,$nb_text,$nrpp_p);
    	$SQL=$SQL.$con_limit;
@@ -327,7 +334,7 @@ function user_save($callback,$user_fname,$user_lname,$user_gender,$age,$user_sta
 							  `user_country` ='$data[states_countries_id]',
 							  /*`user_states` ='$user_state',*/
 							  `user_email` = '$user_email',
-							  `user_password`='$$user_password'";
+							  `user_password`='$user_password'";
 	$id=ei($SQL);
 	if($id>0){
 		

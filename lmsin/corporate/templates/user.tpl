@@ -186,9 +186,7 @@ function check(field)
 							 document.getElementById('user_lname').value,
 							 document.getElementById('user_gender').value,
 							 document.getElementById('age').value,
-                                                         document.getElementById('user_country').value,
 							 document.getElementById('user_state').value,
-                                                         document.getElementById('user_zipcode').value,
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value);
 			}
@@ -199,8 +197,6 @@ function check(field)
 							 document.getElementById('user_gender').value,
 							 document.getElementById('age').value,
 							 document.getElementById('user_country').value,
-                                                         document.getElementById('user_state').value,
-                                                         document.getElementById('user_zipcode').value,
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value,
 							 document.getElementById('user_id').value);
@@ -462,6 +458,7 @@ function open_group()
 	
 <script>
 	user= new cn_ajax("user","user_data");
-	user.view("","","","","","","","","","");
+        //user.view("","","","","","","","","","","","","");
+	user.view("","","map_company_user_id","DESC","","",1,"","","","","","");
 </script>
 {/block}
