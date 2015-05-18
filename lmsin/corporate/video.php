@@ -132,7 +132,10 @@ function video_view($callback,$msg="",$orderby_p="",$order_p="",$st_pos_p=0,$nrp
 				}
 			}
 			
-			array_push($videos,$data);
+			$videoID = substr($data[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";
+                        if (true==file_get_contents($url,0,null,0,1))
+				array_push($videos,$data);
 			$smarty->assign(array("del"=>$del,"v_show_home_page_check"=>$v_show_home_page));
 		}
 	}
