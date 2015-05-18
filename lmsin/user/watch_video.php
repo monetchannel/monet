@@ -366,6 +366,7 @@ function content_feedback($msg = '')
 	     			$t = 1;
 	    		}
 		if($t==1){
+			$c++;
 			$row['i'] = $i++;
 			$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -390,7 +391,7 @@ function content_feedback($msg = '')
    			}
 			
 			array_push($latest_video, $row);
-			$c++;
+			
 		}
 	}
 	
@@ -409,6 +410,7 @@ function content_feedback($msg = '')
 	     			$t = 1;
 	    		}
 		if($t==1){
+			$d++;
 			$row['i'] = $i++;
 			$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -433,7 +435,7 @@ function content_feedback($msg = '')
    			}
 			
 			array_push($reviewed_video, $row);
-			$d++;
+			
 		}
 		
 	}
@@ -684,6 +686,7 @@ function browse_videos()
 	     			$t = 1;
 	    		}
 			if($t==1){
+				$c++;
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -707,7 +710,7 @@ function browse_videos()
     				$row[c_date]= "Added Today";
    				}
 				array_push($latest_v_data, $row);
-				$c++;
+				
 			}
 		}
 		
@@ -725,6 +728,7 @@ function browse_videos()
 	     			$t = 1;
 	    		}
 			if($t==1){
+				$d++;
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -748,7 +752,7 @@ function browse_videos()
     				$row[c_date]= "Added Today";
    				}
 				array_push($reviewed_v_data, $row);
-				$d++;
+			
 			}
 			
 		}
