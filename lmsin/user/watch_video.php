@@ -358,7 +358,13 @@ function content_feedback($msg = '')
 	$c =1;
 	while(($row = mfa($rs1)) && $c<=4)
 	{
-		$t=filterVideo($row);
+		// $t=filterVideo($row);
+		$t = 0;
+                        $videoID = substr($row[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
+                        if (true==file_get_contents($url,0,null,0,1)) {
+	     			$t = 1;
+	    		}
 		if($t==1){
 			$row['i'] = $i++;
 			$row[c_date]=days_ago($row[c_date]);		 
@@ -395,7 +401,13 @@ function content_feedback($msg = '')
 	$d = 1;
 	while(($row = mfa($rs2))&& $d<=4)
 	{
-		$t=filterVideo($row);
+		//$t=filterVideo($row);
+		$t = 0;
+                        $videoID = substr($row[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
+                        if (true==file_get_contents($url,0,null,0,1)) {
+	     			$t = 1;
+	    		}
 		if($t==1){
 			$row['i'] = $i++;
 			$row[c_date]=days_ago($row[c_date]);		 
@@ -609,7 +621,13 @@ function browse_videos()
 		
 		while($row = mfa($filterVideos))
 		{
-			$t=filterVideo($row);
+			// $t=filterVideo($row);
+			$t = 0;
+                        $videoID = substr($row[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
+                        if (true==file_get_contents($url,0,null,0,1)) {
+	     			$t = 1;
+	    		}
 			if($t==1){
 				$row['i'] = $i++;
 			
@@ -658,7 +676,13 @@ function browse_videos()
 		$c =1;
 		while(($row = mfa($rs1)) && $c<=9)
 		{
-			$t=filterVideo($row);
+			// $t=filterVideo($row);
+			$t = 0;
+                        $videoID = substr($row[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
+                        if (true==file_get_contents($url,0,null,0,1)) {
+	     			$t = 1;
+	    		}
 			if($t==1){
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
@@ -693,7 +717,13 @@ function browse_videos()
 		$d = 1;
 		while(($row = mfa($rs2))&& $d<=9)
 		{
-			$t=filterVideo($row);
+			// $t=filterVideo($row);
+			$t = 0;
+                        $videoID = substr($row[c_url],25,11);
+                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
+                        if (true==file_get_contents($url,0,null,0,1)) {
+	     			$t = 1;
+	    		}
 			if($t==1){
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
