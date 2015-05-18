@@ -12,8 +12,9 @@
 				</div>
 				<div class="optn">										
 					<div class="add">
-						<a href="javascript:user.add('','Add User');">Add User <a href="javascript:user.add('','Add User');"><img class="" src="./images/addvideo.png" /></a></a> </div><div class="clear"></div>
-						<a href="excel.php"> Import User from Excel File <a href="excel.php"><img class="" src="./images/csv.png" /></a></a> </div>
+						<a href="javascript:user.add('','Add User');">Add User <a href="javascript:user.add('','Add User');"><img class="" src="./images/addvideo.png" /></a></a> </div>
+                    <div class="clear"></div>
+						<a href="excel.php"> Import User from Excel File <a href="excel.php"><img class="" src="./images/csv.png" /></a></a> </div></div>
 					
 					<div class="srch">
 						<strong>Search User by</strong> &nbsp;
