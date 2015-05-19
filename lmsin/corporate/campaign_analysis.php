@@ -45,6 +45,76 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
         
         $content_id = $vd[c_id];
         $cf_id = $vd[cf_id];
+        //aadi
+            
+            $SQL = "SELECT ar_id from analysis_results where ar_cf_id = $cf_id";
+            $SQL = "SELECT vad_json_data,ad_valence from video_analysis_data inner join (SELECT ad_id, ad_valence from analysis_detail where ad_ar_id in ($SQL))t1 ON video_analysis_data.vad_img_name = concat(t1.ad_id,'.jpg')";
+            eq($SQL,$Result);
+            
+            while($data=mfa($Result)){
+                $json = json_decode($data[vad_json_data],true);
+                $expressions = $json['Faces'];
+                $previous_facebox=$json['previous_facebox'];
+                if($expressions !=null)									
+                {
+                    $expressions = $expressions[0];
+                    if($expressions!=null)								
+                    {
+                        $eye=0.25;
+ 			$head=0;
+ 			$valid_model=1;	
+ 			$x=0;
+ 			$y=0;
+ 			$x1=0;
+ 			$y1=0;
+ 			if($expressions['StateOfLeftEye']=='Open')
+ 				$eye=$eye+0.5;
+ 			if($expressions['StateOfRightEye']=='Open')
+ 				$eye=$eye+0.5;
+ 			if($eye>1) $eye=1;
+ 			for($i = 0; $i<3; $i++)
+ 				$head=$head + $expressions['HeadOrientation'][$i]*$expressions['HeadOrientation'][$i];
+ 			$head=$head/3;
+ 			$head=sqrt($head);
+ 			for($i = 0; $i<4; $i++){
+ 				$x=$x+$expressions['FaceBoxCorners'][$i]['X'];
+ 				$y=$y+$expressions['FaceBoxCorners'][$i]['Y'];
+ 			}
+ 			$x=$x/4;
+ 			$y=$y/4;
+ 			if($previous_facebox==-1){
+ 				$engagement=$eye*(1-$head)*2-1;
+ 				if($engagement>1) $engagement=1;
+				if($engagement<-1) $engagement=-1;
+ 			}
+ 			else{
+ 				for($i = 0; $i<4; $i++){
+	 				$x1=$x1+$previous_facebox[$i]['X'];
+	 				$y1=$y1+$previous_facebox[$i]['Y'];
+	 			}
+	 			$x1=$x1/4;
+ 				$y1=$y1/4;
+ 				$faceBox=$x1-$x;							
+				$faceBox=$faceBox/150;
+				if($faceBox<0) $faceBox=-$faceBox;
+
+				$engagement=$eye*(1-$head)*(1-$faceBox)*2-1;
+				if($engagement>1) $engagement=1;
+				if($engagement<-1) $engagement=-1;
+ 			}
+                    }
+            
+                }
+                //echo "test";
+                $sql="UPDATE analysis_detail SET ad_engagement=$engagement WHERE ad_valence=$data[ad_valence] ";
+                mysql_query($sql) or die(mysql_errno());
+               // echo"temp";
+               
+            }
+            
+            //aadi
+        
+        
 	$ary=get_value_ary("analysis_results left join content_feedback on ar_cf_id=cf_id","ar_id","where cf_c_id='$content_id' ");
         
         // make an array of ad_valence values with their time values       
@@ -184,7 +254,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
                 'Scared' => number_format($adScaredVal, 10)*100000
             );
             
-            $max_value = array_max_key($comparingArray);
+            $max_value = array_keys($comparingArray,max($comparingArray))[0];
             $max_value = ucfirst($max_value);
             
             array_push($adValenceArray, 
