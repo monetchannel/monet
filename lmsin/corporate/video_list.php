@@ -38,9 +38,7 @@ $v_num = mysql_num_rows($videosSchema);
 $videos = array();
 if($v_num>0){
     while($result = mysql_fetch_assoc($videosSchema)){
-         $videoID = substr($result[c_url],25,11);
-         $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";     
-         if (true==file_get_contents($url,0,null,0,1))
+         if ( check_vid_exist($result[c_url]))
         array_push($videos, $result);
     }
 }
