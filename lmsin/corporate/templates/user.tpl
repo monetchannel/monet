@@ -189,7 +189,19 @@ function check(field)
 							 document.getElementById('user_state').value,
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value);
-			}
+                            jQuery.ajax({
+                            type: "POST",
+                            url:"user.php?act=user_save",
+                            data: $('#frm').serialize(),
+                                success: function(js){
+                                        //win=cn_window_open('',"User Added Successfully","",2);
+                                        user.view("","User Added Successfully","map_company_user_id","DESC","","",1,"","","","","","");
+                                },
+                                        error: function(){
+                                        alert("Please try again. Server have not sent response.");
+                                }
+                            });
+                        }
 			else
 			{
 				user.update('',document.getElementById('user_fname').value,
@@ -200,7 +212,21 @@ function check(field)
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value,
 							 document.getElementById('user_id').value);
-			}
+			
+                        
+                            jQuery.ajax({
+                            type: "POST",
+                            url:"user.php?act=user_update",
+                            data: $('#frm').serialize(),
+                                success: function(js){
+                                        //win=cn_window_open('',"User Updated Successfully","",2);
+                                        user.view("","User Updated Successfully","map_company_user_id","DESC","","",1,"","","","","","");
+                                },
+                                        error: function(){
+                                        alert("Please try again. Server have not sent response.");
+                                }
+                            });
+                        }
 		}
 	}
 	
@@ -321,6 +347,7 @@ function check(field)
 			document.getElementById("strt_age").selectedIndex=="0" &&
 			document.getElementById("end_age").selectedIndex=="0" &&
 			document.getElementById("company_country").selectedIndex=="0" &&
+			document.getElementById("users_state").selectedIndex=="0" &&
 			document.getElementById('search').value==""
 		  )
 		{
@@ -337,6 +364,7 @@ function check(field)
 		var strt_age="";
 		var end_age="";
 		var company_country="";
+                /*var users_state="";*/
 		var keyword="";
 		if(document.getElementById("sex").selectedIndex!="0"){
 			sex = document.getElementById('sex').value;
@@ -350,10 +378,13 @@ function check(field)
 		if(document.getElementById("company_country").selectedIndex!="0"){
 			company_country = document.getElementById('company_country').value;
 		}
+                if(document.getElementById("users_state").selectedIndex!="0"){
+			users_state = document.getElementById('users_state').value;
+		}
 		if(document.getElementById('search').value!=""){
 			keyword = document.getElementById('search').value;
 		}
-		user.view('','','','','','','1',sex,strt_age,end_age,company_country,keyword);
+		user.view('','','','','','','1',sex,strt_age,end_age,company_country,/*users_state,*/keyword);
 	}
 	
 	function control() {
@@ -432,7 +463,7 @@ function create_group()
 		url:"user.php?act=create_group",
 		data: $('#frm').serialize(),
 		success: function(js){
-			win=cn_window_open('',js,1);
+			win=cn_window_open('',"Group Created Successfully",1);
 		},
 			error: function(){
 			alert("Please try again. Server have not sent response.");
@@ -459,6 +490,6 @@ function open_group()
 <script>
 	user= new cn_ajax("user","user_data");
         //user.view("","","","","","","","","","","","","");
-	user.view("","","map_company_user_id","DESC","","",1,"","","","","","");
+        user.view("","","map_company_user_id","DESC","","",1,"","","","","","");
 </script>
 {/block}

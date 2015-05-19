@@ -407,6 +407,7 @@ function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_c
 	if($id>0){
 		$ary[0]="Data Updated Successfully.";
 	}
+        else $ary[0]="No Change in User Data";
 	$ary[2] = 1;
 	$ary[3] = $callback;
 	return $ary;
@@ -598,6 +599,8 @@ function create_group()
 		}
 
 	}
+        $ary[0] = "Group Created Successfully";
 	$smarty->display('user.tpl');
+        return $ary;
 }
 ?>

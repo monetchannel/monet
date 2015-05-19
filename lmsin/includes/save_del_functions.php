@@ -179,6 +179,12 @@ function func_delete_user($user_id)
 	//------------------Delete invite -----------------------
 	$SQL="DELETE FROM `invite` WHERE `inv_user_id`='$user_id'";
 	eq($SQL,$rs);
+        //------------------Delete Company User Map data------------- Vivek Verma
+        $SQL="DELETE FROM `map_company_user` WHERE `map_user_id`='$user_id'";
+	eq($SQL,$rs);
+        //------------------Delete Group User Map data------------- Vivek Verma
+        $SQL="DELETE m FROM map_group_user m INNER JOIN groups g ON g.g_company_id ='$company_id' AND g.g_id = m.map_group_id  WHERE `map_user_id`='$user_id' AND `map_user_id`='$user_id'";
+	eq($SQL,$rs);
 }
 //------------------------------------------------------------------------------------
 ############################ DEL VIDEO ###############################################
