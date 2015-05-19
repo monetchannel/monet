@@ -36,11 +36,11 @@ body{
 	z-index: 1021;
 	background-color:#fff;
 	border-bottom: 2px solid #0fbcc0;
-        width: 79.2%;
+        width: 75.6%;
 }
 .bottom-pos{
 	position: relative;
-	top: 440px;
+	top: 400px;
 }
 .navbar-default {
     background-color: #0fbcc0;

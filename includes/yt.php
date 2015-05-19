@@ -9,7 +9,24 @@
  *
  */
 //$id = getVideoID("http://www.youtube.com/watch?v=TBcC8zqNjKk");
-//getVideoDetails($id);					
+//getVideoDetails($id);	
+
+function check_vid_exist($videoDetails) {              //to check whether video exists on YouTube - palash
+    $flag = 0;
+    $videoID = substr($videoDetails,25,11);
+    $url1 =  "http://i.ytimg.com/vi/$videoID/1.jpg";
+    $url2 = "http://i.ytimg.com/vi/$videoID/2.jpg";
+    $url3 = "http://i.ytimg.com/vi/$videoID/3.jpg";
+   // $chk1 = file_get_contents($url1,0,null,0,1);
+    $chk2 = file_get_contents($url2,0,null,0,1);
+    //$chk3 = file_get_contents($url3,0,null,0,1);
+    if ($chk2)
+        $flag = 1;
+     
+     return $flag;
+                      
+                      
+}
 
 
 function parseVideoEntry($entry) {      

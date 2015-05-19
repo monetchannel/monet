@@ -360,9 +360,7 @@ function content_feedback($msg = '')
 	{
 		// $t=filterVideo($row);
 		$t = 0;
-                        $videoID = substr($row[c_url],25,11);
-                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
-                        if (true==file_get_contents($url,0,null,0,1)) {
+                       if (check_vid_exist($row[c_url])) {
 	     			$t = 1;
 	    		}
 		if($t==1){
@@ -404,9 +402,7 @@ function content_feedback($msg = '')
 	{
 		//$t=filterVideo($row);
 		$t = 0;
-                        $videoID = substr($row[c_url],25,11);
-                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
-                        if (true==file_get_contents($url,0,null,0,1)) {
+                        if (check_vid_exist($row[c_url])) {
 	     			$t = 1;
 	    		}
 		if($t==1){
@@ -625,9 +621,7 @@ function browse_videos()
 		{
 			// $t=filterVideo($row);
 			$t = 0;
-                        $videoID = substr($row[c_url],25,11);
-                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
-                        if (true==file_get_contents($url,0,null,0,1)) {
+                        if (check_vid_exist($row[c_url])) {
 	     			$t = 1;
 	    		}
 			if($t==1){
@@ -680,9 +674,7 @@ function browse_videos()
 		{
 			// $t=filterVideo($row);
 			$t = 0;
-                        $videoID = substr($row[c_url],25,11);
-                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
-                        if (true==file_get_contents($url,0,null,0,1)) {
+                        if (check_vid_exist($row[c_url])) {
 	     			$t = 1;
 	    		}
 			if($t==1){
@@ -722,9 +714,7 @@ function browse_videos()
 		{
 			// $t=filterVideo($row);
 			$t = 0;
-                        $videoID = substr($row[c_url],25,11);
-                        $url =  "http://i.ytimg.com/vi/$videoID/2.jpg";  
-                        if (true==file_get_contents($url,0,null,0,1)) {
+                       if (check_vid_exist($row[c_url])) {
 	     			$t = 1;
 	    		}
 			if($t==1){

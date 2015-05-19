@@ -208,7 +208,7 @@
 		jQuery(function(){
                         
 		        var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                         var winWidth = $(window).width()-330;
@@ -219,7 +219,7 @@
 				} 			
 			$(window).scroll(function(){
 				var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                        
