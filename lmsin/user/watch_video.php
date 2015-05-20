@@ -670,7 +670,7 @@ function browse_videos()
 		eq($latest_v_sql,$rs1);
 		$i = 0;
 		$c =1;
-		while(($row = mfa($rs1)) && $c<=9)
+		while(($row = mfa($rs1)) && $c<=12)
 		{
 			// $t=filterVideo($row);
 			$t = 0;
@@ -710,7 +710,7 @@ function browse_videos()
 		eq($reviewed_v_sql,$rs2);
 		$i = 0;
 		$d = 1;
-		while(($row = mfa($rs2))&& $d<=9)
+		while(($row = mfa($rs2))&& $d<=12)
 		{
 			// $t=filterVideo($row);
 			$t = 0;
