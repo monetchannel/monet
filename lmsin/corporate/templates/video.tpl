@@ -21,7 +21,7 @@ function get_video_code(id)
 
 function show_video_code(data)
 {
-	cn_window_open('Video Code - '+data[1],data[0],true,2);
+	cn_window_t_open('Video Code - '+data[1],data[0],true,2);
 }
 
 //--------------------------INVITATION----------------------------------
