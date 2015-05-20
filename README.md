@@ -7,3 +7,10 @@
 * insertCampaignQuestions() add_campaign.php #158 not defined
 * User group in Add Campaign in corporate
 * Campaign date set beforehand
+
+
+
+
+# while integrating with server
+* change lmsin/corporate/templates/video_code.tpl
+* change lmsin/corporate/js/cynets_modal.js \#34 and \#37
