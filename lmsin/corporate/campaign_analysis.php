@@ -178,6 +178,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
         $minTimeValue = ($minTimeValue!=$zerodate) ? $zerodate : $minTimeValue;
        
         $adPeakEmotion = 0;
+        $countForQuery=0;
         for($i = $minTimeValue; $i <= $maxTimeValue; $i = $i+1){
             $whereCondArray = array();
             $to = $i + 1;
@@ -199,21 +200,38 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
                       
             $whereCond = implode(" AND ", $whereCondArray);               
             
-            $adValenceQuery = "SELECT AVG(ad.ad_valence) as 'avg_valence',
-                               AVG(ad.ad_happy) as 'avg_happy',
-                               AVG(ad.ad_sad) as 'avg_sad',
-                               AVG(ad.ad_neutral) as 'avg_neutral',
-                               AVG(ad.ad_angry) as 'avg_angry',
-                               AVG(ad.ad_suprised) as 'avg_surprised',
-                               AVG(ad.ad_disgusted) as 'avg_disgusted',
-                               AVG(ad.ad_scared) as 'avg_scared',
-                               AVG(ad.ad_engagement) as 'avg_engagement',
-                               ad.ad_dominant_emotion as 'peak_emotion',
-                               ad.ad_id
-                               FROM analysis_detail ad
-                               JOIN analysis_results ar ON ad.ad_ar_id = ar.ar_id
-                               JOIN content_feedback cf ON ar.ar_cf_id = cf.cf_id
-                               WHERE $whereCond"; 
+           //aadi
+            if($countForQuery==0){
+            $adValenceQuery = "SELECT ";
+            
+            if(in_array("valence", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_valence) as 'avg_valence',";
+            }
+            if(in_array("emotion", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_happy) as 'avg_happy',
+                                                 AVG(ad.ad_sad) as 'avg_sad',
+                                                 AVG(ad.ad_neutral) as 'avg_neutral',
+                                                 AVG(ad.ad_angry) as 'avg_angry',
+                                                 AVG(ad.ad_suprised) as 'avg_surprised',
+                                                 AVG(ad.ad_disgusted) as 'avg_disgusted',
+                                                 AVG(ad.ad_scared) as 'avg_scared',";
+            }
+            if(in_array("attention", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_engagement) as 'avg_engagement',";
+            }
+            //$adValenceQuery=  rtrim($adValenceQuery,",");
+            $adValenceQuery=$adValenceQuery."ad.ad_dominant_emotion as 'peak_emotion',
+                                             ad.ad_id
+                                             FROM analysis_detail ad
+                                             JOIN analysis_results ar ON ad.ad_ar_id = ar.ar_id
+                                             JOIN content_feedback cf ON ar.ar_cf_id = cf.cf_id
+                                             WHERE $whereCond";
+           
+            $countForQuery++;
+            //echo $adValenceQuery;
+            
+            }
+            //aadi
             
             
             // for getting average emotion values

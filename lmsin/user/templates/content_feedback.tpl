@@ -38,7 +38,7 @@
 									</td>
 									<td class="col-md-5 second-td">
                                                                            
-                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Ratting.</span><br>
+                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Rating.</span><br>
 										<span style="color:#614197;">You won {$rp} rewards</span>
 										
 									</td>
@@ -180,7 +180,7 @@
 											{/if}
 										<div class="row border-bottom">
 											<div class="col-md-3">
-												<a href="javascript:return_play_video({$v.c_id})">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
 												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
@@ -189,7 +189,7 @@
 					 	
 											{else}
 											<div class="col-md-3">
-												<a href="javascript:return_play_video({$v.c_id})">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
 												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
@@ -206,7 +206,7 @@
 											{/if}
 										<div class="row border-bottom">
 											<div class="col-md-3">
-												<a href="javascript:return_play_video({$v.c_id})">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
 												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
@@ -215,7 +215,7 @@
 					 	
 											{else}
 											<div class="col-md-3">
-												<a href="javascript:return_play_video({$v.c_id})">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
 												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
