@@ -8,7 +8,7 @@
 <script src="js/add_campaign.js"></script>
 <script src="js/choosen/chosen.jquery.min.js"></script>
 <script src="js/jquery.validate.js"></script>    <!-- using for validation purposes -->
-<script type="text/javascript" src="js/jquery.multi-select"></script>
+<script type="text/javascript" src="js/jquery.multi-select.js"></script>
 <script type="text/javascript">
 
 var questionSetError = "";

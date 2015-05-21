@@ -50,7 +50,7 @@
 		<label for="State" class="col-sm-4 control-label">State</label>
             <div class="col-sm-7">
             	<select  name="user_state" id="user_state" class="styled-select" style="color:#777">
-            				
+            				{$company_state}
             	</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
     </div>

@@ -5,7 +5,6 @@
 
 
 
-
 function get_video_link()
 {
 	var checkBoxes=document.getElementsByName('chk_user_id[]');
@@ -209,6 +208,7 @@ function check(field)
 							 document.getElementById('user_gender').value,
 							 document.getElementById('age').value,
 							 document.getElementById('user_country').value,
+                                                         document.getElementById('user_state').value,
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value,
 							 document.getElementById('user_id').value);
@@ -262,6 +262,7 @@ function check(field)
 		var strt_age="";
 		var end_age="";
 		var company_country="";
+                var company_state="";
 		var keyword="";
 		if(document.getElementById("sex").selectedIndex!="0"){
 			sex = document.getElementById('sex').value;
@@ -275,11 +276,14 @@ function check(field)
 		if(document.getElementById("company_country").selectedIndex!="0"){
 			company_country = document.getElementById('company_country').value;
 		}
+                if(document.getElementById("users_state").selectedIndex!="0"){
+			company_state = document.getElementById('users_state').value;
+		}
 		if(document.getElementById('search').value!=""){
 			keyword = document.getElementById('search').value;
 		}
 	
-		user.view("","",f,o,document.getElementById('st_pos').value,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,keyword);
+		user.view("","",f,o,document.getElementById('st_pos').value,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,company_state,keyword);
 	}
 	
 	
@@ -289,6 +293,7 @@ function check(field)
 		var strt_age="";
 		var end_age="";
 		var company_country="";
+                var company_state="";
 		var keyword="";
 		if(document.getElementById("sex").selectedIndex!="0"){
 			sex = document.getElementById('sex').value;
@@ -302,13 +307,16 @@ function check(field)
 		if(document.getElementById("company_country").selectedIndex!="0"){
 			company_country = document.getElementById('company_country').value;
 		}
+                if(document.getElementById("users_state").selectedIndex!="0"){
+			company_state = document.getElementById('users_state').value;
+		}
 		if(document.getElementById('search').value!=""){
 			keyword = document.getElementById('search').value;
 		}
 	
 	
 		document.getElementById('st_pos').value=a;
-		user.view("","",document.getElementById('orderby').value,document.getElementById('order').value,a,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,keyword);
+		user.view("","",document.getElementById('orderby').value,document.getElementById('order').value,a,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,company_state,keyword);
 	}
 	
 	function set_page(nrpp)
@@ -317,6 +325,7 @@ function check(field)
 		var strt_age="";
 		var end_age="";
 		var company_country="";
+                var company_state="";
 		var keyword="";
 		if(document.getElementById("sex").selectedIndex!="0"){
 			sex = document.getElementById('sex').value;
@@ -330,12 +339,15 @@ function check(field)
 		if(document.getElementById("company_country").selectedIndex!="0"){
 			company_country = document.getElementById('company_country').value;
 		}
+                if(document.getElementById("users_state").selectedIndex!="0"){
+			company_state = document.getElementById('users_state').value;
+		}
 		if(document.getElementById('search').value!=""){
 			keyword = document.getElementById('search').value;
 		}
 	
 		document.getElementById('nrpp').value=nrpp;
-		user.view("","",document.getElementById('orderby').value,document.getElementById('order').value,document.getElementById('st_pos').value,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,keyword);
+		user.view("","",document.getElementById('orderby').value,document.getElementById('order').value,document.getElementById('st_pos').value,document.getElementById('nrpp').value,document.getElementById('chk').value,sex,strt_age,end_age,company_country,company_state,keyword);
 
 	}
 	
@@ -364,7 +376,7 @@ function check(field)
 		var strt_age="";
 		var end_age="";
 		var company_country="";
-                /*var users_state="";*/
+                var users_state="";
 		var keyword="";
 		if(document.getElementById("sex").selectedIndex!="0"){
 			sex = document.getElementById('sex').value;
@@ -384,9 +396,14 @@ function check(field)
 		if(document.getElementById('search').value!=""){
 			keyword = document.getElementById('search').value;
 		}
-		user.view('','','','','','','1',sex,strt_age,end_age,company_country,/*users_state,*/keyword);
-	}
-	
+                if($('#global_user').is(':checked')){
+		user.view('','Search Result','','','','','2',sex,strt_age,end_age,company_country,users_state,keyword);
+        	}
+                else{
+		user.view('','Search Result','','','','','1',sex,strt_age,end_age,company_country,users_state,keyword);
+        	}
+    }
+    	
 	function control() {
 		if(document.getElementById("strt_age").selectedIndex!="0"){
     		document.getElementById("end_age").disabled = false;
@@ -488,8 +505,9 @@ function open_group()
 	<div id="user_data"></div>
 	
 <script>
+    {$js}
 	user= new cn_ajax("user","user_data");
-        //user.view("","","","","","","","","","","","","");
-        user.view("","","map_company_user_id","DESC","","",1,"","","","","","");
+        user.view("","","","","","",0,"","","","","","");
+        //user.view("","","map_company_user_id","DESC","","",1,"","","","","","");
 </script>
 {/block}

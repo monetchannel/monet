@@ -39,12 +39,16 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['cmp_i
    $dataArray['campaign_id'] = $_REQUEST['cmp_id'];   
    
    // select values from database table
-   $campaignEditInfo = mysql_query("select * from campaigns where cmp_id='".$_REQUEST['cmp_id']."'");   
-   $campaignUsersEditInfo = mysql_query("select * from map_campaign_user where map_campaign_id='".$_REQUEST['cmp_id']."' and map_group_id='0'");
-   $campaignGroupsEditInfo = mysql_query("select map_group_id from map_campaign_user where map_campaign_id='".$_REQUEST['cmp_id']."' and map_group_id != '0'");
-   $campaignQuestionsEditInfo = mysql_query("select map_set_id from map_campaign_sets where map_campaign_id = '".$_REQUEST['cmp_id']."'"); 
-   
-   $selectedQuestionsEditInfo = mysql_query("select map_q_id, map_c_id, map_cmp_q_id from map_camp_question where map_camp_id = '".$_REQUEST['cmp_id']."'");
+   $SQL1 = "select * from campaigns where cmp_id = ".$dataArray['campaign_id'];
+   $SQL2 = "select * from map_campaign_user where map_group_id = '0' and map_campaign_id=".$dataArray['campaign_id'];
+   $SQL3 = "select Distinct map_group_id from map_campaign_user where 'map_group_id != '0' and map_campaign_id = ".$dataArray['campaign_id'];
+   $SQL4 = "select map_set_id from map_campaign_sets where map_campaign_id = ".$dataArray['campaign_id'];
+   $SQL5 = "select map_q_id, map_c_id, map_cmp_q_id from map_camp_question where map_camp_id = ".$dataArray['campaign_id'];
+   $campaignEditInfo = mysql_query($SQL1);   
+   $campaignUsersEditInfo = mysql_query($SQL2);
+   $campaignGroupsEditInfo = mysql_query($SQL3);
+   $campaignQuestionsEditInfo = mysql_query($SQL4); 
+   $selectedQuestionsEditInfo = mysql_query($SQL5);
    
    $campaigndata = mysql_fetch_assoc($campaignEditInfo);
    //$campaignuserdata = mysql_fetch_assoc($campaignUserEditInfo);
@@ -182,7 +186,9 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['cmp_i
    $cmpOpenForAll = (isset($_POST['open_for_all'])) ? $_POST['open_for_all'] : "0";
    $cmp_question_sets = $_POST['select_questions']; 
    $cmp_groups = $_POST['select_groups'];
+   //print_r(array_values($cmp_groups));
    $cmp_users = $_POST['select_users'];
+   //print_r(array_values($cmp_users));
    $questionsCollection = $_POST['choose_questions'];
    
    // Now filter out end users and groups 
@@ -271,20 +277,23 @@ $userOptionsList = '';
 
 if(count($usersSchema)>0){
     //while($cmp_user_result = mysql_fetch_object($usersSchema))
+    //print_r(array_values($usersSchema));
     foreach($usersSchema as $k=>$uarray)
     {
        $selected_user = ""; 
        if(isset($dataArray['campaign_group_users']) && count($dataArray['campaign_group_users'])>0){
-           
-            if(in_array($uarray['id'], $dataArray['campaign_group_users'])){
+           //echo("$uarray[user_id] ");
+            if(in_array($uarray['user_id'], $dataArray['campaign_group_users'])){
                $selected_user = "selected";          
             }   
        }
        
-       $user_id = $uarray['id']; 
-       $user_name = $uarray['name']; 
-       $userOptionsList .= '<option value="'.$user_id.'" '.$selected_user.' >'.$user_name.'</option>';
-    }
+       $user_id = $uarray['user_id']; 
+       $user_name = $uarray['user_name']; 
+       $userOptionsList .= "<option value=$user_id $selected_user >$user_name</option>";
+    //die("Echo $userOptionsList a $user_id a $user_name");
+       
+            }
 }
 
 $groupOptionsList = '';

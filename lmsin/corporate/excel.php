@@ -96,7 +96,8 @@ function insert_excel(){
 						  `user_password` ='".$pwd."',
 						  `user_country` ='".$Row[6]."',
 						  `user_states` ='".$Row[7]."',
-						  `user_zipcode`='".$Row[8]."'";
+                                                  `user_company_id` ='$_COOKIE[CompanyId]',
+						  `user_zipcode`='".$Row[8]."',";
 			
 			mysql_query($SQL);
 			$id = mysql_insert_id();

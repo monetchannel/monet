@@ -143,18 +143,18 @@ if($ageList){
 // get all countries
 // code to display the list of uaers in dropdownlist
 $userOptionsList = '';
-if(mysql_num_rows($usersSchema)>0){   
+if(mysql_num_rows($usersSchema)>0){ 
     while($cmp_user_result = mysql_fetch_object($usersSchema))
     {      
        $selected_user = ""; 
        if(isset($dataArray['mapped_group_users']) && count($dataArray['mapped_group_users'])>0){          
             if(in_array($cmp_user_result->user_id, $dataArray['mapped_group_users'])){
-               $selected_user = "selected";          
+               $selected_user = "selected";        
             }   
        }
        $user_name = $cmp_user_result->user_fname." ".$cmp_user_result->user_lname; 
-       $userOptionsList .= '<option value="'.$cmp_user_result->user_id.'" '.$selected_user.' >'.$user_name.'</option>';
-    }
+       $userOptionsList .= "<option value=$cmp_user_result->user_id $selected_user >$user_name</option>";
+    } 
 }
 
 $countryOptionsList = '';

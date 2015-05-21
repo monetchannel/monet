@@ -44,11 +44,11 @@
             				{$country_name}
             			</select>
 						<select  name="users_state" id="users_state" class="styled-select" style="color:#777">
-            				
+            				{$state_name}
             			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												
 				  		<input type="text" name="search" id="search" class="search-query" value="{$search}" >
-							
+                                                <input type="checkbox" name="global_user" id="global_user" class="checkbox1" > Include Global Users	
                     	<button id="search" class="search-btn" onclick="return ser_by()" ></button>
 						<button id="reset" onclick="return reset_srch()" >Reset</button>
                     	
@@ -75,10 +75,12 @@
 							</tr>
 						</thead>
 						<tbody>
-{foreach $users as $user}
+{foreach $users as $user}{$color = "#EEEEEE"}
+{if $user.map_company_id != $company_id}
+{$color = "#DDDDDD"}
+{/if}
 {strip}
-
-							<tr>
+                                                                <tr bgcolor="{$color}">
 								<td class="field-label col-xs-4 col-sm-4 col-md-2  text-align"><input type="checkbox" name="chk_user_id[]" id="checkbox" value="{$user.user_id}" /></td>
 								<td class="field-label col-xs-4 col-sm-4 col-md-2 text-align">{$user.user_fname} {$user.user_lname}</td>
 								<td class="col-md-3 field-label">{$user.user_email}</td>

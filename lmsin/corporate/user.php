@@ -34,7 +34,7 @@ function user_index($msg='')
 	$smarty = new Smarty;
 	$smarty->assign(array("msg"=>$msg,"js"=>$js,
 				"SERVER_PATH"=>$Server_View_Path,
-				"user_tab"=>"selected","invit_num"=>$invit_num,"js"=>$js,
+				"user_tab"=>"selected","invit_num"=>$invit_num,
 				"SERVER_COMPANY_PATH"=>$Server_company_Path,
 				"SERVER_ADMIN_PATH"=>$Server_View_Path."administrator/",
 				"user_tab"=>"label", "user_mgmt_tab"=>"selected"));
@@ -42,7 +42,7 @@ function user_index($msg='')
 }
 
 #########################################
-function user_view($callback,$msg="",$orderby_p="",$order_p="",$st_pos_p=0,$nrpp_p=0,$chk=0,$sex="",$strt_age="",$end_age="",$company_country="",$search="")
+function user_view($callback,$msg="",$orderby_p="",$order_p="",$st_pos_p=0,$nrpp_p=0,$chk=0,$sex="",$strt_age="",$end_age="",$company_country="",$company_state="",$search="")
 {
 	global $Server_Admin_Path;
 	$smarty = new Smarty;
@@ -56,6 +56,7 @@ function user_view($callback,$msg="",$orderby_p="",$order_p="",$st_pos_p=0,$nrpp
 	$users=array();
 	$tot_rows=0;
 	get_new_option_list('countries','countries_id','countries_name',$company_country,$country_name,0,"",1);
+        get_new_option_list('states', 'states_id', 'states_name', $company_state, $state_name, 0, "WHERE states_countries_id = '$company_country'", 1);
 	get_age_list($strt_age,$age1);
 	get_age_list($end_age,$age2);
    #-------------- Sorting ----------
@@ -122,6 +123,7 @@ if($chk==0)
 		  $data[no_approv]=$no_of_approved;
 		  $no_of_resp=get_row_count("`challenge`, `content`, `content_feedback`","where cf_rating>=0 and cf_ch_id = ch_id and ch_user_id = '$data[user_id]' and cf_c_id = c_id");
 		  $data[no_resp]=$no_of_resp;
+                  $data[map_company_id] = $_COOKIE[CompanyId];
 		  if($data[inv_id])
 		  {
 			$tot_inv=get_row_count("invite","where inv_user_id='".$data[user_id]."'");
@@ -151,6 +153,7 @@ if($chk==0)
 						"SERVER_PATH"=>$Server_Admin_Path,
 						"inv_id"=>$R[inv_id],
 						"user_tab"=>"selected",
+                                                "company_id"=>$_COOKIE[CompanyId],
 						));
 }
 else{
@@ -204,40 +207,83 @@ else{
 		$yy = $dt['year'];
 		$frm_year =($yy-$end_age);
 	}
-	
-	$cond="AND (";
+	if($chk==1){
+	$cond="";
 	
 	if($sex!=""){
-		if(strlen($cond)==5){$cond=$cond."u.user_gender='$sex'";}
+		/*if(strlen($cond)==0){$cond=$cond."u.user_gender='$sex'";}
+		else*/{$cond=$cond." AND u.user_gender='$sex'";}
+	}
+	if($strt_age!=""){
+		if($end_age!=""){
+			$e_age=1;
+			/*if(strlen($cond)==0){$cond=$cond."u.user_dob between '$frm_year' AND '$to_year'";}
+			else*/{$cond=$cond." AND u.user_dob between '$frm_year' AND '$to_year'";}
+		}
+		else{
+			/*if(strlen($cond)==0){$cond=$cond."u.user_dob='$to_year'";}
+			else*/{$cond=$cond." AND u.user_dob='$to_year'";}
+		}
+	}
+	if($company_country!=""){
+		/*if(strlen($cond)==0){$cond=$cond."u.user_country='$company_country'";}
+		else*/{$cond=$cond." AND u.user_country='$company_country'";}
+	}
+	if($company_state!=""){
+		/*if(strlen($cond)==0){$cond=$cond."u.user_states='$company_state'";}
+		else*/{$cond=$cond." AND u.user_states='$company_state'";}
+	}
+	if($search!=""){
+		/*if(strlen($cond)==0){$cond=$cond."(u.user_fname like '%$search%' OR u.user_lname like '%$search%' OR u.user_email like '%$search%')";}
+		else*/{$cond=$cond." AND (u.user_fname like '%$search%' OR u.user_lname like '%$search%' OR u.user_email like '%$search%')";}
+	}
+	
+	//$cond=$cond.")";
+    
+        //if(strlen($cond)==6) $cond = ""; // Vivek - Works Fine
+	
+	$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email, m.map_company_id FROM users u JOIN map_company_user m ON 
+               u.user_id = m.map_user_id WHERE m.map_company_id=$_COOKIE[CompanyId] $cond GROUP BY u.user_id ORDER BY u.$orderby $order";  // Vivek Verma
+        }
+        else{
+            $cond="";
+	
+	if($sex!=""){
+		if(strlen($cond)==0){$cond=$cond."u.user_gender='$sex'";}
 		else{$cond=$cond." AND u.user_gender='$sex'";}
 	}
 	if($strt_age!=""){
 		if($end_age!=""){
 			$e_age=1;
-			if(strlen($cond)==5){$cond=$cond."u.user_dob between '$frm_year' AND '$to_year'";}
+			if(strlen($cond)==0){$cond=$cond."u.user_dob between '$frm_year' AND '$to_year'";}
 			else{$cond=$cond." AND u.user_dob between '$frm_year' AND '$to_year'";}
 		}
 		else{
-			if(strlen($cond)==5){$cond=$cond."u.user_dob='$to_year'";}
+			if(strlen($cond)==0){$cond=$cond."u.user_dob='$to_year'";}
 			else{$cond=$cond." AND u.user_dob='$to_year'";}
 		}
 	}
 	if($company_country!=""){
-		if(strlen($cond)==5){$cond=$cond."u.user_country='$company_country'";}
+		if(strlen($cond)==0){$cond=$cond."u.user_country='$company_country'";}
 		else{$cond=$cond." AND u.user_country='$company_country'";}
 	}
+	if($company_state!=""){
+		if(strlen($cond)==0){$cond=$cond."u.user_states='$company_state'";}
+		else{$cond=$cond." AND u.user_states='$company_state'";}
+	}
 	if($search!=""){
-		if(strlen($cond)==5){$cond=$cond."(u.user_fname like '%$search%' OR u.user_lname like '%$search%' OR u.user_email like '%$search%')";}
+		if(strlen($cond)==0){$cond=$cond."(u.user_fname like '%$search%' OR u.user_lname like '%$search%' OR u.user_email like '%$search%')";}
 		else{$cond=$cond." AND (u.user_fname like '%$search%' OR u.user_lname like '%$search%' OR u.user_email like '%$search%')";}
 	}
 	
-	$cond=$cond.")";
-        if($cond = "AND ()") $cond = "";
+	//$cond=$cond.")";
+    
+        //if(strlen($cond)==6) $cond = ""; // Vivek - Works Fine
 	
-	$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email FROM users u JOIN map_company_user m ON 
-               u.user_id = m.map_user_id WHERE m.map_company_id=$_COOKIE[CompanyId] $cond GROUP BY u.user_id ORDER BY $orderby $order";  // Vivek Verma
-        
-        
+            //substr($cond,3,strlen($cond)-3);
+	$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email, m.map_company_id FROM users u LEFT JOIN map_company_user m ON u.user_id = m.map_user_id WHERE $cond GROUP BY u.user_id ORDER BY u.$orderby $order";  // Vivek Verma
+        }
+        //echo($SQL);
 	//$SQL= "SELECT * FROM users WHERE user_company_id='$_COOKIE[CompanyId]' $cond GROUP BY user_id ORDER BY $orderby $order";
         //$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email FROM users u JOIN map_company_user m ON 
           //     u.user_id = m.map_user_id WHERE m.map_company_id='$_COOKIE[CompanyId]' $cond GROUP BY u.user_id ORDER BY $orderby $order";  
@@ -252,7 +298,7 @@ else{
    	if($tot_rows>0)
    	{
     	while($data=mfa($rs))
-      	{
+      	{   
 		  array_push($users,$data);
       	}
    	}
@@ -264,6 +310,7 @@ else{
 						"orderby"=>$orderby_p,
 						"order"=>$order_p,
 						"country_name"=>$country_name,
+                                                "state_name"=>$state_name,
 						"age1"=>$age1,
 						"age2"=>$age2,
 						"gender_".$sex=>"selected",
@@ -277,6 +324,7 @@ else{
 						"user_tab"=>"selected",
 						"search"=>$search,
 						"e_age"=>$e_age,
+                                                "company_id"=>$_COOKIE[CompanyId]
 
 						));
 						
@@ -332,7 +380,8 @@ function user_save($callback,$user_fname,$user_lname,$user_gender,$age,$user_sta
 							  `user_gender` = '$user_gender',
 							  `user_dob` = '$yy',
 							  `user_country` ='$data[states_countries_id]',
-							  /*`user_states` ='$user_state',*/
+                                                          `user_company_id` ='$_COOKIE[CompanyId]',
+							  `user_states` ='$user_state',
 							  `user_email` = '$user_email',
 							  `user_password`='$user_password'";
 	$id=ei($SQL);
@@ -362,8 +411,9 @@ function user_edit($callback,$user_id)
 {
 	$smarty = new Smarty;
 	get_row_con_info("users","where user_id='$user_id' limit 0,1","",$user);
-	get_new_option_list('countries','countries_id','countries_name',$user[user_country],$country_name,0,"",1);
-	$dt=getdate();
+        get_new_option_list('countries','countries_id','countries_name',$user[user_country],$country_name,0,"",1);
+	get_new_option_list('states','states_id','states_name',$user[user_states],$state_name,0,"WHERE states_countries_id = '$user[user_country]]'",1);
+        $dt=getdate();
 	$yy = $dt['year'];
 	$age =($yy-$user[user_dob]);
 	$smarty->assign($user);
@@ -372,6 +422,7 @@ function user_edit($callback,$user_id)
 					  "user_id"=>$user_id,
 					  "gender_".$user[user_gender]=>"selected",
 					  "country_name"=>$country_name,
+                                          "company_state"=>$state_name,
 					  "age"=>$age,
 					  "user_tab"=>"selected",
 					  ));
@@ -380,7 +431,7 @@ function user_edit($callback,$user_id)
 	return ($ary);
 }
 #################################################################################
-function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_country,$user_email,$user_password,$user_id)
+function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_country,$user_state,$user_email,$user_password,$user_id)
 {
 	if(get_row_count("users","where user_email='$user_email' AND user_id!='$user_id' limit 0,1"))
 	{
@@ -400,6 +451,7 @@ function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_c
 							`user_gender` = '$user_gender',
 							`user_dob` = '$yy',
 							`user_country` ='$user_country',
+                                                        `user_states` ='$user_state',
 							`user_email` = '$user_email',
 							`user_password`='$user_password',
 							`user_company_id`='$_COOKIE[CompanyId]' WHERE `user_id` = '$user_id'";
