@@ -49,11 +49,21 @@ $(function(){
 })
 
 function getUsersAfterAgeFilter(agefrom, ageto, genderval, countryval, stateval){
-    var ageRange = ""; 
-    if(agefrom!='' && ageto!=""){
-        ageRange = agefrom+'-'+ageto;
+    var ageRange = -1; 
+    var year_to = "";
+    var year_from = "";
+    var current_year = new Date().getFullYear();
+    if(agefrom!='' && ageto!=''){
+        ageRange = ageto-agefrom;
     }
+    if(agefrom!='') year_to = current_year - agefrom;
+    else year_to = current_year;
+    if(ageto!='') year_from = current_year - ageto;    
+    else year_from = 0;
     var filterParams = {
+        'current_year':current_year,
+        'year_to':year_to,
+        'year_from':year_from,
         'age_range':ageRange,
         'gender':genderval,
         'country':countryval,

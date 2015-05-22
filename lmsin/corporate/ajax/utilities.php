@@ -74,7 +74,8 @@ function getCategoryName($catid){
 function connectDB()
 {
     /* Connecting, selecting database */
-    $conn = mysql_connect("monetdbase.db.8486879.hostedresource.com", "monetdbase", "Kanpur@123") or die("Could not connect");
+    //$conn = mysql_connect("monetdbase.db.8486879.hostedresource.com", "monetdbase", "Kanpur@123") or die("Could not connect");
+    $conn = mysql_connect("127.0.0.1", "root", "") or die("Could not connect");
     mysql_select_db("monetdbase") or die("Could not select database");
     return $conn;
 }
@@ -162,12 +163,12 @@ if(isset($_POST) && isset($_POST['action'])){
         case "get_filtered_group_users":
             $whereCondArr = array();
             $usersKeyValueCollection = array();
-            $companyId = $_COOKIE[CompanyId];
+            $companyId = $_COOKIE['CompanyId'];
             $chkUserIdArray = array();
             
-            if(isset($_POST['filter_param']['age_range']) && $_POST['filter_param']['age_range']!=""){
-                $age_collec = explode("-", $_POST['filter_param']['age_range']);
-                $ageCondition  = "(YEAR(NOW()) - u.user_dob) BETWEEN ".$age_collec[0]." AND ".$age_collec[1];
+            if(isset($_POST['filter_param']['age_range']) && $_POST['filter_param']['age_range'] > -1){
+                //$age_collec = explode("-", $_POST['filter_param']['age_range']);
+                $ageCondition  = "u.user_dob BETWEEN ".$_POST['filter_param']['year_from']." AND ".$_POST['filter_param']['year_to'];
                 array_push($whereCondArr, $ageCondition);
                 //$ageFilteredSchema = mysql_query($ageFilterationQuery);
             }
@@ -189,7 +190,7 @@ if(isset($_POST) && isset($_POST['action'])){
             
             array_filter($whereCondArr);
             $whereStatement = implode(" AND ", $whereCondArr);  
-            
+            //echo $whereStatement;
             //$userFilterQuery = "SELECT user_id, user_fname, user_lname from users"; 
             // for private users
             $privateUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
@@ -199,7 +200,7 @@ if(isset($_POST) && isset($_POST['action'])){
                        on u.user_id = m.map_user_id WHERE m.map_company_id = '0' and m.map_access_level = 'public'";
             // for public users
             $publicUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
-                              on u.user_id = m.map_user_id WHERE m.map_company_id != '$companyId' and m.map_access_level = 'public'";
+                              on u.user_id = m.map_user_id WHERE m.map_company_id != '$companyId' and m.map_company_id != '0' and m.map_access_level = 'public'";
     
             
             if(isset($whereStatement) && $whereStatement!=""){
@@ -214,8 +215,12 @@ if(isset($_POST) && isset($_POST['action'])){
             $monetUsersQuery .= " ORDER BY u.user_id DESC";
             $publicUsersQuery .= " ORDER BY u.user_id DESC";                    
             
+            //echo $privateUsersQuery;
+            //echo $monetUsersQuery;
+            //echo $publicUsersQuery;
             // first put private users in array
             $privateUsersSchema = mysql_query($privateUsersQuery);
+            //echo"<pre>";print_r(array_values($privateUsersSchema['user_id']));echo"</pre>";
             if(mysql_num_rows($privateUsersSchema)>0){
                  while($user_records = mysql_fetch_assoc($privateUsersSchema)){
                      array_push($chkUserIdArray, $user_records['user_id']);
@@ -229,8 +234,6 @@ if(isset($_POST) && isset($_POST['action'])){
             $monetUsersSchema = mysql_query($monetUsersQuery);
             if(mysql_num_rows($monetUsersSchema)>0){
                 while($user_records = mysql_fetch_assoc($monetUsersSchema)){
-                     if(is_array($monetUsersSchema))
-                     {
                          if(!in_array($user_records['user_id'], $chkUserIdArray)){
                              array_push($chkUserIdArray, $user_records['user_id']);
                              $username = $user_records['user_fname']." ".$user_records['user_lname'];
@@ -238,15 +241,14 @@ if(isset($_POST) && isset($_POST['action'])){
                                              'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
                              array_push($usersKeyValueCollection, $userIdNamePair);
                          }
-                     }
-                     
+                                          
                 }
             }
             // second put monet users in array
             $publicUsersSchema = mysql_query($publicUsersQuery);
-            if(mysql_num_rows($monetUsersSchema)>0){
+            if(mysql_num_rows($publicUsersSchema)>0){
                  while($user_records = mysql_fetch_assoc($publicUsersSchema)){
-                     if(is_array($monetUsersSchema))
+                     if(is_array($publicUsersSchema))
                      {
                         if(!in_array($user_records['user_id'], $chkUserIdArray)){
                             array_push($chkUserIdArray, $user_records['user_id']);
@@ -258,7 +260,7 @@ if(isset($_POST) && isset($_POST['action'])){
                      }
                  }
             }
-            
+            $options_string="";
             if(count($usersKeyValueCollection)>0){
                 foreach ($usersKeyValueCollection as $key=>$urecord){
                     $username = $urecord['user_name'];
