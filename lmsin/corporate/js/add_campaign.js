@@ -6,6 +6,13 @@ $(function(){
         selectionFooter: "<div class='note-label-select'>Selected Campaign Users</div>"
     });
     
+         
+    $('#select_user').multiSelect({ 
+        //selectableOptgroup: true
+        selectableFooter: "<div class='note-label-select'>Global Users</div>",
+        selectionFooter: "<div class='note-label-select'>Selected Campaign Users</div>"
+    });
+    
     $('#select_groups').multiSelect({ 
         //selectableOptgroup: true
         selectableFooter: "<div class='note-label-select'>Brand Groups</div>",
