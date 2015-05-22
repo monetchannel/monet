@@ -73,11 +73,25 @@ function getUsersAfterAgeFilter(agefrom, ageto, genderval, countryval, stateval)
     $.ajax({
         url: 'ajax/utilities.php',
         method: 'post',
-        data: { 'action':'get_filtered_group_users', filter_param:filterParams },
+        data: { 'action':'get_filtered_group_brandusers', filter_param:filterParams },
         success: function(data){                       
-                $('#select_users').html("");
-                $('#select_users').html(data);
-                $('#select_users').trigger("chosen:updated");             
+                $('#select_brandusers').html("");
+                $('#select_brandusers').html(data);
+                $('#select_brandusers').trigger("chosen:updated");             
+        },
+        error: function(status){
+               console.log(status);
+        }
+    });
+    
+    $.ajax({
+        url: 'ajax/utilities.php',
+        method: 'post',
+        data: { 'action':'get_filtered_group_globalusers', filter_param:filterParams },
+        success: function(data){                       
+                $('#select_globalusers').html("");
+                $('#select_globalusers').html(data);
+                $('#select_globalusers').trigger("chosen:updated");             
         },
         error: function(status){
                console.log(status);

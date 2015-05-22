@@ -270,6 +270,175 @@ if(isset($_POST) && isset($_POST['action'])){
             
             echo $options_string;       
             break;
+        
+        case "get_filtered_group_brandusers":
+            $whereCondArr = array();
+            $usersKeyValueCollection = array();
+            $companyId = $_COOKIE['CompanyId'];
+            $chkUserIdArray = array();
+            
+            if(isset($_POST['filter_param']['age_range']) && $_POST['filter_param']['age_range'] > -1){
+                //$age_collec = explode("-", $_POST['filter_param']['age_range']);
+                $ageCondition  = "u.user_dob BETWEEN ".$_POST['filter_param']['year_from']." AND ".$_POST['filter_param']['year_to'];
+                array_push($whereCondArr, $ageCondition);
+                //$ageFilteredSchema = mysql_query($ageFilterationQuery);
+            }
+            
+            if(isset($_POST['filter_param']['gender']) && $_POST['filter_param']['gender']!=""){
+                $genderCondition  = "u.user_gender = '".$_POST['filter_param']['gender']."'";
+                array_push($whereCondArr, $genderCondition);               
+            }
+            
+            if(isset($_POST['filter_param']['country']) && $_POST['filter_param']['country']!=""){
+                $countryCondition  = "u.user_country = '".$_POST['filter_param']['country']."'";
+                array_push($whereCondArr, $countryCondition);               
+            }         
+            
+            if(isset($_POST['filter_param']['state']) && $_POST['filter_param']['state']!=""){
+                $stateCondition  = "u.user_states = '".$_POST['filter_param']['state']."'";
+                array_push($whereCondArr, $stateCondition);               
+            }    
+            
+            array_filter($whereCondArr);
+            $whereStatement = implode(" AND ", $whereCondArr);  
+            //echo $whereStatement;
+            //$userFilterQuery = "SELECT user_id, user_fname, user_lname from users"; 
+            // for private users
+            $privateUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                         on u.user_id = m.map_user_id where m.map_company_id = '$companyId' and m.map_access_level = 'private'";           
+            // for monet users
+            
+            
+            if(isset($whereStatement) && $whereStatement!=""){
+                //$userFilterQuery .= " AND ".$whereStatement;
+                $privateUsersQuery .= " AND ".$whereStatement;
+            }                           
+            
+            //$userFilterQuery .= " ORDER BY u.user_id DESC";  
+            $privateUsersQuery .= " ORDER BY u.user_id DESC";
+            
+            //echo $privateUsersQuery;
+            //echo $monetUsersQuery;
+            //echo $publicUsersQuery;
+            // first put private users in array
+            $privateUsersSchema = mysql_query($privateUsersQuery);
+            //echo"<pre>";print_r(array_values($privateUsersSchema['user_id']));echo"</pre>";
+            if(mysql_num_rows($privateUsersSchema)>0){
+                 while($user_records = mysql_fetch_assoc($privateUsersSchema)){
+                     array_push($chkUserIdArray, $user_records['user_id']);
+                     $username = $user_records['user_fname']." ".$user_records['user_lname'];
+                     $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                             'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+                     array_push($usersKeyValueCollection, $userIdNamePair);
+                 }
+            }
+            
+            $options_string="";
+            if(count($usersKeyValueCollection)>0){
+                foreach ($usersKeyValueCollection as $key=>$urecord){
+                    $username = $urecord['user_name'];
+                    $options_string .= '<option value="'.$urecord['user_id'].'">'.$username.'</option>'; 
+                }
+            }           
+            
+            echo $options_string;       
+            break;
+        
+        case "get_filtered_group_globalusers":
+            $whereCondArr = array();
+            $usersKeyValueCollection = array();
+            $companyId = $_COOKIE['CompanyId'];
+            $chkUserIdArray = array();
+            
+            if(isset($_POST['filter_param']['age_range']) && $_POST['filter_param']['age_range'] > -1){
+                //$age_collec = explode("-", $_POST['filter_param']['age_range']);
+                $ageCondition  = "u.user_dob BETWEEN ".$_POST['filter_param']['year_from']." AND ".$_POST['filter_param']['year_to'];
+                array_push($whereCondArr, $ageCondition);
+                //$ageFilteredSchema = mysql_query($ageFilterationQuery);
+            }
+            
+            if(isset($_POST['filter_param']['gender']) && $_POST['filter_param']['gender']!=""){
+                $genderCondition  = "u.user_gender = '".$_POST['filter_param']['gender']."'";
+                array_push($whereCondArr, $genderCondition);               
+            }
+            
+            if(isset($_POST['filter_param']['country']) && $_POST['filter_param']['country']!=""){
+                $countryCondition  = "u.user_country = '".$_POST['filter_param']['country']."'";
+                array_push($whereCondArr, $countryCondition);               
+            }         
+            
+            if(isset($_POST['filter_param']['state']) && $_POST['filter_param']['state']!=""){
+                $stateCondition  = "u.user_states = '".$_POST['filter_param']['state']."'";
+                array_push($whereCondArr, $stateCondition);               
+            }    
+            
+            array_filter($whereCondArr);
+            $whereStatement = implode(" AND ", $whereCondArr);  
+            //echo $whereStatement;
+            //$userFilterQuery = "SELECT user_id, user_fname, user_lname from users"; 
+            // for monet users
+            $monetUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                       on u.user_id = m.map_user_id WHERE m.map_company_id = '0' and m.map_access_level = 'public'";
+            // for public users
+            $publicUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                              on u.user_id = m.map_user_id WHERE m.map_company_id != '$companyId' and m.map_company_id != '0' and m.map_access_level = 'public'";
+    
+            
+            if(isset($whereStatement) && $whereStatement!=""){
+                //$userFilterQuery .= " AND ".$whereStatement;
+                $monetUsersQuery .= " AND ".$whereStatement;
+                $publicUsersQuery .= " AND ".$whereStatement;
+            }                           
+            
+            //$userFilterQuery .= " ORDER BY u.user_id DESC";  
+            $monetUsersQuery .= " ORDER BY u.user_id DESC";
+            $publicUsersQuery .= " ORDER BY u.user_id DESC";                    
+            
+            //echo $privateUsersQuery;
+            //echo $monetUsersQuery;
+            //echo $publicUsersQuery;
+            // first put private users in array
+            
+            // second put monet users in array
+            $monetUsersSchema = mysql_query($monetUsersQuery);
+            if(mysql_num_rows($monetUsersSchema)>0){
+                while($user_records = mysql_fetch_assoc($monetUsersSchema)){
+                         
+                             array_push($chkUserIdArray, $user_records['user_id']);
+                             $username = $user_records['user_fname']." ".$user_records['user_lname'];
+                             $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                             'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+                             array_push($usersKeyValueCollection, $userIdNamePair);
+                         
+                                          
+                }
+            }
+            // second put monet users in array
+            $publicUsersSchema = mysql_query($publicUsersQuery);
+            if(mysql_num_rows($publicUsersSchema)>0){
+                 while($user_records = mysql_fetch_assoc($publicUsersSchema)){
+                     
+                        if(!in_array($user_records['user_id'], $chkUserIdArray)){
+                            array_push($chkUserIdArray, $user_records['user_id']);
+                            $username = $user_records['user_fname']." ".$user_records['user_lname'];
+                            $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                                    'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+                            array_push($usersKeyValueCollection, $userIdNamePair);
+                        
+                     }
+                 }
+            }
+            $options_string="";
+            if(count($usersKeyValueCollection)>0){
+                foreach ($usersKeyValueCollection as $key=>$urecord){
+                    $username = $urecord['user_name'];
+                    $options_string .= '<option value="'.$urecord['user_id'].'">'.$username.'</option>'; 
+                }
+            }           
+            
+            echo $options_string;       
+            break;
+            
             
         case 'generate_category_questions':
             $checkboxHtml = "";

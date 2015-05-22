@@ -12,8 +12,12 @@ $(function(){
     $("form").validate({       
             errorPlacement: function ($errorLabel, $element) {
                 var elementId = $element.prop('id');
-                if(elementId=="select_users"){
+                if(elementId=="select_brandusers"){
                     var $selectContainer = $element.closest('.form-group').find('#helpBlock');
+                    $errorLabel.insertAfter($selectContainer);                    
+                }
+                else if(elementId=="select_globalusers"){
+                    var $selectContainer = $element.closest('.form-group').find('#helpBlocks');
                     $errorLabel.insertAfter($selectContainer);                    
                 }else{
                     var $elementToInsertAfter = $element;
@@ -130,13 +134,23 @@ $(function(){
         
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="select_users">Select Group Users</label>
-            <select id="select_users" multiple name="select_users[]" class="form-control input-lg chosen-select" 
+            <label for="select_brandusers">Select Brand Group Users</label>
+            <select id="select_brandusers" multiple name="select_brandusers[]" class="form-control input-lg chosen-select" 
                     data-msg-required="Please select any user."
-                    data-rule-required="true">{$dataArray.userSelectOptions}</select>
+                    data-rule-required="true">{$dataArray.branduserSelectOptions}</select>
             <span id="helpBlock" class="help-block">Note: Use ctrl button to select multiple users.</span>
         </div>
-    </div>    
+    </div>  
+            
+            <div class="row">
+        <div class="form-group col-md-6">
+            <label for="select_globalusers">Select Global Group Users</label>
+            <select id="select_globalusers" multiple name="select_globalusers[]" class="form-control input-lg chosen-select" 
+                    data-msg-required="Please select any user."
+                    data-rule-required="true">{$dataArray.globaluserSelectOptions}</select>
+            <span id="helpBlocks" class="help-block">Note: Use ctrl button to select multiple users.</span>
+        </div>
+    </div>
       
     <div class="row col-md-6">
         <div class="form-group text-center">
