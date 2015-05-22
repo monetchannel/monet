@@ -5,20 +5,6 @@
 </div>  
 {/if}
 
-<!--<script>
-{$js}
-	var cookie1 = $.cookie("cookie1");
-	!( cookie1 == "changed" ) || $('#global_user').attr('checked',true);
-	$('#global_user').change(function () {               
-		$('#global_user').toggle(!this.checked);
-		if( this.checked ) {
-			$.cookie("cookie1", "changed");
-		} else {
-			$.cookie("cookie1", null);
-		}         
-	}).change();
-</script>-->
-
 <form name="frm" id="frm" method="POST" action="user.php" onSubmit="return false;">
 <div class="row margin-top">
 				<div>
