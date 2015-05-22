@@ -138,6 +138,7 @@ if($chk==0)
     $smarty->assign(array("users"=>$users,
 						"msg"=>$msg,"tot_rows"=>$tot_rows,
 						"chk"=>$chk,
+                                                "selected"=>"",
 						"act"=>"view",
 						"hide_del"=>$hide_del,
 						"orderby"=>$orderby_p,
@@ -302,9 +303,12 @@ else{
 		  array_push($users,$data);
       	}
    	}
+        if($chk==1) $selected="";
+        else $selected="checked";
 	$smarty->assign(array("users"=>$users,
 						"msg"=>$msg,"tot_rows"=>$tot_rows,
 						"chk"=>$chk,
+                                                "selected"=>$selected,
 						"act"=>"view",
 						"hide_del"=>$hide_del,
 						"orderby"=>$orderby_p,

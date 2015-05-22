@@ -5,6 +5,20 @@
 </div>  
 {/if}
 
+<!--<script>
+{$js}
+	var cookie1 = $.cookie("cookie1");
+	!( cookie1 == "changed" ) || $('#global_user').attr('checked',true);
+	$('#global_user').change(function () {               
+		$('#global_user').toggle(!this.checked);
+		if( this.checked ) {
+			$.cookie("cookie1", "changed");
+		} else {
+			$.cookie("cookie1", null);
+		}         
+	}).change();
+</script>-->
+
 <form name="frm" id="frm" method="POST" action="user.php" onSubmit="return false;">
 <div class="row margin-top">
 				<div>
@@ -48,7 +62,7 @@
             			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												
 				  		<input type="text" name="search" id="search" class="search-query" value="{$search}" >
-                                                <input type="checkbox" name="global_user" id="global_user" class="checkbox1" > Include Global Users	
+                                                <input type="checkbox" name="global_user" id="global_user" class="checkbox1" {$selected} > Include Global Users	
                     	<button id="search" class="search-btn" onclick="return ser_by()" ></button>
 						<button id="reset" onclick="return reset_srch()" >Reset</button>
                     	
