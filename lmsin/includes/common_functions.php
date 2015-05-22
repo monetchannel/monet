@@ -162,6 +162,70 @@ function getGroupUsersWithUserId($groupId){
  * plus to get all public users of other brands
  * plus to get all monet users 
  */
+// Vivek Verma
+function getAllBrandUsers($companyId){
+   $usersKeyValueCollection = array();
+   // first get all private users of selected brand
+   //$privateUsersQuery = "SELECT user_id, user_fname, user_lname from users WHERE user_company_id = '$companyId' and user_access_level = 'private'";
+   if($companyId!=""){
+        $privateUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                         on u.user_id = m.map_user_id
+                         where m.map_company_id = '$companyId'";
+   
+        $privateUsersSchema = mysql_query($privateUsersQuery);
+        if(mysql_num_rows($privateUsersSchema)>0){
+             while($user_records = mysql_fetch_assoc($privateUsersSchema)){
+                 $username = $user_records['user_fname']." ".$user_records['user_lname'];
+                 $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                         'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+                 array_push($usersKeyValueCollection, $userIdNamePair);
+                 }
+        
+            }
+        }
+        return $usersKeyValueCollection;
+   }
+   // Vivek Verma
+   function getAllNonBrandAuthorisedUsers($companyId){
+       $usersKeyValueCollection = array();
+   // first get all private users of selected brand
+   //$privateUsersQuery = "SELECT user_id, user_fname, user_lname from users WHERE user_company_id = '$companyId' and user_access_level = 'private'";
+   
+   
+   // now get all monet users whose company_id will be 0
+   $monetUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                       on u.user_id = m.map_user_id WHERE m.map_company_id = '0'";
+   $monetUsersSchema = mysql_query($monetUsersQuery);
+   if(mysql_num_rows($monetUsersSchema)>0){
+        while($user_records = mysql_fetch_assoc($monetUsersSchema)){
+            $username = $user_records['user_fname']." ".$user_records['user_lname'];
+            $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                    'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+            array_push($usersKeyValueCollection, $userIdNamePair);
+        }
+   }
+   
+   // get all other brand users who have declared public
+   if($companyId!=""){
+            $publicUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                              on u.user_id = m.map_user_id WHERE m.map_company_id != '$companyId' and m.map_company_id != 0 and m.map_access_level = 'public'";
+   }else{
+            $publicUsersQuery = "select u.user_id, u.user_fname, u.user_lname, u.user_email from users u join map_company_user m
+                              on u.user_id = m.map_user_id WHERE m.map_access_level = 'public'";  
+   }
+   $publicUsersSchema = mysql_query($publicUsersQuery);
+   if(mysql_num_rows($publicUsersSchema)>0){
+        while($user_records = mysql_fetch_assoc($publicUsersSchema)){
+            $username = $user_records['user_fname']." ".$user_records['user_lname'];
+            $userIdNamePair = array('user_id'=>$user_records['user_id'],
+                                    'user_name'=>$username, 'user_email'=>$user_records['user_email']); 
+            array_push($usersKeyValueCollection, $userIdNamePair);
+        }
+   }
+   
+   return $usersKeyValueCollection;
+}
+
 function getAllAuthorisedUsers($companyId){
    $usersKeyValueCollection = array();
    // first get all private users of selected brand

@@ -121,7 +121,9 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['cmp_i
    $cmp_open_for_all = (isset($_POST['open_for_all'])) ? $_POST['open_for_all'] : "0";
    //$cmp_groups = $_POST['select_groups'];
    $cmp_groups = $_POST['select_groups'];
-   $cmp_users = $_POST['select_users'];
+   $cmp_globalusers = $_POST['select_globalusers'];
+   $cmp_brandusers = $_POST['select_brandusers'];
+   $cmp_users = array_unique(array_merge($cmp_brandusers,$cmp_globalusers));
    $cmp_question_sets = $_POST['select_questions'];  
    $questionsCollection = $_POST['choose_questions'];
    //$filtered_users = $_POST['filtered_users']; 
@@ -187,7 +189,10 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['cmp_i
    $cmp_question_sets = $_POST['select_questions']; 
    $cmp_groups = $_POST['select_groups'];
    //print_r(array_values($cmp_groups));
-   $cmp_users = $_POST['select_users'];
+   $cmp_brandusers = $_POST['select_brandusers'];
+   
+   $cmp_globalusers = $_POST['select_globalusers'];
+   $cmp_users = array_unique(array_merge($cmp_brandusers,$cmp_globalusers));
    //print_r(array_values($cmp_users));
    $questionsCollection = $_POST['choose_questions'];
    
@@ -248,7 +253,9 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['cmp_i
 //$videosSchema = mysql_query("SELECT c_id, c_title from content where c_company_id = '".$_COOKIE[CompanyId]."' order by c_id desc");
 $videosSchema = mysql_query("SELECT c_id, c_title from content where c_company_id = '".$_COOKIE[CompanyId]."' order by c_id desc");
 // get all users for adding to the group of campaign
-$usersSchema = getAllAuthorisedUsers($_COOKIE[CompanyId]); // to get all authorised users
+$globalusersSchema = getAllNonBrandAuthorisedUsers($_COOKIE[CompanyId]); // to get all authorised users
+$brandusersSchema = getAllBrandUsers($_COOKIE[CompanyId]); // Vivek Verma
+//$globalusersSchema = array_diff($globalusersSchema, $brandusersSchema);
 // get all groups for campaign creation
 $groupsSchema = mysql_query("SELECT g_id, g_name FROM groups order by g_id desc");
 // get all questions for campaign creation
@@ -273,12 +280,12 @@ if(mysql_num_rows($videosSchema)>0){
 }
 
 //$userOptionsList = '<option value="">--Select Any User--</option>';
-$userOptionsList = '';
+$globaluserOptionsList = '';
 
-if(count($usersSchema)>0){
+if(count($globalusersSchema)>0){
     //while($cmp_user_result = mysql_fetch_object($usersSchema))
-    //print_r(array_values($usersSchema));
-    foreach($usersSchema as $k=>$uarray)
+    //echo '<pre>';print_r(array_values($globalusersSchema));echo '</pre>';
+    foreach($globalusersSchema as $k=>$uarray)
     {
        $selected_user = ""; 
        if(isset($dataArray['campaign_group_users']) && count($dataArray['campaign_group_users'])>0){
@@ -290,7 +297,28 @@ if(count($usersSchema)>0){
        
        $user_id = $uarray['user_id']; 
        $user_name = $uarray['user_name']; 
-       $userOptionsList .= "<option value=$user_id $selected_user >$user_name</option>";
+       $globaluserOptionsList .= "<option value=$user_id $selected_user >$user_name</option>";
+    //die("Echo $userOptionsList a $user_id a $user_name");
+       
+            }
+}
+$branduserOptionsList = '';
+if(count($brandusersSchema)>0){
+    //while($cmp_user_result = mysql_fetch_object($usersSchema))
+    //print_r(array_values($usersSchema));
+    foreach($brandusersSchema as $k=>$uarray)
+    {
+       $selected_user = ""; 
+       if(isset($dataArray['campaign_group_users']) && count($dataArray['campaign_group_users'])>0){
+           //echo("$uarray[user_id] ");
+            if(in_array($uarray['user_id'], $dataArray['campaign_group_users'])){
+               $selected_user = "selected";          
+            }   
+       }
+       
+       $user_id = $uarray['user_id']; 
+       $user_name = $uarray['user_name']; 
+       $branduserOptionsList .= "<option value=$user_id $selected_user >$user_name</option>";
     //die("Echo $userOptionsList a $user_id a $user_name");
        
             }
@@ -362,7 +390,8 @@ if($_REQUEST['action']=="edit"){
 
 
 $dataArray['videoSelectOptions'] = $videoOoptionsList;
-$dataArray['userSelectOptions'] = $userOptionsList;
+$dataArray['globaluserSelectOptions'] = $globaluserOptionsList;
+$dataArray['branduserSelectOptions'] = $branduserOptionsList;
 $dataArray['groupSelectOptions'] = $groupOptionsList;
 $dataArray['questionSelectOptions'] = $questionSetOptionsList;
 $dataArray['allSelectedSetQuestions'] = $questionsList;

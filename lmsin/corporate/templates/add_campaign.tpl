@@ -11,6 +11,10 @@
 <script type="text/javascript" src="js/jquery.multi-select.js"></script>
 <script type="text/javascript">
 
+var p = document.getElementById("select_users");
+var div = document.createElement("select_user");
+div.style.cssText = document.defaultView.getComputedStyle(p, "").cssText;
+
 var questionSetError = "";
 
 function chk_all()
@@ -85,7 +89,7 @@ $(function(){
          
             errorPlacement: function ($errorLabel, $element) {
                 var elementId = $element.prop('id');
-                if(elementId=="select_users" || elementId=="select_groups"){
+                if(elementId=="select_users" || elementId=="select_groups" || elementId=="select_user"){
                     var $selectContainer = $element.closest('.tab-content');
                     $selectContainer.append($errorLabel);
                 }else if(elementId=="select_questions"){
@@ -161,24 +165,39 @@ $(function(){
                 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="ug_selection_tab">
-                  <li role="presentation"><a href="#select_users_tab" aria-controls="select_users_tab" role="tab" data-toggle="tab">Users</a></li>
-                  <li role="presentation"><a href="#select_groups_tab" aria-controls="select_groups_tab" role="tab" data-toggle="tab">Groups</a></li>
+                    <li role="presentation"><a href="#select_users_tab" aria-controls="select_users_tab" role="tab" data-toggle="tab">Users</a></li>
+                    <li role="presentation"><a href="#select_groups_tab" aria-controls="select_groups_tab" role="tab" data-toggle="tab">Groups</a></li>
                 </ul>
                 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="select_users_tab">
+                        <ul class="nav nav-tabs" id="dashboard_tabs">
+                            <li role="presentation"><a href="#select_users_tabs" aria-controls="select_users_tabs" role="tab" data-toggle="tab">Userss</a></li>
+                            <li role="presentation"><a href="#select_users_tabss" aria-controls="select_users_tabss" role="tab" data-toggle="tab">Usersss</a></li>
+                        </ul>
                         <label for="select_users">Select Campaign Users</label>
-                        <select id="select_users" multiple name="select_users[]" class="form-control input-lg" 
+                         <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="select_users_tabs">
+                        <select id="select_users" multiple name="select_brandusers[]" class="form-control input-lg" 
                                 data-msg-required="Please select any user."
-                                data-rule-required="true">{$dataArray.userSelectOptions}</select>
+                                data-rule-required="true">{$dataArray.branduserSelectOptions}</select>
                     </div>     
+
+                    <div role="tabpanel" class="tab-pane" id="select_users_tabss">
+                        <select id="select_user" multiple name="select_globalusers[]" class="form-control input-lg" 
+                                data-msg-required="Please select any user."
+                                data-rule-required="true">{$dataArray.globaluserSelectOptions}</select>
+                    </div>
+                    </div>
+                        
+                        </div>     
 
                     <div role="tabpanel" class="tab-pane" id="select_groups_tab">
                         <label for="select_groups">Select Campaign Groups</label>
                         <select id="select_groups" multiple name="select_groups[]" 
                                 class="form-control input-lg">{$dataArray.groupSelectOptions}</select>
                     </div>        
-
+                   
                 </div>
             </div>    
         </div>
