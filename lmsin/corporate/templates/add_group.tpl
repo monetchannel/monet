@@ -27,6 +27,7 @@ $(function(){
         
     $(".chosen-select").chosen({ disable_search_threshold: 10 });    
 })
+
 </script>
 
 <div class="alert alert-warning" style="display:none; margin-top:20px; padding-top:20px">  
@@ -146,7 +147,7 @@ $(function(){
     
     <input type="hidden" name="action" id="action" value="{$dataArray.action}">
     <input type="hidden" name="group_id" id="group_id" value="{$dataArray.g_id}">
-    <input type="hidden" name="group_id" id="demography_id" value="{$dataArray.g_demography_id}">  
+    <input type="hidden" name="demography_id" id="demography_id" value="{$dataArray.g_demography_id}">  
 </form>
 
 </div>

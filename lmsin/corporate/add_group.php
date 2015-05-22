@@ -96,7 +96,7 @@ elseif(isset($_GET['action']) && $_GET['action']=="edit" && $_GET['group_id']!="
 }
 elseif($_POST['action']=='update' && $_POST['group_id']!="")
 {
-   $gId = trim($_POST['group_id']); 
+   $gId = $_POST['group_id']; 
    $gName = (isset($_POST['group_name'])) ? $_POST['group_name'] : "";
    $gDesc = (isset($_POST['group_description'])) ? $_POST['group_description'] : "";
    $gSubject = (isset($_POST['group_subject'])) ? $_POST['group_subject'] : "";
@@ -107,11 +107,11 @@ elseif($_POST['action']=='update' && $_POST['group_id']!="")
        $ageLimit2 = (isset($_POST['select_agegroup2']) && $_POST['select_agegroup2']!="-1") ? $_POST['select_agegroup2'] : ""; 
        $genderSelect = (isset($_POST['select_sex']) && $_POST['select_sex']!="-1") ? $_POST['select_sex'] : ""; 
        $countrySelect = (isset($_POST['select_country']) && $_POST['select_country']!="") ? $_POST['select_country'] : ""; 
-       $demographyQuery = "UPDATE demography SET d_gender = '$genderSelect', "
-               . "d_start_age = '$ageLimit1', d_end_age = '$ageLimit2', d_country_id = '$countrySelect' WHERE d_id = '".$_POST['demography_id']."'";
-   } 
+       $demographyQuery = "UPDATE demography SET d_gender = '$genderSelect', d_start_age = '$ageLimit1', d_end_age = '$ageLimit2', d_country_id = '$countrySelect' WHERE d_id = ".$_POST['demography_id'];
+   }
    
    $updResp = mysql_query($cmpUpQuery);
+    $updResp1 = mysql_query($demographyQuery);
    if($updResp){
       
        $_SESSION['updationStatus'] = "Group has been updated successfully";
