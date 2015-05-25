@@ -55,15 +55,18 @@ if($_COOKIE[CompanyId])
             }
             array_push($country_name, $data);
     }
-    $male=array("key"=>"Male","selected"=>'');
-    $female=array("key"=>"Female","selected"=>'');
+    if($R['gender'] == "Male")
+        $male=array("key"=>"Male","selected"=>"selected");
+    
+    else
+        $male=array("key"=>"Male","selected"=>'');
+    
+    if($R['gender'] == "Female")
+        $female=array("key"=>"Female","selected"=>"selected");
+    
+    else
+        $female=array("key"=>"Female","selected"=>'');
     $gender=array($male,$female);
-    foreach($gender as $k){
-        if($k[key]==$R['gender'])
-        {$k[selected]='selected';}
-        else
-        {$k[selected]='';}
-    }
     $condition1="";
     $condition2="";
     $condition3="";
@@ -133,7 +136,7 @@ if($_COOKIE[CompanyId])
                     //echo "ar_id=".$v[ar_id].",video_num_rows=".$video_num_rows.",video[c_id]=".$videos[c_id]."<br>";
                 }
             $smarty = new Smarty;
-
+            //print_r(array_values($gender));
             $smarty->assign(array("category_name"=>$category_name,
                                 "country_name"=>$country_name,
                                 "gender"=>$gender,
