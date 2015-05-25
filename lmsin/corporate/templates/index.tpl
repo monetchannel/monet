@@ -117,7 +117,11 @@
 
                                     <li class="sub-nav {$active_video_tab}" >
                                         <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
-                                    </li>                               
+                                    </li>
+                                    
+                                    <li class="sub-nav {$test_tab}" >
+                                        <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
+                                    </li>
                                 </ul>                             
                           </li>    
                           
