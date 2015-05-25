@@ -103,7 +103,8 @@ $(function () {
         neutralSum = 0,
         disgustedSum = 0,
         surprisedSum = 0,
-        angrySum = 0
+        angrySum = 0,
+        scaredSum=0
         
     var happyObjLength = Object.keys(smileysCountArray.happy).length; 
     if(happyObjLength>0){
@@ -153,14 +154,22 @@ $(function () {
         });             
     }
     
-    totalSum = Number(happySum)+Number(sadSum)+Number(neutralSum)+Number(angrySum)+Number(disgustedSum)+Number(surprisedSum);
+    var scaredObjLength = Object.keys(smileysCountArray.scared).length; 
+    if(scaredObjLength>0){
+        var scaredObj = smileysCountArray.scared;
+        $.each(scaredObj , function(keys, scared_value){
+            scaredSum = Number(scaredSum) + Number(scared_value);
+        });             
+    }
+    
+    totalSum = Number(happySum)+Number(sadSum)+Number(neutralSum)+Number(angrySum)+Number(disgustedSum)+Number(surprisedSum)+Number(scaredSum);
     var happyPercent = Number(happySum/totalSum);
     var sadPercent = Number(sadSum/totalSum);
     var neutralPercent = Number(neutralSum/totalSum);
     var angryPercent = Number(angrySum/totalSum);
     var disgustedPercent = Number(disgustedSum/totalSum);
     var surprisedPercent = Number(surprisedSum/totalSum);
-    //var happyPercent = Number(happySum/totalSum);
+    var scaredPercent = Number(scaredSum/totalSum);
     
     $('.meaning-happy-blk').circleProgress({
             startAngle: -Math.PI / 4 * 2,
@@ -210,12 +219,20 @@ $(function () {
             fill: { color: '#00ADEE' }
     });
     
+    $('.meaning-scared-darkgreen').circleProgress({
+            startAngle: -Math.PI / 4 * 2,
+            value: scaredPercent,
+            size: 107,
+            thickness:20,
+            fill: { color: '#15AB6D' }
+    });
+    
     $('#neutral-percent').html('<b>Neutral : ' + Number(neutralPercent*100).toFixed(2) +' %</b>');
     $('#sad-percent').html('<b>Sad : ' + Number(sadPercent*100).toFixed(2) +' %</b>');
     $('#happy-percent').html('<b>Happy : ' + Number(happyPercent*100).toFixed(2) +' %</b>');
     $('#disgusted-percent').html('<b>Disgusted : ' + Number(disgustedPercent*100).toFixed(2) +' %</b>');
     $('#angry-percent').html('<b>Angry : ' + Number(angryPercent*100).toFixed(2) +' %</b>');
     $('#surprised-percent').html('<b>Surprised : ' + Number(surprisedPercent*100).toFixed(2) +' %</b>');
-    
+    $('#scared-percent').html('<b>Scared : ' + Number(scaredPercent*100).toFixed(2) +' %</b>');
     
 });
