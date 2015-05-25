@@ -113,39 +113,49 @@
 						Average Meaning Variation
 					</div>
 					<div class="row">
-                                                <div class="col-md-4" style="text-align: center;" title="Happy">
+                                            <div class="col-md-1"></div>
+                                                <div class="col-md-5" style="text-align: center;" title="Happy">
 							<div class="meaning-happy-green circle-graph"></div>
 							<img class="img-responsive" src="images/green_1.png"/>
                                                         <div id="happy-percent" class="smileys-caption"></div>
 						</div>
-						<div class="col-md-4" style="text-align: center;" title="Sad">
+						<div class="col-md-5" style="text-align: center;" title="Sad">
 							<div class="meaning-sad-org circle-graph"></div>
 							<img class="img-responsive" src="images/org.png"/>
                                                         <div id="sad-percent" class="smileys-caption"></div>
 						</div>
-                                                <div class="col-md-4" style="text-align: center;" title="Neutral">
-							<div class="meaning-happy-blk circle-graph"></div>
-							<img class="img-responsive" src="images/blk.png"/>
-                                                        <div id="neutral-percent" class="smileys-caption" ></div>
-						</div>
-						
+					    <div class="col-md-1"></div>
 					</div>
 					<div class="row">
 						<div class="col-md-4" style="text-align: center;" title="Disgusted">
 							<div class="meaning-happy-red circle-graph"></div>
-							<img class="img-responsive" src="images/red.png" />
+							<img class="img-responsive" src="images/disgusted.png" />
                                                         <div id="disgusted-percent" class="smileys-caption"></div>
 						</div>
-						<div class="col-md-4" style="text-align: center;" title="Angry">
-							<div class="meaning-sad-purple circle-graph"></div>
-							<img class="img-responsive" src="images/purple.png"/>
-                                                        <div id="angry-percent" class="smileys-caption"></div>
+						<div class="col-md-4" style="text-align: center;" title="Neutral">
+							<div class="meaning-happy-blk circle-graph"></div>
+							<img class="img-responsive" src="images/blk.png"/>
+                                                        <div id="neutral-percent" class="smileys-caption" ></div>
 						</div>
 						<div class="col-md-4" style="text-align: center;" title="Surprised">
 							<div class="meaning-happy-blue circle-graph"></div>
-							<img class="img-responsive" src="images/blue.png" />
+							<img class="img-responsive" src="images/surprised.png" />
                                                         <div id="surprised-percent" class="smileys-caption"></div>
 						</div>
+					</div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                                <div class="col-md-5" style="text-align: center;" title="Angry">
+							<div class="meaning-sad-purple circle-graph"></div>
+							<img class="img-responsive" src="images/angry.png"/>
+                                                        <div id="angry-percent" class="smileys-caption"></div>
+						</div>
+						<div class="col-md-5" style="text-align: center;" title="Scared">
+							<div class="meaning-scared-darkgreen circle-graph"></div>
+							<img class="img-responsive" src="images/scared.png"/>
+                                                        <div id="scared-percent" class="smileys-caption"></div>
+						</div>
+					    <div class="col-md-1"></div>
 					</div>
                                     
 				</div>
