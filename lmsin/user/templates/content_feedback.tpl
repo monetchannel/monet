@@ -183,7 +183,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
 												</a>
 											</div>
 					 	
@@ -192,7 +192,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
 												</a>
 											</div>
 											{/if}
@@ -209,7 +209,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br>{$v.c_date}</div>
 												</a>
 											</div>
 					 	
@@ -218,7 +218,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
 												</a>
 											</div>
 											{/if}
