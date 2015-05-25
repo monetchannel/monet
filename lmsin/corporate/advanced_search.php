@@ -115,7 +115,7 @@ if($_COOKIE[CompanyId])
                     //print_r(array_values($v));      
 
                     eq($SQL2,$rs2);
-                    while($result=mfa($rs2))
+                    while($result=mfa($rs2)){
                         if(!in_array($result,$id))    
                         {
                             array_push ($id, $result);
@@ -129,6 +129,7 @@ if($_COOKIE[CompanyId])
                                 }
                             }    
                         }
+                    }
                     //echo "ar_id=".$v[ar_id].",video_num_rows=".$video_num_rows.",video[c_id]=".$videos[c_id]."<br>";
                 }
             $smarty = new Smarty;
@@ -167,7 +168,7 @@ function analyse($msg=''){
         if(in_array($data[ar_id], $AnalysisResultId))
             array_push ($Ids, $data[ar_id]);
     }
-    print_r(array_values($Ids));    //Ids contains ar_id of the filtered results corresponding to the video
+    //print_r(array_values($Ids));    //Ids contains ar_id of the filtered results corresponding to the video
     
     
     
