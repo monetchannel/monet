@@ -7,7 +7,7 @@
   {$msg}  
 </div>  
 {/if}
-
+{$Category = ''}{$Gender = ''}{$Country = ''}
 
     <div class="row  margin-top">
         <div class="col-xs-6 col-sm-6 col-md-12">
@@ -19,25 +19,25 @@
                 <input type="hidden" name="filter" value="true">
                 <label class="checkbox-inline">Search By:</label>
                 <div class="top-select checkbox-inline">
-                    <select name="cat">
+                    <select name="cat" id="cat">
                     <option value="">Category</option>
-                    {foreach $category_name as $cat}
+                    {foreach $category_name as $cat}{if $cat.selected !=''}{$Category = $cat.cat_id}{/if}
                     <option value="{$cat.cat_id}" {$cat.selected}>{$cat.cat_name}</option>
                     {/foreach}
                     </select>
                 </div>
                 <div class="top-select checkbox-inline">
-                    <select name="countries">
+                    <select name="countries" id="countries">
                     <option value="">Country</option>
-                    {foreach $country_name as $country}
+                    {foreach $country_name as $country}{if $country.selected !=''}{$Country = $country.countries_id}{/if}
                     <option value="{$country.countries_id}" {$country.selected}>{$country.countries_name}</option>
                     {/foreach}
                     </select>
                 </div>
                 <div class="top-select checkbox-inline">
-                    <select name="gender">
+                    <select name="gender"id="gender">
                     <option value="">Gender</option>
-                    {foreach $gender as $k}
+                    {foreach $gender as $k}{if $k.selected !=''}{$Gender = $k.key}{/if}
                     <option value="{$k.key}" {$k.selected}>{$k.key}</option>
                     {/foreach}
                     </select>
@@ -49,7 +49,38 @@
             
             
     {if $video_num_rows>0}
-
+    <div class="container-fluid"><br>
+                                <div class="row  action pull-left">
+                                    
+                                <a href="javascript:void(0)" >
+                                <input type="checkbox" name="excampaign[]" id="campaign_0" value="excludecampaign" class="0" />
+                                <div><label>Exclude Campaign</label></div>
+                                </a>  
+                                
+                                <a href="javascript:void(0)" >
+                                    <input type="checkbox" name="valence[]" id="Valence_0" value="valence" class="0" checked="checked" />
+                                <div><label for="Valence_0">Valence</label></div>
+                                </a>
+                                
+                                <a href="javascript:void(0)">
+                                <input type="checkbox" name="microexpressions[]" id="Microexpressions_0" value="emotion" class="0" checked="checked" />
+                                <div><label for="Microexpressions_0">Microexpressions</label></div>
+                                </a>	
+                                
+                                <a href="javascript:void(0)">
+                                <input type="checkbox" name="engagement[]" id="Engagement_0" value="attention" class="0" checked="checked" />
+                                <div><label for="Engagement_0">Engagement</label></div>
+                                </a>
+                                
+                                <a href="javascript:void(0)">
+                                <input type="checkbox" name="Heat_map[]" id="Heat_map_0" value="heatmap" class="0" checked="checked" />
+                                <div><label for="Heat_map_0">Heat Map</label></div>
+                                </a>    
+                                
+                                <button class="btn btn-sm btn-default" onclick="javascript:return generate_code('0')"><strong>Analyze By Parameters</strong></button>
+                                <input type="hidden" name="vode_id[]" value="0" /> 
+                               
+                          </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered"> 
@@ -61,7 +92,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {foreach $videos as $video}
+                    {foreach $videos as $video}
                     <tr>
                         <td class="field-label col-xs-2 col-sm-2 col-md-2 text-align"><img class="img-responsive" src="{$video.c_thumb_url}" alt="125x125">
                         </td>
@@ -157,9 +188,16 @@ function generate_code(contentId)
                 return false;
 	}
 	
-        
+        var a = 'advanced_search.php?act=analysebyvideo&c_id=';
+        var aa = 'advanced_search.php?act=analysebyparameters';
+        var b = '&cat=';
+        var c = '&countries=';
+        var d = '&gender=';
         var cook = readCookie("graphs_to_show");
-	location.href = 'advanced_search.php?act=analyse&c_id='+contentId;
+        if(contentId!=0)    
+            location.href = a.concat(contentId,b,document.getElementById('cat').value,c,document.getElementById('countries').value,d,document.getElementById('gender').value);
+        else
+            location.href = aa.concat(b,document.getElementById('cat').value,c,document.getElementById('countries').value,d,document.getElementById('gender').value);
         return false;
 }
 </script>
