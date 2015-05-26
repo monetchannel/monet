@@ -102,7 +102,7 @@ if($_COOKIE[CompanyId])
         $num_rec_per_page=5;
             //print_r(array_values($AnalysisResultId));
         
-        if(fe($_REQUEST[act] && $video_num_rows>0))
+        if(fe($_REQUEST[act]))
         {
           $_REQUEST[act]($_REQUEST[msg]);
            die();
@@ -464,7 +464,6 @@ function analysebyvideo($msg=''){
                                 "analysis_tab"=>"analysis-selected"
 	));
 
-
 $smarty->display('campaign_analysis.tpl');
 }
 
@@ -762,24 +761,23 @@ function analysebyparameters($msg=''){
                                 "avg_ad_valence"=>$avg_valence,
                                 "ad_time"=>$time,
                                 "compare_option"=>$compare_option,
-                                "c_id"=>$vd[c_id],
-                                "cf_id"=>$vd[cf_id],
-                                "user_name"=>$vd[user_fname]." ".$vd[user_lname],
-                                "video_title"=>$vd[c_title],
-                                'cf_date'=>$vd[cf_date],
+                                "c_id"=>"238",
+                                "cf_id"=>"90",
+                                "user_name"=>"Dinesh Chandra",
+                                "video_title"=>"Library Coca-Cola Commercial",
+                                'cf_date'=>"May 26, 2015",
                                 "avg_ad_time"=>$avg_time,
-                                "video_url"=>$Server_View_Path."video_files/".$vd[cf_id].".flv",
-                                "video_id"=>get_video_id($vd[c_url]),
+                                "video_url"=>$Server_View_Path."video_files/90.flv",
+                                "video_id"=>"rKV0kR6Ih0s",
                                 "SERVER_COMPANY_PATH"=>$Server_company_Path,
                                 "SERVER_PATH"=>$Server_View_Path,
                                 "act"=>'analysis_graph',
                                 "filter_graph_array"=>$chkArray,
-                                "video_analysis_tab" => (!isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
-                                "campaign_analysis_tab"=>(isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
+                                "video_analysis_tab" => (!isset($_GET['camp_id']) ) ? "label" : "",
+                                "campaign_analysis_tab"=>(isset($_GET['camp_id']) ) ? "label" : "",
                                 "active_analysis_tab"=>(isset($_GET['ad_ar_id'])) ? "label" : "",
                                 "analysis_tab"=>"analysis-selected"
 	));
-
 
 $smarty->display('campaign_analysis.tpl');
 }
