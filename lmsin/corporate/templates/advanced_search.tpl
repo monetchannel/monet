@@ -7,7 +7,6 @@
   {$msg}  
 </div>  
 {/if}
-{$Category = ''}{$Gender = ''}{$Country = ''}
 
     <div class="row  margin-top">
         <div class="col-xs-6 col-sm-6 col-md-12">
@@ -21,7 +20,7 @@
                 <div class="top-select checkbox-inline">
                     <select name="cat" id="cat">
                     <option value="">Category</option>
-                    {foreach $category_name as $cat}{if $cat.selected !=''}{$Category = $cat.cat_id}{/if}
+                    {foreach $category_name as $cat}
                     <option value="{$cat.cat_id}" {$cat.selected}>{$cat.cat_name}</option>
                     {/foreach}
                     </select>
@@ -29,7 +28,7 @@
                 <div class="top-select checkbox-inline">
                     <select name="countries" id="countries">
                     <option value="">Country</option>
-                    {foreach $country_name as $country}{if $country.selected !=''}{$Country = $country.countries_id}{/if}
+                    {foreach $country_name as $country}
                     <option value="{$country.countries_id}" {$country.selected}>{$country.countries_name}</option>
                     {/foreach}
                     </select>
@@ -37,7 +36,7 @@
                 <div class="top-select checkbox-inline">
                     <select name="gender"id="gender">
                     <option value="">Gender</option>
-                    {foreach $gender as $k}{if $k.selected !=''}{$Gender = $k.key}{/if}
+                    {foreach $gender as $k}
                     <option value="{$k.key}" {$k.selected}>{$k.key}</option>
                     {/foreach}
                     </select>
