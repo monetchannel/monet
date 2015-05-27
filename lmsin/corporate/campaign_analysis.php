@@ -275,6 +275,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
             $max_value = array_keys($comparingArray,max($comparingArray))[0];
             $max_value = ucfirst($max_value);
             
+            if($adValenceVal!="") // checking if the result set of the adValenceQuery is not null, if null then don't include 0's in the array // vivek verma
             array_push($adValenceArray, 
                     array('time_range'=>$time_range_from,
                           'avg_valence'=>$adValenceVal,
