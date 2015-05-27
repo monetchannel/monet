@@ -200,8 +200,8 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
                       
             $whereCond = implode(" AND ", $whereCondArray);               
             
-           //aadi
-            if($countForQuery==0){
+           //aadi // vivek verma
+            //if($countForQuery==0){
             $adValenceQuery = "SELECT ";
             
             if(in_array("valence", $chkArray)){
@@ -227,10 +227,10 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
                                              JOIN content_feedback cf ON ar.ar_cf_id = cf.cf_id
                                              WHERE $whereCond";
            
-            $countForQuery++;
+            //$countForQuery++;
             //echo $adValenceQuery;
             
-            }
+            //} //vivek verma
             //aadi
             
             
@@ -252,7 +252,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
             $adPeakId = (isset($adValenceSchema['ad_id']) && $adValenceSchema['ad_id']!="") ? $adValenceSchema['ad_id'] : "0";          
             
             // create an array of emotions, valence and engagement
-            array_push($commonEmotionsSmileyArray['valence'], $adValenceVal);
+            /*array_push($commonEmotionsSmileyArray['valence'], $adValenceVal);
             array_push($commonEmotionsSmileyArray['engagement'], $adEngagementVal);
             array_push($commonEmotionsSmileyArray['happy'], $adHappyVal);
             array_push($commonEmotionsSmileyArray['sad'], $adSadVal);
@@ -261,7 +261,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
             array_push($commonEmotionsSmileyArray['surprised'], $adSurprisedVal);
             array_push($commonEmotionsSmileyArray['disgusted'], $adDisgustedVal);
             array_push($commonEmotionsSmileyArray['scared'], $adScaredVal);           
-            
+            */
             $comparingArray = array(
                 'Neutral' => (float)$adNeutralVal,
                 'Happy' => (float)$adHappyVal,
@@ -294,7 +294,88 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
             //$adValenceArray[$time_range_to] = $adValenceVal;
             $flag++;
         }              
-        
+            $whereCondArray = array();
+            $to = $i + 1;
+            //$i = ($flag == 0) ? $i : $i+1;
+            $time_range_from = date('H:i:s', $minTimeValue);
+            $time_range_to = date('H:i:s', $maxTimeValue); 
+            
+            // condition for excluding campaigns 
+            if(in_array("excludecampaign", $chkArray)){
+                array_push($whereCondArray, "cf_cmp_id = '0'");               
+            }
+            
+            if(isset($_REQUEST['ad_ar_id'])){ 
+                //$where_cond = "where ar_id='".$_REQUEST['ad_ar_id']."' limit 0,1"; 
+                array_push($whereCondArray, "ar.ar_id = '".trim($_REQUEST['ad_ar_id'])."'");
+            }
+            
+            array_push($whereCondArray, "cf_c_id = '$content_id' AND ad.ad_time BETWEEN '$time_range_from' AND '$time_range_to'");
+                      
+            $whereCond = implode(" AND ", $whereCondArray);               
+            
+           //aadi // vivek verma
+            //if($countForQuery==0){
+            $adValenceQuery = "SELECT ";
+            
+            if(in_array("valence", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_valence) as 'avg_valence',";
+            }
+            if(in_array("emotion", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_happy) as 'avg_happy',
+                                                 AVG(ad.ad_sad) as 'avg_sad',
+                                                 AVG(ad.ad_neutral) as 'avg_neutral',
+                                                 AVG(ad.ad_angry) as 'avg_angry',
+                                                 AVG(ad.ad_suprised) as 'avg_surprised',
+                                                 AVG(ad.ad_disgusted) as 'avg_disgusted',
+                                                 AVG(ad.ad_scared) as 'avg_scared',";
+            }
+            if(in_array("attention", $chkArray)){
+                $adValenceQuery=$adValenceQuery."AVG(ad.ad_engagement) as 'avg_engagement',";
+            }
+            //$adValenceQuery=  rtrim($adValenceQuery,",");
+            $adValenceQuery=$adValenceQuery."ad.ad_dominant_emotion as 'peak_emotion',
+                                             ad.ad_id
+                                             FROM analysis_detail ad
+                                             JOIN analysis_results ar ON ad.ad_ar_id = ar.ar_id
+                                             JOIN content_feedback cf ON ar.ar_cf_id = cf.cf_id
+                                             WHERE $whereCond";
+           
+            //$countForQuery++;
+            //echo $adValenceQuery;
+            
+            //} //vivek verma
+            //aadi
+            
+            
+            // for getting average emotion values
+            $adValenceResource = mysql_query($adValenceQuery);
+            $adValenceSchema = mysql_fetch_assoc($adValenceResource);
+            $compareEmotionArray = array();
+            
+            $adValenceVal = (isset($adValenceSchema['avg_valence']) && $adValenceSchema['avg_valence']!="") ? $adValenceSchema['avg_valence'] : 0; 
+            $adEngagementVal = (isset($adValenceSchema['avg_engagement']) && $adValenceSchema['avg_engagement']!="") ? $adValenceSchema['avg_engagement'] : null;
+            $adHappyVal = (isset($adValenceSchema['avg_happy']) && $adValenceSchema['avg_happy']!="") ? $adValenceSchema['avg_happy'] : 0; 
+            $adSadVal = (isset($adValenceSchema['avg_sad']) && $adValenceSchema['avg_sad']!="") ? $adValenceSchema['avg_sad'] : 0; 
+            $adAngryVal = (isset($adValenceSchema['avg_angry']) && $adValenceSchema['avg_angry']!="") ? $adValenceSchema['avg_angry'] : 0;
+            $adSurprisedVal = (isset($adValenceSchema['avg_surprised']) && $adValenceSchema['avg_surprised']!="") ? $adValenceSchema['avg_surprised'] : 0;
+            $adDisgustedVal = (isset($adValenceSchema['avg_disgusted']) && $adValenceSchema['avg_disgusted']!="") ? $adValenceSchema['avg_disgusted'] : 0;
+            $adScaredVal = (isset($adValenceSchema['avg_scared']) && $adValenceSchema['avg_scared']!="") ? $adValenceSchema['avg_scared'] : 0;
+            $adNeutralVal = (isset($adValenceSchema['avg_neutral']) && $adValenceSchema['avg_neutral']!="") ? $adValenceSchema['avg_neutral'] : 0;
+            //$adPeakEmotion = (isset($adValenceSchema['peak_emotion']) && $adValenceSchema['peak_emotion']!="") ? $adValenceSchema['peak_emotion'] : "Neutral";
+            $adPeakId = (isset($adValenceSchema['ad_id']) && $adValenceSchema['ad_id']!="") ? $adValenceSchema['ad_id'] : "0";          
+            
+            // create an array of emotions, valence and engagement
+            array_push($commonEmotionsSmileyArray['valence'], $adValenceVal);
+            array_push($commonEmotionsSmileyArray['engagement'], $adEngagementVal);
+            array_push($commonEmotionsSmileyArray['happy'], $adHappyVal);
+            array_push($commonEmotionsSmileyArray['sad'], $adSadVal);
+            array_push($commonEmotionsSmileyArray['neutral'], $adNeutralVal);
+            array_push($commonEmotionsSmileyArray['angry'], $adAngryVal);
+            array_push($commonEmotionsSmileyArray['surprised'], $adSurprisedVal);
+            array_push($commonEmotionsSmileyArray['disgusted'], $adDisgustedVal);
+            array_push($commonEmotionsSmileyArray['scared'], $adScaredVal);           
+            
         // make an array of ad_valence values with their time values        
         $ar_ids = implode(',',$ary);
 	if(!$ar_ids)$ar_ids=0;
