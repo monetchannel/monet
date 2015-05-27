@@ -298,8 +298,6 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
             $whereCondArray = array();
             $to = $i + 1;
             //$i = ($flag == 0) ? $i : $i+1;
-            $time_range_from = date('H:i:s', $minTimeValue);
-            $time_range_to = date('H:i:s', $maxTimeValue+1); 
             
             // condition for excluding campaigns 
             if(in_array("excludecampaign", $chkArray)){
@@ -311,7 +309,7 @@ if(isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])){
                 array_push($whereCondArray, "ar.ar_id = '".trim($_REQUEST['ad_ar_id'])."'");
             }
             
-            array_push($whereCondArray, "cf_c_id = '$content_id' AND ad.ad_time BETWEEN '$time_range_from' AND '$time_range_to'");
+            array_push($whereCondArray, "cf_c_id = '$content_id'");
                       
             $whereCond = implode(" AND ", $whereCondArray);               
             

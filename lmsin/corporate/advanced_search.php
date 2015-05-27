@@ -430,8 +430,6 @@ function analysebyvideo($msg=''){
         
             $whereCondArray = array();
             //$i = ($flag == 0) ? $i : $i+1;
-            $time_range_from = date('H:i:s', $minTimeValue);
-            $time_range_to = date('H:i:s', $maxTimeValue+1);
             
             // condition for excluding campaigns 
             if(in_array("excludecampaign", $chkArray)){
@@ -443,7 +441,7 @@ function analysebyvideo($msg=''){
                 array_push($whereCondArray, "ar.ar_id = '".trim($_REQUEST['ad_ar_id'])."'");
             }
             
-            array_push($whereCondArray, "cf_c_id = '$c_id' AND ad.ad_time BETWEEN '$time_range_from' AND '$time_range_to'");
+            array_push($whereCondArray, "cf_c_id = '$c_id'");
                       
             $whereCond = implode(" AND ", $whereCondArray);               
             //echo $whereCond;
@@ -824,8 +822,6 @@ function analysebyparameters($msg=''){
             $flag++;
         }
             $whereCondArray = array();
-            $time_range_from = date('H:i:s', $minTimeValue);
-            $time_range_to = date('H:i:s', $maxTimeValue+1);
             
             // condition for excluding campaigns 
             if(in_array("excludecampaign", $chkArray)){
@@ -837,10 +833,8 @@ function analysebyparameters($msg=''){
                 array_push($whereCondArray, "ar.ar_id = '".trim($_REQUEST['ad_ar_id'])."'");
             }
             
-            array_push($whereCondArray, "ad.ad_time BETWEEN '$time_range_from' AND '$time_range_to'");
-                      
             $whereCond = implode(" AND ", $whereCondArray);               
-            
+            if($whereCond!="") $whereCondd = $whereCond." AND";
            //aadi
             //if($countForQuery==0){
             $adValenceQuery = "SELECT ";
@@ -866,7 +860,7 @@ function analysebyparameters($msg=''){
                                              FROM analysis_detail ad
                                              JOIN analysis_results ar ON ad.ad_ar_id = ar.ar_id
                                              JOIN content_feedback cf ON ar.ar_cf_id = cf.cf_id
-                                             WHERE $whereCond  and ar.ar_id in (".$Ids_string.")";
+                                             WHERE $whereCondd ar.ar_id in (".$Ids_string.")";
            
             //$countForQuery++;
             //echo $adValenceQuery;
