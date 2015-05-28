@@ -1,15 +1,25 @@
 <?php
-$x_arr=array(0,2,4,6);
-$y_arr=array(0,-5,-10,0);
+global $x_arr;
+global $y_arr;
+global $video_length;
+global $xp;
+global $yp;
+global $p_area;
+global $n_area;
+global $x;
+global $y;
 
-$l=count($x_arr);                               // length of json array
-$video_length=6;                               // length of video for x axis length
-$xp=0;
-$yp=0;
+function integral($x_arr_,$y_arr_,$video_length_,$xp_,$yp_){
+global $n_area, $p_area,$x,$y,$x_arr,$y_arr,$video_length,$xp,$yp;
+$x_arr = $x_arr_;
+$y_arr = $y_arr_;
+$video_length = $video_length_;
+$xp = $xp_;
+$yp = $yp_;
+$l=count($x_arr);                            // length of json array
 $i=0;
 $n_area=0;
 $p_area=0;
-
 while($i<$l){
     
     $x=$x_arr[$i];
@@ -146,9 +156,29 @@ if($xp!=$video_length){
         $ar= ($video_length-$xp)*$yp;
         $n_area=$n_area+ ($ar<0?(-1)*$ar:$ar);
     }
-    echo "<br> $i) _ve Area: ".$n_area."  --- +ve Area:".$p_area;
+    //echo "<br> $i) _ve Area: ".$n_area."  --- +ve Area:".$p_area;
 }
 
+
+
+$t_area=$n_area+$p_area;
+if($t_area==0){
+    $n_cent=0;
+    $p_cent=0;
+}
+else {
+    $n_cent=($n_area/$t_area)*100;
+    $p_cent=($p_area/$t_area)*100;
+ }
+//echo "<br><br>Total Negative Area: $n_area";
+//echo "<br>Total Postitive Area: $p_area";
+//echo "<br>Net Total Area: $t_area<br>";
+
+//echo "<br>Percentage Negative Area: $n_cent %";
+//echo "<br>Percentage Postitive Area: $p_cent %";
+$result = array($p_cent,$n_cent,$p_area);
+return $result;
+}
 function calc($i, $x, $y, $are=0, $sign=0){
     global $n_area, $p_area,$xp,$x,$yp,$y;
     if($are==0){
@@ -168,22 +198,6 @@ function calc($i, $x, $y, $are=0, $sign=0){
     }
     $xp=$x;
     $yp=$y;
-    echo "<br> $i) _ve Area: ".$n_area."  --- +ve Area:".$p_area;
+    //echo "<br> $i $x $y $are $sign) _ve Area: ".$n_area."  --- +ve Area:".$p_area;
 }
-
-$t_area=$n_area+$p_area;
-if($t_area==0){
-    $n_cent=0;
-    $p_cent=0;
-}
-else {
-    $n_cent=($n_area/$t_area)*100;
-    $p_cent=($p_area/$t_area)*100;
- }
-echo "<br><br>Total Negative Area: $n_area";
-echo "<br>Total Postitive Area: $p_area";
-echo "<br>Net Total Area: $t_area<br>";
-
-echo "<br>Percentage Negative Area: $n_cent %";
-echo "<br>Percentage Postitive Area: $p_cent %";
 ?>
