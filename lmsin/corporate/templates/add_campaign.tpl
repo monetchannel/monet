@@ -172,8 +172,8 @@ $(function(){
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="select_users_tab">
                         <ul class="nav nav-tabs" id="dashboard_tabs">
-                            <li role="presentation"><a href="#select_users_tabs" aria-controls="select_users_tabs" role="tab" data-toggle="tab">Brand Users</a></li>
-                            <li role="presentation"><a href="#select_users_tabss" aria-controls="select_users_tabss" role="tab" data-toggle="tab">Global Users</a></li>
+                            <li role="presentation"><a href="#select_users_tabs" aria-controls="select_users_tabs" role="tab" data-toggle="tab">Userss</a></li>
+                            <li role="presentation"><a href="#select_users_tabss" aria-controls="select_users_tabss" role="tab" data-toggle="tab">Usersss</a></li>
                         </ul>
                         <label for="select_users">Select Campaign Users</label>
                          <div class="tab-content">
