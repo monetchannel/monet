@@ -18,25 +18,26 @@ $(function () {
     var 
     positiveValence = 0,
     negativeValence = 0,
-    totalValence = 0
     posValencePercent = 0,
     negValencePercent = 0;
     
-    valenceObjLength = Object.keys(smileysCountArray.valence).length; 
-    if(valenceObjLength>0){
-        var valenceObj = smileysCountArray.valence
-        $.each(valenceObj , function(keys, valence_value){
-            if(valence_value>=0){
-                positiveValence = Number(positiveValence) + Number(valence_value);
-            }else if(valence_value<0){
-                negativeValence = Number(Math.abs(negativeValence)) + Number(Math.abs(valence_value));
-            }
+    posvalenceObjLength = Object.keys(smileysCountArray.posvalence).length; 
+    if(posvalenceObjLength>0){
+        var posvalenceObj = smileysCountArray.posvalence;
+        $.each(posvalenceObj , function(keys, valence_value){
+            positiveValence = Number(valence_value);
         });
-        totalValence = Number(positiveValence) + Number(negativeValence);       
+    }
+    negvalenceObjLength = Object.keys(smileysCountArray.negvalence).length; 
+    if(negvalenceObjLength>0){
+        var negvalenceObj = smileysCountArray.negvalence;
+        $.each(negvalenceObj , function(keys, valence_value){
+            negativeValence = Number(valence_value);
+        });
     }
     
-    posValencePercent = Number(positiveValence/totalValence);
-    negValencePercent = Number(negativeValence/totalValence);    
+    posValencePercent = Number(positiveValence/100);
+    negValencePercent = Number(negativeValence/100);    
        
    
     
@@ -63,22 +64,34 @@ $(function () {
     
     // engagement smileys section
     var totalEngage = 0,
-        engagementPercent = 0;
+        posengagementPercent = 0,
+        negengagementPercent = 0;
         
-    engageObjLength = Object.keys(smileysCountArray.engagement).length; 
-    if(valenceObjLength>0){
-        var engObj = smileysCountArray.engagement;
-        $.each(engObj , function(keys, engage_value){
-            totalEngage = Number(totalEngage) + Number(engage_value);
+    posengageObjLength = Object.keys(smileysCountArray.posengagement).length; 
+    if(posengageObjLength>0){
+        var posengObj = smileysCountArray.posengagement;
+        $.each(posengObj , function(keys, posengage_value){
+            totalEngage = Number(posengage_value);
         });             
     }
     
-    engagementPercent = Number(totalEngage/engageObjLength);
-    remainingPercent = Number(1 - engagementPercent);
+    posengagementPercent = Number(totalEngage/100);
+    
+    negengageObjLength = Object.keys(smileysCountArray.negengagement).length; 
+    if(negengageObjLength>0){
+        var negengObj = smileysCountArray.negengagement;
+        $.each(negengObj , function(keys, negengage_value){
+            totalEngage = Number(negengage_value);
+        });             
+    }
+    
+    negengagementPercent = Number(totalEngage/100);
+    
+    //remainingPercent = Number(1 - engagementPercent);
  
     $('.attention-happy').circleProgress({
             startAngle: -Math.PI / 4 * 2,
-            value: engagementPercent,
+            value: posengagementPercent,
             size: 130,
             thickness:20,
             fill: { color: '#303192' }
@@ -86,14 +99,14 @@ $(function () {
     
     $('.attention-sad').circleProgress({
             startAngle: -Math.PI / 4 * 2,
-            value: remainingPercent,
+            value: negengagementPercent,
             size: 130,
             thickness:20,
             fill: { color: '#1DABE2' }
     });
     
-    $('#head-stillness-percent').html('<b>Engagement : ' + Number(engagementPercent*100).toFixed(2) +' %</b>');
-    $('#eye-stillness-percent').html('<b>Disengagement : ' + Number(remainingPercent*100).toFixed(2) +' %</b>');
+    $('#head-stillness-percent').html('<b>Engagement : ' + Number(posengagementPercent*100).toFixed(2) +' %</b>');
+    $('#eye-stillness-percent').html('<b>Disengagement : ' + Number(negengagementPercent*100).toFixed(2) +' %</b>');
     
     
     // Emotions smileys section
@@ -104,7 +117,7 @@ $(function () {
         disgustedSum = 0,
         surprisedSum = 0,
         angrySum = 0,
-        scaredSum=0
+        scaredSum=0;
         
     var happyObjLength = Object.keys(smileysCountArray.happy).length; 
     if(happyObjLength>0){
