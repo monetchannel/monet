@@ -6,16 +6,16 @@
 
 <link rel="stylesheet" type="text/css" href="{$SERVER_ADMIN_PATH}jquery-multiselect/jquery.multiselect.css" />
 <link rel="stylesheet" type="text/css" href="{$SERVER_ADMIN_PATH}jquery-multiselect/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="{$SERVER_PATH}css/boxy.css" />
+<link rel="stylesheet" type="text/css" href="./boxy.css" />
 <link rel="stylesheet" type="text/css" href="{$SERVER_ADMIN_PATH}style.css" />
 
-<script language="javascript" src="{$SERVER_ADMIN_PATH}cal2.js"></script>
-<script language="javascript" src="{$SERVER_ADMIN_PATH}cal_conf2.js"></script>
-<script type="text/javascript" src="{$SERVER_ADMIN_PATH}jquery-multiselect/jquery.js"></script>
-<script type="text/javascript" src="{$SERVER_ADMIN_PATH}js/cynets.js"></script>
-<script type="text/javascript" src="{$SERVER_PATH}js/jquery.boxy.js"></script>
-<script type="text/javascript" src="{$SERVER_ADMIN_PATH}jquery-multiselect/jquery-ui.min.js"></script>
-<script type="text/javascript" src="{$SERVER_ADMIN_PATH}jquery-multiselect/jquery.multiselect.js"></script>
+<script language="javascript" src="./cal2.js"></script>
+<script language="javascript" src="./cal_conf2.js"></script>
+<script type="text/javascript" src="./jquery-multiselect/jquery.js"></script>
+<script type="text/javascript" src="./js/cynets.js"></script>
+<script type="text/javascript" src="./js/jquery.boxy.js"></script>
+<script type="text/javascript" src="./jquery-multiselect/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./jquery-multiselect/jquery.multiselect.js"></script>
 
 </head>
 <body>
@@ -90,6 +90,13 @@
                     
                         </li>
                        
+                        <li class="{$reward_tab}">
+                            <a href="reward.php">Rewards</a>
+                            <ul>
+                                <li><a href="reward.php">Reward List</a></li>
+                                <li><a href="redemption.php">Redemption Info</a></li>
+                            </ul>
+                        </li>
                     
                       <li class="{$logout_tab}">
                             <a href="index.php?act=logout">Logout</a>
