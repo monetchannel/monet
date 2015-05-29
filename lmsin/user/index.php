@@ -113,7 +113,7 @@ function chk_login()
 		setcookie("UserId",$user[user_id],time()+86400,"/");
 		setcookie("UserName",$user[user_fname]." ".$user[user_lname],time()+86400,"/");
 		
-		if($R[c_id] && $user[user_accept_toc]==1)
+	if($R[c_id] && $user[user_accept_toc]==1 && $user[active]==1)
 		{
 			if($R['cmp_id'])
 			{
@@ -142,20 +142,28 @@ function chk_login()
 			}
 				
 		}
-		elseif($user[user_accept_toc]==1)
+		elseif($user[user_accept_toc]==1 && $user[active]==1)
 		{
 			$ary[0]="watch_video.php";
 			$ary[1]=2;
 			print json_encode($ary);
 			die();
 		}
-		else
+		elseif ($user[active]==1 && $user[user_accept_toc]==0)
 		{
 			$ary[0]="index.php?act=view_toc";
 			$ary[1]=2;
 			print json_encode($ary);
 			die();
 		}
+                
+                else
+                {
+                $ary[0]="Activate your account and try again."; //We used jquery ajax so use print
+		$ary[1]=1;
+		print json_encode($ary);
+		die();
+                }
 	}	
 }
 ###########################################################
