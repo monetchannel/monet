@@ -47,7 +47,8 @@ if($_COOKIE[UserId] != "" && $_REQUEST[act]=="cumulative_rewards" && $_REQUEST[a
 
 if ($_COOKIE[UserId]=="" AND $_REQUEST[act]!="show_login" AND $_REQUEST[act]!="chk_login" && $_REQUEST[act]!="save_ragistration" && $_REQUEST[act]!="save_invites_request"  && $_REQUEST[act]!="toc")
 {
-   show_login();
+   user_home();
+   //show_login();
    die();
 }
 
@@ -58,8 +59,34 @@ if(fe($_REQUEST[act]))
 }
 else
 {
-	show_login();
-	die();
+	user_home();
+    //show_login();
+    die();
+}
+
+#########################################
+function user_home()
+{
+    $R = DIN_ALL($_REQUEST);
+	global $Server_View_Path;	
+	global $Server_company_Path;
+	$smarty = new Smarty;
+	get_new_option_list('countries','countries_id','countries_name','',$country_name,0,"",1);
+	
+	$smarty->assign(array("msg"=>$msg,"none"=>$none,
+						 "SERVER_COMPANY_PATH"=>$Server_company_Path,
+						 "country_name"=>$country_name,
+						 "SERVER_PATH"=>$Server_View_Path,
+						 "company_url"=>$R[company_url],
+						 "company_name"=>$company[company_name],
+						 "records"=>$records,
+						 "c_id"=>$R[c_id],
+						 "cmp_id"=>$R[cmp_id],
+						 "company_id"=>$company[company_id],
+						 "base_path"=>base_url(), // path for images 
+						 ));
+
+	$smarty->display("index_home.tpl");
 }
 
 #########################################
@@ -298,13 +325,26 @@ function cumulative_rewards($msg = '')
 		array_push($companies,$data);
 	}
 	
-	$user_sql = "select  u.*, rp.points, co.countries_name, up.up_fname, up.up_ext from users as u left join reward_point as rp on rp.rp_u_id = u.user_id inner join countries as co on co.countries_id = u.user_country left join uploads as up on up.up_s_id = u.user_id where u.user_id = '{$_COOKIE[UserId]}' and up.up_s_type = 'user_profile_photo'";
-	
-	eq($user_sql,$user);
-	$user_data = mfa($user);//mysql_fetch_array($rs2);
-	if($user_data['points'] == '' || empty($user_data['points'])){
+        $up_table_sql= "select  up_fname, up_ext from uploads where up_s_id='{$_COOKIE[UserId]}' and up_s_type = 'user_profile_photo'"; 
+        $up=intval(eq($up_table_sql,$user));
+        if($up>0){
+            $user_sql = "select  u.*, rp.points, co.countries_name, up.up_fname, up.up_ext from users as u left join reward_point as rp on rp.rp_u_id = u.user_id inner join countries as co on co.countries_id = u.user_country left join uploads as up on up.up_s_id = u.user_id where u.user_id = '{$_COOKIE[UserId]}' and up.up_s_type = 'user_profile_photo'";
+            eq($user_sql,$user);
+            $user_data = mfa($user);//mysql_fetch_array($rs2);
+            if($user_data['points'] == '' || empty($user_data['points'])){
 		$user_data['points'] = 0;
-	}
+            }
+        }
+        else{
+            $user_sql = "select  u.*, rp.points, co.countries_name from users as u left join reward_point as rp on rp.rp_u_id = u.user_id inner join countries as co on co.countries_id = u.user_country where u.user_id = '{$_COOKIE[UserId]}'";
+            eq($user_sql,$user);
+            $user_data = mfa($user);//mysql_fetch_array($rs2);
+            if($user_data['points'] == '' || empty($user_data['points'])){
+		$user_data['points'] = 0;
+            }
+        }
+        
+	
 	
 	
 	//$reward_sql = "select * from reward where points > '{$user_data[points]}' limit 1";
@@ -324,7 +364,7 @@ function cumulative_rewards($msg = '')
 	$t_reward = mfa($tre_sql);
 	
 	$last_redeem_sql = "select rr.rr_id, rr.rr_timestamp, re.* from reward_redeem as rr inner join reward as re on re.r_id=rr.rr_r_id inner join users as u on u.user_id=rr.rr_u_id where u.user_id = '{$_COOKIE[UserId]}' order by rr.rr_id desc limit 1";
-	eq($last_redeem_sql,$redeem_reward);
+	$last_rdm =(eq($last_redeem_sql,$redeem_reward));
 	$my_redeems = mfa($redeem_reward);
 	
 	
@@ -333,13 +373,25 @@ function cumulative_rewards($msg = '')
 	eq($count_cmp_sql,$cmp_count);
 	$cmp = mfa($cmp_count);
 	
+	$SQL1 = "SELECT c.c_url FROM content c
+                            JOIN campaigns cmp ON c.c_id=cmp.cmp_c_id
+                            JOIN map_campaign_user mcu ON mcu.map_campaign_id=cmp.cmp_id
+                            WHERE mcu.map_user_id='$_COOKIE[UserId]]'";
+        
+      eq($SQL1,$rs1);
+      while($result1 = mfa($rs1)) {
+      if(!check_vid_exist($result1[c_url]))
+          $cmp[total]--;
+      }
+
 	// assign variable to teplate 
 	$smarty->assign(array("msg"=>$msg,
 			"SERVER_PATH"=>$Server_View_Path,
 			"view_path" => $View_Path,
+                        "up"=>$up,
+                        "last_rdm"=>$last_rdm,
 			"user_data"=>$user_data,
-			"userimage" => $user_data['up_fname'] != '' ? $View_Path.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
-			"UserId"=>$_COOKIE[UserId],
+			"userimage" => $user_data['up_fname'] != '' ? $View_Path.'thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
 			"request" => $R,
 			"reward" => $nearest_reward,
 			"rewards" => $rewards,
@@ -347,8 +399,7 @@ function cumulative_rewards($msg = '')
 			"companies" => $companies,
 			"my_redeems" => $my_redeems,
 			"cmp_count" => $cmp,
-			"reward_tab"=>'reward-selected',
-                        "active_cumulative_rewards_tab"=>'label',
+			"reward_tab"=>'reward-selected',"active_cumulative_rewards_tab"=>'label',
 		       ));
 	
 	$smarty->display("cumulativa.tpl");
@@ -435,6 +486,17 @@ function redeem_reward()
 	eq($count_cmp_sql,$cmp_count);
 	$cmp = mfa($cmp_count);
 	
+	$SQL1 = "SELECT c.c_url FROM content c
+                            JOIN campaigns cmp ON c.c_id=cmp.cmp_c_id
+                            JOIN map_campaign_user mcu ON mcu.map_campaign_id=cmp.cmp_id
+                            WHERE mcu.map_user_id='$_COOKIE[UserId]]'";
+        
+      eq($SQL1,$rs1);
+      while($result1 = mfa($rs1)) {
+      if(!check_vid_exist($result1[c_url]))
+          $cmp[total]--;
+      }
+
 	// assign variable to teplate 
 	$smarty->assign(array( "msg"=>$msg,
        "SERVER_PATH"=>$Server_View_Path,
@@ -464,7 +526,7 @@ function redeem_reward()
  */
 function xhr_redeem_reward()
 {
-	$R = DIN_ALL($_REQUEST);
+	/*$R = DIN_ALL($_REQUEST);
 	$UserId = $_COOKIE['UserId'];
 	$rewardId = $R['rewardId'];
 	$ctime = time();
@@ -483,7 +545,9 @@ function xhr_redeem_reward()
 	}else{
 		echo '1';
 		die;
-	}
+	}*/
+	alert("Hello");
+	
 }
 
 
