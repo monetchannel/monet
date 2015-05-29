@@ -47,7 +47,7 @@ function addCampaignQuestions($qSetCollection, $campaignId, $contentId){
         foreach($qSetCollection as $eachsetid){ 
             // map camapign and set using map_camapign_qsets tables
             $setIns = mysql_query("insert into map_campaign_sets set map_campaign_id = '$campaignId', map_set_id = '$eachsetid'");
-            if($setIns){
+            /*if($setIns){
                 $set_questions_array = getAllSetQuestions($eachsetid);
                 if(count($set_questions_array)>0){
                     foreach ($set_questions_array as $qkey=>$questionid){
@@ -56,7 +56,17 @@ function addCampaignQuestions($qSetCollection, $campaignId, $contentId){
                         mysql_query($insQuery);
                     }
                 }
-            }    
+            }*/    
+        }
+    }
+}
+
+function insertCampaignQuestions($questionsCollection, $campaignId, $contentId){
+    if(count($questionsCollection)>0){
+        foreach ($questionsCollection as $questionid){
+            $insQuery = "insert into map_camp_question (map_camp_id, map_q_id, map_c_id) "
+                           . "values ('".$campaignId."', '".$questionid."', '".$contentId."')";
+            mysql_query($insQuery) or die(mysql_error());
         }
     }
 }
