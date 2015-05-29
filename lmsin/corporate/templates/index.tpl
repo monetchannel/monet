@@ -122,6 +122,10 @@
                                     <li class="sub-nav {$test_tab}" >
                                         <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
                                     </li>
+                                    
+                                    <li class="sub-nav {$test_tab}" >
+                                        <a href="compare.php"><img class="img-responsive" src="./images/arrow.png">Compare</a>
+                                    </li>
                                 </ul>                             
                           </li>    
                           
