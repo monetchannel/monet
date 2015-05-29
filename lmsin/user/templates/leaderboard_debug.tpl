@@ -239,8 +239,7 @@
     </head>
     <body>
 	<div id="ranking">
-	<div id="head"><b>Rewards Leader Cap</b></div>
-	<table style="background:#f1f1f1;color:#333;">
+	<div id="head"><b>Rewards Leader Cap</b></div><table style="background:#f1f1f1;color:#333;">
             <tr style="border-color:#000000;border:10px;">
                 <td style="align:left;">
                     <div style="overflow:auto;">
@@ -280,10 +279,10 @@
                 <h1>You</h1>
                 <div id="stats">
 				  <div id="img-div">
-                    <img src="{$user.profile_image}" width="80" height="80" style="vertical-align:middle;width:7.5em;height:7.5em;border:1px solid #614197;"/>
+                    <img src="{$user_data.profile_image}" width="80" height="80" style="vertical-align:middle;width:7.5em;height:7.5em;border:1px solid #614197;"/>
                 </div>
-                    <p>Rank: {$user.rank}</p>
-                    <p>Points: {$user.points}</p>
+                    <p>Rank: {$user_data.rank}</p>
+                    <p>Points: {$user_data.points}</p>
                 </div>
               
             </div>
@@ -295,7 +294,8 @@
                 
             </div>
             <div id="comments"><div id="command">Last Comment</div>
-               <p>You: {$cf_data.comment}</p>
+</br>
+               <p>&nbspYou: {$cf_data.comment}</p>
 
             </div>
          
@@ -328,21 +328,21 @@
 table.hovertable {
 	font-family: verdana,arial,sans-serif;
 	font-size:11px;
-	color:#f1f1f1;
+	color:#000;
 	border-width: 1px;
 	border-color: #999999;
 	border-collapse: collapse;
 	width:100%;
 }
 table.hovertable th {
-	background-color:#c3dde0;
+	background-color:#614197;
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
 	border-color: #a9c6c9;
 }
 table.hovertable tr {
-	 background:url("images/blur.jpg");
+	 background: f1f1f1;
 }
 table.hovertable td {
 	border-width: 1px;

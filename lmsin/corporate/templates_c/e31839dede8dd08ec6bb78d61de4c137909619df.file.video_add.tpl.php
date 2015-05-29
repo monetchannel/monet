@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-04-17 10:32:14
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-29 11:47:10
          compiled from ".\templates\video_add.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:25650541ff069c43e78-83887672%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:317505568359ee661f6-21330914%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e31839dede8dd08ec6bb78d61de4c137909619df' => 
     array (
       0 => '.\\templates\\video_add.tpl',
-      1 => 1425973767,
+      1 => 1432892824,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '25650541ff069c43e78-83887672',
+  'nocache_hash' => '317505568359ee661f6-21330914',
   'function' => 
   array (
   ),
@@ -23,7 +23,7 @@ $_smarty_tpl->decodeProperties(array (
 
  <script type="text/javascript" src="js/add_video.js"></script>
 
-<form method="POST" action="video.php" onSubmit="return false;" name="videofrm" enctype="multipart/form-data" class="form-horizontal" role="form" style="z-index:67856756">
+<form method="POST" action="video.php"  id="videofrm" name="videofrm" enctype="multipart/form-data" class="form-horizontal" role="form" style="z-index:67856756">
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-4 control-label">Do you wish to:</label>
     <div class="col-sm-7" style="text-align:left">
@@ -65,7 +65,7 @@ $_smarty_tpl->decodeProperties(array (
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">Question Sets *:</label>
     <div class="col-sm-7">
-      <select name="set_id[]" id="set_id" multiple="multiple" onchange="getCategoryQuestionsList(this)" class="form-control" ><?php echo $_smarty_tpl->getVariable('question_set_list')->value;?>
+      <select name="set_id[]" id="set_id" multiple="multiple" onchange="getCategoryQuestionsList(this);" class="form-control" ><?php echo $_smarty_tpl->getVariable('question_set_list')->value;?>
 </select>
     </div>
   </div>
@@ -78,7 +78,7 @@ $_smarty_tpl->decodeProperties(array (
   
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-7">
-      <input type="submit" value="Submit" name="B1" id="buttongray" onclick="chk_all()" class="btn btn-default" />
+      <input type="submit" value="Submit" name="B1" id="buttongray"  class="btn btn-default" />
     </div>
   </div>
   

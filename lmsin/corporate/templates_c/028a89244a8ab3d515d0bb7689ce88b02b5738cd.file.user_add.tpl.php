@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2014-12-11 12:20:45
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-20 07:58:20
          compiled from ".\templates\user_add.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2336554897e0dd0d2c5-72083828%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:32758555c227c16fd21-56643426%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '028a89244a8ab3d515d0bb7689ce88b02b5738cd' => 
     array (
       0 => '.\\templates\\user_add.tpl',
-      1 => 1418296553,
+      1 => 1432101368,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2336554897e0dd0d2c5-72083828',
+  'nocache_hash' => '32758555c227c16fd21-56643426',
   'function' => 
   array (
   ),
@@ -65,10 +65,28 @@ $_smarty_tpl->decodeProperties(array (
 	<div class="form-group">
         <label for="Country" class="col-sm-4 control-label">Country</label>
             <div class="col-sm-7">
-            	<select  name="user_country" id="user_country" class="form-control">
+            	<select  name="user_country" id="user_country" class="form-control" onchange="javascript:state_srch(this.value, '<?php echo $_smarty_tpl->getVariable('act')->value;?>
+')">
             				<?php echo $_smarty_tpl->getVariable('country_name')->value;?>
 
             	</select>
+            </div>
+    </div>
+                <div class="form-group">
+		<label for="State" class="col-sm-4 control-label">State</label>
+            <div class="col-sm-7">
+            	<select  name="user_state" id="user_state" class="styled-select" style="color:#777">
+            				<?php echo $_smarty_tpl->getVariable('company_state')->value;?>
+
+            	</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+    </div>
+                
+    <div class="form-group">
+        <label for="zipcode" class="col-sm-4 control-label">Zip Code:</label>
+            <div class="col-sm-7">
+             <input type="text" name="user_zipcode" id="user_zipcode" value="<?php echo $_smarty_tpl->getVariable('user_zipcode')->value;?>
+" class="form-control" />
             </div>
     </div>
 	

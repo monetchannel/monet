@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2014-12-31 05:53:55
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-21 06:09:27
          compiled from "./templates/index_user_login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:128944185654a3f1e37e3942-31071223%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '47fd104f56c668e76ed64ac246777ca2e5df8707' => 
     array (
       0 => './templates/index_user_login.tpl',
-      1 => 1420030267,
+      1 => 1432213363,
       2 => 'file',
     ),
   ),
@@ -18,130 +18,144 @@ $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Monet</title>
-
-
-
-<!-- Bootstrap -->
-
 <link href="css/bootstrap.css" rel="stylesheet">
-
 <link href="css/index-login.css" rel="stylesheet">
+   <script src="js/jquery.min.js"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
-<!--[if lt IE 9]>
-
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-		<![endif]-->
-
-
-
+    
+    <link href="css/style.css" rel="stylesheet">
 </head>
+<style type="text/css">
+*{
+margin:0px;
+padding:0px;
+}
+input:-moz-placeholder {
+      color: green;
+    }
+</style> 
+<body>
+    <script type="text/javascript">//handling of google login button redirect
+        $(document).ready(function() {
+            $('#google_login_button').click(function() {
+            $(this).attr('href','https://accounts.google.com/o/oauth2/auth?scope=' +
+                         'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.login+openid%20email&' +
+                         'state=<?php echo $_smarty_tpl->getVariable('google_unique_state')->value;?>
+&' +
+                         'redirect_uri=<?php echo $_smarty_tpl->getVariable('google_redirect_uri')->value;?>
+&'+
+                         'response_type=code&' +
+                         'client_id=<?php echo $_smarty_tpl->getVariable('google_client_id')->value;?>
+&' +
+                         'access_type=offline&');
+      return true; // Continue with the new href.
+  });
+});
+    </script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '424155627744603',
+          xfbml      : true,
+          version    : 'v2.3'
+        });
+      };
 
-<body class="bg-color">
-
-<div id="wrap">
-
-  <nav class="navbar navbar-default" role="navigation">
-
-    <div class="container-fluid"> 
-
-      <!-- Brand and toggle get grouped for better mobile display -->
-
-      <div class="navbar-header">
-
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-
-        <a class="navbar-brand" href="#"> <img src="images/logo.png" class="img-responsive top-logo" alt="Responsive image" style="width:140px;"> </a> </div>
-
-      
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-        <ul class="nav navbar-nav navbar-right">
-
-          <li><a href="#">ABOUT MONET</a></li>
-
-          <li><a href="#">HOW IT WORKS</a></li>
-
-          <li><a href="#">CONTACT US</a></li>
-
-          <li> <a href="#" class="top-right-icon"> <img src="images/fb.png" class="img-responsive" alt="Responsive image" width="54"> <img src="images/twitter.png" class="img-responsive" alt="Responsive image" width="54"> </a> </li>
-
-        </ul>
-
-      </div>
-
-      <!-- /.navbar-collapse --> 
-
-    </div>
-
-    <!-- /.container-fluid --> 
-
-  </nav>
-
-  <div class="container">
-
-    <div class="row">
-
-      <div class="col-md-8">
-
-        <div class="align-center">
-
-          <div class="color-meg"> <span>Welcome to Monet!</span> </div>
-
-          <div class="color-yellow"> <span>your online impressions...</span> </div>
-
-        </div>
-
-        <div class="left-bottom"> <img src="images/mid_grapic.png" class="img-responsive image-width" alt="Responsive image"> </div>
-
-      </div>
-
-      <div class="col-md-4">
-
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {
+             return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script type="text/javascript">//handling of google login button redirect
+        $(document).ready(function() {
+            $('#google_login_button').click(function() {
+            $(this).attr('href','https://accounts.google.com/o/oauth2/auth?scope=' +
+                         'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&' +
+                         'state=<?php echo $_smarty_tpl->getVariable('google_unique_state')->value;?>
+&' +
+                         'redirect_uri=<?php echo $_smarty_tpl->getVariable('google_redirect_uri')->value;?>
+&'+
+                         'response_type=code&' +
+                         'client_id=<?php echo $_smarty_tpl->getVariable('google_client_id')->value;?>
+&' +
+                         'access_type=offline');
+      return true; // Continue with the new href.
+  });
+});
+    </script>
+<meta name="google-signin-clientid" content="<?php echo $_smarty_tpl->getVariable('google_client_id')->value;?>
+" />
+<meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+<meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" />
+<meta name="google-signin-cookiepolicy" content="single_host_origin" />
+<header>
         <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3 col-sm-5">
+              <div style="padding-bottom:10px;"><a href="index.php"><img class="img-responsive" src="./images/logo.png"></a>       </div>
+            </div>
+           </div>
+        </div>
+     </header>
+	 
+	 <section>
+      <div class="container-fluid welcome-bg">
+         <div class="row">
+           <h1 align="center" style="color:#fff;font-weight:700;font-size:55px;margin-bottom: 0;">Welcome to Monet</h1>
+           <h2 align="center" style="color:#fff;padding-bottom:30px;margin:0;text-shadow: 0px 4px #7F55A6;">Start rate and earn rewards</h2>
+         </div>  
+      </div>
+	 
+    <div class="container-fluid" style="background-color:#7F55A6;padding-bottom: 35px;">
+    <div class="row">
+       <div class="col-md-4 col-sm-5 col-md-offset-2 col-sm-offset-1">
 
-          <div class="row" style="">
+        <div class="container-fluid" style="margin-top:35px;">
+			
+              
+          <div class="row" style="margin-bottom:16px;">
+			
+            <div id="registrationTab" class="col-md-6 col-xs-6 signup"align="center" style="border-right: 2px solid  #edf1f4;"> <span>Sign up!</span> </div>
 
-            <div id="registrationTab" class="col-md-6 login-text" style="border-right: 2px solid  #edf1f4;"> <span>Sign up!</span> </div>
-
-            <div id="loginTab" class="col-md-6 login-text"> <span>Login</span> </div>
+            <div id="loginTab" class="col-md-6 col-xs-6 login" align="center" style="border-right: 2px solid  #edf1f4;"> <span>Login!</span> </div>
 
           </div>
 
           <div class="row" style="">
 
-            <div class="col-md-12 authantication-form">
+            <div class="<div class="form-group">
 
-              <div class="login-title">Welcome to Monet!</div>
+            
 
-              <form id="registrationForm" class="form-signin" name="signup_form" action="index.php" method="post" onSubmit="javascript:return singup_validation()"  style="display:none;" >
+              <form id="registrationForm" class="form-signin" name="signup_form" action="index.php" method="post" onSubmit="javascript:return singup_validation()" style="radius:5px ; display:none;" >
 
                 <input type="text" class="form-input" placeholder="First Name" required autofocus name="user_fname"  onkeypress="goods='abcdefghijklmnopqrstuvwxyz '; return limitchar(event)"  />
 
                 <input type="text" class="form-input" placeholder="Last Name" required autofocus name="user_lname"  onkeypress="goods='abcdefghijklmnopqrstuvwxyz '; return limitchar(event)" />
 
-                <input type="email" class="form-input" placeholder="User ID" required autofocus  name="user_email" />
+                <input type="email" class="form-input" placeholder="Email ID" required autofocus  name="user_email" />
+                
+                <input type="password" class="form-input" placeholder="Password" required autofocus name="user_pass"/>
+                
+                <input type="password" class="form-input" placeholder="Confirm Password" required autofocues name="confirm_user_pass"/>
 
                 <select  name="user_country" class="styled-select" style="color:#777" onChange="$('.styled-select').css('color','#000000')">
 
@@ -150,7 +164,7 @@ $_smarty_tpl->decodeProperties(array (
 
                 </select>
 
-                <input type="text" class="form-input" placeholder="Zip" required autofocus name="user_zipcode" onkeypress="goods='0123456789'; return limitchar(event)" maxlength="6"  />
+                <input type="text" class="form-input" placeholder="Zip" required autofocus name="user_zipcode" onKeyPress="goods='0123456789'; return limitchar(event)" maxlength="6"  />
 
                 <div class="input-block" style="width:90%; margin:0 auto;font-size: 10px;">
 
@@ -158,9 +172,9 @@ $_smarty_tpl->decodeProperties(array (
 
                     <input type="hidden" name="rented" id="rented" value="true">
 
-                    <span  class="checkbox1 checked" tabindex="11" id="checkbox-is-rented" ></span> <span style="float: left; margin-top: 5px;">Email me about new features & updates (usually once per month)</span> </label>
+                    <span  class="checkbox1 checked" tabindex="11" id="checkbox-is-rented" ></span> <span  style="color:#FFF;font-size:10px;float: left; margin-top: 5px;">Email me about new features & updates (usually once per month)</span> </label>
 
-                  <label> By clicking Sign up you agree to the <a href="javascript:open_agreement()">license agreement</a> </label>
+                  <label style="color:#FFF;font-size:10px;"> By clicking Sign up you agree to the <a href="javascript:open_agreement()">license agreement</a> </label>
 
                 </div>
 
@@ -172,44 +186,18 @@ $_smarty_tpl->decodeProperties(array (
 
                   <input type="hidden" name="c_id" value="<?php echo $_smarty_tpl->getVariable('c_id')->value;?>
 " id="c_id" />
-
                 </div>
-
-              </form>
-
-             
-
-<form id="loginForm" class="form-signin" method="post" name="login_frm" action="index.php" onSubmit="javascript:return chk_login()">
-
-                        
-
+              </form>           
+<form id="loginForm" class="form-signin" method="post" name="login_frm" action="index.php" onSubmit="javascript:return chk_login()">                       
 <input type="email" class="form-input" placeholder="User ID" required autofocus name="user_email" />
-
-
-
-<input type="password" class="form-input" placeholder="Password" required name="user_password">
-
-                         
-
-                         
-
-                         <div class="row" style="margin: 0 auto;padding-bottom: 2%;">
-
-										
-
+<input type="password" class="form-input" placeholder="Password" required name="user_password">                                               
+                         <div class="row" style="margin: 0 auto;padding-bottom: 2%;">									
 										<div class="col-md-6 col-sm-6 log-top" style="">
-
 											<a class="btn-lg btn-block btn-primary" href="javascript:void(1)" onClick="javascript:chk_login()">
-
-												<span class="fb-text">Sign In</span>
-
+												<span>Sign In</span>
 											</a>
-
 										</div>
-
-									</div>
-
-                                
+									</div>    
 
 <!--<div style="width:95%; text-align:right; padding-bottom: 3%;">
 
@@ -229,60 +217,50 @@ $_smarty_tpl->decodeProperties(array (
 "  />
 
 </form>
-
-
-
             </div>
-
           </div>
-
-          
-
-          
-
         </div>
 
-        <div class="container-fluid margin-top">	
+      
 
-						<div class="row">
-
-							<div class="col-md-5 col-sm-5" style=" visibility: hidden;">
-
-								
-
-							</div>
-
-							<div class="col-md-7 col-sm-7 fb-log" style="">
-
-								<a  href="#">
-
-									<img class="fb-icon" src="images/flog.png">
-
-									<span class="fb-text">Login with Facebok</span>
-
-								</a>
-
-							</div>
-
-							
-
-						</div>
-
-					</div>
-
-      </div>
 
     </div>
+	  <div class="col-md-1 col-sm-1 col-xs-1">
+             <div style="margin-top:180%;">
+                <p align="center" style="color:#FFF;font-size:18px;"> or </p>
+             </div>
+           </div>
+           <div class="col-md-3 col-sm-4 col-xs-7">
+               <div style="margin-top:30%;">
+                   <p align="center" style="margin-bottom: 30px;"><a id="FB" href="<?php echo $_smarty_tpl->getVariable('fb_login_url')->value;?>
+"><img src="./images/fb21.png" class="img-responsive">  </p>
+                           <p align="center"><button><a id="google_login_button" href="#"><img src="./images/gmail.png" class="img-responsive"></button></p>
+               </div>
+           </div>
 
+      </div>
   </div>
-
-  <div id="push"></div>
-
+ <div class="container-fluid welcome-down-bg">
+       <footer>
+     <div class="container-fluid">
+       <div class="row">
+         <div align="center" style="height:30px">
+           <p style="color:#fff;padding-top:10px;">Copyright &copy; 2015 Monet All rights reserved.     </p>
+         </div>
+       </div>  
+	   
+ <p style="color:#fff;padding-top:15px;font-size:10px;">Follow Us On     </p>
+ <a href="https://www.facebook.com/pages/Monet/1819590604933229"><img src="images/ff1.png"></a>
+ &nbsp&nbsp&nbsp <a href="https://twitter.com/Monetchannel"><img src="images/tt1.png"></a>
+ &nbsp&nbsp&nbsp <a href="https://plus.google.com/u/0/108008107785253348043"><img src="images/gg1.png"></a>
+</div> 
 </div>
+    </footer>
+      </div>
 
-<div id="footer">
 
-</div>
+
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 
@@ -389,7 +367,7 @@ $_smarty_tpl->decodeProperties(array (
 
 		 
 
-		 /* BY dinesh */
+		 /* BY Anand vats */
 
 		 function chk_login()
 
@@ -663,24 +641,6 @@ $_smarty_tpl->decodeProperties(array (
 
 
 
-  window.fbAsyncInit = function() {
-
-  FB.init({
-
-    appId      : '432978236748242',
-
-    cookie     : true,  // enable cookies to allow the server to access 
-
-                        // the session
-
-    xfbml      : true,  // parse social plugins on this page
-
-    version    : 'v2.1' // use version 2.1
-
-  });
-
-
-
   // Now that we've initialized the JavaScript SDK, we call 
 
   // FB.getLoginStatus().  This function gets the state of the
@@ -719,20 +679,6 @@ $_smarty_tpl->decodeProperties(array (
 
   // Load the SDK asynchronously
 
-  (function(d, s, id) {
-
-    var js, fjs = d.getElementsByTagName(s)[0];
-
-    if (d.getElementById(id)) return;
-
-    js = d.createElement(s); js.id = id;
-
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-
-    fjs.parentNode.insertBefore(js, fjs);
-
-  }(document, 'script', 'facebook-jssdk'));
-
 
 
   // Here we run a very simple test of the Graph API after login is
@@ -761,7 +707,7 @@ $_smarty_tpl->decodeProperties(array (
 
 			success: function(js){
 
-					location.href='http://www.monetchannel.com/lmsin/user/watch_video.php'
+					location.href='localhost/monet/lmsin/user/watch_video.php'
 
 					return false;
 
@@ -785,7 +731,7 @@ $_smarty_tpl->decodeProperties(array (
 
   FB.init({
 
-    appId      : '432978236748242',
+    appId      : '424155627744603',
 
     cookie     : true,  // enable cookies to allow the server to access 
 
@@ -793,7 +739,7 @@ $_smarty_tpl->decodeProperties(array (
 
     xfbml      : true,  // parse social plugins on this page
 
-    version    : 'v2.1' // use version 2.1
+    version    : 'v2.2' // use version 2.1
 
   });
 
@@ -813,9 +759,26 @@ $_smarty_tpl->decodeProperties(array (
 
 </script>
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-
-</fb:login-button>
+<script type="text/javascript">//handling of google login button redirect
+        $(document).ready(function() {
+            $('#google_login_button').click(function() {
+            $(this).attr('href','https://accounts.google.com/o/oauth2/auth?scope=' +
+                         'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.login&' +
+                         'state=<?php echo $_smarty_tpl->getVariable('google_unique_state')->value;?>
+&' +
+                         'redirect_uri=<?php echo $_smarty_tpl->getVariable('google_redirect_uri')->value;?>
+&'+
+                         'response_type=code&' +
+                         'client_id=<?php echo $_smarty_tpl->getVariable('google_client_id')->value;?>
+&' +
+                         'access_type=offline&'
+                         'scope=openid%20email');
+      return true; // Continue with the new href.
+  });
+});
+    </script>
+</section>
+ 
 
 </body>
 

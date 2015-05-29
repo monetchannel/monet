@@ -55,14 +55,14 @@
         <script type="text/javascript" src="../includes/jQuery-webcam/jquery.webcam.js"></script>
         <script>
             //users with social login
-            $(document).ready(function () {   
-                var activated = {$user_activated};
-                if (activated > 1){
-                    $("#email_field").prop("disabled", true);
-                    $("#upload-new-image-btn").prop("disabled", true);
-                    $("#change-pass-btn").prop("disabled", true);
-                }
-            });
+            //$(document).ready(function () {   
+                //var activated = {$user_activated};
+               // if (activated > 1){
+                 //   $("#email_field").prop("disabled", true);
+                //    $("#upload-new-image-btn").prop("disabled", true);
+               //     $("#change-pass-btn").prop("disabled", true);
+               // }
+          //  });
         </script>
         <script>
             
@@ -116,21 +116,25 @@
     </head>
     
     <body>
-        <img src="{$profile_image}" width="80" height="80">
+        {if $userimage}
+            <img src="{$userimage}" width="80" height="80">
+        {else}
+            <img src="./images/dashboard/user.jpg" width="80" height="80">
+        {/if}
         <h1>Edit Your Account</h1>
-        <form id="profile-edit-form" name="edit_form" action="account_info.php" method="post" onsubmit="javascript:return validate_edits()">
-            Name: <input type="text" autofocus value="{$fname}" name="user_fname">
-            <input type="text" autofocus value="{$lname}" name="user_lname">
+        <form id="profile-edit-form" name="edit_form" onsubmit="javascript:return validate_edits()">
+            Name: <input type="text" autofocus value="{$user_data.user_fname}" name="user_fname">
+            <input type="text" autofocus value="{$user_data.user_lname}" name="user_lname">
             <br>
-            Birthday: <input type="text" autofocus placeholder="mm/dd/yyyy" value="{$dob}" name="user_dob">
+            Birthday: <input type="text" autofocus placeholder="mm/dd/yyyy" value="{$user_data.user_dob}" name="user_dob">
             <br>
-            Email:</label> <input type="text" autofocus value="{$email}" name="user_email" id="email_field">
+            Email:</label> <input type="text" autofocus value="{$user_data.user_email}" name="user_email" id="email_field">
             <br>
-            Zip: <input type="text" autofocus value="{$zipcode}" name="user_zip">
+            Zip: <input type="text" autofocus value="{$user_data.user_zipcode}" name="user_zipcode">
             <br>
-            Country: <select  name="user_country" class="styled-select" style="color:#777;" onChange="$('.styled-select').css('color','#000000')">
-                {$country_name}
-            </select>
+            Country: <select  name="user_country" class="styled-select" style="color:#777;">
+                        {$country}
+                     </select>
             <br>
             <input type="submit" name="save" value="Save Edits" class="btn-primary" id="save_edits_btn" style="display:inline;"/>
             <input type="button" id="edit-cancel-btn" class="btn-primary" value="Cancel" name="cancel_btn"/>
@@ -266,7 +270,7 @@
                             });
                             return false;
                 </script>
-            </div>
+            </div>*/
             <div id="webcam-upload-div" style="display:none;">
                 <form id="webcam-upload-form" method="POST" enctype="multipart/form-data" >
                     <div id="camera" style="display:inline;"></div>

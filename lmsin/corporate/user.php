@@ -137,6 +137,7 @@ if($chk==0)
    }
     $smarty->assign(array("users"=>$users,
 						"msg"=>$msg,"tot_rows"=>$tot_rows,
+                                                "state_name"=>"State",
 						"chk"=>$chk,
                                                 "selected"=>"",
 						"act"=>"view",

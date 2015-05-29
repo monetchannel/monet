@@ -305,19 +305,19 @@ function content_feedback($msg = '')
 		if(strtolower($row['ad_dominant_emotion']) == 'neutral' )
 		{
 			$u_exp_data['neutral'] = $row;
-                        $emotion_img_data['neutral'] = "../uploads/368637.jpg";
+                        $emotion_img_data['neutral'] = "../../uploads/368637.jpg";
 		}
 		
 		if(strtolower($row['ad_dominant_emotion']) == 'happy' )
 		{
 			$u_exp_data['happy'] = $row;
-                        $emotion_img_data['happy'] = "../uploads/368637.jpg";
+                        $emotion_img_data['happy'] = "../../uploads/368637.jpg";
 		}
 		
 		if(strtolower($row['ad_dominant_emotion']) == 'sad' )
 		{
 			$u_exp_data['sad'] = $row;
-                        $emotion_img_data['sad'] = "../uploads/368637.jpg";
+                        $emotion_img_data['sad'] = "../../uploads/368637.jpg";
 		}
 		
 		if(strtolower($row['ad_dominant_emotion']) == 'angry' )
@@ -358,11 +358,11 @@ function content_feedback($msg = '')
 	$c =1;
 	while(($row = mfa($rs1)) && $c<=4)
 	{
-		// $t=filterVideo($row);
 		$t = 0;
-                       if (check_vid_exist($row[c_url])) {
-	     			$t = 1;
-	    		}
+        if (check_vid_exist($row[c_url])) {
+			$t = 1;
+        }
+		//$t=filterVideo($row);
 		if($t==1){
 			$c++;
 			$row['i'] = $i++;
@@ -400,13 +400,13 @@ function content_feedback($msg = '')
 	$d = 1;
 	while(($row = mfa($rs2))&& $d<=4)
 	{
-		//$t=filterVideo($row);
 		$t = 0;
-                        if (check_vid_exist($row[c_url])) {
-	     			$t = 1;
-	    		}
+		//$t=filterVideo($row);
+        if (check_vid_exist($row[c_url])) {
+            $t = 1;
+        }
 		if($t==1){
-			$d++;
+            $d++;
 			$row['i'] = $i++;
 			$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -431,7 +431,7 @@ function content_feedback($msg = '')
    			}
 			
 			array_push($reviewed_video, $row);
-			
+		
 		}
 		
 	}
@@ -445,7 +445,7 @@ function content_feedback($msg = '')
 		 "user_points"=>$user_data['points'],
 		 "userimage" => $user_data['up_fname'] != '' ? $View_Path.'thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
 		 "UserId"=>$_COOKIE[UserId],
-		 "request" => $R,
+		
 		 'user_data' => $user_data,
 		 "rp" => isset($R['rp']) ? $R['rp'] : '',
 		 "u_exp" => $u_exp_data,
@@ -520,6 +520,7 @@ function browse_videos()
 {
 	global $js;
 	global $View_Path;
+        global $filespath;
 	$cdate = date('Y-m-d H:i:s');
 	$cdates = date_create($cdate);
 	
@@ -592,6 +593,17 @@ function browse_videos()
 	eq($campaigns_sql,$cmp_count);
 	$cmp = mfa($cmp_count);
 	
+	$SQL1 = "SELECT c.c_url FROM content c
+                JOIN campaigns cmp ON c.c_id=cmp.cmp_c_id
+                JOIN map_campaign_user mcu ON mcu.map_campaign_id=cmp.cmp_id
+                WHERE mcu.map_user_id='$_COOKIE[UserId]]'";
+        
+      	eq($SQL1,$rs1);
+      	while($result1 = mfa($rs1)) {
+      		if(!check_vid_exist($result1[c_url]))
+          			$cmp[total]--;
+      	}
+	
 	## --------------------------------------------------------------------------------
 	## content queries
 	## --------------------------------------------------------------------------------
@@ -619,11 +631,12 @@ function browse_videos()
 		
 		while($row = mfa($filterVideos))
 		{
-			// $t=filterVideo($row);
-			$t = 0;
+			//$t=filterVideo($row);
+                    $t = 0;
+                    
                         if (check_vid_exist($row[c_url])) {
-	     			$t = 1;
-	    		}
+	     $t = 1;
+	    }
 			if($t==1){
 				$row['i'] = $i++;
 			
@@ -661,7 +674,7 @@ function browse_videos()
 		 	"category" => $category_data,
                         "up"=>$up,
 		 	'user_data' => $user_data,
-		 	"userimage" => $user_data['up_fname'] != '' ? $View_Path.'thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
+		 	"userimage" => $user_data['up_fname'] != '' ? $filespath.'uploads/thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
 		 	"cmp_count" => $cmp,
 	 	);
 	}
@@ -672,13 +685,13 @@ function browse_videos()
 		$c =1;
 		while(($row = mfa($rs1)) && $c<=12)
 		{
-			// $t=filterVideo($row);
-			$t = 0;
-                        if (check_vid_exist($row[c_url])) {
-	     			$t = 1;
-	    		}
+			//$t=filterVideo($row);
+                    $t = 0;
+                    if (check_vid_exist($row[c_url])) {
+	     $t = 1;
+	    }
 			if($t==1){
-				$c++;
+                                $c++;
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -712,13 +725,13 @@ function browse_videos()
 		$d = 1;
 		while(($row = mfa($rs2))&& $d<=12)
 		{
-			// $t=filterVideo($row);
-			$t = 0;
-                       if (check_vid_exist($row[c_url])) {
-	     			$t = 1;
-	    		}
+			//$t=filterVideo($row);
+                    $t = 0;
+                   if (check_vid_exist($row[c_url])) {
+	     $t = 1;
+	    }
 			if($t==1){
-				$d++;
+                            $d++;
 				$row['i'] = $i++;
 				$row[c_date]=days_ago($row[c_date]);		 
 			 	
@@ -742,7 +755,7 @@ function browse_videos()
     				$row[c_date]= "Added Today";
    				}
 				array_push($reviewed_v_data, $row);
-			
+				
 			}
 			
 		}
@@ -759,7 +772,7 @@ function browse_videos()
 		 	"category" => $category_data,
                         "up"=>$up,
 		 	'user_data' => $user_data,
-		 	"userimage" => $user_data['up_fname'] != '' ? $View_Path.'thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
+		 	"userimage" => $user_data['up_fname'] != '' ? $filespath.'uploads/thumb_'.$user_data['up_fname'].$user_data['up_ext'] : './images/dashboard/user.jpg',
 		 	"cmp_count" => $cmp,
 	 	);
 	}
@@ -793,24 +806,17 @@ function str_replace_last( $search , $replace , $str ) {
 function get_highest_emotion_images() {
     $emotions = array("neutral", "happy", "sad", "angry", "suprised", "scared", "disgusted"); //NOTE:'vad_sacred' needs to be changed to 'vad_scared' in DB
     $images = array("neutral" => "", "happy" => "", "sad" => "", "angry" => "", "suprised" => "", "scared" => "", "disgusted" => "");
-
-    for ($i = 0; $i < count($emotions); $i++) {
-        $images[$emotions[$i]] = get_image_for_emotion($emotions[$i], "CURRENT"); //store image to $images under the proper key
-    }
-    return $images;
-}
+	
+		for ($i = 0; $i < count($emotions); $i++) {
+			$images[$emotions[$i]] = get_image_for_emotion($emotions[$i], "CURRENT"); //store image to $images under the proper key
+		}
+		return $images;
+	}
 
 function get_image_for_emotion($emotion, $scope) {
-    //retrieves image file from DB that has the highest value for specified emtion ($emotion)
-    //$scope defines whether search should be performed for all users or for current user 
-    //possible values are "CURRENT" and "ALL"
-
     global $Server_Upload_Path;
-
+	$ad_emotion = "ad_" . $emotion;
     if (strtoupper($scope) == "ALL") {//for all users
-        $ad_emotion = "ad_" . $emotion;
-        //below sql gets the row with the highest value for $emotion
-        //$filter_SQL = "(SELECT * FROM analysis_detail WHERE ad_id>368648) AS filtered_ad";//we only want files we have
         $image_request_SQL = "SELECT ad_id FROM analysis_detail WHERE $ad_emotion=(SELECT MAX($ad_emotion) FROM analysis_detail)";
         eq($image_request_SQL, $image_row);
         $data = mfa($image_row);
@@ -819,38 +825,11 @@ function get_image_for_emotion($emotion, $scope) {
     } else if (strtoupper($scope) == "CURRENT") {//current user only
         //get content feedback ids for currrent user
         $user_id = $_COOKIE['UserId'];
-        $get_cf_ids_SQL = "SELECT * FROM content_feedback WHERE cf_user_id=$user_id";
-        eq($get_cf_ids_SQL, $cf_ids_resource);
-        $cf_ids = array();
-        while ($row = mysql_fetch_array($cf_ids_resource, MYSQL_ASSOC)) {//while there are more rows
-            array_push($cf_ids, $row["cf_id"]);
-        }
-        //get ar_ids for currrent user
-        $ar_ids = array();
-        for ($j = 0; $j < sizeof($cf_ids); $j++) {
-            $cf_id = $cf_ids[$j];
-            $get_ar_id_SQL = "SELECT ar_id FROM analysis_results WHERE ar_cf_id=$cf_id";
-            eq($get_ar_id_SQL, $ar_id_row); //get the row
-            $ar_id = "'" . mfa($ar_id_row)['ar_id'] . "'"; //extract ar_id
-            if ($ar_id !== "''") {//input check
-                array_push($ar_ids, $ar_id);
-            }
-        }
-
-        $ad_emotion = "ad_" . $emotion; //get current emotion
-        $filter_SQL = "(SELECT * FROM analysis_detail WHERE ad_id>0) AS filtered_ad"; //filter to files we have locally
-        //format for use in IN caluse
-        $formatted_ar_ids = implode(",", $ar_ids);
-        $formatted_ar_ids = "(" . $formatted_ar_ids . ")";
-        if ($formatted_ar_ids != "()") {//no images selected
-            $image_request_SQL = "SELECT ad_id FROM analysis_detail WHERE $ad_emotion=(SELECT MAX($ad_emotion) FROM $filter_SQL WHERE ad_ar_id IN $formatted_ar_ids)";
-            eq($image_request_SQL, $image_row);
-            $image_name = "../../uploads/" . mfa($image_row)["ad_id"] . ".jpg"; //prepend directory, append file extension
-        } else {
-            $image_name = "images/" . $emotion . ".jpg"; //stock images
-            echo "You have not yet rated any videos.";
-        }
-    }
+        
+		$image_request_SQL="Select ad_id from `analysis_detail` where $ad_emotion=(Select MAX($ad_emotion) FROM  `analysis_detail` WHERE ad_ar_id IN (SELECT ar_id FROM  `analysis_results` WHERE ar_cf_id IN (SELECT cf_id FROM  `content_feedback` WHERE cf_user_id =$user_id)))";
+		eq($image_request_SQL, $image_row);
+		$image_name = "../../uploads/".mfa($image_row["ad_id"]).".jpg";
+	}
     return $image_name;
 }
 
@@ -859,13 +838,10 @@ function get_radar_chart_data(){
     $emotions = array("neutral", "happy", "sad", "angry", "suprised", "scared", "disgusted");
     $chart_data = array();
     $cf_id = $_REQUEST['cf_id'];
-    //get ar_id for this content feedback id 
-    $get_ar_id_SQL = "SELECT ar_id FROM analysis_results WHERE ar_cf_id='$cf_id'";
-    eq($get_ar_id_SQL, $ar_id_row);
-    $ar_id = mfa($ar_id_row)["ar_id"];
     for ($i = 0; $i < sizeof($emotions); $i++){//current user
         $ad_emotion = "ad_".$emotions[$i];//which emotion to search for
-        $get_ad_value_SQL = "SELECT * FROM analysis_detail WHERE $ad_emotion=(SELECT MAX($ad_emotion) FROM analysis_detail WHERE ad_ar_id='$ar_id')";
+		$get_ad_value_SQL= "Select * from `analysis_detail` WHERE $ad_emotion=(Select MAX($ad_emotion) FROM `analysis_detail` WHERE ad_ar_id in (SELECT ar_id FROM `analysis_results` WHERE ar_cf_id='$cf_id'))";
+        
         eq($get_ad_value_SQL, $ad_value_row);
         $ad_value_row = mfa($ad_value_row);
         $ad_id = $ad_value_row["ad_id"];
@@ -875,38 +851,10 @@ function get_radar_chart_data(){
         $chart_data[$emotions[$i]]["value"]["current"] = $chart_value;
         $chart_data[$emotions[$i]]["image_path"]["current"] = $image;
     }
-    //get the content id
-    $get_c_id_SQL = "SELECT cf_c_id FROM content_feedback WHERE cf_id='$cf_id' limit 0,1";
-    eq($get_c_id_SQL, $c_id_row);
-    $c_id = mfa($c_id_row)["cf_c_id"];
-    //get all cf_ids with this content id
-    $get_cf_ids_SQL = "SELECT * FROM content_feedback WHERE cf_c_id = '$c_id'";
-    eq($get_cf_ids_SQL, $cf_ids_resource);
-    $cf_ids = array();
-    while ($tmp_cf_id = mfa($cf_ids_resource)["cf_id"]){
-        array_push($cf_ids, "'".$tmp_cf_id."'");
-    }
-    //get the ar_ids for the cf_ids
-    $ar_ids = array();
-    for ($j = 0; $j < sizeof($cf_ids); $j++) {
-        $cf_id = $cf_ids[$j];
-        $get_ar_id_SQL = "SELECT ar_id FROM analysis_results WHERE ar_cf_id=$cf_id";
-        eq($get_ar_id_SQL, $ar_id_row); //get the row
-        $ar_id = "'" . mfa($ar_id_row)["ar_id"] . "'"; //extract ar_id
-        if ($ar_id !== "''") {//input check
-            array_push($ar_ids, $ar_id);
-        }
-    }
-    //format for IN clause
-    $formatted_ar_ids = implode(",", $ar_ids);
-    $formatted_ar_ids = "(".$formatted_ar_ids.")";
-    if ($formatted_ar_ids == "()"){
-        $formatted_ar_ids = "('940')";
-    }
-    echo $formatted_ar_ids;
     for ($k = 0; $k < sizeof($emotions); $k++){//all users
         $ad_emotion = "ad_".$emotions[$k];
-        $get_ad_value_SQL = "SELECT * FROM analysis_detail WHERE $ad_emotion=(SELECT MAX($ad_emotion) FROM analysis_detail WHERE ad_ar_id IN $formatted_ar_ids)";
+        
+        $get_ad_value_SQL = "select * from analysis_detail where $ad_emotion = (select MAX($ad_emotion) from analysis_detail where ad_ar_id in (Select ar_id from `analysis_results` where ar_cf_id in(SELECT cf_id FROM `content_feedback` WHERE cf_c_id in (SELECT cf_c_id FROM `content_feedback` WHERE cf_id=$cf_id))))";
         eq($get_ad_value_SQL, $ad_value_row);
         $ad_value_row = mfa($ad_value_row);
         $ad_id = $ad_value_row["ad_id"];
@@ -919,11 +867,15 @@ function get_radar_chart_data(){
     return $chart_data;
 }
 
+
 function scale_value_for_chart($value){
-    $chart_value = round(($value * 10), 2, PHP_ROUND_HALF_UP);
-        if ($chart_value < 0.09) 
-            $chart_value = 0; 
+	$val=($value * 10);
+    $chart_value = round($val, 2);
+    if ($chart_value < 0.09){
+        $chart_value = 0; 
+	}
     return $chart_value;
 }
+
 
 ?>

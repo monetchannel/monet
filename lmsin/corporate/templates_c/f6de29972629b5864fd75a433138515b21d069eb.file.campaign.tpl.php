@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-05-01 09:04:56
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-27 10:36:12
          compiled from ".\templates\campaign.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2122455432598336361-97812318%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_smarty_tpl->decodeProperties(array (
     'f6de29972629b5864fd75a433138515b21d069eb' => 
     array (
       0 => '.\\templates\\campaign.tpl',
-      1 => 1425973785,
+      1 => 1431684616,
       2 => 'file',
     ),
     '749422d4cfc3eb5677cf499730392b6accd4d1c7' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1425973777,
+      1 => 1432536350,
       2 => 'file',
     ),
   ),
@@ -149,7 +149,12 @@ $_smarty_tpl->decodeProperties(array (
                                     <li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_video_tab')->value;?>
 " >
                                         <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
-                                    </li>                               
+                                    </li>
+                                    
+                                    <li class="sub-nav <?php echo $_smarty_tpl->getVariable('test_tab')->value;?>
+" >
+                                        <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
+                                    </li>
                                 </ul>                             
                           </li>    
                           
@@ -365,7 +370,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 		jQuery(function(){
                         
 		        var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                         var winWidth = $(window).width()-330;
@@ -376,7 +381,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 				} 			
 			$(window).scroll(function(){
 				var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                        

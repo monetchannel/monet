@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-05-12 12:34:08
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-26 10:31:34
          compiled from ".\templates\hall_of_fame.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1878155518d89116906-07079952%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3225555d83754567f3-84750302%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fe87862c0433b90ea492122ed7fd4628100d79ad' => 
     array (
       0 => '.\\templates\\hall_of_fame.tpl',
-      1 => 1431405339,
+      1 => 1432616467,
       2 => 'file',
     ),
     'd60d58cb3f80dc8e9bfb970545d100fb7f9f8563' => 
     array (
       0 => '.\\templates\\video_list_header.tpl',
-      1 => 1431426831,
+      1 => 1432616459,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1878155518d89116906-07079952',
+  'nocache_hash' => '3225555d83754567f3-84750302',
   'function' => 
   array (
   ),
@@ -75,18 +75,18 @@ $_smarty_tpl->decodeProperties(array (
 				 <span class="icon-bar"></span>
 				 </button>
 													
-											</div>
+				</div>
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				 <ul class="nav navbar-nav navbar-right">
 				  <li>      
-							  <a  href="watch_video.php" id="browse-more">
+						<a  href="watch_video.php" id="browse-more">
 					   <span>Home</span>
 					   <i class="browse-video" ></i>
 					   </a>
 				  </li>
-				  <li><a href="account_setting.php"><?php echo $_COOKIE['UserName'];?>
+				  <li><a href="account_info.php"><?php echo $_COOKIE['UserName'];?>
  !</a></li>
 				  <li>
 						  <a href="javascript:void(1)" onClick="javascript:<?php if ($_SESSION['FBuserID']){?>logoutFacebook()<?php }else{ ?>location.href='index.php?act=logout'<?php }?>">
@@ -99,11 +99,11 @@ $_smarty_tpl->decodeProperties(array (
 				
 				 </div><!-- /.container-fluid -->
 				 </nav>    
-									</div>
+				</div>
 					
-					  </div>
+				 </div>
 			  </div>
-	  
+	  </div>
 	  
 	  
    <!-- header ended -->
@@ -144,14 +144,14 @@ $_smarty_tpl->decodeProperties(array (
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_cumulative_rewards_tab')->value;?>
 " >
 								<a href="index.php?act=cumulative_rewards">
-								<img class="img-responsive" src="./images/arrow.png"></img>Cumulative Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;"> Cumulative Rewards
 								</a>
 							</li>
 							
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_redeem_reward_tab')->value;?>
 " >
 								<a href="index.php?act=redeem_reward">
-								<img class="img-responsive" src="./images/arrow.png"></img>Redeem Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;">&nbspRedeem Rewards
 								</a>
 							</li>
 						</ul>
@@ -172,14 +172,14 @@ $_smarty_tpl->decodeProperties(array (
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_current_user_tab')->value;?>
 " >
 								<a href="hall_of_fame.php?act=current">
-								<img class="img-responsive current_user" src="./images/arrow.png"></img>Current User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Current User
 								</a>
 							</li>
 							
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_overall_user_tab')->value;?>
 " >
 							<a href="hall_of_fame.php?act=all_users">
-								<img class="img-responsive overall_user" src="./images/arrow.png"></img>Overall User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Overall User
 								</a>
 							</li>
 						</ul>
@@ -189,7 +189,7 @@ $_smarty_tpl->decodeProperties(array (
 ">
 						<a href="campaigns.php">
 							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Campaigns</span><span class="badge">&nbsp&nbsp<?php echo $_smarty_tpl->getVariable('cmp_count')->value['total'];?>
+							<span style="font-size:16px;">Campaigns</span>&nbsp&nbsp<span class="notif"><?php echo $_smarty_tpl->getVariable('cmp_count')->value['total'];?>
 </span>
 						</a>
 					</li>
@@ -197,8 +197,8 @@ $_smarty_tpl->decodeProperties(array (
 					<li class="<?php echo $_smarty_tpl->getVariable('stats_tab')->value;?>
 ">
 						<a href="leaderboard.php">
-							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Stats</span><span class="badge"></span>
+							<img class="img-responsive campaing" src="./images/stats.png"></img>
+							<span style="font-size:16px;">Statistics</span><span class="badge"></span>
 						</a>
 					</li>
 					
@@ -225,7 +225,7 @@ $_smarty_tpl->decodeProperties(array (
 </div>
 <div class="container-fluid expression-container"style="margin-top:-150px;"/>
 									
-							<div class="row border-bottom col-row" style="padding-top:200px;">
+							<div class="row border-bottom col-row" style="padding-top:200px;width:1200px;margin-left:-200px;">
 								<?php if (isset($_smarty_tpl->getVariable('images',null,true,false)->value['neutral']['value'])){?>
 								<div class="col-md-2"style="width:120px;background: #ccc;">
 									<a href="#" class="indicator-link">
@@ -266,12 +266,12 @@ $_smarty_tpl->decodeProperties(array (
 									</a>
 								</div>
 								<?php }?>
-								<?php if (isset($_smarty_tpl->getVariable('images',null,true,false)->value['surprised']['value'])){?>
+								<?php if (isset($_smarty_tpl->getVariable('images',null,true,false)->value['suprised']['value'])){?>
 								<div class="col-md-2"style="width:120px;background: #ccc;">
 									<a href="#" class="indicator-link">
-										<span>Surprised</span>
-										<img class="img-responsive " src="images/dashboard/surprised.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" style="width:100px;"src="<?php echo $_smarty_tpl->getVariable('images')->value['surprised']['image_path'];?>
+										<span>Suprised</span>
+										<img class="img-responsive " src="images/dashboard/suprised.png">
+										<img class="img-responsive img-thumbnail emotion-indicator" style="width:100px;"src="<?php echo $_smarty_tpl->getVariable('images')->value['suprised']['image_path'];?>
 ">
 									</a>
 								</div>
@@ -298,7 +298,7 @@ $_smarty_tpl->decodeProperties(array (
 								<?php }?>
                                                                 
 							</div>
-                                                        <div class="panel panel-default" style=max-width:750px;height:20px;">
+							                        <div class="panel panel-default" style=max-width:750px;height:20px;">
                                                      <div class="panel-heading"><strong><?php if ($_smarty_tpl->getVariable('scope')->value=="ALL"){?>Everyone's<?php }else{ ?>Your<?php }?> Emotion</strong></div></div>
                                                      <!--radar chart design --->
                                                     <div id="chartdiv" style="width:600px; height:400px;"></div>
@@ -353,7 +353,7 @@ $_smarty_tpl->decodeProperties(array (
                 },
                
                 {
-                    "direction": "Surprised",
+                    "direction": "Surpised",
                     "value": <?php echo $_smarty_tpl->getVariable('images')->value['suprised']['value'];?>
 ,
                     "img_src": "<?php echo $_smarty_tpl->getVariable('images')->value['suprised']['image_path'];?>

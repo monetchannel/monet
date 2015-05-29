@@ -2,7 +2,13 @@
 {block name=body}
 
  <!-- ----------------------------- -->
-      <div class="panel panel-default">
+      
+           
+            <!-- --------- -->
+           
+            
+            {if $campaigns|@count > 0}
+                <div class="panel panel-default">
        <div class="panel-heading">
         <strong><em>Campaigns</em></strong>
        </div>
@@ -11,10 +17,6 @@
          <div class="col-md-12" style="padding-left:0;padding-right:0;">
           <div class="panel-left-content">
            <div class="container-fluid">
-           
-            <!-- --------- -->
-            
-            {if $campaigns|@count > 0}
             <!--<div class="row border-bottom vcon">-->
             {foreach $campaigns as $k=>$v}
             {if $k%2==0}
@@ -55,6 +57,17 @@
             {/if}
             {/foreach}
             </div>
+            {else}
+                <div class="panel panel-default">
+       <div class="panel-heading">
+        <strong><em>Campaigns :  &nbsp&nbsp No campaigns assigned.</em></strong>
+       </div>
+       <div class="container-fluid">
+        <div class="row">
+         <div class="col-md-12" style="padding-left:0;padding-right:0;">
+          <div class="panel-left-content">
+           <div class="container-fluid">
+               <div class="text-center alert alert-info" id = "link"><a href = "watch_video.php?act=browse_videos" class="myclass">Click here to watch more videos!</a></div>
             {/if}
             
             <!-- --------- -->
@@ -66,8 +79,20 @@
         </div>
        </div>
       </div>
+      
       <!-- ----------------------------- -->
+      <script type="text/javascript">
+          function(){
+          $("#link").hover(function (){
+        $(this).css("text-decoration", "underline");
+    },function(){
+        $(this).css("text-decoration", "none");
+    }
+          }
+);
+          </script>
 <script type="text/javascript">
+    
 var SERVER_PATH="{$SERVER_PATH}";
 function return_campaign_video(c_id, cmp_id)
 {

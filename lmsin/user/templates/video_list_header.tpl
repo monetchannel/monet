@@ -50,18 +50,18 @@
 				 <span class="icon-bar"></span>
 				 </button>
 													
-											</div>
+				</div>
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				 <ul class="nav navbar-nav navbar-right">
 				  <li>      
-							  <a  href="watch_video.php" id="browse-more">
+						<a  href="watch_video.php" id="browse-more">
 					   <span>Home</span>
 					   <i class="browse-video" ></i>
 					   </a>
 				  </li>
-				  <li><a href="account_setting.php">{$smarty.cookies.UserName} !</a></li>
+				  <li><a href="account_info.php">{$smarty.cookies.UserName} !</a></li>
 				  <li>
 						  <a href="javascript:void(1)" onClick="javascript:{if $smarty.session.FBuserID}logoutFacebook(){else}location.href='index.php?act=logout'{/if}">
 				   <span>Logout</span>
@@ -73,11 +73,11 @@
 				
 				 </div><!-- /.container-fluid -->
 				 </nav>    
-									</div>
+				</div>
 					
-					  </div>
+				 </div>
 			  </div>
-	  
+	  </div>
 	  
 	  
    <!-- header ended -->
@@ -113,13 +113,13 @@
 						<ul id="accordionfour" class="panel-collapse collapse" style="background:#fff; {if $reward_tab!=''}display:block {/if}">
 							<li class="sub-nav {$active_cumulative_rewards_tab}" >
 								<a href="index.php?act=cumulative_rewards">
-								<img class="img-responsive" src="./images/arrow.png"></img>Cumulative Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;"> Cumulative Rewards
 								</a>
 							</li>
 							
 							<li class="sub-nav {$active_redeem_reward_tab}" >
 								<a href="index.php?act=redeem_reward">
-								<img class="img-responsive" src="./images/arrow.png"></img>Redeem Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;">&nbspRedeem Rewards
 								</a>
 							</li>
 						</ul>
@@ -138,13 +138,13 @@
 						<ul id="accordionthree" class="panel-collapse collapse" style="background:#fff; {if $fame_tab!=''}display:block {/if}">
 							<li class="sub-nav {$active_current_user_tab}" >
 								<a href="hall_of_fame.php?act=current">
-								<img class="img-responsive current_user" src="./images/arrow.png"></img>Current User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Current User
 								</a>
 							</li>
 							
 							<li class="sub-nav {$active_overall_user_tab}" >
 							<a href="hall_of_fame.php?act=all_users">
-								<img class="img-responsive overall_user" src="./images/arrow.png"></img>Overall User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Overall User
 								</a>
 							</li>
 						</ul>
@@ -153,14 +153,14 @@
 					<li class="{$campaigns_tab}">
 						<a href="campaigns.php">
 							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Campaigns</span><span class="badge">&nbsp&nbsp{$cmp_count.total}</span>
+							<span style="font-size:16px;">Campaigns</span>&nbsp&nbsp<span class="notif">{$cmp_count.total}</span>
 						</a>
 					</li>
 					
 					<li class="{$stats_tab}">
 						<a href="leaderboard.php">
-							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Stats</span><span class="badge"></span>
+							<img class="img-responsive campaing" src="./images/stats.png"></img>
+							<span style="font-size:16px;">Statistics</span><span class="badge"></span>
 						</a>
 					</li>
 					

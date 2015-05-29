@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2014-12-31 05:38:18
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-22 01:51:44
          compiled from "./templates/watch_video.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:128466328354a3ee3add6906-75785660%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:650014521555eee205a3826-29607509%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cb422ecb5d350ce0b5f8463a018bbe23a9852d4c' => 
     array (
       0 => './templates/watch_video.tpl',
-      1 => 1420029494,
+      1 => 1432284579,
       2 => 'file',
     ),
     '23b117ccf77c14a1503941da7dfd83e802ed2d2f' => 
     array (
       0 => './templates/watch_video_header.tpl',
-      1 => 1418451008,
+      1 => 1432213379,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '128466328354a3ee3add6906-75785660',
+  'nocache_hash' => '650014521555eee205a3826-29607509',
   'function' => 
   array (
   ),
@@ -95,7 +95,7 @@ $_smarty_tpl->decodeProperties(array (
 
         
 
-<!--<link href="nvd3/src/nv.d3.css" rel="stylesheet" type="text/css">
+<link href="nvd3/src/nv.d3.css" rel="stylesheet" type="text/css">
 
 <script src="nvd3/lib/d3.v3.js"></script> 
 
@@ -113,7 +113,7 @@ $_smarty_tpl->decodeProperties(array (
 
 <script src="nvd3/src/models/line.js"></script> 
 
-<script src="nvd3/src/models/lineChart.js"></script> -->
+<script src="nvd3/src/models/lineChart.js"></script> 
 
 <script src="js/new_record.js"></script> 
 
@@ -122,7 +122,7 @@ $_smarty_tpl->decodeProperties(array (
 <script src="js/cynets_modal.js"></script> 
 
 <script type="text/javascript" src="js/swfobject.js"></script> 
-
+<script type="text/javascript" src="js/mic.js"></script> 
 <script language="javascript" type="text/javascript">
 
 var Timer;
@@ -559,13 +559,13 @@ if ($_smarty_tpl->_count($_from) > 0){
 						<?php }?>
 						
 						<div class="top-desc">
-							Comment about this video Or click Record icon to speak something about this video.
-							<a  class="pull-right" href="#">
-								<img class="img-responsive" src="./images/voicemsgicon.png"></img>
+							Comment about this video or click Record icon to speak something about this video.
+							<a  class="pull-right" style="cursor:pointer">
+								<img id="mic" width="40" height="40" src="images/mic.gif" onClick="toggle();">
 							</a>
 						</div>
 						
-						<textarea name="comment" class="form-control text-area-field" placeholder="Please enter your comments" ></textarea>
+						<textarea name="comment" id="comment" class="form-control text-area-field" placeholder="Please enter your comments" ></textarea>
 						
 						<div style="margin-top:10px;">
 							<div id="mygrapph_popup"><object id="mygrapph_popup" width="500" height="170" type="application/x-shockwave-flash" data="swf/Sample.swf" style="visibility: visible;"></object></div>
@@ -779,10 +779,12 @@ var localMediaStream;
 		$('.agreebtn').on('click', function(){
 			//var fcagrFrm = "<form name=\"agreefrm\" action=\"watch_video.php\" method=\"post\" style=\"z-index:300px;\" id=\"agreefrm\"><div class=\"checkbox\"> <label> <input type=\"checkbox\" name=\"agree\" value=\"\" id=\"agree\" />Did you agree for capturing this video?</label></div><button type=\"submit\" class=\"btn btn-primary agreebtn\">Ok</button></form>";
 			//cn_window_open("Video Capturing ",fcagrFrm,1);
-			$("#videoAgree").modal({ backdrop:false,keybord:false});
+			//$("#videoAgree").modal({ backdrop:false,keybord:false});
+			$('#playerover').remove();
+			player.playVideo();
 		});
 	
-		$('body').on('submit','#videoAgreeForm', function(e){
+		/*$('body').on('submit','#videoAgreeForm', function(e){
 			e.preventDefault();
 			var agree = $('#agree').is(':checked');
 			if(agree == false){
@@ -795,7 +797,7 @@ var localMediaStream;
 				$("#emotionWave img").attr("src","images/animated-emotion.gif");
 				
 			}
-		});
+		});*/
 		/* ------------- added by Girish -------------- */
 	}
 

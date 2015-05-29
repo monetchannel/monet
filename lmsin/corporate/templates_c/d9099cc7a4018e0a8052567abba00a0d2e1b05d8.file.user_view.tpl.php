@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2014-12-15 10:24:39
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-22 06:53:17
          compiled from ".\templates\user_view.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6694548ea8d7497393-50210099%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:22503555eb63d75e784-59723604%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd9099cc7a4018e0a8052567abba00a0d2e1b05d8' => 
     array (
       0 => '.\\templates\\user_view.tpl',
-      1 => 1418635475,
+      1 => 1432270140,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6694548ea8d7497393-50210099',
+  'nocache_hash' => '22503555eb63d75e784-59723604',
   'function' => 
   array (
   ),
@@ -25,7 +25,7 @@ $_smarty_tpl->decodeProperties(array (
 </div>  
 <?php }?>
 
-<form name="frm" method="POST" action="user.php" onSubmit="return false;">
+<form name="frm" id="frm" method="POST" action="user.php" onSubmit="return false;">
 <div class="row margin-top">
 				<div>
 					 <img class="img-responsive" src="<?php echo $_COOKIE['CompanyLogoSmall'];?>
@@ -33,7 +33,9 @@ $_smarty_tpl->decodeProperties(array (
 				</div>
 				<div class="optn">										
 					<div class="add">
-						<a href="javascript:user.add('','Add User');">Add User<a href="javascript:user.add('','Add User');"><img class="" src="./images/addvideo.png" /></a></a> </div>
+						<a href="javascript:user.add('','Add User');">Add User<a href="javascript:user.add('','Add User');"><img class="" src="./images/addvideo.png" /></a></a>
+                        <br><br>
+                        <a href="excel.php"> Import User from Excel File <a href="excel.php"><img class="" src="./images/csv.png" /></a></a></div>
 					
 					<div class="srch">
 						<strong>Search User by</strong> &nbsp;
@@ -44,29 +46,41 @@ $_smarty_tpl->decodeProperties(array (
 >Male</option>
             				<option value="Female" <?php echo $_smarty_tpl->getVariable('gender_Female')->value;?>
 >Female</option>
-					    </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						
+					    </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
 						
 						
 						<select  name="strt_age" id="strt_age" class="styled-select" style="color:#777" onchange="control()">
             				<?php echo $_smarty_tpl->getVariable('age1')->value;?>
 
             			</select> -to-
+					<?php if ($_smarty_tpl->getVariable('e_age')->value==1){?>
+ 						<select  name="end_age" id="end_age" class="styled-select" style="color:#777" onchange="control()">
+						<?php echo $_smarty_tpl->getVariable('age2')->value;?>
+
+            			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<?php }else{ ?>
 						<select  name="end_age" id="end_age" class="styled-select" style="color:#777" onchange="control()" disabled>
-            				<?php echo $_smarty_tpl->getVariable('age2')->value;?>
+							<?php echo $_smarty_tpl->getVariable('age2')->value;?>
 
             			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
+					<?php }?>
 						
 						
-						<select  name="company_country" id="company_country" class="styled-select" style="color:#777">
+						<select  name="company_country" id="company_country" class="styled-select" style="color:#777" onchange="javascript:state_srch(this.value, '<?php echo $_smarty_tpl->getVariable('act')->value;?>
+')">
             				<?php echo $_smarty_tpl->getVariable('country_name')->value;?>
 
             			</select>
+						<select  name="users_state" id="users_state" class="styled-select" style="color:#777">
+            				<?php echo $_smarty_tpl->getVariable('state_name')->value;?>
+
+            			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												
 				  		<input type="text" name="search" id="search" class="search-query" value="<?php echo $_smarty_tpl->getVariable('search')->value;?>
 " >
-							
+                                                <input type="checkbox" name="global_user" id="global_user" class="checkbox1" <?php echo $_smarty_tpl->getVariable('selected')->value;?>
+ > Include Global Users	
                     	<button id="search" class="search-btn" onclick="return ser_by()" ></button>
 						<button id="reset" onclick="return reset_srch()" >Reset</button>
                     	
@@ -81,6 +95,7 @@ $_smarty_tpl->decodeProperties(array (
 					<table class="table table-bordered"> 
 						<thead>
 							<tr>
+								<th><a href="javascript:void(1)" onclick="javascript:check('chk_user_id[]')" style="color:#FFF">Check All</a></th>
 								<th><a href="javascript: set_order('user_fname','<?php echo $_smarty_tpl->getVariable('user_fname_order')->value;?>
 ')" style="color:#FFF">User Name</a></th>
 								<th><a href="javascript: set_order('user_email','<?php echo $_smarty_tpl->getVariable('user_email_order')->value;?>
@@ -89,10 +104,10 @@ $_smarty_tpl->decodeProperties(array (
 ')" style="color:#FFF">Birth Year</a></th>
 								<th><a href="javascript: set_order('user_gender','<?php echo $_smarty_tpl->getVariable('user_gender_order')->value;?>
 ')" style="color:#FFF">Gender</a></th>
-                               	<th>Rated Videos</th>
-                                <th>Approved Videos</th>
-                                <th>Responded Challenges</th>
-                                <th>Action</th>
+                                                                <th>Rated Videos</th>
+                                                                <th>Approved Videos</th>
+                                                                <th>Responded Challenges</th>
+                                                                <th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -100,8 +115,13 @@ $_smarty_tpl->decodeProperties(array (
  $_from = $_smarty_tpl->getVariable('users')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['user']->key => $_smarty_tpl->tpl_vars['user']->value){
-?>
-<tr><td class="field-label col-xs-4 col-sm-4 col-md-2 text-align"><?php echo $_smarty_tpl->tpl_vars['user']->value['user_fname'];?>
+?><?php $_smarty_tpl->tpl_vars['color'] = new Smarty_variable("#EEEEEE", null, null);?>
+<?php if ($_smarty_tpl->tpl_vars['user']->value['map_company_id']!=$_smarty_tpl->getVariable('company_id')->value){?>
+<?php $_smarty_tpl->tpl_vars['color'] = new Smarty_variable("#DDDDDD", null, null);?>
+<?php }?>
+<tr bgcolor="<?php echo $_smarty_tpl->getVariable('color')->value;?>
+"><td class="field-label col-xs-4 col-sm-4 col-md-2  text-align"><input type="checkbox" name="chk_user_id[]" id="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['user_id'];?>
+" /></td><td class="field-label col-xs-4 col-sm-4 col-md-2 text-align"><?php echo $_smarty_tpl->tpl_vars['user']->value['user_fname'];?>
  <?php echo $_smarty_tpl->tpl_vars['user']->value['user_lname'];?>
 </td><td class="col-md-3 field-label"><?php echo $_smarty_tpl->tpl_vars['user']->value['user_email'];?>
 </td><td class="col-md-2 field-label"><?php echo $_smarty_tpl->tpl_vars['user']->value['user_dob'];?>
@@ -114,7 +134,25 @@ if ($_smarty_tpl->_count($_from) > 0){
 ')"><img class=""  width="24" height="24" src="./images/delete.png"><div>Delete</div></a></div></td></tr>
 <?php }} ?>                            
 						</tbody>
-					</table>
+                                                
+						<tr><td colspan="9"><button type="button" id="group_btn" style="display:block" class="btn btn-default" onclick="return open_group()" >Proceed to Create Group</button></td></tr>
+					        
+                                                </table>
+					
+					<div id="group" style="display: none">
+						<br><input type="text" class="form-control input-lg"  name="g_name" id="g_name" 
+                   				data-msg-required="Please enter group name."
+                   				data-rule-required="true" placeholder="Group Name" /></br>
+								
+						<br><textarea class="form-control input-lg" name="g_desc" id="g_desc" 
+                    	  data-msg-required="Please enter some description for group."
+                    	  data-msg-maxlength="The description cannot be greater than 1000 characters."
+                     	  data-msg-minlength="Please enter atleast 10 characters for description"
+                     	  data-rule-maxlength="1000" data-rule-minlength="10"
+                     	  data-rule-required="true"
+                     	  placeholder="Group Description" rows="6"></textarea></br>
+					<button type="button" class="btn btn-default" onclick="javascript:create_group()" >Submit to Create Group</button>
+					</div>
     				
 					<table class="table">
     					<tr>
@@ -131,8 +169,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 
     						</td>
     					</tr>
-    				</table>
-				
+					</table>
+    							
 				</div>
 			</div>
            

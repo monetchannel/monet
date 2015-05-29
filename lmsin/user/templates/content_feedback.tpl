@@ -38,7 +38,7 @@
 									</td>
 									<td class="col-md-5 second-td">
                                                                            
-                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Rating.</span><br>
+                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Ratting.</span><br>
 										<span style="color:#614197;">You won {$rp} rewards</span>
 										
 									</td>
@@ -90,7 +90,7 @@
 									<a href="#" class="indicator-link">
 										<span>Happy</span>
 										<img class="img-responsive " src="images/dashboard/happy.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.happy.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.happy.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -99,7 +99,7 @@
 									<a href="#" class="indicator-link">
 										<span>Sad</span>
 										<img class="img-responsive " src="images/dashboard/sad.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.sad.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.sad.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -108,7 +108,7 @@
 									<a href="#" class="indicator-link">
 										<span>Angry</span>
 										<img class="img-responsive " src="images/dashboard/angry.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.angry.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.angry.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -117,7 +117,7 @@
 									<a href="#" class="indicator-link">
 										<span>Surprised</span>
 										<img class="img-responsive " src="images/dashboard/surprised.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.suprised.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.suprised.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -126,7 +126,7 @@
 									<a href="#" class="indicator-link">
 										<span>Scared</span>
 										<img class="img-responsive " src="images/dashboard/scared.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.scared.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.scared.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -135,7 +135,7 @@
 									<a href="#" class="indicator-link">
 										<span>Disgusted</span>
 										<img class="img-responsive" src="images/dashboard/disgusted.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" src="../uploads/{$u_exp.disgusted.ad_id}.jpg">
+										<img class="img-responsive img-thumbnail emotion-indicator" src="../../uploads/{$u_exp.disgusted.ad_id}.jpg">
 									</a>
 								</div>
 								{/if}
@@ -183,7 +183,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
 												</a>
 											</div>
 					 	
@@ -192,7 +192,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
 												</a>
 											</div>
 											{/if}
@@ -209,7 +209,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br>{$v.c_date}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
 												</a>
 											</div>
 					 	
@@ -218,7 +218,7 @@
 												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
 												<img class="img-responsive" src="{$v.c_thumb_url}">
 												<div class="video-detail">{$v.c_title}</div>
-												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {if $v.diff_months==0} {if $v.diff_days==0} Added today {else} {$v.diff_days} days ago {/if}{else} {$v.diff_months} months ago{/if}</div>
 												</a>
 											</div>
 											{/if}
@@ -444,7 +444,7 @@ function testAPI() {
 
 			success: function(js){
 
-					location.href='http://www.monetchannel.com/lmsin/watch_video.php'
+					location.href='http://www.monetchannel.com/lmsin/user/watch_video.php'
 
 					return false;
 

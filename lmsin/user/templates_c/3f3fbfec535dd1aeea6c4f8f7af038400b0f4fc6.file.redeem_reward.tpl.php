@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-05-12 12:43:43
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-26 10:31:05
          compiled from ".\templates\redeem_reward.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1421254e17f8957aab8-39931986%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_smarty_tpl->decodeProperties(array (
     '3f3fbfec535dd1aeea6c4f8f7af038400b0f4fc6' => 
     array (
       0 => '.\\templates\\redeem_reward.tpl',
-      1 => 1424064390,
+      1 => 1432616463,
       2 => 'file',
     ),
     'd60d58cb3f80dc8e9bfb970545d100fb7f9f8563' => 
     array (
       0 => '.\\templates\\video_list_header.tpl',
-      1 => 1431426831,
+      1 => 1432616459,
       2 => 'file',
     ),
   ),
@@ -75,18 +75,18 @@ $_smarty_tpl->decodeProperties(array (
 				 <span class="icon-bar"></span>
 				 </button>
 													
-											</div>
+				</div>
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				 <ul class="nav navbar-nav navbar-right">
 				  <li>      
-							  <a  href="watch_video.php" id="browse-more">
+						<a  href="watch_video.php" id="browse-more">
 					   <span>Home</span>
 					   <i class="browse-video" ></i>
 					   </a>
 				  </li>
-				  <li><a href="account_setting.php"><?php echo $_COOKIE['UserName'];?>
+				  <li><a href="account_info.php"><?php echo $_COOKIE['UserName'];?>
  !</a></li>
 				  <li>
 						  <a href="javascript:void(1)" onClick="javascript:<?php if ($_SESSION['FBuserID']){?>logoutFacebook()<?php }else{ ?>location.href='index.php?act=logout'<?php }?>">
@@ -99,11 +99,11 @@ $_smarty_tpl->decodeProperties(array (
 				
 				 </div><!-- /.container-fluid -->
 				 </nav>    
-									</div>
+				</div>
 					
-					  </div>
+				 </div>
 			  </div>
-	  
+	  </div>
 	  
 	  
    <!-- header ended -->
@@ -144,14 +144,14 @@ $_smarty_tpl->decodeProperties(array (
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_cumulative_rewards_tab')->value;?>
 " >
 								<a href="index.php?act=cumulative_rewards">
-								<img class="img-responsive" src="./images/arrow.png"></img>Cumulative Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;"> Cumulative Rewards
 								</a>
 							</li>
 							
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_redeem_reward_tab')->value;?>
 " >
 								<a href="index.php?act=redeem_reward">
-								<img class="img-responsive" src="./images/arrow.png"></img>Redeem Rewards
+								<img class="img-responsive halloffame" src="./images/rewards.png" style="opacity:0;">&nbspRedeem Rewards
 								</a>
 							</li>
 						</ul>
@@ -172,14 +172,14 @@ $_smarty_tpl->decodeProperties(array (
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_current_user_tab')->value;?>
 " >
 								<a href="hall_of_fame.php?act=current">
-								<img class="img-responsive current_user" src="./images/arrow.png"></img>Current User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Current User
 								</a>
 							</li>
 							
 							<li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_overall_user_tab')->value;?>
 " >
 							<a href="hall_of_fame.php?act=all_users">
-								<img class="img-responsive overall_user" src="./images/arrow.png"></img>Overall User
+								<img class="img-responsive halloffame" src="./images/fame.png" style="opacity:0;">Overall User
 								</a>
 							</li>
 						</ul>
@@ -189,7 +189,7 @@ $_smarty_tpl->decodeProperties(array (
 ">
 						<a href="campaigns.php">
 							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Campaigns</span><span class="badge">&nbsp&nbsp<?php echo $_smarty_tpl->getVariable('cmp_count')->value['total'];?>
+							<span style="font-size:16px;">Campaigns</span>&nbsp&nbsp<span class="notif"><?php echo $_smarty_tpl->getVariable('cmp_count')->value['total'];?>
 </span>
 						</a>
 					</li>
@@ -197,8 +197,8 @@ $_smarty_tpl->decodeProperties(array (
 					<li class="<?php echo $_smarty_tpl->getVariable('stats_tab')->value;?>
 ">
 						<a href="leaderboard.php">
-							<img class="img-responsive campaing" src="./images/campain.png"></img>
-							<span style="font-size:16px;">Stats</span><span class="badge"></span>
+							<img class="img-responsive campaing" src="./images/stats.png"></img>
+							<span style="font-size:16px;">Statistics</span><span class="badge"></span>
 						</a>
 					</li>
 					
@@ -216,185 +216,182 @@ $_smarty_tpl->decodeProperties(array (
 											
 						<!-- ----------------------------- -->
 						
- <div style="margin-left:15px;">
-							<h4>My reward points :<b> <?php echo $_smarty_tpl->getVariable('user_data')->value['points'];?>
+<div style="margin-left:15px;">
+    <h4>My reward points :<b> <?php echo $_smarty_tpl->getVariable('user_data')->value['points'];?>
 </b></h4>
-						</div>
+</div>
 						
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<strong><em>Last Redeemed Reward</em></strong>
-							</div>
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-12" style="padding-left:0;padding-right:0;">
-										<div class="panel-left-content">
-											<div class="container-fluid">
-												<!--<div class="row border-bottom vcon">-->
-												<?php if (count($_smarty_tpl->getVariable('my_redeems')->value)>0){?>
-												<?php  $_smarty_tpl->tpl_vars['rev'] = new Smarty_Variable;
+<div class="panel panel-default">
+    <div class="panel-heading">
+	<strong><em>Last Redeemed Reward</em></strong>
+    </div>
+    <div class="container-fluid">
+	<div class="row">
+            <div class="col-md-12" style="padding-left:0;padding-right:0;">
+                <div class="panel-left-content">
+                    <div class="container-fluid">
+                    	<!--<div class="row border-bottom vcon">-->
+			<?php if (count($_smarty_tpl->getVariable('my_redeems')->value)>0){?>
+                            <?php  $_smarty_tpl->tpl_vars['rev'] = new Smarty_Variable;
  $_smarty_tpl->tpl_vars['rek'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('my_redeems')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['rev']->key => $_smarty_tpl->tpl_vars['rev']->value){
  $_smarty_tpl->tpl_vars['rek']->value = $_smarty_tpl->tpl_vars['rev']->key;
 ?>
-												<?php if ($_smarty_tpl->tpl_vars['rek']->value%4==0){?>
-												<?php if ($_smarty_tpl->tpl_vars['rek']->value>0){?>
-													</div>
-												<?php }?>
-												<div class="row border-bottom">
-													<div class="col-md-3">
-														<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
+                                <?php if ($_smarty_tpl->tpl_vars['rek']->value%4==0){?>
+                                    <?php if ($_smarty_tpl->tpl_vars['rek']->value>0){?>
+                    </div>
+                                    <?php }?>
+                    <div class="row border-bottom">
+                        <div class="col-md-3">
+                            <img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
 " style="width:120px;height:120px; float:left; margin-right:6px"></img>  
-														<div class="product-title">
-															<?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
+                            <div class="product-title">
+                                <?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
  (<?php echo $_smarty_tpl->tpl_vars['rev']->value['sub_title'];?>
 )
-														</div>
-														<div class="product-point">
-															<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
+                            </div>
+                            <div class="product-point">
+				<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
  Points
-														</div>
-													</div>
-												
-												<?php }else{ ?>
-													<div class="col-md-3">
-														<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
+			    </div>
+			</div>
+				<?php }else{ ?>
+                        <div class="col-md-3">
+                            <img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
 " style="width:120px;height:120px; float:left; margin-right:6px" ></img>  
-														<div class="product-title">
-															<?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
+                            <div class="product-title">
+                                <?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
  (<?php echo $_smarty_tpl->tpl_vars['rev']->value['sub_title'];?>
 )
-														</div>
-														<div class="product-point">
-															<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
+                            </div>
+                            <div class="product-point">
+				<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
  Points
-														</div>
-													</div>
-												<?php }?>
-												<?php }} ?>
-												</div>
-												<?php }?>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<strong><em>More Rewards to Redeem</em></strong>
-							</div>
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-12" style="padding-left:0;padding-right:0;">
-										<div class="panel-left-content">
-											<div class="container-fluid">
-												<!--<div class="row border-bottom vcon">-->
-												<?php if (count($_smarty_tpl->getVariable('rewards')->value)>0){?>
-												<?php  $_smarty_tpl->tpl_vars['rev'] = new Smarty_Variable;
+			    </div>
+			</div>
+				<?php }?>
+			    <?php }} ?>
+                        <?php }else{ ?>
+                            <div>
+                                You did not redeem any reward yet!
+                            </div>
+                    </div>
+			<?php }?>
+                </div>
+            </div>
+	</div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+	<strong><em>More Rewards to Redeem</em></strong>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="padding-left:0;padding-right:0;">
+		<div class="panel-left-content">
+                    <div class="container-fluid">
+                        <!--<div class="row border-bottom vcon">-->
+			<?php if (count($_smarty_tpl->getVariable('rewards')->value)>0){?>
+                            <?php  $_smarty_tpl->tpl_vars['rev'] = new Smarty_Variable;
  $_smarty_tpl->tpl_vars['rek'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('rewards')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['rev']->key => $_smarty_tpl->tpl_vars['rev']->value){
  $_smarty_tpl->tpl_vars['rek']->value = $_smarty_tpl->tpl_vars['rev']->key;
 ?>
-												<?php if ($_smarty_tpl->tpl_vars['rek']->value%4==0){?>
-												<?php if ($_smarty_tpl->tpl_vars['rek']->value>0){?>
-													</div>
-												<?php }?>
-												<div class="row border-bottom">
-													<div class="col-md-3">
-														<a href="javascript:void(0)" id="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
+				<?php if ($_smarty_tpl->tpl_vars['rek']->value%4==0){?>
+                                    <?php if ($_smarty_tpl->tpl_vars['rek']->value>0){?>
+                    </div>
+                                    <?php }?>
+                    <div class="row border-bottom">
+                    <div class="col-md-3">
+			<a href="javascript:void(0)" id="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
 " data="<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_id'];?>
 " class="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
 ">
-															<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
+			<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
 "style="width:150px;height:150px; float:left; margin-right:6px" ></img> 
-															<div class="product-title">
-																<?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
+			<div class="product-title">
+                            <?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
  (<?php echo $_smarty_tpl->tpl_vars['rev']->value['sub_title'];?>
 )
-															</div>
-															<div class="product-point">
-																<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
+			</div>
+			<div class="product-point">
+                            <?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
  Points
-															</div>
-														</a>
-													</div>
-												
-												<?php }else{ ?>
-													<div class="col-md-3">
-														<a href="javascript:void(0)" id="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
+			</div>
+			</a>
+                    </div>
+				<?php }else{ ?>
+                    <div class="col-md-3">
+			<a href="javascript:void(0)" id="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
 " data="<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_id'];?>
 " class="<?php echo $_smarty_tpl->tpl_vars['rev']->value['re_a_id'];?>
 ">
-															<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
+			<img class="" src="../files/prize_thumb/<?php echo $_smarty_tpl->tpl_vars['rev']->value['r_image'];?>
 "style="width:150px;height:150px; float:left; margin-right:6px"></img>  
-															<div class="product-title">
-																<?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
+			<div class="product-title">
+                            <?php echo $_smarty_tpl->tpl_vars['rev']->value['title'];?>
  (<?php echo $_smarty_tpl->tpl_vars['rev']->value['sub_title'];?>
 )
-															</div>
-															<div class="product-point">
-																<?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
- Points
-															</div>
-														</a>
-													</div>
-												<?php }?>
-												<?php }} ?>
-												</div>
-												<?php }?>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						</div>
-					
-										
-					
-				
-		
-		
-		<div class="modal fade redeem-popup" id="redeem-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form id="redeemReForm" role="form">
-						<input type="hidden" name="UserId" id="UserId">
-						<input type="hidden" name="rewardId" id="rewardId">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-							<h4 class="modal-title" id="myModalLabel">Redeem Reward</h4>
-						</div>
-						<div class="modal-body" style=" padding: 0;">
-							<table class="">
-								<tr>
-									<td><img src=""  style="width:120px;height:120px; float:left; margin-right:6px" class="reimg"></td>
-									<td><span class="retitle"></span><br><span class="repoints"></span></td>
-								</tr>
-							</table
-						</div>
-						<div class="modal-footer">
-							<div id="agreeSubmit" class="form-group" style="text-align:center;">
-								<button type="submit" class="ok-button">Redeem</button>
-								<button type="button" class="ok-button" data-dismiss="modal"><span aria-hidden="true">Cancel</span></button>
-							</div>
-						</div>
-					</form>	
-				</div>
 			</div>
+			<div class="product-point">
+                            <?php echo $_smarty_tpl->tpl_vars['rev']->value['points'];?>
+ Points
+			</div>
+			</a>
+                    </div>
+				<?php }?>
+                            <?php }} ?>
+                    </div>
+			<?php }?>
 		</div>
-	
-	
-	
-	
-		
-		<script type="text/javascript">
+            </div>
+	</div>
+    </div>
+   </div>
+ 	
+</div>
+</div>		
+</div>
+</div>
+
+
+<div class="modal fade redeem-popup" id="redeem-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+            <form id="redeemReForm" role="form">
+		<input type="hidden" name="UserId" id="UserId">
+		<input type="hidden" name="rewardId" id="rewardId">
+		<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Redeem Reward</h4>
+		</div>
+		<div class="modal-body" style=" padding: 0;">
+                    <table class="">
+			<tr>
+                            <td><img src=""  style="width:120px;height:120px; float:left; margin-right:6px" class="reimg"></td>
+                            <td><span class="retitle"></span><br><span class="repoints"></span></td>
+			</tr>
+                    </table
+		</div>
+		<div class="modal-footer">
+                    <div id="agreeSubmit" class="form-group" style="text-align:center;">
+			<button type="submit" class="ok-button">Redeem</button>
+			<button type="button" class="ok-button" data-dismiss="modal"><span aria-hidden="true">Cancel</span></button>
+                    </div>
+		</div>
+            </form>	
+	</div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
 		
 		var SERVER_PATH="<?php echo $_smarty_tpl->getVariable('SERVER_PATH')->value;?>
 ";

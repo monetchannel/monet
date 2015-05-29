@@ -99,7 +99,8 @@ function chk_email(v)
     <div class="form-group">
        <input type="file" name="company_logo" id="company_logo" value="" />&nbsp;&nbsp;<a href="{$up_thumb_view_path}" target="_blank">{$file_name}</a>
     </div>
-    
+    {$up_thumb_view_path}
+    {$file_name}
     <div class="form-group text-center">
     <input type="button" value="  Submit  " name="B1"  class="btn btn-default" id="buttongray" onclick="chk_all()" />
     </div>

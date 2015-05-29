@@ -7,7 +7,7 @@
 <img src="{$images.happy}" alt="Happy" height="120" width="160">
 <img src="{$images.sad}" alt="Sad" height="120" width="160">
 <img src="{$images.angry}" alt="Angry" height="120" width="160">
-<img src="{$images.suprised}" alt="Surprised" height="120" width="160">
+<img src="{$images.suprised}" alt="Suprised" height="120" width="160">
 <img src="{$images.scared}" alt="Scared" height="120" width="160">
 <img src="{$images.disgusted}" alt="Disgusted" height="120" width="160">
 <br></br>
@@ -21,7 +21,7 @@
 </div>
 <div class="container-fluid expression-container"style="margin-top:-150px;"/>
 									
-							<div class="row border-bottom col-row" style="padding-top:200px;">
+							<div class="row border-bottom col-row" style="padding-top:200px;width:1200px;margin-left:-200px;">
 								{if isset($images.neutral.value)}
 								<div class="col-md-2"style="width:120px;background: #ccc;">
 									<a href="#" class="indicator-link">
@@ -58,12 +58,12 @@
 									</a>
 								</div>
 								{/if}
-								{if isset($images.surprised.value)}
+								{if isset($images.suprised.value)}
 								<div class="col-md-2"style="width:120px;background: #ccc;">
 									<a href="#" class="indicator-link">
-										<span>Surprised</span>
-										<img class="img-responsive " src="images/dashboard/surprised.png">
-										<img class="img-responsive img-thumbnail emotion-indicator" style="width:100px;"src="{$images.surprised.image_path}">
+										<span>Suprised</span>
+										<img class="img-responsive " src="images/dashboard/suprised.png">
+										<img class="img-responsive img-thumbnail emotion-indicator" style="width:100px;"src="{$images.suprised.image_path}">
 									</a>
 								</div>
 								{/if}
@@ -87,7 +87,7 @@
 								{/if}
                                                                 
 							</div>
-                                                        <div class="panel panel-default" style=max-width:750px;height:20px;">
+							                        <div class="panel panel-default" style=max-width:750px;height:20px;">
                                                      <div class="panel-heading"><strong>{if $scope == "ALL"}Everyone's{else}Your{/if} Emotion</strong></div></div>
                                                      <!--radar chart design --->
                                                     <div id="chartdiv" style="width:600px; height:400px;"></div>
@@ -129,7 +129,7 @@
                 },
                
                 {
-                    "direction": "Surprised",
+                    "direction": "Surpised",
                     "value": {$images.suprised.value},
                     "img_src": "{$images.suprised.image_path}"
                 }

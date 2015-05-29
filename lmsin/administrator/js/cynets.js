@@ -177,7 +177,7 @@ function view(js_data,msg,orderby,order,st_pos,nrpp,cond1,cond2,cond3,cond4,cond
 		if(cond7){this.condition7=cond7}
 //alert(this.condition3);
 		
-		str="x_"+this.prefix+"_view('"+this.prefix+".view',msg,this.orderby,this.order,this.st_pos,this.nrpp,this.condition1,this.condition2,this.condition3,this.condition4,this.condition5,this.condition6,this.condition7,set_js_data)"
+		str="x_"+this.prefix+"_view('"+this.prefix+".view',msg,this.orderby,this.order,this.st_pos,this.nrpp,this.condition1,this.condition2,this.condition3,this.condition4,this.condition5,this.condition6,this.condition7)"
 		//alert(this.nrpp)
 		//view('','',1,'',a,'',mysearch,1,1)
 		//alert(this.nrpp)

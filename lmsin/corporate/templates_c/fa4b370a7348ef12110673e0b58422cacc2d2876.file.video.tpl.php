@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-04-17 10:32:07
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-25 08:46:20
          compiled from ".\templates\video.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1557654827c71bf8ee6-85359311%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:27722555dc3e7ec5dd7-96934987%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fa4b370a7348ef12110673e0b58422cacc2d2876' => 
     array (
       0 => '.\\templates\\video.tpl',
-      1 => 1425973767,
+      1 => 1432201327,
       2 => 'file',
     ),
     '749422d4cfc3eb5677cf499730392b6accd4d1c7' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1425973777,
+      1 => 1432536350,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1557654827c71bf8ee6-85359311',
+  'nocache_hash' => '27722555dc3e7ec5dd7-96934987',
   'function' => 
   array (
   ),
@@ -149,7 +149,12 @@ $_smarty_tpl->decodeProperties(array (
                                     <li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_video_tab')->value;?>
 " >
                                         <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
-                                    </li>                               
+                                    </li>
+                                    
+                                    <li class="sub-nav <?php echo $_smarty_tpl->getVariable('test_tab')->value;?>
+" >
+                                        <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
+                                    </li>
                                 </ul>                             
                           </li>    
                           
@@ -245,7 +250,7 @@ function get_video_code(id)
 
 function show_video_code(data)
 {
-	cn_window_open('Video Code - '+data[1],data[0],true,2);
+	cn_window_t_open('Video Code - '+data[1],data[0],true,2);
 }
 
 //--------------------------INVITATION----------------------------------
@@ -453,7 +458,7 @@ function call_after_popup_open()
 		jQuery(function(){
                         
 		        var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                         var winWidth = $(window).width()-330;
@@ -464,7 +469,7 @@ function call_after_popup_open()
 				} 			
 			$(window).scroll(function(){
 				var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                        

@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-05-12 14:24:54
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-21 12:40:36
          compiled from ".\templates\content_feedback.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:214025551ccfd46bee2-88543641%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20223555db624d02b52-53539436%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '510b323cbae219c52d318910b016825e60cd8cea' => 
     array (
       0 => '.\\templates\\content_feedback.tpl',
-      1 => 1431424245,
+      1 => 1432190307,
       2 => 'file',
     ),
     'd60d58cb3f80dc8e9bfb970545d100fb7f9f8563' => 
     array (
       0 => '.\\templates\\video_list_header.tpl',
-      1 => 1431426831,
+      1 => 1432102683,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '214025551ccfd46bee2-88543641',
+  'nocache_hash' => '20223555db624d02b52-53539436',
   'function' => 
   array (
   ),
@@ -75,13 +75,13 @@ $_smarty_tpl->decodeProperties(array (
 				 <span class="icon-bar"></span>
 				 </button>
 													
-											</div>
+				</div>
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 					 <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				 <ul class="nav navbar-nav navbar-right">
 				  <li>      
-							  <a  href="watch_video.php" id="browse-more">
+						<a  href="watch_video.php" id="browse-more">
 					   <span>Home</span>
 					   <i class="browse-video" ></i>
 					   </a>
@@ -99,11 +99,11 @@ $_smarty_tpl->decodeProperties(array (
 				
 				 </div><!-- /.container-fluid -->
 				 </nav>    
-									</div>
+				</div>
 					
-					  </div>
+				 </div>
 			  </div>
-	  
+	  </div>
 	  
 	  
    <!-- header ended -->
@@ -262,7 +262,7 @@ $_smarty_tpl->decodeProperties(array (
 									</td>
 									<td class="col-md-5 second-td">
                                                                            
-                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Ratting.</span><br>
+                                                                            <span style="color:#614197;font-size: 18px;"><b>Congratulations!</b></span> <span style="color:#614197;font-size: 18px;">You Completed Rating.</span><br>
 										<span style="color:#614197;">You won <?php echo $_smarty_tpl->getVariable('rp')->value;?>
  rewards</span>
 										
@@ -419,8 +419,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 											<?php }?>
 										<div class="row border-bottom">
 											<div class="col-md-3">
-												<a href="javascript:return_play_video(<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
-)">
+												<a href="watch_video.php?act=watch_video&c_id=<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
+">
 												<img class="img-responsive" src="<?php echo $_smarty_tpl->tpl_vars['v']->value['c_thumb_url'];?>
 ">
 												<div class="video-detail"><?php echo $_smarty_tpl->tpl_vars['v']->value['c_title'];?>
@@ -435,8 +435,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 					 	
 											<?php }else{ ?>
 											<div class="col-md-3">
-												<a href="javascript:return_play_video(<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
-)">
+												<a href="watch_video.php?act=watch_video&c_id=<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
+">
 												<img class="img-responsive" src="<?php echo $_smarty_tpl->tpl_vars['v']->value['c_thumb_url'];?>
 ">
 												<div class="video-detail"><?php echo $_smarty_tpl->tpl_vars['v']->value['c_title'];?>
@@ -465,8 +465,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 											<?php }?>
 										<div class="row border-bottom">
 											<div class="col-md-3">
-												<a href="javascript:return_play_video(<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
-)">
+												<a href="watch_video.php?act=watch_video&c_id=<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
+">
 												<img class="img-responsive" src="<?php echo $_smarty_tpl->tpl_vars['v']->value['c_thumb_url'];?>
 ">
 												<div class="video-detail"><?php echo $_smarty_tpl->tpl_vars['v']->value['c_title'];?>
@@ -481,8 +481,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 					 	
 											<?php }else{ ?>
 											<div class="col-md-3">
-												<a href="javascript:return_play_video(<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
-)">
+												<a href="watch_video.php?act=watch_video&c_id=<?php echo $_smarty_tpl->tpl_vars['v']->value['c_id'];?>
+">
 												<img class="img-responsive" src="<?php echo $_smarty_tpl->tpl_vars['v']->value['c_thumb_url'];?>
 ">
 												<div class="video-detail"><?php echo $_smarty_tpl->tpl_vars['v']->value['c_title'];?>

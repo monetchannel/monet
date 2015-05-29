@@ -508,3 +508,13 @@ tr.BarVertical
     
     width: 151px;
 }
+.notif {
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  background-color: #614197;
+  border-radius: 10px;
+}

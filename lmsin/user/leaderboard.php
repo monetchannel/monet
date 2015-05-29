@@ -9,11 +9,11 @@ function get_leaderboard_data(){
      **/
     $board_data = array();
     //store all the results in order of descending total points
-    $get_ordered_results_SQL = "SELECT rp_u_id, total_points_earned FROM reward_point ORDER BY total_points_earned DESC";
-    eq($get_ordered_results_SQL, $ordered_results_resource);
-//    $ordered_data = mfa($ordered_results_resource);
+    $get_ordered_results_SQL = "SELECT rp_u_id, points FROM reward_point ORDER BY points DESC";
+    eq($get_ordered_results_SQL, $rs);
+//    $ordered_data = mfa($rs);
     $rank = 0; 
-    while ($row = mfa($ordered_results_resource)){
+    while ($row = mfa($rs)){
         $current_row = array();
         //gather data
         $rank++;
@@ -22,11 +22,12 @@ function get_leaderboard_data(){
             $current_user_rank = $rank;
         }
         $name = get_name_for_user_id($row['rp_u_id']);
-        $points = $row['total_points_earned'];
-        $get_profile_img_SQL = "SELECT user_profile_image FROM users WHERE user_id='{$row['rp_u_id']}'";
+        $points = $row['points'];
+        //$get_profile_img_SQL = "SELECT user_profile_image FROM users WHERE user_id='{$row['rp_u_id']}'";
+        $get_profile_img_SQL = "SELECT * FROM `uploads` WHERE up_s_type='user_profile_photo' and up_s_id={$row['rp_u_id']}";
         eq($get_profile_img_SQL, $image_row);
         $image_row = mfa($image_row);
-        $profile_img_path = $image_row['user_profile_image'];
+        $profile_img_path = "../../uploads/thumb_".$image_row['up_fname'];
         //assign and push
         $current_row['rank'] = $rank;
         $current_row['name'] = $name;
@@ -37,13 +38,16 @@ function get_leaderboard_data(){
     //data related to cf_id
     $cf_id_data = get_last_cf_id($_COOKIE['UserId']);
     $radar_chart_data = get_radar_chart_from_cf_id($cf_id_data['id']);
+	$user_data=get_current_user_info();
+	$userimage = $user_data['profile_image'];
     $smarty = new Smarty;
-    $smarty->assign(["data"=>$board_data,
+    $smarty->assign(array("data"=>$board_data,
                      "rating_data"=>get_rating_leaderboard($cf_id_data['c_id']),
-                     "user"=>get_current_user_info(),
+                     "user_data"=>$user_data,
                      "cf_data"=>$cf_id_data,
+                     "userimage"=>$userimage,
                      "radar_chart_data"=>$radar_chart_data,
-                     "latest_reward"=>get_latest_reward_info($_COOKIE['UserId'])]);
+                     "latest_reward"=>get_latest_reward_info($_COOKIE['UserId'])));
     $smarty->display("leaderboard_debug.tpl");
     return $board_data;
 }
@@ -66,18 +70,18 @@ function get_name_for_user_id($user_id){
 function get_current_user_info(){
     $user_name = $_COOKIE['UserName'];
     $user_id = $_COOKIE['UserId'];
-    $get_image_SQL = "SELECT user_profile_image FROM users WHERE user_id='$user_id'";
+    $get_image_SQL = "SELECT * FROM `uploads` WHERE up_s_type='user_profile_photo' and up_s_id='$user_id'";
     eq($get_image_SQL, $image);
-    $image = mfa($image)['user_profile_image'];
-    $user_image = $image;
+    $image = mfa($image);
+    $user_image = "../../uploads/thumb_".$image['up_fname'];
     
     //rank and points
-    $get_ordered_results_SQL = "SELECT total_points_earned FROM reward_point WHERE rp_u_id='$user_id'";
+    $get_ordered_results_SQL = "SELECT points FROM reward_point WHERE rp_u_id='$user_id'";
     eq($get_ordered_results_SQL, $ordered_results_resource);
     $rp_info = mfa($ordered_results_resource);
-    $user_points = $rp_info['total_points_earned'];
+    $user_points = $rp_info['points'];
     global $current_user_rank;
-    $user_ary = array("id"=>$user_id, "name"=>$user_name, "profile_image"=>$user_image, "points"=>$user_points, "rank"=>$current_user_rank);
+    $user_ary = array("id"=>$user_id, "name"=>$user_name, "profile_image"=>$user_image, "points"=>$user_points, "rank"=>$current_user_rank, "up_fname"=>$image);
     return $user_ary;
 }
 
@@ -93,10 +97,11 @@ function get_last_cf_id($user_id){
     
     $get_c_url_SQL = "SELECT c_url FROM content WHERE c_id='{$cf_data['cf_c_id']}'";
     eq($get_c_url_SQL, $c_url_data);
-    
-    $formatted_cf_data = [];
+    $c_url_data= mfa($c_url_data);
+	
+    $formatted_cf_data = array();
     $formatted_cf_data["id"] = $cf_data["cf_id"];
-    $formatted_cf_data["c_url"] = mfa($c_url_data)["c_url"];
+    $formatted_cf_data["c_url"] = $c_url_data["c_url"];
     $formatted_cf_data["c_id"] = $cf_data['cf_c_id'];
     $formatted_cf_data["date"] = $cf_data["cf_date"];
     $formatted_cf_data["comment"] = $cf_data["cf_comment"];
@@ -109,12 +114,12 @@ function get_radar_chart_from_cf_id($cf_id){
     $emotions = array("neutral", "happy", "sad", "angry", "suprised", "scared", "disgusted");
     $chart_data = array();
     //get ar_id for this content feedback id 
-    $get_ar_id_SQL = "SELECT ar_id FROM analysis_results WHERE ar_cf_id='$cf_id'";
-    eq($get_ar_id_SQL, $ar_id_row);
-    $ar_id = mfa($ar_id_row)["ar_id"];
+    //$get_ar_id_SQL = "SELECT ar_id FROM analysis_results WHERE ar_cf_id='$cf_id'";
+    //eq($get_ar_id_SQL, $ar_id_row);
+    //$ar_id = mfa($ar_id_row["ar_id"]);
     for ($i = 0; $i < sizeof($emotions); $i++){
         $ad_emotion = "ad_".$emotions[$i];//which emotion to search for
-        $get_ad_value_SQL = "SELECT * FROM analysis_detail WHERE $ad_emotion=(SELECT MAX($ad_emotion) FROM analysis_detail WHERE ad_ar_id='$ar_id')";
+        $get_ad_value_SQL = "Select * from `analysis_detail` WHERE $ad_emotion=(Select MAX($ad_emotion) FROM `analysis_detail` WHERE ad_ar_id in (SELECT ar_id FROM `analysis_results` WHERE ar_cf_id='$cf_id'))";
         eq($get_ad_value_SQL, $ad_value_row);
         $ad_value_row = mfa($ad_value_row);
         $ad_id = $ad_value_row["ad_id"];
@@ -126,11 +131,12 @@ function get_radar_chart_from_cf_id($cf_id){
     }
     return $chart_data;
 }
-
 function scale_value_for_chart($value){
-    $chart_value = round(($value * 10), 2, PHP_ROUND_HALF_UP);
-        if ($chart_value < 0.09) 
-            $chart_value = 0; 
+	$val=($value * 10);
+    $chart_value = round($val, 2);
+    if ($chart_value < 0.09){
+        $chart_value = 0; 
+	}
     return $chart_value;
 }
 
@@ -149,7 +155,7 @@ function get_latest_reward_info($user_id){
     $reward_image = "../files/prize_thumb/".$reward_info['r_image'];
     $reward_points = $reward_info['points'];
     
-    $formatted_reward_data = []; 
+    $formatted_reward_data =array(); 
     $formatted_reward_data["title"] = $reward_title;
     $formatted_reward_data["subtitle"] = $reward_subtitle;
     $formatted_reward_data["image"] = $reward_image;
@@ -206,10 +212,10 @@ function get_rating_leaderboard($c_id){
     $get_cf_ratings_SQL = "SELECT cf_rating, cf_user_id FROM content_feedback WHERE cf_c_id='$c_id' ORDER BY cf_rating DESC";
     eq($get_cf_ratings_SQL, $cf_ratings);
     $i=0;
-    $rating_leaderboard_data = [];
+    $rating_leaderboard_data = array();
     while ($cf_rating = mfa($cf_ratings)) {
         if ($cf_rating > 0 && count($rating_leaderboard_data) <= 5){
-            $current_row = [];
+            $current_row = array();
             $get_user_name_for_id = "SELECT user_fname, user_lname, user_id FROM users WHERE user_id='{$cf_rating['cf_user_id']}'";
             eq($get_user_name_for_id, $name);
             $name = mfa($name);

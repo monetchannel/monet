@@ -35,8 +35,7 @@
               <div style="padding-bottom:10px;"><a href="#"><img class="img-responsive" src="./images/logo.png"></a>       </div>
             </div>
             <div class="col-md-5 pull-right">
-              <div style="padding-bottom:10px;float: right;;padding-top:30px;text-decoration:none;"><a href="javascript:sign(1)">Sign In </a>&nbsp;|&nbsp; <a href="javascript:sign(2)">Sign Up </a> &nbsp;&nbsp;&nbsp;<a href="#">
-              <img style="height: 20px;" src="./images/fb-icon.png"></a> </div>
+              <div style="padding-bottom:10px;float: right;;padding-top:30px;text-decoration:none;"><a href="javascript:sign(1)">Sign In </a>&nbsp;|&nbsp; <a href="javascript:sign(2)">Sign Up </a></div>
             </div>
           </div>
         </div>
@@ -45,17 +44,17 @@
     <section>
       <div class="container-fluid">
          <div style="margin-right:-15px;margin-left:-15px;">
-           <img class="img-responsive" src="../images/hd1.jpg">
+           <img class="img-responsive" src="./images/hd1.jpg">
          </div>  
       </div>
       <div class="container-fluid">
          <div style="margin-right:-15px;margin-left:-15px;">
-           <img class="img-responsive" src="../images/hd2.jpg">
+           <img class="img-responsive" src="./images/hd2.jpg">
          </div>  
       </div>
       <div class="container-fluid">
          <div style="margin-right:-15px;margin-left:-15px;">
-           <img class="img-responsive" src="../images/hd3.jpg">
+           <img class="img-responsive" src="./images/hd3.jpg">
          </div>  
       </div>
     </section>
@@ -72,14 +71,14 @@
 	   
  <p style="color:#fff;padding-top:15px;font-size:10px;">Follow Us      </p>
 
- <a href="https://www.facebook.com/pages/Monet/1819590604933229"><img src="image/ff1.png"></a>
+ <a href="https://www.facebook.com/pages/Monet/1819590604933229"><img src="images/ff1.png"></a>
  
- &nbsp&nbsp&nbsp <a href="https://twitter.com/Monetchannel"><img src="image/tt1.png"></a>
+ &nbsp&nbsp&nbsp <a href="https://twitter.com/Monetchannel"><img src="images/tt1.png"></a>
  
   
 
 
-  &nbsp&nbsp&nbsp <a href="https://plus.google.com/u/0/108008107785253348043"><img src="image/gg1.png"></a>
+  &nbsp&nbsp&nbsp <a href="https://plus.google.com/u/0/108008107785253348043"><img src="images/gg1.png"></a>
 </div> 
 </footer>
 </div>

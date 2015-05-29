@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.6, created on 2015-05-01 09:06:19
+<?php /* Smarty version Smarty-3.0.6, created on 2015-05-29 10:35:06
          compiled from ".\templates\add_campaign.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5105554325ebdfaf38-93821476%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20530556824ba9bcdb8-31658276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '9f26f957604c8056891b791988482c76f91d524a' => 
     array (
       0 => '.\\templates\\add_campaign.tpl',
-      1 => 1425973789,
+      1 => 1432788062,
       2 => 'file',
     ),
     '749422d4cfc3eb5677cf499730392b6accd4d1c7' => 
     array (
       0 => '.\\templates\\index.tpl',
-      1 => 1425973777,
+      1 => 1432536350,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5105554325ebdfaf38-93821476',
+  'nocache_hash' => '20530556824ba9bcdb8-31658276',
   'function' => 
   array (
   ),
@@ -149,7 +149,12 @@ $_smarty_tpl->decodeProperties(array (
                                     <li class="sub-nav <?php echo $_smarty_tpl->getVariable('active_video_tab')->value;?>
 " >
                                         <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
-                                    </li>                               
+                                    </li>
+                                    
+                                    <li class="sub-nav <?php echo $_smarty_tpl->getVariable('test_tab')->value;?>
+" >
+                                        <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
+                                    </li>
                                 </ul>                             
                           </li>    
                           
@@ -231,8 +236,12 @@ $_smarty_tpl->decodeProperties(array (
 <script src="js/add_campaign.js"></script>
 <script src="js/choosen/chosen.jquery.min.js"></script>
 <script src="js/jquery.validate.js"></script>    <!-- using for validation purposes -->
-<script type="text/javascript" src="js/jquery.multi-select"></script>
+<script type="text/javascript" src="js/jquery.multi-select.js"></script>
 <script type="text/javascript">
+
+var p = document.getElementById("select_users");
+var div = document.createElement("select_user");
+div.style.cssText = document.defaultView.getComputedStyle(p, "").cssText;
 
 var questionSetError = "";
 
@@ -308,7 +317,7 @@ $(function(){
          
             errorPlacement: function ($errorLabel, $element) {
                 var elementId = $element.prop('id');
-                if(elementId=="select_users" || elementId=="select_groups"){
+                if(elementId=="select_users" || elementId=="select_groups" || elementId=="select_user"){
                     var $selectContainer = $element.closest('.tab-content');
                     $selectContainer.append($errorLabel);
                 }else if(elementId=="select_questions"){
@@ -391,18 +400,34 @@ $(function(){
                 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="ug_selection_tab">
-                  <li role="presentation"><a href="#select_users_tab" aria-controls="select_users_tab" role="tab" data-toggle="tab">Users</a></li>
-                  <li role="presentation"><a href="#select_groups_tab" aria-controls="select_groups_tab" role="tab" data-toggle="tab">Groups</a></li>
+                    <li role="presentation"><a href="#select_users_tab" aria-controls="select_users_tab" role="tab" data-toggle="tab">Users</a></li>
+                    <li role="presentation"><a href="#select_groups_tab" aria-controls="select_groups_tab" role="tab" data-toggle="tab">Groups</a></li>
                 </ul>
                 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="select_users_tab">
+                        <ul class="nav nav-tabs" id="dashboard_tabs">
+                            <li role="presentation"><a href="#select_users_tabs" aria-controls="select_users_tabs" role="tab" data-toggle="tab">Brand Users</a></li>
+                            <li role="presentation"><a href="#select_users_tabss" aria-controls="select_users_tabss" role="tab" data-toggle="tab">Global Users</a></li>
+                        </ul>
                         <label for="select_users">Select Campaign Users</label>
-                        <select id="select_users" multiple name="select_users[]" class="form-control input-lg" 
+                         <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="select_users_tabs">
+                        <select id="select_users" multiple name="select_brandusers[]" class="form-control input-lg" 
                                 data-msg-required="Please select any user."
-                                data-rule-required="true"><?php echo $_smarty_tpl->getVariable('dataArray')->value['userSelectOptions'];?>
+                                data-rule-required="true"><?php echo $_smarty_tpl->getVariable('dataArray')->value['branduserSelectOptions'];?>
 </select>
                     </div>     
+
+                    <div role="tabpanel" class="tab-pane" id="select_users_tabss">
+                        <select id="select_user" multiple name="select_globalusers[]" class="form-control input-lg" 
+                                data-msg-required="Please select any user."
+                                data-rule-required="true"><?php echo $_smarty_tpl->getVariable('dataArray')->value['globaluserSelectOptions'];?>
+</select>
+                    </div>
+                    </div>
+                        
+                        </div>     
 
                     <div role="tabpanel" class="tab-pane" id="select_groups_tab">
                         <label for="select_groups">Select Campaign Groups</label>
@@ -410,7 +435,7 @@ $(function(){
                                 class="form-control input-lg"><?php echo $_smarty_tpl->getVariable('dataArray')->value['groupSelectOptions'];?>
 </select>
                     </div>        
-
+                   
                 </div>
             </div>    
         </div>
@@ -524,7 +549,7 @@ $(function(){
 		jQuery(function(){
                         
 		        var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                         var winWidth = $(window).width()-330;
@@ -535,7 +560,7 @@ $(function(){
 				} 			
 			$(window).scroll(function(){
 				var topPos = window.pageYOffset;
-				if(topPos>50){
+				if(topPos>0){
 					$("#videoContainer").addClass("fixed-pos");
 					$("#bottomContainer").addClass("bottom-pos");
                                        

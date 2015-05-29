@@ -106,8 +106,98 @@ function campaigns()
 	eq($campaigns_sql, $cmp);
 	while($cmprow = mfa($cmp))
 	{
-		$campaigns[] = $cmprow;
+		if (check_vid_exist($cmprow[c_url])) 
+  		$campaigns[] = $cmprow;
 	}
+	
+	   // ------------------------ latest vid ------------------------
+        $latest_video = array();
+        $reviewed_video = array();
+        $latest_v_sql = "select co.*, com.* from content as co inner join company as com on com.company_id=co.c_company_id where (co.c_company_id in(select distinct(company_id) from company)) ORDER BY `co`.`c_id`  DESC";
+	eq($latest_v_sql,$rs1);
+       
+	$i = 0;
+	$c =1;
+	while(($row = mfa($rs1)) && $c<=4)
+	{
+            $t = 0;
+            if (check_vid_exist($row[c_url])) {
+            $t = 1;
+            }
+		//$t=filterVideo($row);
+		if($t==1){
+                    $c++;
+			$row['i'] = $i++;
+			$row[c_date]=days_ago($row[c_date]);		 
+			 	
+			if (strpos($row[c_date],'days ago') == true) {
+		 		//$days = substr($row[c_date],0,3);
+				$days = chop($row[c_date]," days ago");
+				($days<0)?($days=$days*-1):$days;
+				if($days>=30){
+					$month = ($days/30);
+					if($month>0){
+						if($month>=12){
+							$row[c_date]= intval($month/12)." year(s) ago";
+						}
+						else{
+							$row[c_date]= intval($month)." month(s) ago";
+						}
+					}
+				}
+			}
+			else{
+    			$row[c_date]= "Added Today";
+   			}
+			
+			array_push($latest_video, $row);
+			
+		}
+	}
+	
+	///////////////////////////// browse Most Reviewed Video///////////////////////////////////////////		
+	$reviewed_v_sql = "select co.*, com.* from content as co inner join company as com on com.company_id=co.c_company_id where (co.c_company_id in(select distinct(company_id) from company))order by co.c_views desc";
+	eq($reviewed_v_sql,$rs2);
+	$i = 0;
+	$d = 1;
+	while(($row = mfa($rs2))&& $d<=4)
+	{
+            $t = 0;
+		//$t=filterVideo($row);
+            if (check_vid_exist($row[c_url])) {
+                $t = 1;
+            }
+		if($t==1){
+                    $d++;
+			$row['i'] = $i++;
+			$row[c_date]=days_ago($row[c_date]);		 
+			 	
+			if (strpos($row[c_date],'days ago') == true) {
+		 		//$days = substr($row[c_date],0,3);
+				$days = chop($row[c_date]," days ago");
+				($days<0)?($days=$days*-1):$days;
+				if($days>=30){
+					$month = ($days/30);
+					if($month>0){
+						if($month>=12){
+							$row[c_date]= intval($month/12)." year(s) ago";
+						}
+						else{
+							$row[c_date]= intval($month)." month(s) ago";
+						}
+					}
+				}
+			}
+			else{
+    			$row[c_date]= "Added Today";
+   			}
+			
+			array_push($reviewed_video, $row);
+			
+		}
+		
+	}
+	
 	
 	
 	// assign variable to teplate 
@@ -123,6 +213,8 @@ function campaigns()
         "campaigns" => $campaigns,
         "cmp_count" => $cmp,
         "campaigns_tab"=>"campaigns-selected",
+		"latest_videos" => $latest_video,
+	 	"most_reviewed" => $reviewed_video,
         ));
         $smarty->display('campaigns.tpl');
         }
