@@ -38,7 +38,7 @@
                     {foreach $rewards as $reward}
                     {strip}
                     <tr bgcolor="#ffffff">
-                        <td align="center">
+                        <td align="center" style="width:100px;">
                             <div style="height:120px;overflow: hidden;">
                                 {if $reward.r_image==""}
                                     <img class="img-responsive" style="height:100%;" src="../../uploads/default.png"></img>
