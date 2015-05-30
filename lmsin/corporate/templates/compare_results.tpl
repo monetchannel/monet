@@ -267,7 +267,7 @@
                                         <div class="analysis-graph-header">
 					        Engagement Variation - All videos
 					</div>
-                                        <div id="attention_chart-overall" class="min_height"></div>
+                                        <div id="attention_chart_overall" class="min_height"></div>
 				</div>
                         </div>
                         {/if}
@@ -371,4 +371,5 @@
                 <script src="{$SERVER_PATH}corporate/js/highcharts/heatmap.js"></script> 
                 <script src="{$SERVER_PATH}corporate/js/highcharts/exporting.js"></script>                        
                 <script type="text/javascript" src="templates/video_graph_play.js"></script>
+                <script type="text/javascript" src="templates/compare_graph.js"></script>
 {/block} 
