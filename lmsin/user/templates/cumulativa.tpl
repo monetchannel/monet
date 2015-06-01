@@ -7,7 +7,7 @@
 									<tr class="" style="border-bottom:0">
 										{if $my_redeems|@count > 0}
 										<td class="field-label col-xs-3 col-sm-3 col-md-2 ">
-											<img class="" src="../files/prize_thumb/{$my_redeems.r_image}""style="width:150px;height:150px; float:left; margin-right:6px"></img>   
+											<img class="" src="../../uploads/{$my_redeems.r_image}""style="width:150px;height:150px; float:left; margin-right:6px"></img>   
 										</td>
 										<td class="col-xs-4 col-sm-4 col-md-4 second-td">
 											<span style="color:#0855CB;">{$my_redeems.title}</span><br>
@@ -17,7 +17,7 @@
 										
 										{else}
 										<td class="field-label col-xs-3 col-sm-3 col-md-2 ">
-											You did not redeem any reward yet!
+											You have not redeemed any reward yet!
 										</td>
 										{/if}
 									</tr>
@@ -32,7 +32,7 @@
 								<div class="row">
 									<div  class="col-md-12">
 										
-										<div id="rewardsCircle" class="graph-circle"></div>
+										<div id="circleGraph" class="graph-circle"></div>
 									</div>	
 								</div>	
 								
@@ -44,7 +44,7 @@
 									{if $rewards|@count > 0}
 										{foreach $rewards as $rek=>$rev}
 											<div  class="col-md-4">
-												<img class="" src="../files/prize_thumb/{$rev.r_image}"style="width:150px;height:150px; float:left; margin-right:6px"></img>  
+												<img class="" src="../../uploads/{$rev.r_image}"style="width:150px;height:150px; float:left; margin-right:6px"></img>  
 												<div class="product-title">
 													{$rev.title} ({$rev.sub_title})
 												</div>
@@ -149,7 +149,7 @@
 						$("#productContainer").append('<div id="pr" class="row product-rows" style="" ></div>');
 						
 						$.each( result, function( i, val ){
-							productCol += '<div  class="col-md-4 load-img">'+'<img class="img-responsive" src="../files/prize_thumb/'+val.r_image+'"></img>'+'<div class="product-title">'+val.title+' ('+val.sub_title+')</div>'+'<div class="product-point">'+val.points+' Points'+'</div>'+'</div>';
+							productCol += '<div  class="col-md-4 load-img">'+'<img class="img-responsive" src="../../uploads/'+val.r_image+'"></img>'+'<div class="product-title">'+val.title+' ('+val.sub_title+')</div>'+'<div class="product-point">'+val.points+' Points'+'</div>'+'</div>';
 						});
 						$("#pr").append(productCol);
 					}
