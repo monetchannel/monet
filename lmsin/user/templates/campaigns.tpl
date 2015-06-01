@@ -1,14 +1,9 @@
 {extends file="video_list_header.tpl"}
+
 {block name=body}
 
  <!-- ----------------------------- -->
-      
-           
-            <!-- --------- -->
-           
-            
-            {if $campaigns|@count > 0}
-                <div class="panel panel-default">
+  <div class="panel panel-default">
        <div class="panel-heading">
         <strong><em>Campaigns</em></strong>
        </div>
@@ -16,7 +11,14 @@
         <div class="row">
          <div class="col-md-12" style="padding-left:0;padding-right:0;">
           <div class="panel-left-content">
-           <div class="container-fluid">
+              <div class="container-fluid">
+      
+           
+            <!-- --------- -->
+           
+            
+            {if $campaigns|@count > 0}
+               
             <!--<div class="row border-bottom vcon">-->
             {foreach $campaigns as $k=>$v}
             {if $k%2==0}
@@ -58,16 +60,72 @@
             {/foreach}
             </div>
             {else}
-                <div class="panel panel-default">
-       <div class="panel-heading">
-        <strong><em>Campaigns :  &nbsp&nbsp No campaigns assigned.</em></strong>
-       </div>
-       <div class="container-fluid">
-        <div class="row">
-         <div class="col-md-12" style="padding-left:0;padding-right:0;">
-          <div class="panel-left-content">
-           <div class="container-fluid">
-               <div class="text-center alert alert-info" id = "link"><a href = "watch_video.php?act=browse_videos" class="myclass">Click here to watch more videos!</a></div>
+                
+               <div class="text-center alert alert-info" id = "link"><a href = "" class="myclass"> No campaigns assigned. Please watch more videos!</a></div>
+               <div class="panel panel-default" style=max-width:750px;height:20px;"><br>
+                                                     <div class="panel-heading"><strong>Rate More Videos</strong></div></div>
+                                                                                <br>
+                                                                                <br>                  
+							<div class="row border-bottom">
+								<div class="col-md-12">
+								
+										
+											Recently Added
+										{foreach $latest_videos as $k=>$v}
+											{if $v.i%6==0}
+											{if $v.i>0}
+											{/if}
+										<div class="row border-bottom">
+											<div class="col-md-3">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
+												<img class="img-responsive" src="{$v.c_thumb_url}">
+												<div class="video-detail">{$v.c_title}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												</a>
+											</div>
+					 	
+											{else}
+											<div class="col-md-3">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
+												<img class="img-responsive" src="{$v.c_thumb_url}">
+												<div class="video-detail">{$v.c_title}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												</a>
+											</div>
+											{/if}
+										{/foreach}
+										</div>
+										
+										Most Reviewed
+										{foreach $most_reviewed as $k=>$v}
+											{if $v.i%6==0}
+											{if $v.i>0}
+											{/if}
+										<div class="row border-bottom">
+											<div class="col-md-3">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
+												<img class="img-responsive" src="{$v.c_thumb_url}">
+												<div class="video-detail">{$v.c_title}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												</a>
+											</div>
+					 	
+											{else}
+											<div class="col-md-3">
+												<a href="watch_video.php?act=watch_video&c_id={$v.c_id}">
+												<img class="img-responsive" src="{$v.c_thumb_url}">
+												<div class="video-detail">{$v.c_title}</div>
+												<div class="video-short">by - <b>{$v.company_name}</b> | {$v.c_views} views <br> {$v.c_date}</div>
+												</a>
+											</div>
+											{/if}
+										{/foreach}
+										</div>
+								</div>
+							</div>
+						</div>
+						
+                                        </div>
             {/if}
             
             <!-- --------- -->
@@ -76,9 +134,9 @@
           </div>
          </div>
          
-        </div>
-       </div>
-      </div>
+       
+           
+            
       
       <!-- ----------------------------- -->
       <script type="text/javascript">
