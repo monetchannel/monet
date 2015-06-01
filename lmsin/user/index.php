@@ -140,7 +140,7 @@ function chk_login()
 		setcookie("UserId",$user[user_id],time()+86400,"/");
 		setcookie("UserName",$user[user_fname]." ".$user[user_lname],time()+86400,"/");
 		
-		if($R[c_id] && $user[user_accept_toc]==1)
+	if($R[c_id] && $user[user_accept_toc]==1 && $user[active]==1)
 		{
 			if($R['cmp_id'])
 			{
@@ -169,20 +169,28 @@ function chk_login()
 			}
 				
 		}
-		elseif($user[user_accept_toc]==1)
+		elseif($user[user_accept_toc]==1 && $user[active]==1)
 		{
 			$ary[0]="watch_video.php";
 			$ary[1]=2;
 			print json_encode($ary);
 			die();
 		}
-		else
+		elseif ($user[active]==1 && $user[user_accept_toc]==0)
 		{
 			$ary[0]="index.php?act=view_toc";
 			$ary[1]=2;
 			print json_encode($ary);
 			die();
 		}
+                
+                else
+                {
+                $ary[0]="Activate your account and try again."; //We used jquery ajax so use print
+		$ary[1]=1;
+		print json_encode($ary);
+		die();
+                }
 	}	
 }
 ###########################################################
@@ -235,25 +243,37 @@ function save_invites_request()
 		if($R[user_fname]!='' && $R[user_lname]!='' && $R[user_email]!='' && $R[user_country]!=-1 && $R[user_zipcode]!='')
 		{
 			$SQL="INSERT INTO `invites_request` ( `invr_fname` , `invr_lname` , `invr_eamil` , `invr_date`,`invr_country`,`invr_zipcode`,invr_company_id)VALUES ( '$R[user_fname]', '$R[user_lname]', '$R[user_email]','".time()."','$R[user_country]','$R[user_zipcode]','$R[company_id]')";
-			eq($SQL,$rs);
+		//	eq($SQL,$rs);
 		}
 		else
 		{
 			print "Please fill all fields.";
 			die();	
 		}
-		
-		$subject="New Invitation Request From ".$company[company_name];
-		$admin_url=$Server_View_Path."administrator/";
-		$user[name]=$R[user_fname]." ".$R[user_lname];
+		$hash = md5( rand(0,1000) );
+                $p = md5($R[user_pass]);
+                $SQL = "INSERT INTO users (user_fname,user_lname,user_gender,user_email,user_password,user_accept_toc,hash) VALUES ('$R[user_fname]','$R[user_lname]','$R[user_gender]','$R[user_email]','$p','0','$hash');";
+		eq($SQL,$rs);
 		$user[email]=$R[user_email];
-		$user[admin_url]=$Server_View_Path."administrator/";
-		$message=get_parse_tpl_page("signup_mail.tpl",$user);
-		///send_mail_new("","","MonetChannel","support@monetchannel.com",$subject,$message);
-		send_mail_new("","","MonetChannel","dinesh.chandra@cynets.com",$subject,$message);
-		
-		print "Thank you for registering. We will process your request and send you a conformation on your email shortly.";
-        die();
+		 $to      = $user[email]; // Send email to our user
+                $user[name]=$R[user_fname]." ".$R[user_lname];
+                        $subject = 'Signup | Verification for MonetChannel'; // Give the email a subject 
+                        $message = '
+
+                        Thanks for signing up!
+                        
+
+                        Please click this link to activate your account:
+                        http://localhost/monet/lmsin/user/verify.php?email='.$user[email].'&hash='.$hash.'
+                            
+                         Thanks!
+
+                        '; // Our message above including the link
+
+                        $headers = 'From:support@monetchannel.com' . "\r\n"; // Set from headers
+                        mail($to, $subject, $message, $headers); // Send our email
+                        print "Your account has been made, please verify it by clicking the activation link that has been sent to your email.";
+	 die();
 	    }
 }###########################################################
 
