@@ -540,7 +540,7 @@ function xhr_redeem_reward()    //aadi
         $user=mfa($userResult);
         
         $code=$reward[title];
-        $code=trim($code," ");
+        $code=preg_replace('/\s+/', '', $code);
         $code=substr($code,0,3);
         $code=  strtoupper($code);
         $code.=rand(1000000,10000000);
