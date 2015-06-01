@@ -9,7 +9,7 @@ sajax_export("video_add","video_view","video_edit","video_del","view_feedback","
 sajax_handle_client_request();
 $js = sajax_return_javascript();
 //.........................................
-$func_ary=array("video_save","video_update","watch_video");
+$func_ary=array("video_save","video_update","watch_video","watch_slides");
 
 ###################### Ok #####################################
 if($_COOKIE[CompanyId]=="")
@@ -480,6 +480,26 @@ function watch_video()
 	$smarty->assign(array("url"=>$_REQUEST[url]));
 	$smarty->display("watch_video.tpl"); 
 }
+
+function watch_slides()
+{
+	global $Server_View_Path;
+	$R=DIN_ALL($_REQUEST);
+	$SQL="SELECT ad_id, ad_time, ad_dominant_emotion FROM analysis_detail WHERE ad_ar_id = $R[ad_ar_id]";
+	eq($SQL,$rs2);
+	$picss = array();
+	while($datass=mfa($rs2)){
+		$pi=$Server_View_Path."../uploads/".$datass[ad_id].".jpg";
+		array_push($picss,array($pi,$datass[ad_time],$datass[ad_dominant_emotion]));
+	}
+	$smarty = new Smarty;
+	$smarty->debugging = false;
+	$smarty->caching = false;
+	$smarty->cache_lifetime = 120;
+	$smarty->assign($R);
+	$smarty->assign(array("pic"=>$picss));
+	$smarty->display("watch_slides.tpl"); 
+}
 //--------------------------------------------------------------------
 function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_pos_p="")
 {
@@ -493,7 +513,7 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 	$video_file=array();
 	$i=0;
 	
-	get_row_con_info("content","WHERE c_id = $c_id","c_title",$video_name);
+	get_row_con_info("content","WHERE c_id = '$c_id' limit 0,1","c_title",$video_name);
 	
    #-------------- Sorting ----------
    if($orderby_p=='num_feedback')$orderby_p='';
@@ -546,7 +566,7 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 	else
 		$SQL_CON.="AND cf_ep_id > 0";
    
-   $SQL="SELECT c_id,user_fname,user_lname,cf_comment,cf_date,ep_name,cf_rating FROM content_feedback LEFT JOIN content ON cf_c_id=c_id LEFT JOIN users ON cf_user_id=user_id LEFT JOIN emotional_profile ON cf_ep_id=ep_id WHERE cf_c_id = $c_id $SQL_CON ORDER BY $orderby $order $con_limit";
+   $SQL="SELECT cf_id,c_id,user_fname,user_lname,cf_comment,cf_date,ep_name,cf_rating FROM content_feedback LEFT JOIN content ON cf_c_id=c_id LEFT JOIN users ON cf_user_id=user_id LEFT JOIN emotional_profile ON cf_ep_id=ep_id WHERE cf_c_id = $c_id $SQL_CON ORDER BY $orderby $order $con_limit";
    $tot_rows=eq($SQL,$rs);
    
    get_nb_text_multi_pop($tot_rows,"Feedback",$st_pos_p,$con_limit,$nb_text,$nrpp_p);
@@ -560,18 +580,54 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 			$file=$Server_Upload_Path."video_files/".$data[cf_id].".flv";
 			$url=$Server_View_Path."video_files/".$data[cf_id].".flv";
 			if(file_exists($file))
-			{
-				$data[video]="<span id=button><a href=\"javascript:void(1)\" onclick=\"setLink('".$url."')\"><img src='images/watch.gif' border='0'/></a></span>";
+			{				
+				$video_type="flv";
+				$data[video]= "<span id=button><a href=\"javascript:void(1)\" onclick=\"setLink('".$url."','".$video_type."')\"><img src='images/watch.png' border='0'/><br>Watch</a></span>";
 				$video_file[$i]=$data[cf_id].".flv";
 				$i++;
 				$file_name=$data[cf_id].".flv";
 			}
 			else
 			{
-				$data[video]="";
-				$file_name="";
+				$video_type="webm";
+				$file=$Server_Upload_Path."lmsin/video_files/".$data[cf_id].".webm";
+				$url=$Server_View_Path."video_files/".$data[cf_id].".webm";
+				if(file_exists($file))
+				{
+					$data[video]= "<span id=button><a href=\"javascript:void(1)\" onclick=\"setLink('".$url."','".$video_type."')\"><img src='images/watch.png' border='0'/><br>Watch</a></span>";
+					$video_file[$i]=$data[cf_id].".webm";
+					$i++;
+					$file_name=$data[cf_id].".webm";
+				}
+				else 
+				{
+					$data[video]="";
+					$file_name="";
+				}
 			}
-			$data[cf_date]=days_ago($data[cf_date]);
+
+			$SQL="SELECT ad_id, ad_time, ad_ar_id FROM analysis_detail INNER JOIN ( SELECT ar_id FROM analysis_results INNER JOIN  content_feedback ON analysis_results.ar_cf_id = content_feedback.cf_id AND cf_id= $data[cf_id] ) t1 ON t1.ar_id = analysis_detail.ad_ar_id ORDER BY `analysis_detail`.`ad_time` ASC";
+			eq($SQL,$rs1);
+			$pics = array();
+			while($datas=mfa($rs1)){
+				$pic=$Server_View_Path."uploads/".$datas[ad_id].".jpg";
+				$ad_ar_id=$datas[ad_ar_id];
+				array_push($pics,$pic);
+			}
+			if(sizeof($pics)){
+				$data[slides]="<span id=slide_button><a href=\"javascript:void(1)\" onclick=\"setLinkSlide('".$ad_ar_id."')\"><img src='images/slide.png' border='0'/><br>Slide</a></span>";
+			} 
+
+		  get_row_con_info("emotional_profile","where ep_id='$data[cf_ep_id]'",'ep_name',$ep_name);
+		  $data[user]="$user[user_fname] $user[user_lname]";
+		  $data[ep_name]=$ep_name[ep_name];
+		 if($data[cf_date]!=0)
+				$data[cf_date]=date("m/d/Y",$data[cf_date]);
+			else
+				$l_feedback[cf_date]="-";
+			
+			$data[user]=$data[user_fname]." ".$data[user_lname];
+				
 			array_push($feedbacks,$data);
 		}
 	}
@@ -587,11 +643,13 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 						 "nrpp_p"=>$nrpp_p,
 						 "tot_rows"=>$tot_rows,
 						 "c_id"=>$c_id,
+						 "rate"=>$rate,
 						 "unrated_hide"=>$unrated_hide,
 						 ));
 	$ary[0] = $smarty->fetch("view_feedback.tpl");
 	$video_name[c_title] = '<span class="tablehead">'.$video_name[c_title].'</span>';
 	$ary[1] = $video_name[c_title];
+	$ary[3] = $rate;
 	return $ary;
 }
 

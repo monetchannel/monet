@@ -31,7 +31,7 @@
   <tr bgcolor="#ffffff">
   
     <td class="tabletext"><div style="float:right">{$feedback.video}</div><div style="float:left">{$feedback.slides}</div></td>
-    <td class="tabletext">{$feedback.user}</td>
+    <td class="tabletext">{$feedback.user_fname} {$feedback.user_lname}</td>
     <td class="tabletext">&nbsp;{$feedback.cf_comment}</td>
     <td class="tabletext">{$feedback.cf_date}</td>
     <td style="display:{$unrated_hide}" height="16" class="tabletext" >{$feedback.ep_name}</td>
