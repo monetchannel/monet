@@ -152,7 +152,7 @@ function get_latest_reward_info($user_id){
     $reward_info = mfa($reward_info);
     $reward_title = $reward_info['title'];
     $reward_subtitle = $reward_info['sub_title'];
-    $reward_image = "../files/prize_thumb/".$reward_info['r_image'];
+    $reward_image = "../../uploads/".$reward_info['r_image'];
     $reward_points = $reward_info['points'];
     
     $formatted_reward_data =array(); 
