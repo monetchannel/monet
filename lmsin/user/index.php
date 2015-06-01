@@ -572,10 +572,10 @@ function xhr_redeem_reward()    //aadi
         mysql_query($update_sql);
         $to=$user[user_email];
         $subject="Reward Redemption";
-        $message="Hi '$user[user_fname]',
-                    Thnak you for using Monet Networks Inc.
-
-                    Your reward voucher is '$code'";
+        $message='Hi '.$user[user_fname].',
+        		Thank you for using Monet Networks Inc.
+        		
+        		Your coupon code is '.$code;
         mail($to,$subject, $message);
         print "Your reward has been successfully redeemed. Please check your registered email for more details.";
         die();
