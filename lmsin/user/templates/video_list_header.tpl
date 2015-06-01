@@ -394,7 +394,7 @@
 						$("#productContainer").append('<div id="pr" class="row product-rows" style="" ></div>');
 						
 						$.each( result, function( i, val ){
-							productCol += '<div  class="col-md-4 load-img">'+'<img class="img-responsive" src="../files/prize_thumb/'+val.r_image+'"style="width:150px;height:150px; float:left; margin-right:6px"></img>'+'<div class="product-title">'+val.title+' ('+val.sub_title+')</div>'+'<div class="product-point">'+val.points+' Points'+'</div>'+'</div>';
+							productCol += '<div  class="col-md-4 load-img">'+'<img class="img-responsive" src="../../uploads/'+val.r_image+'"style="width:150px;height:150px; float:left; margin-right:6px"></img>'+'<div class="product-title">'+val.title+' ('+val.sub_title+')</div>'+'<div class="product-point">'+val.points+' Points'+'</div>'+'</div>';
 						});
 						$("#pr").append(productCol);
 					}
