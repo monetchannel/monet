@@ -3,7 +3,14 @@
 {block name=body}
 
  <!-- ----------------------------- -->
-  <div class="panel panel-default">
+  
+      
+           
+            <!-- --------- -->
+           
+            
+            {if $campaigns|@count > 0}
+               <div class="panel panel-default">
        <div class="panel-heading">
         <strong><em>Campaigns</em></strong>
        </div>
@@ -12,15 +19,8 @@
          <div class="col-md-12" style="padding-left:0;padding-right:0;">
           <div class="panel-left-content">
               <div class="container-fluid">
-      
-           
-            <!-- --------- -->
-           
-            
-            {if $campaigns|@count > 0}
-               
-            <!--<div class="row border-bottom vcon">-->
-            {foreach $campaigns as $k=>$v}
+            <!--<div class="row border-bottom vcon">-->{$i=0}
+            {foreach $campaigns as $k=>$v} {$i = $i + 1}
             {if $k%2==0}
                {if $k>0}
                  </div>
@@ -57,10 +57,18 @@
               </div>
              </div>
             {/if}
-            {/foreach}
-            </div>
+            {/foreach}{if $i%2==1} </div>{/if}
+            </div></div></div></div></div></div>
             {else}
-                
+                <div class="panel panel-default">
+       <div class="panel-heading">
+        <strong><em>Campaigns</em></strong>
+       </div>
+       <div class="container-fluid">
+        <div class="row">
+         <div class="col-md-12" style="padding-left:0;padding-right:0;">
+          <div class="panel-left-content">
+              <div class="container-fluid">
                <div class="text-center alert alert-info" id = "link"><a href = "" class="myclass"> No campaigns assigned. Please watch more videos!</a></div>
                <div class="panel panel-default" style=max-width:750px;height:20px;"><br>
                                                      <div class="panel-heading"><strong>Rate More Videos</strong></div></div>
@@ -125,15 +133,11 @@
 							</div>
 						</div>
 						
-                                        </div>
+          </div></div></div></div></div>
             {/if}
-            
+        
             <!-- --------- -->
-            
-           </div>
-          </div>
-         </div>
-         
+          
        
            
             
