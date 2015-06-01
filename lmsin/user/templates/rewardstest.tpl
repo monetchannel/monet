@@ -144,7 +144,7 @@
 												{/if}
 												<div class="row border-bottom">
 													<div class="col-md-3">
-														<img class="" src="../files/prize_thumb/{$rev.r_image}"></img>  
+														<img class="" src="../../uploads/{$rev.r_image}"></img>  
 														<div class="product-title">
 															{$rev.title} ({$rev.sub_title})
 														</div>
@@ -155,7 +155,7 @@
 												
 												{else}
 													<div class="col-md-3">
-														<img class="" src="../files/prize_thumb/{$rev.r_image}"></img>  
+														<img class="" src="../../uploads/{$rev.r_image}"></img>  
 														<div class="product-title">
 															{$rev.title} ({$rev.sub_title})
 														</div>
@@ -193,7 +193,7 @@
 												<div class="row border-bottom">
 													<div class="col-md-3">
 														<a href="javascript:void(0)" id="{$rev.re_a_id}" data="{$rev.r_id}" class="{$rev.re_a_id}">
-															<img class="" src="../files/prize_thumb/{$rev.r_image}"></img>  
+															<img class="" src="../../uploads/{$rev.r_image}"></img>  
 															<div class="product-title">
 																{$rev.title} ({$rev.sub_title})
 															</div>
@@ -206,7 +206,7 @@
 												{else}
 													<div class="col-md-3">
 														<a href="javascript:void(0)" id="{$rev.re_a_id}" data="{$rev.r_id}" class="{$rev.re_a_id}">
-															<img class="" src="../files/prize_thumb/{$rev.r_image}"></img>  
+															<img class="" src="../../uploads/{$rev.r_image}"></img>  
 															<div class="product-title">
 																{$rev.title} ({$rev.sub_title})
 															</div>
