@@ -618,9 +618,9 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 				$data[slides]="<span id=slide_button><a href=\"javascript:void(1)\" onclick=\"setLinkSlide('".$ad_ar_id."')\"><img src='images/slide.png' border='0'/><br>Slide</a></span>";
 			} 
 
-		  get_row_con_info("emotional_profile","where ep_id='$data[cf_ep_id]'",'ep_name',$ep_name);
+		 // get_row_con_info("emotional_profile","where ep_id='$data[cf_ep_id]'",'ep_name',$ep_name);
 		  $data[user]="$user[user_fname] $user[user_lname]";
-		  $data[ep_name]=$ep_name[ep_name];
+		  //$data[ep_name]=$ep_name[ep_name];
 		 if($data[cf_date]!=0)
 				$data[cf_date]=date("m/d/Y",$data[cf_date]);
 			else
