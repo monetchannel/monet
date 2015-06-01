@@ -6,11 +6,11 @@ ini_set('post_max_size','128M');
 
 
 	$filename = $_POST["filename"];
-		$uploadDirectory = '../video_files/'.$filename;
+		$uploadDirectory = '../../video_files/'.$filename;
 	if (isset($_FILES["video-blob"])) {
 	
 		$filename = $_POST["filename"];
-		$uploadDirectory = '../video_files/'.$filename;
+		$uploadDirectory = '../../video_files/'.$filename;
 	
 		if (!move_uploaded_file($_FILES["video-blob"]["tmp_name"], $uploadDirectory)) {
 			echo("Problem moving uploaded file");
