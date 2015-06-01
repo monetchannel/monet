@@ -590,8 +590,8 @@ function view_feedback($c_id,$rate="",$orderby_p="",$order_p="",$nrpp_p="",$st_p
 			else
 			{
 				$video_type="webm";
-				$file=$Server_Upload_Path."lmsin/video_files/".$data[cf_id].".webm";
-				$url=$Server_View_Path."video_files/".$data[cf_id].".webm";
+				$file=$Server_Upload_Path."video_files/".$data[cf_id].".webm";
+				$url=$Server_View_Path."../video_files/".$data[cf_id].".webm";
 				if(file_exists($file))
 				{
 					$data[video]= "<span id=button><a href=\"javascript:void(1)\" onclick=\"setLink('".$url."','".$video_type."')\"><img src='images/watch.png' border='0'/><br>Watch</a></span>";
