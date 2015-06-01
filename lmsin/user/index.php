@@ -546,39 +546,40 @@ function redeem_reward()
  */
 function xhr_redeem_reward()    //aadi
 {
-	$R = DIN_ALL($_REQUEST);
-	$UserId = $_COOKIE['UserId'];
-	$rewardId = $R['rewardId'];
-	$ctime = time();
-	
-	$reward_sql = "select * from reward where r_id = '{$rewardId}'";
-	eq($reward_sql,$redata);
-	$reward = mfa($redata);
-        
-        $userSQL="SELECT * FROM users WHERE `user_id`='$UserId'";
-        eq($userSQL,$userResult);
-        $user=mfa($userResult);
-        
-        $code=$reward[title];
-        $code=preg_replace('/\s+/', '', $code);
-        $code=substr($code,0,3);
-        $code=  strtoupper($code);
-        $code.=rand(1000000,10000000);
-	
-	$redeem_sql = "insert into reward_redeem(`rr_id`, `rr_u_id`, `rr_r_id`, `rr_timestamp`,`rr_coupon_code`) values(NULL, '{$UserId}', '{$rewardId}', '{$ctime}','$code')";
-	$value=mysql_query($redeem_sql);
-	if($value){
-            $update_sql = "UPDATE `reward_point` SET `points` = (`points` - {$reward[points]} ) WHERE `rp_u_id` = '{$UserId}'"; 
-            mysql_query($update_sql);
-            $subject="Reward Redemption";
-            $message="Hi '$user[user_fname]',"
-                . "Thnak you for using Monet Networks Inc."
-                . ""
-                . "Your reward voucher is '$code'";
-            mail($user[user_email],$subject, $message);
-            print "Your reward has been successfully redeemed. Please check your registered email for more details.";
-            die();
-        }
+    $R = DIN_ALL($_REQUEST);
+    $UserId = $_COOKIE['UserId'];
+    $rewardId = $R['rewardId'];
+    $ctime = time();
+
+    $reward_sql = "select * from reward where r_id = '{$rewardId}'";
+    eq($reward_sql,$redata);
+    $reward = mfa($redata);
+
+    $userSQL="SELECT * FROM users WHERE `user_id`='$UserId'";
+    eq($userSQL,$userResult);
+    $user=mfa($userResult);
+
+    $code=$reward[title];
+    $code=preg_replace('/\s+/', '', $code);
+    $code=substr($code,0,3);
+    $code=  strtoupper($code);
+    $code.=rand(1000000,10000000);
+
+    $redeem_sql = "insert into reward_redeem(`rr_id`, `rr_u_id`, `rr_r_id`, `rr_timestamp`,`rr_coupon_code`) values(NULL, '{$UserId}', '{$rewardId}', '{$ctime}','$code')";
+    $value=mysql_query($redeem_sql);
+    if($value){
+        $update_sql = "UPDATE `reward_point` SET `points` = (`points` - {$reward[points]} ) WHERE `rp_u_id` = '{$UserId}'"; 
+        mysql_query($update_sql);
+        $to=$user[user_email];
+        $subject="Reward Redemption";
+        $message="Hi '$user[user_fname]',
+                    Thnak you for using Monet Networks Inc.
+
+                    Your reward voucher is '$code'";
+        mail($to,$subject, $message);
+        print "Your reward has been successfully redeemed. Please check your registered email for more details.";
+        die();
+    }
 }
 
 
