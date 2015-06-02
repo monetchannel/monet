@@ -863,7 +863,7 @@ function company_profile_edit($msg='')
 						   "heading"=>"Edit",
 						   "country_name"=>$country_name,
 						   "pass"=>'none',
-						   "up_thumb_view_path"=>$View_Path."thumb_".$up[up_fname].$up[up_ext],
+						   "up_thumb_view_path"=>$View_Path.$up[up_fname].$up[up_ext],
 						   "file_name"=>$up[up_oname],"profile_tab"=>"selected"
 					  ));
 	$smarty->display('add_company.tpl');
