@@ -230,14 +230,14 @@ $(function(){
         <div class="form-group col-md-3">
             <label for="campaign_startdate">Select Start Date</label>
             <input type="text" class="form-control input-lg datepicker-input" placeholder="Start Date" name="campaign_startdate" 
-                   data-msg-required="Please select start date." data-rule-required="true" readonly="readonly"
+                   data-msg-required="Please select start date." data-rule-required="true"
                    id="campaign_startdate" value="{$dataArray.campaign_startdate}"  />
         </div>
         <div class="form-group col-md-3">
             <label for="campaign_enddate">Select End Date</label>
             <input type="text" class="form-control input-lg datepicker-input" placeholder="End Date" name="campaign_enddate" 
                    data-msg-required="Please select end date." 
-                   data-rule-required="true" readonly="readonly"
+                   data-rule-required="true"
                    data-rule-greaterthan="#campaign_startdate"
                    id="campaign_enddate" value="{$dataArray.campaign_enddate}"  />
         </div>
