@@ -295,7 +295,7 @@
                         {/if}
                         
                         {if 'heatmap'|in_array:$filter_graph_array}
-                        <div class="row row-top">
+                        <!--div class="row row-top">
                             <div class="col-md-6 row-right" >
                                 <div class="analysis-graph-header">
                                         Heat Map
@@ -305,9 +305,9 @@
                                 
                                 <div id="timeline-section">
                                    <div class="timeline-steps" >
-                                        <ul class="nav nav-tabs dots">
+                                        <ul class="nav nav-tabs dots"-->
                                             <!-- timeline will display here -->
-                                        </ul>
+                                        <!--/ul>
                                    </div>
                                 </div>
                                
@@ -363,7 +363,7 @@
 				</div>
 				<div class="col-md-6">
 			        </div>
-                        </div>    
+                        </div-->    
 		</div> 
                
                 <script src="{$SERVER_PATH}corporate/js/highcharts/highcharts.js"></script>
