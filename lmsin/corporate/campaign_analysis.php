@@ -51,7 +51,7 @@ if (isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])) {
 	get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id", $where_cond, "c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date", $vd);
 	$content_id = $vd[c_id];
 	$cf_id = $vd[cf_id];
-
+        if($cf_id==NULL)die("You don't have a single feedback for the current campaign/video");
 	// aadi
 
 	$SQL = "SELECT ar_id from analysis_results where ar_cf_id = $cf_id";
