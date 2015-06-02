@@ -57,7 +57,7 @@
               </div>
              </div>
             {/if}
-            {/foreach}{if $i%2==1} </div>{/if}
+            {/foreach}</div>
             </div></div></div></div></div></div>
             {else}
                 <div class="panel panel-default">
