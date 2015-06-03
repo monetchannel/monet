@@ -119,13 +119,10 @@
                                         <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
                                     </li>
                                     
-                                    <li class="sub-nav {$advanced_tab}" >
-                                        <a href="advanced_search.php"><img class="img-responsive" src="./images/arrow.png">Advanced Search</a>
+                                    <li class="sub-nav {$premium_tab}" >
+                                        <a href="premium.php"><img class="img-responsive" src="./images/arrow.png">Premium Features</a>
                                     </li>
                                     
-                                    <li class="sub-nav {$compare_tab}" >
-                                        <a href="compare.php"><img class="img-responsive" src="./images/arrow.png">Compare</a>
-                                    </li>
                                 </ul>                             
                           </li>    
                           
