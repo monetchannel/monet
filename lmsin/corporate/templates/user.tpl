@@ -150,30 +150,30 @@ function check(field)
 			document.getElementById('user_email').value==""
 		  )
 		{
-			bootbox.alert("Please fill all * fields to continue.");
+			alert("Please fill all * fields to continue.");
 			return false;
 		}
 		else if( document.getElementById('act').value=="user_save" && (document.getElementById('user_password').value=="" ||
 			document.getElementById('user_con_password').value==""))
 		{
-			bootbox.alert("Please fill all * fields to continue.");
+			alert("Please fill all * fields to continue.");
 			return false;
 		}
 		
 		else if(!chk_email(document.getElementById('user_email').value))
 		{
-			bootbox.alert("Please enter a valid email address to continue.");
+			alert("Please enter a valid email address to continue.");
 			return false;
 		}
 		
 		else if(document.getElementById('email_exist').value==1)
 		{
-			bootbox.alert("The email address you entered already exists in our system. Please enter another email address to continue.");
+			alert("The email address you entered already exists in our system. Please enter another email address to continue.");
 			return false;
 		}
 		else if(document.getElementById('user_password').value!=document.getElementById('user_con_password').value)
 		{
-			bootbox.alert("Password and Confirm Password are not matched Please try again.");
+			alert("Password and Confirm Password are not matched Please try again.");
 			return false;
 		}
 		else
@@ -188,7 +188,8 @@ function check(field)
 							 document.getElementById('user_state').value,
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value);
-                            jQuery.ajax({
+                            alert("User Added Succesfully");
+                            /*jQuery.ajax({
                             type: "POST",
                             url:"user.php?act=user_save",
                             data: $('#frm').serialize(),
@@ -199,7 +200,7 @@ function check(field)
                                         error: function(){
                                         alert("Please try again. Server have not sent response.");
                                 }
-                            });
+                            });*/
                         }
 			else
 			{
@@ -212,9 +213,9 @@ function check(field)
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value,
 							 document.getElementById('user_id').value);
-			
-                        
-                            jQuery.ajax({
+			alert("Data Updated Succesfully");
+                                
+                            /*jQuery.ajax({
                             type: "POST",
                             url:"user.php?act=user_update",
                             data: $('#frm').serialize(),
@@ -225,7 +226,7 @@ function check(field)
                                         error: function(){
                                         alert("Please try again. Server have not sent response.");
                                 }
-                            });
+                            });*/
                         }
 		}
 	}
@@ -236,7 +237,7 @@ function check(field)
 	
 	function chk_email_exist()
 	{
-		x_chk_email_exist(document.getElementById('user_email').value,document.getElementById('user_id').value,chk_email_exist_responce)
+		x_chk_email_exist(document.getElementById('user_email').value,document.getElementById('user_id').value,chk_email_exist_responce);
 	}
 	
 	function chk_email_exist_responce(js)

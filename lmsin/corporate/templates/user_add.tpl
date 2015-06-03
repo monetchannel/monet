@@ -34,7 +34,7 @@
     <div class="form-group">
         <label for="Age" class="col-sm-4 control-label">Your Age:</label>
             <div class="col-sm-7">
-            	<input type="text" name="user_lname" id="age" value="{$age}"  class="form-control" placeholder=" in years"/>
+            	<input type="text" name="age" id="age" value="{$age}"  class="form-control" placeholder=" in years"/>
             </div>
     </div>
 	
@@ -77,7 +77,7 @@
     </div>
     
       <div class="form-group">
-        <label for="Conferm" class="col-sm-4 control-label">Confirm Password</label>
+        <label for="Confirm" class="col-sm-4 control-label">Confirm Password</label>
             <div class="col-sm-7">
             	<input type="password" name="user_con_password" id="user_con_password" value=""  class="form-control" />
             </div>
