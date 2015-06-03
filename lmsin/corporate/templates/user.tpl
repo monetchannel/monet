@@ -189,6 +189,7 @@ function check(field)
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value);
                             alert("User Added Succesfully");
+                            user.view("","","user_id","DESC","","",1,"","","","","","");
                             /*jQuery.ajax({
                             type: "POST",
                             url:"user.php?act=user_save",
@@ -213,8 +214,8 @@ function check(field)
 							 document.getElementById('user_email').value,
 							 document.getElementById('user_password').value,
 							 document.getElementById('user_id').value);
-			alert("Data Updated Succesfully");
-                                
+			alert("User Updated Succesfully");
+                        user.view("","","user_id","DESC","","",1,"","","","","","");
                             /*jQuery.ajax({
                             type: "POST",
                             url:"user.php?act=user_update",
