@@ -21,7 +21,7 @@ if(fe($_REQUEST[act]))
 function excel_show(){
 	$smarty = new Smarty;
 	$smarty->assign(array("msg"=>$msg,						  
-						  "user_tab"=>"selected",
+						  "user_tab"=>"label", "user_mgmt_tab"=>"selected"
 						  ));
  	$smarty->display('excel.tpl');
 }

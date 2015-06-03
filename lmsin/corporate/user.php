@@ -34,7 +34,7 @@ function user_index($msg='')
 	$smarty = new Smarty;
 	$smarty->assign(array("msg"=>$msg,"js"=>$js,
 				"SERVER_PATH"=>$Server_View_Path,
-				"user_tab"=>"selected","invit_num"=>$invit_num,
+				"invit_num"=>$invit_num,
 				"SERVER_COMPANY_PATH"=>$Server_company_Path,
 				"SERVER_ADMIN_PATH"=>$Server_View_Path."administrator/",
 				"user_tab"=>"label", "user_mgmt_tab"=>"selected"));
@@ -245,7 +245,7 @@ else{
         //if(strlen($cond)==6) $cond = ""; // Vivek - Works Fine
 	
 	$SQL= "SELECT u.user_id, u.user_fname, u.user_lname, u.user_gender, u.user_dob, u.user_country, u.user_email, u.user_email, m.map_company_id FROM users u JOIN map_company_user m ON 
-               u.user_id = m.map_user_id WHERE m.map_company_id=$_COOKIE[CompanyId] $cond GROUP BY u.user_id ORDER BY u.$orderby $order";  // Vivek Verma
+               u.user_id = m.map_user_id WHERE m.map_company_id=$_COOKIE[CompanyId] $cond GROUP BY u.user_id ORDER BY $orderby $order";  // Vivek Verma
         }
         else{
             $cond="";
@@ -440,7 +440,7 @@ function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_c
 {
 	if(get_row_count("users","where user_email='$user_email' AND user_id!='$user_id' limit 0,1"))
 	{
-		$ary[0]="users name $user_email already exists, Please try again.";
+		$ary[0]="user email $user_email already exists, Please try again.";
 		$ary[2] = 1;
 		$ary[3] = $callback;
 		return $ary;
@@ -462,9 +462,11 @@ function user_update($callback,$user_fname,$user_lname,$user_gender,$age,$user_c
 							`user_company_id`='$_COOKIE[CompanyId]' WHERE `user_id` = '$user_id'";
 	$id=eq($SQL,$rs);
 	if($id>0){
-		$ary[0]="Data Updated Successfully.";
+		$ary[0]="Data Updated Successfully";
 	}
-        else $ary[0]="No Change in User Data";
+        else{ 
+            $ary[0]="No Change in User Data";
+        }
 	$ary[2] = 1;
 	$ary[3] = $callback;
 	return $ary;
