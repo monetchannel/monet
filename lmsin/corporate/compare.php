@@ -138,7 +138,9 @@ if($_COOKIE[CompanyId])
             $smarty->assign(array("category_name"=>$category_name,
                                 "country_name"=>$country_name,
                                 "gender"=>$gender,
-                                "video_num_rows" => $video_num_rows,  
+                                "video_num_rows" => $video_num_rows,
+                                "analysis_tab" => "analysis-selected",
+                                "compare_tab" => "label",  
                                 "videos" => $videos));
         
            $smarty->display('compare.tpl');
@@ -491,10 +493,8 @@ function compare($msg="") {
                                 "SERVER_PATH"=>$Server_View_Path,
                                 "act"=>'analysis_graph',
                                 "filter_graph_array"=>$chkArray,
-                                "video_analysis_tab" => (!isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
-                                "campaign_analysis_tab"=>(isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
-                                "active_analysis_tab"=>(isset($_GET['ad_ar_id'])) ? "label" : "",
-                                "analysis_tab"=>"analysis-selected"
+                                "analysis_tab" => "analysis-selected",
+                                "compare_tab" => "label"
 	));
         
   ##########################################################################################################################################      

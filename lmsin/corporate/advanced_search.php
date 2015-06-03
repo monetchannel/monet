@@ -152,7 +152,9 @@ if ($_COOKIE[CompanyId]) {
 			"country_name" => $country_name,
 			"gender" => $gender,
 			"video_num_rows" => $video_num_rows,
-			"videos" => $videos
+			"videos" => $videos,
+                        "analysis_tab" => "analysis-selected",
+                        "advanced_tab" => "label"
 		));
 		$smarty->display('advanced_search.tpl');
 	}
@@ -504,10 +506,8 @@ function analysebyvideo($msg = '')
 		"SERVER_PATH" => $Server_View_Path,
 		"act" => 'analysis_graph',
 		"filter_graph_array" => $chkArray,
-		"video_analysis_tab" => (!isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
-		"campaign_analysis_tab" => (isset($_GET['camp_id']) && isset($_GET['c_id'])) ? "label" : "",
-		"active_analysis_tab" => (isset($_GET['ad_ar_id'])) ? "label" : "",
-		"analysis_tab" => "analysis-selected"
+		"analysis_tab" => "analysis-selected",
+                "advanced_tab" => "label"
 	));
 	$smarty->display('campaign_analysis.tpl');
 }
@@ -849,9 +849,7 @@ function analysebyparameters($msg = '')
 		"SERVER_PATH" => $Server_View_Path,
 		"act" => 'analysis_graph',
 		"filter_graph_array" => $chkArray,
-		"video_analysis_tab" => (!isset($_GET['camp_id'])) ? "label" : "",
-		"campaign_analysis_tab" => (isset($_GET['camp_id'])) ? "label" : "",
-		"active_analysis_tab" => (isset($_GET['ad_ar_id'])) ? "label" : "",
+                "advanced_tab" => "label",
 		"analysis_tab" => "analysis-selected"
 	));
 	$smarty->display('campaign_analysis.tpl');
