@@ -98,7 +98,7 @@
                                      <img class="img-responsive analysis-result" src="./images/report.png">Analysis Result
                                   </a>
                                 {else}
-                                  <a href="javascript:void(0)" style="background:#f7f7f7; {if $analysis_tab!=''}display:block {/if}" >
+                                  <a href="javascript:void(0)" >
                                      <img class="img-responsive analysis-result" src="./images/report_ov.png">Analysis Result
                                   </a>
                                 {/if}
