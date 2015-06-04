@@ -115,33 +115,28 @@ if ($_COOKIE[CompanyId]) {
 		die();
 	}
 	else {
-		foreach($AnalysisResultId as $v) {
-			$SQL2 = "SELECT c.c_id FROM content c
-                           JOIN content_feedback cf ON c.c_id=cf.cf_c_id
-                           JOIN analysis_results ar ON cf.cf_id=ar.ar_cf_id
-                           WHERE ar.ar_id=" . $v;
-
-			// print_r(array_values($v));
-
-			eq($SQL2, $rs2);
-			while ($result = mfa($rs2)) {
-				if (!in_array($result, $id)) {
-					array_push($id, $result);
-					$SQL3 = "SELECT *,(SELECT count(*) FROM content_feedback WHERE cf_c_id = c_id AND cf_rating>'0' and cf_ep_id>'0') AS num_feedback FROM content where c_id=" . $result[c_id];
-					eq($SQL3, $rs3);
-					while ($video = mfa($rs3)) {
-						if (check_vid_exist($video[c_url])) {
-							$video[c_date] = date('m/d/y', $video[c_date]);
-							array_push($videos, $video);
-							$video_num_rows++;
-						}
-					}
-				}
-			}
+            $AnalysisID = implode(",",$AnalysisResultId);
+            if($AnalysisID!=""){
+			$SQL2 = "SELECT DISTINCT c.c_id FROM content c
+                        JOIN content_feedback cf ON c.c_id=cf.cf_c_id
+                        JOIN analysis_results ar ON cf.cf_id=ar.ar_cf_id
+                        WHERE ar.ar_id IN (".$AnalysisID.")";
+                        $SQL3 = "SELECT DISTINCT *,(SELECT count(*) FROM content_feedback JOIN analysis_results ar ON cf_id=ar.ar_cf_id
+                           WHERE ar.ar_id IN (".$AnalysisID.") AND cf_c_id = c_id AND cf_rating>'0' and cf_ep_id>'0') AS num_feedback FROM content JOIN category_video cv ON cv.cv_c_id = c_id JOIN category cat ON cv.cv_cat_id = cat.cat_id WHERE c_id In (" .$SQL2.")";
+                        eq($SQL3, $rs3);
+                        while ($video = mfa($rs3)) {echo $video[c_id];
+                            if (check_vid_exist($video[c_url])) {
+                                    $video[c_date] = date('m/d/y', $video[c_date]);
+                                    array_push($videos, $video);
+                                    $video_num_rows++;
+                            }
+                        }
+                    
+            }
 
 			// echo "ar_id=".$v[ar_id].",video_num_rows=".$video_num_rows.",video[c_id]=".$videos[c_id]."<br />";
 
-		}
+            
 
 		$smarty = new Smarty;
 
