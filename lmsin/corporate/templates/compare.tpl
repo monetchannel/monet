@@ -161,14 +161,14 @@
     </div>
             
     <div class="row">
-        <div class="col-md-6">       
+        <div class="col-md-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" class="allbrands1">Include All Videos From Other Brands   
     {if $video_num_rows1>0}
     <div class="container-fluid"><br>
                                 
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <input type="checkbox" class="allbrands1">Include All Videos From Other Brands
+            <table class="table table-bordered">
+                
                 <thead>
                     <tr>
                         <th><input type="checkbox" id="selectall1"></th>
@@ -204,14 +204,14 @@
     <div class="row"><div class="col-md-12 text-center alert alert-info">There are no feedbacks from the current selection.</div></div>
     {/if}
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" class="allbrands2">Include All Videos From Other Brands
         {if $video_num_rows2>0}
     <div class="container-fluid"><br>
                                 
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-                <input type="checkbox" class="allbrands2">Include All Videos From Other Brands
+            <table class="table table-bordered"> 
+                
                 <thead>
                     <tr>
                         <th><input type="checkbox" id="selectall2"></th>
