@@ -31,7 +31,7 @@
 							<div class="container-fluid" style="border-bottom:1px solid #ddd;padding-bottom:1%">
 								<div class="row">
 									<div  class="col-md-12">
-										
+										<h3 class="text-info">Your Points : {$user_data.points}</h3>
 										<div id="circleGraph" class="graph-circle"></div>
 									</div>	
 								</div>	
@@ -78,20 +78,8 @@
 	
 	
 	
-	<script src="js/jquery.diagram.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/circle-progress.js"></script>
-	
-	<script type="text/javascript">
-		
-	//var wl = window.location.hostname + window.location.pathname; 
-	
-	$(function(){
-		 
-	});
-		
-	
-	
-	</script>
 	
 	<script type="text/javascript">
 			
@@ -99,39 +87,23 @@
 	
 		<!-- ******************************* Circle Graph******************************-->
 		var userPoint = {$user_data.points};
-		var totalPoint = {$reward.points};
-		var priceName = "{$reward.title}";
-		var priceTitle = "{$reward.sub_title}";
-		var topText = "<div style='color:#658CEB; font-size:40px; height: 48px;'> "+priceName+" </div> <div style='font-size:20px;'>"+priceTitle+"</div>"
-		var htmlString = "<div class='text-inner'>"+topText+"<div style='color:#FF0000; font-size:54px;border-bottom:2px solid #99C1DA;margin: 0 auto 4%; height: 68px; width: 60%;'>"+totalPoint+"</div> <div style='color:#4D616D; font-size:20px;'> TO GOAL </div></div>" ;
-		
-		var pointPercent = userPoint*100/totalPoint;
-		$("#circleGraph").html(htmlString+"<div class='demo' data-percent='"+pointPercent+"%'></div>");
-		$('.demo').diagram({
-			size: "250", // graph size
-			borderWidth: "10", // border width
-			bgFill: "#ccc", // background color
-			frFill: "#12A5DC", // foreground color
-			textSize: 34, // text color
-			textColor: '#2a2a2a' // text color
-		});
-		var detailText = $(".text-inner").html();
-		$(".text-inner").hide();
-		$('.demo span').addClass("inner-style");
-		$('.demo span').html(detailText);
-		$(".emotion-indicator").css("visibility","hidden");
-		var winWidth = $(window).width();
-		$(".col-md-2 a").hover(
-		  function() {
-			$( this ).children(".emotion-indicator").css("visibility","visible");
-			}, function() {
-			$( this ).children(".emotion-indicator").css("visibility","hidden");
-		  }
-		);
-		//alert(winWidth);
-		
-		<!-- ******************************* Show More Product ****************************** -->
-		
+	            var goalPoints = {$reward.points};
+	            var title = "{$reward.title}";
+	            var subTitle = "{$reward.sub_title}";
+	            var fraction = userPoint/goalPoints;
+	            var tLength = title.length;
+	            var stLength = subTitle.length;
+	            var pLength = goalPoints.toString().length;
+	            $('#circleGraph').circleProgress({
+	                value: fraction,
+	                size: 300,
+	                startAngle: Math.PI*1.50,
+			thickness:12,
+	                fill: {
+	                        color: 'lime', // fallback color when image is not loaded
+	                        image: 'http://i.imgur.com/pT0i89v.png'
+	                }
+	            });
 		$(".show-more").click(function(){
 			$(".move-top").show();
 			
