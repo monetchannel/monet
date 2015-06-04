@@ -187,7 +187,7 @@
 						{foreach $companies as $k=>$v}
 						<div class="row">
 							<div class="col-md-12 block">
-								<a class="" href="{$SERVER_PATH}watch_video.php?filter=true&cat=&brand={$v.company_id}"> 
+								<a class="" href="watch_video.php?filter=true&cat=&brand={$v.company_id}"> 
 									<img class="img-responsive" src="{$v.company_logo}" alt="{$v.company_name}"></img> 
 								</a>
 							</div>
