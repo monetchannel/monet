@@ -315,12 +315,16 @@
 
 </table>
             </div>
-			   <div id="reward"><div id="command">Last Redemption</div>
-                <h2>Your Latest Redemption</h2>
-                
-                <p>{$latest_reward.subtitle}</p>
-                <img src="{$latest_reward.image}" width="80" height="80"/>
-                <p>Redeemed for {$latest_reward.points} points.</p>
+	   	<div id="reward"><div id="command">Last Redemption</div>
+                {if $latest_reward.count > 0}
+                    <h2>Your Latest Redemption</h2>
+                    <p>{$latest_reward.subtitle}</p>
+                    <img src="{$latest_reward.image}" width="80" height="80"/>
+                    <p>Redeemed for {$latest_reward.points} points.</p>
+                {else}
+                    <br><br>
+                    <div class="text-center alert alert-info">You have not redeemed any rewards yet!</div>
+                {/if}
             </div>
         </div>
        <!-- CSS goes in the document HEAD or added to your external stylesheet -->
