@@ -142,7 +142,7 @@ function scale_value_for_chart($value){
 
 function get_latest_reward_info($user_id){
     $get_latest_reward_SQL = "SELECT rr_r_id, rr_timestamp FROM reward_redeem WHERE rr_u_id='$user_id' ORDER BY rr_timestamp DESC";
-    eq($get_latest_reward_SQL, $reward_data);
+    $count=eq($get_latest_reward_SQL, $reward_data);
     $reward_data = mfa($reward_data);
     
     $reward_id = $reward_data['rr_r_id'];
@@ -154,6 +154,10 @@ function get_latest_reward_info($user_id){
     $reward_subtitle = $reward_info['sub_title'];
     $reward_image = "../../uploads/".$reward_info['r_image'];
     $reward_points = $reward_info['points'];
+    if($count)
+        $formatted_reward_data['count']=$count;
+    else
+        $formatted_reward_data['count']=0;
     
     $formatted_reward_data =array(); 
     $formatted_reward_data["title"] = $reward_title;
