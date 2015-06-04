@@ -82,7 +82,7 @@ function go_button()
              <option value=".8" {$valence_to_plus8}>.8</option>
              <option value=".9" {$valence_to_plus9}>.9</option>
              <option value="1" {$valence_to_1}>1</option>
-            </select>&nbsp;&nbsp;&nbsp;<!--Time Segment: --><input type="hidden" name="time_segment" value="{$time_segment}" size="3" />&nbsp;&nbsp;&nbsp;<input id="buttongray" class="mybutton" type="submit" name="go"  value="  GO  " /></div>
+            </select>&nbsp;&nbsp;&nbsp;<!--Time Segment: --><input type="text" name="time_segment" value="{$time_segment}" size="3" />&nbsp;&nbsp;&nbsp;<input id="buttongray" class="mybutton" type="submit" name="go"  value="  GO  " /></div>
    
   </div>
   {if $tot_rows>0}
