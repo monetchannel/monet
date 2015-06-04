@@ -43,9 +43,26 @@ function edit_profile(){
     $smarty = new Smarty;
     global  $filespath;
     global $Server_View_Path;
+    global $View_Path;
     $userimage="";
     $ui = $_COOKIE[UserId];
     $user_data = get_account_info();
+    $companies = array();
+    $com_sql="select distinct(company_id),company_url,company_name from company,content where company_id=c_company_id order by company_name";
+    eq($com_sql,$comp);
+    while($data=mfa($comp))
+    {
+            if(get_upload_info($data[company_id],"company_logo",0,$company_logo)>0)
+                    $data[company_logo]=$company_logo[up_thumb_view_path];
+            else
+                    $data[company_logo]='';
+
+            //$data[video_list]=brand_videos($data[company_id],$data[company_url]);	
+            array_push($companies,$data);
+    }
+    $campaigns_sql = "select count(*) as total from campaigns as cmp inner join content as co on cmp.cmp_c_id = co.c_id inner join map_campaign_user as mcu on mcu.map_campaign_id=cmp.cmp_id where cmp.cmp_start <= '{$cdate}' and mcu.map_user_id = '{$_COOKIE[UserId]}'";
+    eq($campaigns_sql,$cmp_count);
+    $cmp = mfa($cmp_count);
     
     $m = "user_profile_photo";
     $qr = "select * from uploads where up_s_id = '$ui' and up_s_type = '$m'";
@@ -59,6 +76,10 @@ function edit_profile(){
     get_new_option_list('countries','countries_id','countries_name',$user_data[user_country],$country_name,0,"",1);
     
     $smarty->assign(array("user_data"=>$user_data,
+                          "SERVER_PATH"=>$Server_View_Path,
+                          "view_path" => $View_Path,
+                          "companies" => $companies,
+                          "cmp_count" => $cmp,
                           "user_upload"=>$user_upload,
 			  "country"=>$country_name,
     			  "userimage"=>$userimage,
@@ -91,10 +112,13 @@ function get_account_info(){
     eq($user_SQL, $unparsed_user);
     $user = mfa($unparsed_user);
     $country_id=$user['user_country'];
-
-    $country_SQL= "SELECT countries_name FROM `countries` WHERE countries_id=$country_id";
-    eq($country_SQL, $name_row);
-    $name_row = mfa($name_row);
+    if($user['user_country']){
+        $country_SQL= "SELECT countries_name FROM `countries` WHERE countries_id=$country_id";
+        eq($country_SQL, $name_row);
+        $name_row = mfa($name_row);
+    }
+    else
+        $name_row['countries_name']="";
     $user['countries_name']= $name_row['countries_name'];
 
     return $user;
@@ -229,24 +253,23 @@ function upload_new_profile_image(){
     }else if ($_POST["type"] == "webcam"){
         $ui = $_COOKIE["UserId"];
         $temp = get_new_file_name();
-        $target_file_name = $Upload_Path."thumb_".$temp.".".$image_file_type;
+        $target_file_name = $Upload_Path."thumb_".$temp.".jpg";
         $image_base64 = $_POST['webcam_image'];
+        $time=time();
         $image = base64_decode(str_replace('data:image/jpeg;base64,', '', $image_base64));
         // $target_file_name = get_new_file_name().".jpg";
         //if (!$_COOKIE['uses_social_login'] == "1"){
             if(file_put_contents($target_file_name, $image)){
                 $image_msg = "File upload succesful.";
-                //$_COOKIE[userimage]=$target_file_name;
-                //setcookie("userimage",$target_file_name,time()+86400,"/");
-                //update_profile("user_profile_image", $target_file_name);
-                $imgext = ".".$image_file_type;
+                $uponame="thumb_".$temp.".jpg";
+                $imgext = ".jpg";
                 $m = "user_profile_photo";
                 $qr = "select * from uploads where up_s_id = '$ui' and up_s_type = '$m'";
                 $tr = eq($qr,$r);
                 if ($tr==0)
                     $q = "insert into uploads (up_s_id, up_fname, up_ext, up_s_type) values ('$ui', '$temp', '$imgext', '$m')";
                 else
-                    $q = "UPDATE uploads SET up_fname='$temp', up_ext='$imgext', up_s_type = '$m' WHERE up_s_id='$ui'";
+                    $q = "UPDATE uploads SET up_fname='$temp', up_ext='$imgext', up_oname='$uponame', up_date='$time' WHERE up_s_id='$ui' AND up_s_type = '$m'";
                     
                 eq($q,$rst);
             }else {
@@ -267,9 +290,13 @@ function update_profile($setting, $new_value){
 }
 
 function get_country_name($country_number){//returns name of country for country id
-    $get_country_SQL = "SELECT countries_name FROM countries WHERE countries_id='$country_number'";
-    eq($get_country_SQL, $country);
-    $country_name = mfa($country);
+    if($country_number){
+        $get_country_SQL = "SELECT countries_name FROM countries WHERE countries_id='$country_number'";
+        eq($get_country_SQL, $country);
+        $country_name = mfa($country);
+    }
+    else
+        $country_name="";
     return $country_name;
 }
 
@@ -285,7 +312,7 @@ function get_new_file_name(){
     }
 }
 
-function image_upload(){	//aadi
+function image_upload(){
     $smarty = new Smarty;
     global  $filespath;
     global $Server_View_Path;
