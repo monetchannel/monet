@@ -174,23 +174,23 @@ $.fn.circleProgress = function(options) {
             ctx.strokeStyle = arcFill;
 			
 			ctx.fillStyle="#658ceb";
-			ctx.font = "24pt arial";
-			ctx.fillText(title,95,65);
+			ctx.font = "30px arial";
+			ctx.fillText(title,150-tLength*7,85);
 		
 			// Price Title
 			ctx.fillStyle="#4d616d";
-			ctx.font = "14pt arial";
-			ctx.fillText(subTitle, 75, 100);
+			ctx.font = "25px arial";
+			ctx.fillText(subTitle,150-stLength*5.5,135);
 			
 			//Total Reward Point
 			ctx.fillStyle="#FF0000";
-			ctx.font = "40pt serif";
-			ctx.fillText(goalPoints, 60, 160);
+			ctx.font = "50px serif";
+			ctx.fillText(goalPoints,150-pLength*12,205);
 			
 			//To Goal
 			ctx.fillStyle="#4d616d";
 			ctx.font = "14pt arial";
-			ctx.fillText("TO GOAL", 85, 195);
+			ctx.fillText("NEXT GOAL",100,250);
 			
             ctx.stroke();
             ctx.restore();
