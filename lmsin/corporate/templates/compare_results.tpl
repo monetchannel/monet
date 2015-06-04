@@ -26,25 +26,14 @@
    
     <script type="text/javascript" src="{$SERVER_PATH}corporate/js/compare.js"></script> 
 
-		<div id="videoContainer" class="container-fluid " style="margin-top:80px;">
-			<div class="row margin-top">
-				<div class="col-xs-6 col-sm-6 col-md-6 row-right" style="padding: 15px;">                                       
-                                        <div id="video" >
-                                                <div id="player"></div>
-                                        </div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6" style="padding: 25px;">
-					<div id="chart_div"></div>
-				</div>	
-			</div>			
-		</div>
+		
 		<div id="bottomContainer" class="container-fluid">
                     
                         {if 'valence'|in_array:$filter_graph_array}
 			<div class="row row-top">
 				<div class="col-md-6 row-right" style="">
 					<div class="analysis-graph-header">
-					        Average Emotion and Motivation Variation - Current Video
+					        Average Valence Variation - Selection 1
 					</div>
                                     <!--div id="valence_chart" class="min_height"></div-->
                                         <div class="row margin-top">
@@ -62,7 +51,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="analysis-graph-header">
-					        Average Emotion and Motivation Variation - All Videos
+					        Average Valence Variation - Selection 2
 					</div>
                                     
                                         <div class="row margin-top">
@@ -88,7 +77,7 @@
 					<!--<img class="img-responsive" src="./images/graph2.png" style="margin: 0 auto;">-->
                                         <!--<text class="analysis-graph-header">Attention Variance</text>-->
                                         <div class="analysis-graph-header">
-					        Average Engagement Variation - Current Video
+					        Average Engagement Variation - Selection 1
 					</div>
                                         <!--div id="attention_chart" class="min_height"></div-->
                                         <div class="row margin-top">
@@ -107,7 +96,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="analysis-graph-header">
-						Average Engagement Variation - All Videos
+						Average Engagement Variation - Selection 2
 					</div>
 					<div class="row margin-top">
 						<div class="col-md-6" style="text-align: center;" title="Average Engagement">
@@ -130,7 +119,7 @@
 			<div class="row row-top">
 				<div class="col-md-6 row-right circle-face" style="">
 					<div class="analysis-graph-header">
-					        Average Meaning Variation - Current video
+					        Average Meaning Variation - Selection 1
 					</div>
                                         <!--div id="meaning_chart" class="min_height">
                                             
@@ -183,7 +172,7 @@
 				</div>
 				<div class="col-md-6 circle-face">
 					<div class="analysis-graph-header">
-						Average Meaning Variation - All videos
+						Average Meaning Variation - Selection 2
 					</div>
 					<div class="row">
                                             <div class="col-md-1"></div>
@@ -239,13 +228,13 @@
 			<div class="row row-top">
 				<div class="col-md-6 row-right" style="">
 					<div class="analysis-graph-header">
-					        Overall Emotion Variation - Current Video
+					        Overall Valence Variation - Selection 1
 					</div>
                                     <div id="valence_chart" class="min_height"></div>
 				</div>
                                 <div class="col-md-6 " style="">
 					<div class="analysis-graph-header">
-					        Overall Emotion Variation - All Videos
+					        Overall Valence Variation - Selection 2
 					</div>
                                     <div id="valence_chart_overall" class="min_height"></div>
 				</div>
@@ -258,15 +247,15 @@
 				<div class="col-md-6 row-right" style="">
 					
                                         <div class="analysis-graph-header">
-					        Engagement Variation - Current Video
+					        Overall Engagement Variation - Selection 1
 					</div>
                                         <div id="attention_chart" class="min_height"></div>
 				</div>
                                 <div class="col-md-6 " style="">
 					
                                         <div class="analysis-graph-header">
-					        Engagement Variation - All videos
-					</div>
+					        Overall Engagement Variation - Selection 2
+                                        </div>
                                         <div id="attention_chart_overall" class="min_height"></div>
 				</div>
                         </div>
@@ -277,7 +266,7 @@
 			<div class="row row-top">
 				<div class="col-md-6 row-right" style="">
 					<div class="analysis-graph-header">
-					        Meaning Variance - Current Video
+					        Overall Meaning Variation - Selection 1
 					</div>
                                         <div id="meaning_chart" class="min_height">
                                             <!--Here the meaning chart will display with the succession of the video -->
@@ -285,7 +274,7 @@
 				</div>
                                 <div class="col-md-6" style="">
 					<div class="analysis-graph-header">
-					        Meaning Variance - All Videos
+					        Overall Meaning Variation - Selection 2
 					</div>
                                         <div id="meaning_chart_overall" class="min_height">
                                             <!--Here the meaning chart will display with the succession of the video -->
@@ -365,7 +354,7 @@
 			        </div>
                         </div-->    
 		</div> 
-               
+                        <div id="player" style="display:none;"></div>
                 <script src="{$SERVER_PATH}corporate/js/highcharts/highcharts.js"></script>
                 <script src="{$SERVER_PATH}corporate/js/highcharts/data.js"></script> 
                 <script src="{$SERVER_PATH}corporate/js/highcharts/heatmap.js"></script> 

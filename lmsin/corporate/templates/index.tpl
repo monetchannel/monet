@@ -114,10 +114,6 @@
                                     <li class="sub-nav {$active_analysis_tab}" >
                                         <a href="analysis.php"><img class="img-responsive" src="./images/arrow.png">User Recording</a>
                                     </li>
-
-                                    <li class="sub-nav {$active_video_tab}" >
-                                        <a href="analysis.php?act=video_section"><img class="img-responsive" src="./images/arrow.png">Search</a>
-                                    </li>
                                     
                                     <li class="sub-nav {$premium_tab}" >
                                         <a href="premium.php"><img class="img-responsive" src="./images/arrow.png">Premium Features</a>

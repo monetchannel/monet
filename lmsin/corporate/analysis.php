@@ -419,7 +419,7 @@ function video_section()
 	
 	
 	$smarty->assign(array("msg"=>$msg,"videos"=>$records,"st_pos"=>$R[st_pos],"nb_text"=>$nb_text,"nrpp"=>$R[nrpp],"op_nrpp"=>$op_nrpp,"tot_rows"=>$tot_rows,"ICON_PATH"=>$Server_Icon_Path,"import_tab"=>"selected","SERVER_PATH"=>$Server_View_Path,"js"=>$js,"valence_from_".$R[valence_from]=>"selected","valence_to_".$R[valence_to]=>"selected","valence_from"=>$vlc_from,"valence_to"=>$vlc_to,"time_segment"=>$R[time_segment],"invit_num"=>$invit_num,"company_invite_num"=>$company_invite_num,"analysis_tab"=>'analysis-selected',
-	"active_video_tab"=>'label'));
+	"premium_tab"=>'label'));
 
 	$smarty->display("video_section.tpl"); 
 }
