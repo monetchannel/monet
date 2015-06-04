@@ -124,7 +124,7 @@ if ($_COOKIE[CompanyId]) {
                         $SQL3 = "SELECT DISTINCT *,(SELECT count(*) FROM content_feedback JOIN analysis_results ar ON cf_id=ar.ar_cf_id
                            WHERE ar.ar_id IN (".$AnalysisID.") AND cf_c_id = c_id AND cf_rating>'0' and cf_ep_id>'0') AS num_feedback FROM content JOIN category_video cv ON cv.cv_c_id = c_id JOIN category cat ON cv.cv_cat_id = cat.cat_id WHERE c_id In (" .$SQL2.")";
                         eq($SQL3, $rs3);
-                        while ($video = mfa($rs3)) {echo $video[c_id];
+                        while ($video = mfa($rs3)) {
                             if (check_vid_exist($video[c_url])) {
                                     $video[c_date] = date('m/d/y', $video[c_date]);
                                     array_push($videos, $video);

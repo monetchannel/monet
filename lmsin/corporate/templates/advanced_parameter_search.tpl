@@ -158,10 +158,10 @@
                     <img class="img-responsive" style="margin:0 auto;" src="{$video.c_thumb_url}" alt="125x125">
                   </td>
                   <td class="col-md-7  second-td">
-                    {$video.c_date} 
-                  </br>
+                    
                 {$video.c_title}
-              </br>
+              </br>Category: {$video.cat_name} 
+                  </br>
           Feedback: {$video.num_feedback}
       </td>
       
