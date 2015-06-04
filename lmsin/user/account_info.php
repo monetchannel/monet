@@ -4,12 +4,12 @@ init();
 global  $filespath;
 $uses_social_login = 0;
 
-$func_ary = array("display_profile", "edit_profile", "save_profile_changes", "change_password", "upload_new_profile_image");
+$func_ary = array("display_profile", "edit_profile", "save_profile_changes", "change_password", "upload_new_profile_image","image_upload","password_form");
 
 if (in_array($_REQUEST["act"], $func_ary)) {
     $_REQUEST["act"]();
 }else {
-    display_profile();//default to displaying profile
+    edit_profile();//default to displaying profile
 }
 
 function display_profile(){
@@ -283,4 +283,88 @@ function get_new_file_name(){
     }else {
         get_new_file_name();
     }
+}
+
+function image_upload(){	//aadi
+    $smarty = new Smarty;
+    global  $filespath;
+    global $Server_View_Path;
+    global $View_Path;
+    $userimage="";
+    $ui = $_COOKIE[UserId];
+    $user_data = get_account_info();
+    $companies = array();
+    $com_sql="select distinct(company_id),company_url,company_name from company,content where company_id=c_company_id order by company_name";
+    eq($com_sql,$comp);
+    while($data=mfa($comp))
+    {
+        if(get_upload_info($data[company_id],"company_logo",0,$company_logo)>0)
+            $data[company_logo]=$company_logo[up_thumb_view_path];
+        else
+            $data[company_logo]='';
+        array_push($companies,$data);
+    }
+    $campaigns_sql = "select count(*) as total from campaigns as cmp inner join content as co on cmp.cmp_c_id = co.c_id inner join map_campaign_user as mcu on mcu.map_campaign_id=cmp.cmp_id where cmp.cmp_start <= '{$cdate}' and mcu.map_user_id = '{$_COOKIE[UserId]}'";
+    eq($campaigns_sql,$cmp_count);
+    $cmp = mfa($cmp_count);
+    
+    $m = "user_profile_photo";
+    $qr = "select * from uploads where up_s_id = '$ui' and up_s_type = '$m'";
+    if(eq($qr, $unparsed_upload)){
+        $upload = mfa($unparsed_upload);
+	$user_data['up_fname']=$upload['up_fname'];
+        $userimage= $filespath."uploads/thumb_".$upload['up_fname'].$upload['up_ext'];
+    }
+    
+    
+    $smarty->assign(array("user_data"=>$user_data,
+                          "SERVER_PATH"=>$Server_View_Path,
+                          "view_path" => $View_Path,
+                          "companies" => $companies,
+                          "cmp_count" => $cmp,
+                          "userimage"=>$userimage,
+                   	));
+    $smarty->display("upload_image.tpl");
+}
+
+function password_form(){
+    $smarty = new Smarty;
+    global  $filespath;
+    global $Server_View_Path;
+    global $View_Path;
+    $userimage="";
+    $ui = $_COOKIE[UserId];
+    $user_data = get_account_info();
+    $companies = array();
+    $com_sql="select distinct(company_id),company_url,company_name from company,content where company_id=c_company_id order by company_name";
+    eq($com_sql,$comp);
+    while($data=mfa($comp))
+    {
+        if(get_upload_info($data[company_id],"company_logo",0,$company_logo)>0)
+            $data[company_logo]=$company_logo[up_thumb_view_path];
+        else
+            $data[company_logo]='';
+        array_push($companies,$data);
+    }
+    $campaigns_sql = "select count(*) as total from campaigns as cmp inner join content as co on cmp.cmp_c_id = co.c_id inner join map_campaign_user as mcu on mcu.map_campaign_id=cmp.cmp_id where cmp.cmp_start <= '{$cdate}' and mcu.map_user_id = '{$_COOKIE[UserId]}'";
+    eq($campaigns_sql,$cmp_count);
+    $cmp = mfa($cmp_count);
+    
+    $m = "user_profile_photo";
+    $qr = "select * from uploads where up_s_id = '$ui' and up_s_type = '$m'";
+    if(eq($qr, $unparsed_upload)){
+        $upload = mfa($unparsed_upload);
+	$user_data['up_fname']=$upload['up_fname'];
+        $userimage= $filespath."uploads/thumb_".$upload['up_fname'].$upload['up_ext'];
+    }
+    
+    $smarty->assign(array("user_data"=>$user_data,
+                          "SERVER_PATH"=>$Server_View_Path,
+                          "view_path" => $View_Path,
+                          "companies" => $companies,
+                          "cmp_count" => $cmp,
+                          "userimage"=>$userimage,
+                   	));
+    $smarty->display("change_password.tpl");
+    
 }
