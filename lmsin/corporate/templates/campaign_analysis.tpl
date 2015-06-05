@@ -47,12 +47,33 @@
                 <div id="bottomContainer" class="container-fluid">
                 {else}
                    <div id="player" style="display:none;"></div>
-                   <div id="" class="container-fluid" style="margin-top:75px;">
+                   <div id="" class="container-fluid" style="margin-top:0px;">
+                {/if}
+                {if $act=='analysebyparameters' || $act=='analysebyvideo'}
+                <div class="row top-margin">
+                        <div id="" class="col-md-12">
+                            
+                    <div class="analysis-graph-header">
+					        {$heading}
+                    </div>
+                            
+                            <ul>
+                                <li><strong>Category: </strong>{$category_parameter}</li>
+                                <li><strong>Demography</strong>
+                                    <ul>
+                                        <li><strong>Country: </strong>{$country_parameter}</li>
+                                        <li><strong>Gender: </strong>{$gender_parameter}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                    
+                        </div>
+                        
+                        
+                    </div>
                 {/if}
                 <div class="row row-top">
-                    <div class="analysis-graph-header">
-					        {$heading}: {$category_parameter} {$country_parameter} {$gender_parameter}
-                    </div>
                                             
                 </div>
                     

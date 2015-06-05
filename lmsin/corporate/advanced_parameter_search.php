@@ -30,9 +30,9 @@ if ($_COOKIE[CompanyId]) {
 	$country_name = array();
 	$videos = array();
         
-        $country_parameter="";
-        $category_parameter="";
-        $gender_parameter="";
+        $country_parameter="All";
+        $category_parameter="All";
+        $gender_parameter="Both";
         
 	$SQL = "Select * FROM category";
 	eq($SQL, $rs);
@@ -43,7 +43,7 @@ if ($_COOKIE[CompanyId]) {
 	while ($data = mfa($rs)) {
 		if ($data['cat_id'] == $R['cat']) {
 			$data['selected'] = 'selected';
-                        $category_parameter = "| Category = ".$data['cat_name']." |";
+                        $category_parameter = $data['cat_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -57,7 +57,7 @@ if ($_COOKIE[CompanyId]) {
 	while ($data = mfa($rs)) {
 		if ($data['countries_id'] == $R['countries']) {
 			$data['selected'] = 'selected';
-                        $category_parameter = "| Country = ".$data['countries_name']." |";
+                        $country_parameter = $data['countries_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -71,7 +71,7 @@ if ($_COOKIE[CompanyId]) {
                 "key" => "Male",
                 "selected" => "selected"
             );
-            $gender_parameter = "| Gender = Male |";
+            $gender_parameter = "Male";
         }
 	else $male = array(
 		"key" => "Male",
@@ -82,7 +82,7 @@ if ($_COOKIE[CompanyId]) {
 		"key" => "Female",
 		"selected" => "selected"
             );
-            $gender_parameter = "| Gender = Female |";
+            $gender_parameter = "Female";
         }
 	else $female = array(
 		"key" => "Female",
@@ -194,7 +194,8 @@ function analysebyparameters($msg = '')
 	// print_r(array_values($Ids));
 
 	if (count($Ids > 0)) $Ids_string = implode(",", $Ids); //Ids contains ar_id of the filtered results corresponding to the video
-	$SQL = "SELECT vad_json_data,ad_valence from video_analysis_data inner join (SELECT ad_id, ad_valence from analysis_detail where ad_ar_id in ($Ids_string))t1 ON video_analysis_data.vad_img_name = concat(t1.ad_id,'.jpg')";
+	if($Ids_string=="") if($cf_id==NULL)die("You don't have a single feedback for the current selection");
+        $SQL = "SELECT vad_json_data,ad_valence from video_analysis_data inner join (SELECT ad_id, ad_valence from analysis_detail where ad_ar_id in ($Ids_string))t1 ON video_analysis_data.vad_img_name = concat(t1.ad_id,'.jpg')";
 	eq($SQL, $Result);
 	while ($data = mfa($Result)) {
 		$json = json_decode($data[vad_json_data], true);
