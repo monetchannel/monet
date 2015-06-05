@@ -23,7 +23,15 @@
     </style>
    
     <script type="text/javascript" src="{$SERVER_PATH}corporate/js/campaign_charts.js"></script> 
-
+    {if $act == 'analysebyparameters'}
+    {$heading = 'Analyse By Parameters'}
+    {else if $act == 'analysebyvideo'}
+    {$heading = 'Analyse By Video'}
+    {else}
+    {$heading = 'Campaign Analysis'}
+    {/if}
+    
+                {if $act!="analysebyparameters"}
 		<div id="videoContainer" class="container-fluid " style="margin-top:80px;">
 			<div class="row margin-top">
 				<div class="col-xs-6 col-sm-6 col-md-6 row-right" style="padding: 15px;">                                       
@@ -36,10 +44,20 @@
 				</div>	
 			</div>			
 		</div>
-		<div id="bottomContainer" class="container-fluid">
+                <div id="bottomContainer" class="container-fluid">
+                {else}
+                   <div id="player" style="display:none;"></div>
+                   <div id="" class="container-fluid" style="margin-top:75px;">
+                {/if}
+                <div class="row row-top">
+                    <div class="analysis-graph-header">
+					        {$heading}: {$category_parameter} {$country_parameter} {$gender_parameter}
+                    </div>
+                                            
+                </div>
                     
                         {if 'valence'|in_array:$filter_graph_array}
-			<div class="row row-top">
+			<div class="row">
 				<div class="col-md-6 row-right" style="">
 					<div class="analysis-graph-header">
 					        Overall Emotion Variation
