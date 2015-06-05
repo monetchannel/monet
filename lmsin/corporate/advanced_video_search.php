@@ -398,20 +398,20 @@ function analysebyvideo($msg = '')
 		$adValenceResource = mysql_query($adValenceQuery);
 		$adValenceSchema = mysql_fetch_assoc($adValenceResource);
 		$compareEmotionArray = array();
-		$adValenceVal = (isset($adValenceSchema['avg_valence']) && $adValenceSchema['avg_valence'] != "") ? $adValenceSchema['avg_valence'] : 0;
+		$adValenceVal = (isset($adValenceSchema['avg_valence']) && $adValenceSchema['avg_valence'] != "") ? $adValenceSchema['avg_valence'] : null;
 		$adEngagementVal = (isset($adValenceSchema['avg_engagement']) && $adValenceSchema['avg_engagement'] != "") ? $adValenceSchema['avg_engagement'] : null;
-		$adHappyVal = (isset($adValenceSchema['avg_happy']) && $adValenceSchema['avg_happy'] != "") ? $adValenceSchema['avg_happy'] : 0;
-		$adSadVal = (isset($adValenceSchema['avg_sad']) && $adValenceSchema['avg_sad'] != "") ? $adValenceSchema['avg_sad'] : 0;
-		$adAngryVal = (isset($adValenceSchema['avg_angry']) && $adValenceSchema['avg_angry'] != "") ? $adValenceSchema['avg_angry'] : 0;
-		$adSurprisedVal = (isset($adValenceSchema['avg_surprised']) && $adValenceSchema['avg_surprised'] != "") ? $adValenceSchema['avg_surprised'] : 0;
-		$adDisgustedVal = (isset($adValenceSchema['avg_disgusted']) && $adValenceSchema['avg_disgusted'] != "") ? $adValenceSchema['avg_disgusted'] : 0;
-		$adScaredVal = (isset($adValenceSchema['avg_scared']) && $adValenceSchema['avg_scared'] != "") ? $adValenceSchema['avg_scared'] : 0;
-		$adNeutralVal = (isset($adValenceSchema['avg_neutral']) && $adValenceSchema['avg_neutral'] != "") ? $adValenceSchema['avg_neutral'] : 0;
+		$adHappyVal = (isset($adValenceSchema['avg_happy']) && $adValenceSchema['avg_happy'] != "") ? $adValenceSchema['avg_happy'] : null;
+		$adSadVal = (isset($adValenceSchema['avg_sad']) && $adValenceSchema['avg_sad'] != "") ? $adValenceSchema['avg_sad'] : null;
+		$adAngryVal = (isset($adValenceSchema['avg_angry']) && $adValenceSchema['avg_angry'] != "") ? $adValenceSchema['avg_angry'] : null;
+		$adSurprisedVal = (isset($adValenceSchema['avg_surprised']) && $adValenceSchema['avg_surprised'] != "") ? $adValenceSchema['avg_surprised'] : null;
+		$adDisgustedVal = (isset($adValenceSchema['avg_disgusted']) && $adValenceSchema['avg_disgusted'] != "") ? $adValenceSchema['avg_disgusted'] : null;
+		$adScaredVal = (isset($adValenceSchema['avg_scared']) && $adValenceSchema['avg_scared'] != "") ? $adValenceSchema['avg_scared'] : null;
+		$adNeutralVal = (isset($adValenceSchema['avg_neutral']) && $adValenceSchema['avg_neutral'] != "") ? $adValenceSchema['avg_neutral'] : null;
 
 		// $adPeakEmotion = (isset($adValenceSchema['peak_emotion']) && $adValenceSchema['peak_emotion']!="") ? $adValenceSchema['peak_emotion'] : "Neutral";
 
-		$adPeakId = (isset($adValenceSchema['ad_id']) && $adValenceSchema['ad_id'] != "") ? $adValenceSchema['ad_id'] : "0";
-
+		$adPeakId = (isset($adValenceSchema['ad_id']) && $adValenceSchema['ad_id'] != "") ? $adValenceSchema['ad_id'] : null;
+                
 		// create an array of emotions, valence and engagement
 
 		/*array_push($commonEmotionsSmileyArray['valence'], $adValenceVal);
@@ -437,7 +437,7 @@ function analysebyvideo($msg = '')
 		$temp = array_keys($comparingArray, max($comparingArray));
 		$max_value = $temp[0];
 		$max_value = ucfirst($max_value);
-		if ($adEngagementVal != "") // checking if the result set of the adValenceQuery is not null, if null then don't include 0's in the array // vivek verma
+		if ($adEngagementVal != null || $adValenceVal != null || $adHappyVal != null) // checking if the result set of the adValenceQuery is not null, if null then don't include 0's in the array // vivek verma
 		array_push($adValenceArray, array(
 			'time_range' => $time_range_from,
 			'i' => ($i - $minTimeValue + 0.5) ,
@@ -497,7 +497,7 @@ function analysebyvideo($msg = '')
         global $gender_parameter;
         global $country_parameter;
         global $category_parameter;
-	$smarty = new Smarty;
+        $smarty = new Smarty;
 	$smarty->assign(array(
 		"avg_img" => $avg_img,
 		"ad_valence" => $valence,
