@@ -105,6 +105,14 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 }
     $videos1 = array();
     $videos2 = array();
+    
+    $gender1_include = "";
+    $country1_include = "";
+    $category1_include = "";
+    $gender2_include = "";
+    $country2_include = "";
+    $category2_include = "";
+    
     $SQL="Select * FROM category";
     eq($SQL,$rs);
     $func_ary=array("compare","analysebyvideo","analysebyparameters");
@@ -114,6 +122,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
             if($data['cat_id'] == $R['cat1'])
             {
                     $data['selected'] = 'selected';
+                    $category1_include = $data['cat_name'];
             }else {
                     $data['selected'] = '';
             }
@@ -122,6 +131,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
             if($data['cat_id'] == $R['cat2'])
             {
                     $data['selected'] = 'selected';
+                    $category2_include = $data['cat_name'];
             }else {
                     $data['selected'] = '';
             }
@@ -133,6 +143,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 	while ($data = mfa($rs)) {
 		if ($data['countries_id'] == $R['countries1']) {
 			$data['selected'] = 'selected';
+                        $country1_include = $data['countries_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -142,6 +153,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
                 
                 if ($data['countries_id'] == $R['countries2']) {
 			$data['selected'] = 'selected';
+                        $country2_include = $data['countries_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -150,18 +162,24 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 		array_push($country_name2, $data);
 	}
 
-	if ($R['gender1'] == "Male") $male = array(
+	if ($R['gender1'] == "Male"){
+            $male = array(
 		"key" => "Male",
 		"selected" => "selected"
-	);
+            );
+            $gender1_include = "Males";
+        }
 	else $male = array(
 		"key" => "Male",
 		"selected" => ''
 	);
-	if ($R['gender1'] == "Female") $female = array(
+	if ($R['gender1'] == "Female"){
+            $female = array(
 		"key" => "Female",
 		"selected" => "selected"
-	);
+            );
+            $gender1_include = "Females";
+        }
 	else $female = array(
 		"key" => "Female",
 		"selected" => ''
@@ -171,18 +189,24 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 		$female
 	);
         
-        if ($R['gender2'] == "Male") $male = array(
+        if ($R['gender2'] == "Male"){
+            $male = array(
 		"key" => "Male",
 		"selected" => "selected"
-	);
+            );
+            $gender2_include = "Males";
+        }
 	else $male = array(
 		"key" => "Male",
 		"selected" => ''
 	);
-	if ($R['gender2'] == "Female") $female = array(
+	if ($R['gender2'] == "Female"){
+            $female = array(
 		"key" => "Female",
 		"selected" => "selected"
-	);
+            );
+            $gender2_include = "Females";
+        }
 	else $female = array(
 		"key" => "Female",
 		"selected" => ''
@@ -325,7 +349,13 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
                                 "analysis_tab" => "analysis-selected",
                                 "premium_tab" => "label",  
                                 "videos1" => $videos1,  
-                                "videos2" => $videos2));
+                                "videos2" => $videos2,
+                                "gender1_include" => $gender1_include,
+                                "gender2_include" => $gender2_include,
+                                "country1_include" => $country1_include,
+                                "country2_include" => $country2_include,
+                                "category1_include" => $category1_include,
+                                "category2_include" => $category2_include));
         
            $smarty->display('compare.tpl');
         }

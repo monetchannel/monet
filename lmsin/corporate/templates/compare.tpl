@@ -21,7 +21,7 @@
                 <form method="POST" action="compare.php">
                     <input type="hidden" name="filter" value="true">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="border-right: 2px solid purple;">
                             <label class="checkbox-inline"><strong><font size="5">Compare what:</font></strong></label>
                             <div class="row"><div class="col-md-5">
                                     <div class="top-select checkbox-inline" >
@@ -81,7 +81,7 @@
                                             <option value="">
                                                 Category
                                             </option>
-                                            {foreach $category_name1 as $cat}
+                                            {foreach $category_name2 as $cat}
                                                 <option value="{$cat.cat_id}" {$cat.selected}>
                                                     {$cat.cat_name}
                                                 </option>
@@ -94,7 +94,7 @@
                                             <option value="">
                                                 Country
                                             </option>
-                                            {foreach $country_name1 as $country}
+                                            {foreach $country_name2 as $country}
                                                 <option value="{$country.countries_id}" {$country.selected}>
                                                     {$country.countries_name}
                                                 </option>
@@ -109,7 +109,7 @@
                                             <option value="">
                                                 Gender
                                             </option>
-                                            {foreach $gender1 as $k}
+                                            {foreach $gender2 as $k}
                                                 <option value="{$k.key}" {$k.selected}>
                                                     {$k.key}
                                                 </option>
@@ -191,10 +191,12 @@
             </div> 
         </div>
 
-
+    <div class="row"><div class="col-md-6 text-center alert alert-info" style="height:70px;"><input type="checkbox" class="allbrands1">&nbsp;Include All{if $category1_include!=""} {$category1_include} Category{/if} Videos From Other Brands{if $country1_include!="" or $gender1_include!=""} with feedbacks{if $gender1_include!=""} of {$gender1_include}{/if}{if $country1_include!=""} from {$country1_include}{/if}{/if}</div><div class="col-md-6 text-center alert alert-info" style="height:70px;"><input type="checkbox" class="allbrands2">&nbsp;Include All{if $category2_include!=""} {$category2_include} Category{/if} Videos From Other Brands{if $country2_include!="" or $gender2_include!=""} with feedbacks{if $gender2_include!=""} of {$gender2_include}{/if}{if $country2_include!=""} from {$country2_include}{/if}{/if}
+</div></div>
+    
     <div class="row">
-        <div class="col-md-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" class="allbrands1">Include All Videos From Other Brands   
-    {if $video_num_rows1>0}
+        <div class="col-md-6">
+            {if $video_num_rows1>0}
     <div class="container-fluid"><br>
                                 
     <div class="row">
@@ -236,7 +238,7 @@
     <div class="row"><div class="col-md-12 text-center alert alert-info">There are no feedbacks from the current selection.</div></div>
     {/if}
     </div>
-    <div class="col-md-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" class="allbrands2">Include All Videos From Other Brands
+    <div class="col-md-6">
         {if $video_num_rows2>0}
     <div class="container-fluid"><br>
                                 
