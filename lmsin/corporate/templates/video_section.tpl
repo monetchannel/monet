@@ -85,6 +85,13 @@ function go_button()
             </select>&nbsp;&nbsp;&nbsp;Time Segment:<input type="text" name="time_segment" value="{$time_segment}" size="3" />&nbsp;&nbsp;&nbsp;<input id="buttongray" class="mybutton" type="submit" name="go"  value="  GO  " /></div>
    
   </div>
+            
+  <input type="hidden" name="st_pos" id='st_pos' value="{$st_pos}">
+  <input type="hidden" name="act"  value="video_section">
+  <input type="hidden" name="nrpp" id='nrpp' value="{$nrpp}">
+  <input type="hidden" name="order" id="order" value="{$order}">
+  <input type="hidden" name="orderby" id="orderby" value="{$orderby}">
+</form>
   {if $tot_rows>0}
   <div class="row">
     <div class="col-md-12">
@@ -122,10 +129,5 @@ function go_button()
   {else} <br />
   <div class="text-center alert alert-info">Your current video section list is empty</div>
   {/if}
-  <input type="hidden" name="st_pos" id='st_pos' value="{$st_pos}">
-  <input type="hidden" name="act"  value="video_section">
-  <input type="hidden" name="nrpp" id='nrpp' value="{$nrpp}">
-  <input type="hidden" name="order" id="order" value="{$order}">
-  <input type="hidden" name="orderby" id="orderby" value="{$orderby}">
-</form>
+
 {/block}

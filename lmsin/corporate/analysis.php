@@ -381,7 +381,10 @@ function video_section()
 	else if(($R[valence_to]<0 && $R[valence_to]!=-2 && $R[valence_from]<0 && $R[valence_from]!=-2) || ($R[valence_to]<0 && $R[valence_from]>0))$val="MIN";
 	else $val="MAX";
 	
-	$SQL="SELECT c_id as c_id,c_title,c_url,c_company_id,(Select count(ara_valence) from analysis_results_average where ara_c_id=c_id $SQL_CON) as total_vlc,(Select MIN(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON) as ar_time,(select MAX(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON)  as max_time,(Select (MAX(ara_time)-ar_time) from analysis_results_average where ara_c_id=c_id) as diff_time FROM content where c_company_id='$_COOKIE[CompanyId]' AND c_id IN (Select DISTINCT(ara_c_id) from analysis_results_average  WHERE 1 $SQL_CON) having diff_time>5  ORDER BY total_vlc DESC ";
+        $time_segment = 1;
+        if(isset($R[time_segment])&& $R[time_Segment]>0) $time_segment=$R[time_segment];
+        
+	$SQL="SELECT c_id as c_id,c_title,c_url,c_company_id,(Select count(ara_valence) from analysis_results_average where ara_c_id=c_id $SQL_CON) as total_vlc,(Select MIN(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON) as ar_time,(select MAX(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON)  as max_time,(Select (MAX(ara_time)-ar_time) from analysis_results_average where ara_c_id=c_id) as diff_time FROM content where c_company_id='$_COOKIE[CompanyId]' AND c_id IN (Select DISTINCT(ara_c_id) from analysis_results_average  WHERE 1 $SQL_CON) having diff_time>".$time_segment."  ORDER BY total_vlc DESC ";
 	$tot_rows=eq($SQL,$rs);
 	get_nb_text_multi($tot_rows,"records",$R[st_pos],$con_limit,$nb_text,$R[nrpp]);
 	$SQL=$SQL.$con_limit;
@@ -445,10 +448,11 @@ function get_time_slice($c_id,$from=-1,$to=1,$time_segment_length=5)
 	$time=array();	
 	$SQL="Select ara_time from analysis_results_average where ara_c_id='$c_id' $SQL_CON order by ara_time ASC";
 	eq($SQL,$rs);
+        $last=0;
 	while($data=mfa($rs))
 	{
 		$data[ara_time]=intval($data[ara_time]);	
-		if($data[ara_time]>$last)
+		if($data[ara_time]>=$last)
 		{
 			$data[end_time]=$data[ara_time]+$time_segment_length;
 			$data[time_slice]=$data[ara_time]."-".$data[end_time];
@@ -476,7 +480,7 @@ function play_video()
 						"avg_valence"=>$avg_valence,
 						"time_slice"=>get_time_slice($_REQUEST[c_id],$_REQUEST[vlc_from],$_REQUEST[vlc_to],$_REQUEST[time_segment]),
 						"avg_time"=>$avg_time,"analysis_tab"=>'analysis-selected',
-	"active_video_tab"=>'label'
+	"premium_tab"=>'label'
 	));
 	$smarty->display("video_section_play.tpl");
 }
