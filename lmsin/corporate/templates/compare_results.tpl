@@ -22,13 +22,48 @@
         .glyphicon{
             top:16px
         }  
+        #sel {
+        border: 1px solid #008B8B;
+        
+        }
     </style>
    
     <script type="text/javascript" src="{$SERVER_PATH}corporate/js/compare.js"></script> 
 
 		
-		<div id="bottomContainer" class="container-fluid">
+		<div id="" class="container-fluid">
+                    <div class="row top-margin">
+                        <div id="" class="col-md-6 row-right">
+                            <h3 class="text-center">Selection 1</h3>
+                            
+                            <ul>
+                                <li><strong>Category: </strong>{$category1}</li>
+                                <li><strong>Demography</strong>
+                                    <ul>
+                                        <li><strong>Country: </strong>{$country1}</li>
+                                        <li><strong>Gender: </strong>{$gender1}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
                     
+                        </div>
+                        <div id="" class="col-md-6">
+                               <h3 class="text-center">Selection 2</h3>
+                            <ul>
+                                <li><strong>Category: </strong>{$category2}</li>
+                                <li><strong>Demography</strong>
+                                    <ul>
+                                        <li><strong>Country: </strong>{$country2}</li>
+                                        <li><strong>Gender: </strong>{$gender2}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        
+                        
+                    </div>
                         {if 'valence'|in_array:$filter_graph_array}
 			<div class="row row-top">
 				<div class="col-md-6 row-right" style="">
@@ -284,75 +319,10 @@
                         {/if}
                         
                         {if 'heatmap'|in_array:$filter_graph_array}
-                        <!--div class="row row-top">
-                            <div class="col-md-6 row-right" >
-                                <div class="analysis-graph-header">
-                                        Heat Map
-                                </div>
-                                <div id="heatmapview" title="Heat Map" style="min-height:200px;">
-                                </div>
-                                
-                                <div id="timeline-section">
-                                   <div class="timeline-steps" >
-                                        <ul class="nav nav-tabs dots"-->
-                                            <!-- timeline will display here -->
-                                        <!--/ul>
-                                   </div>
-                                </div>
-                               
-                            </div>
-                            <div class="col-md-6">
-                                <div class="analysis-graph-header">
-					Heat Map Color Codes
-				</div>
-                                <div class="row">
-                                <ul class="pieID heatmap-legend">
-                                    <li class="happy-item">
-                                      <em>Happy</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="sad-item">
-                                      <em>Sad</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="neutral-item">
-                                      <em>Neutral</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="angry-item">
-                                      <em>Angry</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="surprised-item">
-                                      <em>Surprised</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="disgusted-item">
-                                      <em>Disgusted</em>
-                                      <span></span>
-                                    </li>
-                                    <li class="scared-item">
-                                      <em>Scared</em>
-                                      <span></span>
-                                    </li>
-                                </ul>
-                                </div>
-                            </div>
-                        </div>    
+                          
                         {/if}
                                               
-                        <div class="row row-top">
-				<div class="col-md-6 row-right" style="">
-				    <div class="analysis-graph-header">
-					        User Feedback Variation
-				    </div>
-                                    <div id="questions_chart" class="min_height">
-                                        
-                                    </div>
-				</div>
-				<div class="col-md-6">
-			        </div>
-                        </div-->    
+                          
 		</div> 
                         <div id="player" style="display:none;"></div>
                 <script src="{$SERVER_PATH}corporate/js/highcharts/highcharts.js"></script>
