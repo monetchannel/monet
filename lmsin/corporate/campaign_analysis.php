@@ -361,7 +361,10 @@ if (isset($_REQUEST['cid']) || isset($_REQUEST['ad_ar_id'])) {
 		"video_analysis_tab" => (!isset($_GET['camp_id']) && isset($_GET['cid'])) ? "label" : "",
 		"campaign_analysis_tab" => (isset($_GET['camp_id']) && isset($_GET['cid'])) ? "label" : "",
 		"active_analysis_tab" => (isset($_GET['ad_ar_id'])) ? "label" : "",
-		"analysis_tab" => "analysis-selected"
+		"analysis_tab" => "analysis-selected",
+                "gender_parameter" => "",
+                "country_parameter" => "",
+                "category_parameter" => ""
 	));
 }
 

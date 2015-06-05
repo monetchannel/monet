@@ -29,6 +29,12 @@ if ($_COOKIE[CompanyId]) {
 	$category_name = array();
 	$country_name = array();
 	$videos = array();
+        
+        $country_parameter="";
+        $category_parameter="";
+        $gender_parameter="";
+        
+	
 	$SQL = "Select * FROM category";
 	eq($SQL, $rs);
 	$func_ary = array(
@@ -38,6 +44,7 @@ if ($_COOKIE[CompanyId]) {
 	while ($data = mfa($rs)) {
 		if ($data['cat_id'] == $R['cat']) {
 			$data['selected'] = 'selected';
+                        $category_parameter = "| Category = ".$data['cat_name']." |";
 		}
 		else {
 			$data['selected'] = '';
@@ -51,6 +58,7 @@ if ($_COOKIE[CompanyId]) {
 	while ($data = mfa($rs)) {
 		if ($data['countries_id'] == $R['countries']) {
 			$data['selected'] = 'selected';
+                        $category_parameter = "| Country = ".$data['countries_name']." |";
 		}
 		else {
 			$data['selected'] = '';
@@ -59,18 +67,24 @@ if ($_COOKIE[CompanyId]) {
 		array_push($country_name, $data);
 	}
 
-	if ($R['gender'] == "Male") $male = array(
-		"key" => "Male",
-		"selected" => "selected"
-	);
+	if ($R['gender'] == "Male"){
+            $male = array(
+                "key" => "Male",
+                "selected" => "selected"
+            );
+            $gender_parameter = "| Gender = Male |";
+        }
 	else $male = array(
 		"key" => "Male",
 		"selected" => ''
 	);
-	if ($R['gender'] == "Female") $female = array(
+	if ($R['gender'] == "Female"){
+            $female = array(
 		"key" => "Female",
 		"selected" => "selected"
-	);
+            );
+            $gender_parameter = "| Gender = Female |";
+        }
 	else $female = array(
 		"key" => "Female",
 		"selected" => ''
@@ -477,6 +491,9 @@ function analysebyvideo($msg = '')
 	if (!$ar_ids) $ar_ids = 0;
 	if ($vd[cf_date] != 0) $vd[cf_date] = date("M d,Y", $vd[cf_date]);
 	else $vd[cf_date] = "-";
+        global $gender_parameter;
+        global $country_parameter;
+        global $category_parameter;
 	$smarty = new Smarty;
 	$smarty->assign(array(
 		"avg_img" => $avg_img,
@@ -499,10 +516,13 @@ function analysebyvideo($msg = '')
 		"video_id" => get_video_id($vd[c_url]) ,
 		"SERVER_COMPANY_PATH" => $Server_company_Path,
 		"SERVER_PATH" => $Server_View_Path,
-		"act" => 'analysis_graph',
+		"act" => 'analysebyvideo',
 		"filter_graph_array" => $chkArray,
 		"analysis_tab" => "analysis-selected",
-                "premium_tab" => "label"
+                "premium_tab" => "label",
+                "gender_parameter" => $gender_parameter,
+                "country_parameter" => $country_parameter,
+                "category_parameter" => $category_parameter
 	));
 	$smarty->display('campaign_analysis.tpl');
 }
