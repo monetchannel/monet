@@ -23,11 +23,11 @@
           <div class="top-title">
             <form method="POST" action="advanced_parameter_search.php">
               <input type="hidden" name="filter" value="true">
-              <label class="checkbox-inline">
-                Search By:
+              <label class="checkbox-inline"><strong>
+                      Search By:</strong>
               </label>
               <div class="top-select checkbox-inline">
-                <select name="cat" id="cat">
+                <select name="cat" id="cat" class="form-control">
                   <option value="">
                     Category
                   </option>
@@ -39,7 +39,7 @@
                 </select>
               </div>
               <div class="top-select checkbox-inline">
-                <select name="countries" id="countries">
+                <select name="countries" id="countries" class="form-control">
                   <option value="">
                     Country
                   </option>
@@ -51,7 +51,7 @@
                 </select>
               </div>
               <div class="top-select checkbox-inline">
-                <select name="gender"id="gender">
+                <select name="gender"id="gender" class="form-control">
                   <option value="">
                     Gender
                   </option>
@@ -63,8 +63,8 @@
                 </select>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="submit" class="search-button">
-                Search
+              <button type="submit" class="btn btn-default"><strong>
+                      Search</strong>
               </button>
             </div>
           </div>
@@ -126,9 +126,9 @@
           </a>
           
           
-          <button class="btn btn-sm btn-default" onclick="javascript:return generate_code('0')">
+          <button class="btn btn-default" onclick="javascript:return generate_code('0')">
             <strong>
-              Analyze By Parameters
+              Analyze
             </strong>
           </button>
           <input type="hidden" name="vode_id[]" value="0" />

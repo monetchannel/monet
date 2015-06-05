@@ -23,11 +23,11 @@
           <div class="top-title">
             <form method="POST" action="advanced_video_search.php">
               <input type="hidden" name="filter" value="true">
-              <label class="checkbox-inline">
-                Search By:
+              <label class="checkbox-inline"><strong>
+                      Search By:</strong>
               </label>
               <div class="top-select checkbox-inline">
-                <select name="cat" id="cat">
+                <select name="cat" id="cat" class="form-control">
                   <option value="">
                     Category
                   </option>
@@ -39,7 +39,7 @@
                 </select>
               </div>
               <div class="top-select checkbox-inline">
-                <select name="countries" id="countries">
+                <select name="countries" id="countries" class="form-control">
                   <option value="">
                     Country
                   </option>
@@ -51,7 +51,7 @@
                 </select>
               </div>
               <div class="top-select checkbox-inline">
-                <select name="gender"id="gender">
+                <select name="gender"id="gender" class="form-control">
                   <option value="">
                     Gender
                   </option>
@@ -63,8 +63,8 @@
                 </select>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="submit" class="search-button">
-                Search
+              <button type="submit" class="btn btn-default"><strong>
+                      Search</strong>
               </button>
             </div>
           </div>
@@ -99,9 +99,9 @@
                 {foreach $videos as $video}
                 <tr>
                   <td class="field-label col-xs-2 col-sm-2 col-md-2 text-align">
-                    <img class="img-responsive" src="{$video.c_thumb_url}" alt="125x125">
+                    <img class="img-responsive" src="{$video.c_thumb_url}" alt="125x125" style="margin:0 auto;">
                   </td>
-                  <td class="col-md-2  second-td">
+                  <td class="col-md-3 second-td">
                     
                 {$video.c_title}
               </br>Category: {$video.cat_name} 
@@ -109,7 +109,7 @@
           Feedback: {$video.num_feedback}
       </td>
       
-      <td class="col-md-5 third-td" >
+      <td class="col-md-7 third-td" >
         <div class="container-fluid">
           <div class="row  action pull-right">
             
@@ -174,16 +174,6 @@
       </tr>
       {/foreach}
       </tbody>
-</table>
-
-<table class="table">
-  <td>
-  </td>
-  <td>
-  </td>
-  <td class="text-right">
-    {$paging_html}
-  </td>
 </table>
 
 </div>
