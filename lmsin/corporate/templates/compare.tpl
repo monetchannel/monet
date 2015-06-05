@@ -169,14 +169,14 @@
                                 </div>
                             </a>
 
-                            <a href="javascript:void(0)">
+                            <!--a href="javascript:void(0)">
                                 <input type="checkbox" name="Heat_map[]" id="Heat_map_0" value="heatmap" class="0" checked="checked" />
                                 <div>
                                     <label for="Heat_map_0">
                                         Heat Map
                                     </label>
                                 </div>
-                            </a>
+                            </a-->
 
 
                             <input type="hidden" name="vode_id[]" value="0" />
