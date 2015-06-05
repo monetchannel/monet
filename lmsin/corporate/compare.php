@@ -21,6 +21,12 @@ if($_COOKIE[CompanyId])
    
     
     $R=  DIN_ALL($_REQUEST);
+    $c1="Overall";
+    $ct1="Overall";
+    $c2="Overall";
+    $ct2="Overall";
+    $g1="Overall";
+    $g2="Overall";
     $category_name1=array();
     $category_name2=array();
     $country_name1=array();
@@ -123,6 +129,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
             {
                     $data['selected'] = 'selected';
                     $category1_include = $data['cat_name'];
+                    $c1 = $data['cat_name'];
             }else {
                     $data['selected'] = '';
             }
@@ -132,6 +139,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
             {
                     $data['selected'] = 'selected';
                     $category2_include = $data['cat_name'];
+                    $c2 = $data['cat_name'];
             }else {
                     $data['selected'] = '';
             }
@@ -144,6 +152,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 		if ($data['countries_id'] == $R['countries1']) {
 			$data['selected'] = 'selected';
                         $country1_include = $data['countries_name'];
+                         $ct1 = $data['countries_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -154,6 +163,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
                 if ($data['countries_id'] == $R['countries2']) {
 			$data['selected'] = 'selected';
                         $country2_include = $data['countries_name'];
+                         $ct2 = $data['countries_name'];
 		}
 		else {
 			$data['selected'] = '';
@@ -215,6 +225,8 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
 		$male,
 		$female
 	);
+        if ($R['gender1'] != "") $g1 = $R['gender1'];
+        if ($R['gender2']!="") $g2 = $R['gender2'];
 	$condition1 = "";
 	$condition2 = "";
 	$condition3 = "";
@@ -363,6 +375,12 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
     
 
 function compare($msg="") {
+     global $c1;
+    global $c2;
+    global $ct1;
+    global $ct2;
+    global $g1;
+    global $g2;
     $c_id=$_REQUEST[c_id];
     //echo $c_id;
     global $AnalysisResultId;
@@ -620,8 +638,8 @@ function compare($msg="") {
                 'Disgusted' => (float)$adDisgustedVal,
                 'Scared' => number_format($adScaredVal, 10)*100000
             );
-            
-            $max_value = array_keys($comparingArray,max($comparingArray))[0];
+            $temp=array_keys($comparingArray,max($comparingArray));
+            $max_value = $temp[0];
             $max_value = ucfirst($max_value);
             
             if($adEngagementVal!="") // checking if the result set of the adValenceQuery is not null, if null then don't include 0's in the array // vivek verma
@@ -965,8 +983,8 @@ function compare($msg="") {
                 'Disgusted' => (float)$adDisgustedVal,
                 'Scared' => number_format($adScaredVal, 10)*100000
             );
-            
-            $max_value = array_keys($comparingArray,max($comparingArray))[0];
+            $temp= array_keys($comparingArray,max($comparingArray));
+            $max_value = $temp[0];
             $max_value = ucfirst($max_value);
             if($adValenceVal!="") // checking if the result set of the adValenceQuery is not null, if null then don't include 0's in the array // vivek verma
             array_push($adValenceArray_overall, 
@@ -1036,6 +1054,12 @@ function compare($msg="") {
                               
                                 'cf_date'=>"",
                                 "avg_ad_time"=>$avg_time,
+                                "category1"=>$c1,
+                                "country1"=>$ct1,
+                                "gender1"=>$g1,
+                                "category2"=>$c2,
+                                "country2"=>$ct2,
+                                "gender2"=>$g2,
             ));
 $smarty->display('compare_results.tpl');
     
