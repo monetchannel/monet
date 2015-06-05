@@ -1,5 +1,5 @@
-<?php
-include ("../includes/common.php");
+ <?php
+include ("../../includes/common.php");
 init();
 $from=3;
 //.........................................
@@ -78,7 +78,7 @@ function analysis_results($msg="")
 		$search_msg=1;
 	}
 	
-	$SQL="SELECT * FROM `analysis_results` left join `content_feedback` on ar_cf_id=cf_id left join users on user_id=cf_user_id left join `content` on c_id=cf_c_id where c_company_id='$_COOKIE[CompanyId]' order by cf_id DESC"; // AND c_category IN (SELECT cat_name FROM category)
+	$SQL="SELECT * FROM analysis_results left join content_feedback on cf_id=ar_cf_id left join users on cf_user_id=user_id left join content on  c_id=cf_c_id WHERE ar_id IN (SELECT DISTINCT(ad_ar_id) FROM analysis_detail) $SQL_CON AND c_company_id='$_COOKIE[CompanyId]' ORDER BY cf_id DESC ";// AND c_category IN (SELECT cat_name FROM category)
 	$tot_rows=eq($SQL,$rs);
 	get_nb_text_multi($tot_rows,"records",$R[st_pos],$con_limit,$nb_text,$R[nrpp]);
 	
@@ -125,7 +125,7 @@ function analysis_results($msg="")
 	));
 	$smarty->display("analysis_results.tpl");
 }
-#######################################################################################################
+##############################################
 function analysis_graph()
 {
 	$R=DIN_ALL($_REQUEST);
@@ -136,15 +136,14 @@ function analysis_graph()
 	get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id","where ar_id='$_REQUEST[ad_ar_id]' limit 0,1","c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);	
 	
 	$ary=get_value_ary("analysis_results left join content_feedback on ar_cf_id=cf_id","ar_id","where cf_c_id='$vd[c_id]' ");
-	
-        $ar_ids = implode(',',$ary);
+	$ar_ids = implode(',',$ary);
 	if(!$ar_ids)$ar_ids=0;
 	if(get_row_count("analysis_results_average","where ara_c_id='$vd[c_id]' limit 0,1")>0)
 	{
 		//analysis_graph_avg_coord($avg_time,$avg_valence);
-		analysis_graph_avg_coord($vd[c_id],$avg_time,$avg_valence);			//function defined in line 175 in this page
+		analysis_graph_avg_coord($vd[c_id],$avg_time,$avg_valence);
 	}
-	analysis_graph_coord($time,$valence);									//function defined in line 190 in this page
+	analysis_graph_coord($time,$valence);	
 	get_new_option_list_full_name("analysis_results left join content_feedback on cf_id=ar_cf_id left join users on cf_user_id=user_id left join content on  c_id=cf_c_id","user_id","user_fname","user_lname",'',$compare_option,0,"WHERE user_id<>'$vd[cf_user_id]' and  cf_c_id='$vd[c_id]' and ar_id IN (SELECT ad_ar_id FROM analysis_detail where ad_ar_id IN ($ar_ids))  ORDER BY user_fname,user_lname",1,"DISTINCT user_id,user_fname,user_lname");
 	
 	
@@ -152,8 +151,6 @@ function analysis_graph()
 		$vd[cf_date]=date("M d,Y",$vd[cf_date]);
 	else
 		$vd[cf_date]="-";
-        
-      
 
 	$smarty->assign(array("avg_img"=>$avg_img,
 						"ad_valence"=>$valence,
@@ -174,12 +171,12 @@ function analysis_graph()
 	));
 	$smarty->display("video_graph.tpl");
 }
-####################################################################################################################
+
 function analysis_graph_avg_coord($c_id,&$x,&$y)
 {
 	$datax = array();
 	$datay_valence=array();
-	$SQL = "SELECT  * FROM analysis_results_average  WHERE ara_c_id='$c_id' ORDER BY ara_time ASC ;";
+	$SQL = "SELECT  * FROM analysis_results_average  WHERE ara_c_id='$c_id' AND ara_valence BETWEEN ".$_REQUEST[vlc_from]." AND ".$_REQUEST[vlc_to]." ORDER BY ara_time ASC ;";
 	$tot_rows=eq($SQL,$rs1);
 	while($data=mfa($rs1))
 	{
@@ -243,7 +240,7 @@ function compare_youtube()
 	$smarty->display("compare_youtube.tpl");
 	
 }
-###############################################################################################################################
+################################################
 function analysis_csv()
 {
 	$R=DIN_ALL($_REQUEST);
@@ -333,7 +330,7 @@ function analysis_csv()
 	}
 }
 
-##############################################################################################################################
+##########################################
 function video_section()
 {
 	$R=DIN_ALL($_REQUEST);
@@ -380,11 +377,8 @@ function video_section()
 	if($R[valence_to]>0 && $R[valence_from]>0)$val="MAX";
 	else if(($R[valence_to]<0 && $R[valence_to]!=-2 && $R[valence_from]<0 && $R[valence_from]!=-2) || ($R[valence_to]<0 && $R[valence_from]>0))$val="MIN";
 	else $val="MAX";
-	
-        $time_segment = 1;
-        if(isset($R[time_segment])&& $R[time_Segment]>0) $time_segment=$R[time_segment];
-        
-	$SQL="SELECT c_id as c_id,c_title,c_url,c_company_id,(Select count(ara_valence) from analysis_results_average where ara_c_id=c_id $SQL_CON) as total_vlc,(Select MIN(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON) as ar_time,(select MAX(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON)  as max_time,(Select (MAX(ara_time)-ar_time) from analysis_results_average where ara_c_id=c_id) as diff_time FROM content where c_company_id='$_COOKIE[CompanyId]' AND c_id IN (Select DISTINCT(ara_c_id) from analysis_results_average  WHERE 1 $SQL_CON) having diff_time>".$time_segment."  ORDER BY total_vlc DESC ";
+	if(!isset($R[time_segment]) || $R[time_segment]<0)$R[time_segment]=0;
+	$SQL="SELECT c_id as c_id,c_title,c_url,c_company_id,(Select count(ara_valence) from analysis_results_average where ara_c_id=c_id $SQL_CON) as total_vlc,(Select MIN(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON) as ar_time,(select MAX(ara_time) from analysis_results_average where ara_c_id=c_id $SQL_CON)  as max_time,(Select (MAX(ara_time)-ar_time) from analysis_results_average where ara_c_id=c_id) as diff_time FROM content where c_company_id='$_COOKIE[CompanyId]' AND c_id IN (Select DISTINCT(ara_c_id) from analysis_results_average  WHERE 1 $SQL_CON) having diff_time >= $R[time_segment]  ORDER BY total_vlc DESC ";
 	$tot_rows=eq($SQL,$rs);
 	get_nb_text_multi($tot_rows,"records",$R[st_pos],$con_limit,$nb_text,$R[nrpp]);
 	$SQL=$SQL.$con_limit;
@@ -427,7 +421,7 @@ function video_section()
 	$smarty->display("video_section.tpl"); 
 }
 
-###################################################################################################################################
+######################################################
 function get_time_slice($c_id,$from=-1,$to=1,$time_segment_length=5)
 {
 	if($time_segment_length==0)
@@ -451,7 +445,7 @@ function get_time_slice($c_id,$from=-1,$to=1,$time_segment_length=5)
         $last=0;
 	while($data=mfa($rs))
 	{
-		$data[ara_time]=intval($data[ara_time]);	
+		$data[ara_time]=intval($data[ara_time]);
 		if($data[ara_time]>=$last)
 		{
 			$data[end_time]=$data[ara_time]+$time_segment_length;
@@ -466,7 +460,7 @@ function get_time_slice($c_id,$from=-1,$to=1,$time_segment_length=5)
 
 }
 
-################################################################################################################################
+######################################################
 function play_video()
 {
    	$smarty = new Smarty;
