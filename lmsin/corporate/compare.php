@@ -202,7 +202,7 @@ if($video2_to_compare=="") echo "<script>alert('Sorry, there are no feedbacks fo
         if (isset($R['cat1']) && $R['cat1'] != '') $condition1 = " AND cv.cv_cat_id = " . $R['cat1'];
 	if (isset($R['countries1']) && $R['countries1'] != '') $condition2 = " AND u.user_country = " . $R['countries1'];
 	if (isset($R['gender1']) && $R['gender1'] != '') $condition3 = " AND u.user_gender = '" . $R['gender1'] . "'";
-        if  (isset($R['all2']) && $R['all2'] != '') $brand_condition = "";
+        if  (isset($R['all1']) && $R['all1'] != '') $brand_condition = "";
         
 
         $SQL="SELECT c.c_id,ar.ar_id
@@ -667,7 +667,7 @@ function compare($msg="") {
                                 'cf_date'=>$vd[cf_date],
                                 "avg_ad_time"=>$avg_time,
                                 "video_url"=>$Server_View_Path."video_files/".$vd[cf_id].".flv",
-                                "video_id"=>get_video_id($vd[c_url]),
+                                "video_id"=>"_r8Isy9bNi4",
                                 "SERVER_COMPANY_PATH"=>$Server_company_Path,
                                 "SERVER_PATH"=>$Server_View_Path,
                                 "act"=>'analysis_graph',
