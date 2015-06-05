@@ -346,7 +346,7 @@ function compare($msg="") {
         }
         
 	//get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id","where ar_id='$_REQUEST[ad_ar_id]' limit 0,1","c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);	
-        get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id",$where_cond,"c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);        
+        //get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id",$where_cond,"c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);        
         
     $graphsToShowArray = explode(",", $_COOKIE['graphs_to_show']);
     $chkArray = array();
@@ -660,13 +660,7 @@ function compare($msg="") {
                                 "avg_ad_valence"=>$avg_valence,
                                 "ad_time"=>$time,
                                 "compare_option"=>$compare_option,
-                                "c_id"=>$vd[c_id],
-                                "cf_id"=>$vd[cf_id],
-                                "user_name"=>$vd[user_fname]." ".$vd[user_lname],
-                                "video_title"=>$vd[c_title],
-                                'cf_date'=>$vd[cf_date],
                                 "avg_ad_time"=>$avg_time,
-                                "video_url"=>$Server_View_Path."video_files/".$vd[cf_id].".flv",
                                 "video_id"=>"_r8Isy9bNi4",
                                 "SERVER_COMPANY_PATH"=>$Server_company_Path,
                                 "SERVER_PATH"=>$Server_View_Path,
@@ -685,7 +679,7 @@ function compare($msg="") {
         }
         
 	//get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id","where ar_id='$_REQUEST[ad_ar_id]' limit 0,1","c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);	
-        get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id",$where_cond,"c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);        
+        //get_row_con_info("analysis_results left join content_feedback on ar_cf_id=cf_id left join users on cf_user_id=user_id left join content on c_id=cf_c_id",$where_cond,"c_id ,c_url,cf_id,cf_user_id,user_lname,user_fname,c_title,cf_date",$vd);        
         
     $graphsToShowArray = explode(",", $_COOKIE['graphs_to_show']);
     $chkArray = array();
