@@ -1,165 +1,197 @@
 {extends file="index.tpl"}
 {block name=body}
-
-{if $msg}
-<div class="alert alert-success margin-top">  
-  <a class="close" data-dismiss="alert">×</a>  
-  {$msg}  
-</div>  
-{/if}
+    <style> 
+        #temp {
+            background-color: purple;
+        }
+    </style>
+    {if $msg}
+        <div class="alert alert-success margin-top">  
+            <a class="close" data-dismiss="alert">×</a>  
+            {$msg}  
+        </div>  
+    {/if}
 
     <div class="row  margin-top">
         <div class="col-xs-6 col-sm-6 col-md-12">
             <img class="img-responsive" src="{$smarty.cookies.CompanyLogoSmall}" />
-             <!--<img class="img-responsive" src="./images/pepsilogo.png">-->
-          
+            <!--<img class="img-responsive" src="./images/pepsilogo.png">-->
+
             <div class="top-title">
                 <form method="POST" action="compare.php">
-                <input type="hidden" name="filter" value="true">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="checkbox-inline">Compare what:</label><br>
-                <div class="top-select checkbox-inline">
-                <select name="cat1" id="cat1">
-                  <option value="">
-                    Category
-                  </option>
-                  {foreach $category_name1 as $cat}
-                  <option value="{$cat.cat_id}" {$cat.selected}>
-                    {$cat.cat_name}
-                  </option>
-                  {/foreach}
-                </select>
-                </div><br>
-              <div class="top-select checkbox-inline">
-                <select name="countries1" id="countries1">
-                  <option value="">
-                    Country
-                  </option>
-                  {foreach $country_name1 as $country}
-                  <option value="{$country.countries_id}" {$country.selected}>
-                    {$country.countries_name}
-                  </option>
-                  {/foreach}
-                </select>
-              </div><br>
-              <div class="top-select checkbox-inline">
-                <select name="gender1"id="gender1">
-                  <option value="">
-                    Gender
-                  </option>
-                  {foreach $gender1 as $k}
-                  <option value="{$k.key}" {$k.selected}>
-                    {$k.key}
-                  </option>
-                  {/foreach}
-                </select>
-              </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <label class="checkbox-inline">Compare with:</label><br>
-                <div class="top-select checkbox-inline">
-                <select name="cat2" id="cat2">
-                  <option value="">
-                    Category
-                  </option>
-                  {foreach $category_name2 as $cat}
-                  <option value="{$cat.cat_id}" {$cat.selected}>
-                    {$cat.cat_name}
-                  </option>
-                  {/foreach}
-                </select>
-                </div><br>
-              <div class="top-select checkbox-inline">
-                <select name="countries2" id="countries2">
-                  <option value="">
-                    Country
-                  </option>
-                  {foreach $country_name2 as $country}
-                  <option value="{$country.countries_id}" {$country.selected}>
-                    {$country.countries_name}
-                  </option>
-                  {/foreach}
-                </select>
-              </div><br>
-              <div class="top-select checkbox-inline">
-                <select name="gender2" id="gender2">
-                  <option value="">
-                    Gender
-                  </option>
-                  {foreach $gender2 as $k}
-                  <option value="{$k.key}" {$k.selected}>
-                    {$k.key}
-                  </option>
-                  {/foreach}
-                </select>
-              </div>
-                </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-6 action align-center">
-          
-          <a href="javascript:void(0)" >
-            <input type="checkbox" name="excampaign[]" id="campaign_0" value="excludecampaign" class="0" />
-            <div>
-              <label>
-                Exclude Campaign
-              </label>
-            </div>
-          </a>
-          
-          
-          <a href="javascript:void(0)" >
-            <input type="checkbox" name="valence[]" id="Valence_0" value="valence" class="0" checked="checked" />
-            <div>
-              <label for="Valence_0">
-                Valence
-              </label>
-            </div>
-          </a>
-          
-          <a href="javascript:void(0)">
-            <input type="checkbox" name="microexpressions[]" id="Microexpressions_0" value="emotion" class="0" checked="checked" />
-            <div>
-              <label for="Microexpressions_0">
-                Microexpressions
-              </label>
-            </div>
-          </a>
-          
-          
-          <a href="javascript:void(0)">
-            <input type="checkbox" name="engagement[]" id="Engagement_0" value="attention" class="0" checked="checked" />
-            <div>
-              <label for="Engagement_0">
-                Engagement
-              </label>
-            </div>
-          </a>
-          
-          <a href="javascript:void(0)">
-            <input type="checkbox" name="Heat_map[]" id="Heat_map_0" value="heatmap" class="0" checked="checked" />
-            <div>
-              <label for="Heat_map_0">
-                Heat Map
-              </label>
-            </div>
-          </a>
-          
-          
-            <input type="hidden" name="vode_id[]" value="0" />
-          
-          
-                        </div><div class="col-md-6 align-left">
-                        <button type="submit" class="btn btn-sm btn-default"><strong>Search</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-sm btn-default" onclick="javascript:return generate_code();"><strong>Compare</strong></button>
-                </div>
-            </div>
-        </div> 
-    </div>
-            
+                    <input type="hidden" name="filter" value="true">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="checkbox-inline"><strong><font size="5">Compare what:</font></strong></label>
+                            <div class="row"><div class="col-md-5">
+                                    <div class="top-select checkbox-inline" >
+                                        <select name="cat1" id="cat1" class="form-control">
+                                            <option value="">
+                                                Category
+                                            </option>
+                                            {foreach $category_name1 as $cat}
+                                                <option value="{$cat.cat_id}" {$cat.selected}>
+                                                    {$cat.cat_name}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div></div>
+                                <div class="col-md-7">
+                                    <div class="top-select checkbox-inline">
+                                        <select name="countries1" id="countries1" class="form-control">
+                                            <option value="">
+                                                Country
+                                            </option>
+                                            {foreach $country_name1 as $country}
+                                                <option value="{$country.countries_id}" {$country.selected}>
+                                                    {$country.countries_name}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div></div></div><br>
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-4 align-center" >
+                                    <div class="top-select checkbox-inline" >
+                                        <select name="gender1"id="gender1" class="form-control">
+                                            <option value="">
+                                                Gender
+                                            </option>
+                                            {foreach $gender1 as $k}
+                                                <option value="{$k.key}" {$k.selected}>
+                                                    {$k.key}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-5"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="checkbox-inline"><strong><font size="5">Compare with:</font></strong></label><br>
+                            <div class="row"><div class="col-md-5">
+                                    <div class="top-select checkbox-inline" >
+                                        <select name="cat2" id="cat2" class="form-control">
+                                            <option value="">
+                                                Category
+                                            </option>
+                                            {foreach $category_name1 as $cat}
+                                                <option value="{$cat.cat_id}" {$cat.selected}>
+                                                    {$cat.cat_name}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div></div>
+                                <div class="col-md-7">
+                                    <div class="top-select checkbox-inline">
+                                        <select name="countries2" id="countries2" class="form-control">
+                                            <option value="">
+                                                Country
+                                            </option>
+                                            {foreach $country_name1 as $country}
+                                                <option value="{$country.countries_id}" {$country.selected}>
+                                                    {$country.countries_name}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div></div></div><br>
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-4 align-center" >
+                                    <div class="top-select checkbox-inline" >
+                                        <select name="gender2" id="gender2" class="form-control">
+                                            <option value="">
+                                                Gender
+                                            </option>
+                                            {foreach $gender1 as $k}
+                                                <option value="{$k.key}" {$k.selected}>
+                                                    {$k.key}
+                                                </option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-5"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-6 action align-center">
+
+                            <a href="javascript:void(0)" >
+                                <input type="checkbox" name="excampaign[]" id="campaign_0" value="excludecampaign" class="0" />
+                                <div>
+                                    <label>
+                                        Exclude Campaign
+                                    </label>
+                                </div>
+                            </a>
+
+
+                            <a href="javascript:void(0)" >
+                                <input type="checkbox" name="valence[]" id="Valence_0" value="valence" class="0" checked="checked" />
+                                <div>
+                                    <label for="Valence_0">
+                                        Valence
+                                    </label>
+                                </div>
+                            </a>
+
+                            <a href="javascript:void(0)">
+                                <input type="checkbox" name="microexpressions[]" id="Microexpressions_0" value="emotion" class="0" checked="checked" />
+                                <div>
+                                    <label for="Microexpressions_0">
+                                        Microexpressions
+                                    </label>
+                                </div>
+                            </a>
+
+
+                            <a href="javascript:void(0)">
+                                <input type="checkbox" name="engagement[]" id="Engagement_0" value="attention" class="0" checked="checked" />
+                                <div>
+                                    <label for="Engagement_0">
+                                        Engagement
+                                    </label>
+                                </div>
+                            </a>
+
+                            <a href="javascript:void(0)">
+                                <input type="checkbox" name="Heat_map[]" id="Heat_map_0" value="heatmap" class="0" checked="checked" />
+                                <div>
+                                    <label for="Heat_map_0">
+                                        Heat Map
+                                    </label>
+                                </div>
+                            </a>
+
+
+                            <input type="hidden" name="vode_id[]" value="0" />
+
+
+                        </div><div class="col-md-4 align-center">
+                            <button type="submit" class="btn btn-default" id="temp"><strong><font color="white">Search</font></strong></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-default" id="temp" onclick="javascript:return generate_code();"><strong><font color="white">Compare</font></strong></button>
+                        </div>
+                    </div>
+
+            </div> 
+        </div>
+
+
     <div class="row">
         <div class="col-md-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" class="allbrands1">Include All Videos From Other Brands   
     {if $video_num_rows1>0}
