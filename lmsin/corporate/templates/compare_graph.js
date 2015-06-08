@@ -1132,7 +1132,7 @@ data-toggle="popover" data-placement="bottom" style="width:'+width+'%"></div>';
         tooltip: {
             formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
-                        "Avg. Engagement at " + this.x + " :<br/>" + this.y;
+                        "Avg. Emotion at " + this.x + " :<br/>" + this.y;
             }
         },
         legend: {
@@ -1358,7 +1358,7 @@ data-toggle="popover" data-placement="bottom" style="width:'+width+'%"><!/div>';
         tooltip: {
             formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
-                        "Avg. Engagement at " + this.x + " :<br/>" + this.y;
+                        "Avg. Emotion at " + this.x + " :<br/>" + this.y;
             }
         },
         legend: {
