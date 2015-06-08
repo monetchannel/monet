@@ -38,7 +38,7 @@ function get_leaderboard_data(){
     }
     //data related to cf_id
     $cf_id_data = get_last_cf_id($_COOKIE['UserId']);
-    $SQL="SELECT cf.cf_comment,up.up_fname,up.up_ext FROM `content_feedback` cf JOIN users u ON cf.cf_user_id=u.user_id JOIN uploads up ON u.user_id=up.up_s_id WHERE cf_c_id='{$cf_id_data['c_id']}' AND up.up_s_type='user_profile_photo' ORDER BY cf_date DESC LIMIT 0,2";
+    $SQL="SELECT cf.cf_comment,up.up_fname,up.up_ext FROM `content_feedback` cf JOIN users u ON cf.cf_user_id=u.user_id JOIN uploads up ON u.user_id=up.up_s_id WHERE cf.cf_c_id='{$cf_id_data['c_id']}' AND up.up_s_type='user_profile_photo' AND cf.cf_comment !='' ORDER BY cf_date DESC LIMIT 0,2";
     eq($SQL, $rs);
     while($data=mfa($rs)){
         
