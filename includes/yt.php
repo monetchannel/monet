@@ -117,6 +117,27 @@ function getVideoID($url){
       return $id;      
 }
 
+function getnewVideoDetails($url) {                                                //palash
+      // create an array to return
+      $videoDetails = Array();
+      $id=getVideoID($url);
+      
+          $youtube = "http://www.youtube.com/oembed?url=". $url ."&format=json";
+
+ 
+  $videoDetails = json_decode(file_get_contents($youtube), true);
+
+	  $videoDetails['length']=$video->length;
+	  $videoDetails['rating']=$video->rating;
+	  $videoDetails['category']=$video->category;
+      $videoDetails->title = $video->title;
+      $videoDetails->description = $video->description;
+      $videoDetails['thumbnail'] = "http://i.ytimg.com/vi/".$id."/2.jpg";
+
+      return $videoDetails;
+}                                                                         //palash
+
+
    // will accept a youtube video ID
    // returns title, description, thumbnail
 function getVideoDetails($id) {
