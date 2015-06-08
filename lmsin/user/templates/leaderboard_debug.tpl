@@ -6,8 +6,10 @@
         <script src="amcharts.js" type="text/javascript"></script>
         <script src="radar.js" type="text/javascript"></script>
         <script type="text/javascript">
-            var chart;
-
+                window.onload = function() {
+                    setHeight();
+                };
+                
             var chartData = [
                 {
                     "direction": "Happy",
@@ -88,7 +90,7 @@
                 guide.toAngle = 315;
                 guide.value = 0;
                 guide.toValue = 9;
-                guide.fillColor = "#F1F1F1";
+                guide.fillColor = "#f1f1f1";
                 guide.fillAlpha = 0.6;
                 valueAxis.addGuide(guide);
 
@@ -99,22 +101,86 @@
                 guide.toAngle = 135;
                 guide.value = 0;
                 guide.toValue = 9;
-                guide.fillColor = "#F1F1F1";
+                guide.fillColor = "#f1f1f1";
                 guide.fillAlpha = 0.6;
                 valueAxis.addGuide(guide);
 
                 // WRITE                
                 chart.write("radar");
             });
+            
+            
+                function setHeight(){
+                    var height1 = document.getElementById('max-height-container').offsetHeight;
+                    var height2 = document.getElementById('topcontainer1').offsetHeight;
+                    var height3 = document.getElementById('topcontainer2').offsetHeight;
+                    var maxheight = height1;
+                    if(maxheight<height2)
+                        maxheight=height2;
+                    if(maxheight<height3)
+                        maxheight=height3;
+                    maxheight+=10;
+                    document.getElementById('topcontainer1').style.height = maxheight+'px';
+                    document.getElementById('max-height-container').style.height = maxheight+'px';
+                    document.getElementById('topcontainer2').style.height = maxheight+'px';
+                }
         </script>
         <style type="text/css">
+            .talk-bubble {
+                margin-top: 40px;
+                margin-left: 0px;
+                display: inline-block;
+                position: relative;
+                min-width: 40px; 
+                height: auto;
+                color: #ffffff;
+                background-color: #614197;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .tri-right.border.left-top:before {
+                content: ' ';
+                position: absolute;
+                width: 0;
+                height: 0;
+                left: -20px;
+                right: auto;
+                top: -8px;
+                bottom: auto;
+                border: 32px solid;
+                border-color: #ffffff transparent transparent transparent;
+            }
+            .tri-right.left-top:after{
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                left: -20px;
+                right: auto;
+                top: 0px;
+                bottom: auto;
+                border: 22px solid;
+                border-color: #614197 transparent transparent transparent;
+            }
+            .aspect-ratio {
+                position: relative;
+                width: 100%;
+                height: 0;
+                padding-bottom: 40%;    //maintains aspect ratio in percentage
+            }
+            .aspect-ratio iframe {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0; top: 0;
+            }
             *{
                 padding: 0px;
                 margin: 0px;
             }
             #timeline{
-                height:450px;
-                width:800px;
+               // height:450px;
+               // width:800px;
                 background:#f1f1f1;
                 margin-left:10px;
                 margin-top:10px;
@@ -123,13 +189,13 @@
             }
             #radar{
                 height:200px;
-                width:265px;
-                background:#f1f1f1;
-                border:1px solid #fff;
+                width: 100%;
+                //background:#f1f1f1;
+                //border:1px solid #fff;
                 float:left;
-               margin-left:1px;
-               margin-top:1px;
-			   color:#f1f1f1;
+                margin-left:1px;
+                margin-top:1px;
+                color:#f1f1f1;
             }
             #youtube{
                 height:200px;
@@ -143,8 +209,8 @@
                margin-top:1px;
             }
              #rank{
-                height:200px;
-                width:190px;
+                //height:200px;
+                //width:190px;
                background:#f1f1f1;
                 border-bottom:1px solid #fff;
                 border-right:1px solid #fff;
@@ -165,8 +231,8 @@
                margin-top:1px;
             }
              #comments{
-                height:55%;
-                width:230px;
+                //height:55%;
+                //width:100%;
                background:#f1f1f1;
                 border-bottom:1px solid #fff;
                border-right:1px solid #fff;
@@ -177,7 +243,7 @@
             }
              #demo{
                 height:55%;
-                width:280px;
+              //  width:280px;
              background:#f1f1f1;
                 border-bottom:1px solid #fff;
                border-right:1px solid #fff;
@@ -192,33 +258,30 @@
 			#ranking
 			{
 			background:#f1f1f1;
-			height:290px;
-			width:190px;
+			//height:290px;
+			//width:190px;
 			color:#333;
-			text-align:center;
+			//text-align:center;
 			margin-left:10px;
 			float:left;
 			}
 			#head
 			{
-			background:#614197;
-			height:30px;
-			width:190px;
-			color:#f1f1f1;
-			font-size:16px;
-			float:left;
-			border:1px solid#614197;
+			background: #614197;
+                        color: #fff;
+                        font-size: 16px;
 			}
 			#head_tab
 			{
-			background:#ccc;
-			height:25px;
+			background:#614197;
+			height:35px;
 			float:left;
-			color:#000;
-			font-size:16px;
-			width:100%;
+			color:#fff;
+			font-size:20px;
+			width:98%;
 			margin-top:30px;
 			text-align:center;
+                        margin-bottom: 20px;
 			}
 			#command
 			{
@@ -237,193 +300,140 @@
 			
 			
     </head>
-    <body>
-	<div id="ranking">
-	<div id="head"><b>Rewards Leader Cap</b></div><table style="background:#f1f1f1;color:#333;">
-            <tr style="border-color:#000000;border:10px;">
-                <td style="align:left;">
-                    <div style="overflow:auto;">
-                        <div style="float:left;">
-                            <h3><b>{$data[0].points}</b></h3>
-                            <h5>POINTS</h5>
-                            <p>{$data[0].rank}. {$data[0].name}</p>
-                        </div>
-                        <div style="float:left;padding-left:5px;">
-                            <img src="{$data[0].profile_img}" alt="{$data[0].profile_img}" style="vertical-align:middle;width:7.5em;height:7.5em;border:1px solid #614197;"/>
-                        </div>
+    <body onresize="setHeight()">
+        <div class="row" style="width: 110%;overflow-y: hidden;">
+            <div class="col-md-4" id="topcontainer1" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;">
+                <div id="head" class="text-center row">
+                    <b>Rewards &nbsp; Leader &nbsp; Cap</b>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
+                        <h3 class="text-center" style="vertical-align:middle;">
+                            <b class="text-danger">{$data[0].points}</b>
+                            Points
+                        </h3>
                     </div>
-                </td>
-            </tr>
-			<tr>
-            
-                {$i = 1}
-            {while $i < 5}
-                    <td><p style="float:left;">{$data[$i].rank}. {$data[$i].name}</p><p style="float:right;">{$data[$i].points}</p></td>
-					
-                </tr>
-                {$i++}
-            {/while}
-        </table>
-		</div>
-		<div id="ranking"><div id="head"><b>Rating Leader Cap</b></div>
-		</div>
-		<div id="ranking"><div id="head">Leader Cap</div>
-		</div>
-		<div id="ranking"><div id="head">Leader Cap</div>
-		</div>
-	
-      <div id="head_tab">TimeLIne
-	  </div>
-        <div id="timeline">
-            <div id="rank"><div id="command">About ME</div>
-                <h1>You</h1>
-                <div id="stats">
-				  <div id="img-div">
-                    <img src="{$user_data.profile_image}" width="80" height="80" style="vertical-align:middle;width:7.5em;height:7.5em;border:1px solid #614197;"/>
+                    <div class="col-sm-7">
+                        <img class="img-responsive" src="{$data[0].profile_img}" alt="{$data[0].profile_img}" style="border:1px solid #614197;max-width: 100%;"/>
+                    </div>
                 </div>
-                    <p>Rank: {$user_data.rank}</p>
-                    <p>Points: {$user_data.points}</p>
+                <br>
+                <div class="row text-info" style="font-size: 20px;">
+                    <div class="col-md-3">
+                        <p style="float:right;">1 .</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p class="text-center">{$data[0].name}</p>
+                    </div>
                 </div>
-              
+                <br>
+                {for $i=1 to 4}
+                    <div class="row" style="font-size: 16px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-7">{$data[$i].rank}. {$data[$i].name}</div>
+                        <div class="col-sm-3 text-center">{$data[$i].points}</div>
+                    </div>
+                {/for}
             </div>
-            <div id="youtube"><div id="command">Last Watched Video Ad</div>
-              <iframe width="340" height="172.5" src="{$cf_data.c_url}">
-              </iframe>  
+            <div class="col-md-4" id="max-height-container" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;">
+                <div id="head" class="text-center row">
+                    <b>About &nbsp; Me</b>
+                </div>
+                <h2 class="text-center">You</h2>
+                <img class="img-responsive" src="{$user_data.profile_image}" style="border:1px solid #614197;margin: 0 auto;max-width: 50%;max-height: 40%;"/>
+                <h3 class="text-center">Rank : {$user_data.rank}</h3>
+                <h3 class="text-center">Points : {$user_data.points}</h3>
             </div>
-            <div id="radar" style="background-color:#ececec;"><div id="command">Your Last Radar</div>
-                
-            </div>
-            <div id="comments"><div id="command">Last Comment</div>
-</br>
-               <p>&nbspYou: {$cf_data.comment}</p>
-
-            </div>
-         
-            <div id="demo"><div id="command">Top 5 Ratings</div>
-                <table border="1">
-                  <!-- Table goes in the document BODY -->
-<table class="hovertable">
-<tr>
-	<th>User</th><th>Rating</th>
-</tr>
- {foreach from=$rating_data item=row}
-                        <tr {if $row.user_id == $user.id}bgcolor="#000"{/if}>
-                            <td>{$row.name}</td>
-                            <td>{$row.rating}</td>
-                        </tr>
-                    {/foreach}
-
-</table>
-            </div>
-	   	<div id="reward"><div id="command">Last Redemption</div>
-                {if $latest_reward.count > 0}
-                    <h2>Your Latest Redemption</h2>
-                    <p>{$latest_reward.subtitle}</p>
-                    <img src="{$latest_reward.image}" width="80" height="80"/>
-                    <p>Redeemed for {$latest_reward.points} points.</p>
-                {else}
-                    <br><br>
-                    <div class="text-center alert alert-info">You have not redeemed any rewards yet!</div>
-                {/if}
+            <div class="col-md-4" id="topcontainer2" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;">
+                <div>
+                    <div id="head" class="text-center row">
+                        <b>Last &nbsp; Redemption</b>
+                    </div>
+                    {if $latest_reward.count > 0}
+                        <h3 class="text-center">Your Latest Redemption</h3>
+                        <h4 class="text-center">{$latest_reward.subtitle}</h4>
+                        <img class="img-responsive" src="{$latest_reward.image}" style="margin:0 auto;max-height: 40%;max-width: 50%;"/>
+                        <br>
+                        <h4 class="text-center">Redeemed for {$latest_reward.points} points.</h4>
+                    {else}
+                        <br><br>
+                        <div class="text-center alert alert-info">You have not redeemed any rewards yet!</div>
+                    {/if}
+                </div>
             </div>
         </div>
-       <!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
-table.hovertable {
-	font-family: verdana,arial,sans-serif;
-	font-size:11px;
-	color:#000;
-	border-width: 1px;
-	border-color: #999999;
-	border-collapse: collapse;
-	width:100%;
-}
-table.hovertable th {
-	background-color:#614197;
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
-table.hovertable tr {
-	 background: f1f1f1;
-}
-table.hovertable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
-</style>
-
-        
+        <div id="head_tab">
+            <b>TimeLine</b>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row text-center" id="head" style="width:100%;">
+                    Last Watched Video Ad
+                </div>
+                <div class="row aspect-ratio">
+                    <iframe style="width: 100%;height: 100%;" src="{$cf_data.c_url}"></iframe>  
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+                <br>
+        <div class="row" style="width: 110%;">
+            <div id="radarindex" class="col-md-4" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;">
+                <div id="head" class="text-center row">Your Last Radar</div>
+                <div id="radar" style="background-color:#f1f1f1;"></div>
+            </div>
+            <div class="col-md-4" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;height: 223px;">
+                <div id="head" class="text-center row">Last Comment</div>
+                <div class="row">
+                    <div class="col-md-3" style="margin-top:25px;">
+                        <img class="img-responsive img-circle" src="{$last_comment[0].image}" style="margin-right: 0;width: 30px;height:30px"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="talk-bubble tri-right left-top">
+                            <div class="talktext">
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$last_comment[0].cf_comment}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {if $last_comment[1]}
+                    <div class="row">
+                        <div class="col-md-3" style="margin-top:25px;">
+                            <img class="img-responsive img-circle" src="{$last_comment[1].image}" style="margin-right: 0;width: 30px;height:30px"/>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="talk-bubble tri-right left-top">
+                                <div class="talktext">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$last_comment[1].cf_comment}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+            <div class="col-md-4" style="background: #f1f1f1;margin-left: 1px;margin-right: 1px;height: 223px;">
+                <div id="head" class="text-center row">Top 5 Ratings</div>
+                <div class="row" style="font-size:16px;background: #ececec;padding-top: 10px;padding-bottom: 10px;">
+                    <div class="col-md-6"><b>User</b></div>
+                    <div class="col-md-3"><b>Emotion</b></div>
+                    <div class="col-md-3"><b>Rating</b></div>
+                </div>
+                    {foreach from=$rating_data item=row}
+                        <div class="row" style="font-size:16px;" {if $row.user_id == $user.id}style="background:#ececec;"{/if}>
+                            <div class="col-md-6">{$row.name}</div>
+                            <div class="col-md-3">{$row.emotion}</div>
+                            <div class="col-md-3">{$row.rating}</div>
+                        </div>
+                    {/foreach}
+                
+            </div>
+        </div>
+        <br>
     </body>
             <script type="text/javascript">
-	
-	$(function(){
-		// 
-		$(".emotion-indicator").css("visibility","hidden");
-		var winWidth = $(window).width();
-		$(".col-md-2 a").hover(
-		  function() {
-			$( this ).children(".emotion-indicator").css("visibility","visible");
-			}, function() {
-			$( this ).children(".emotion-indicator").css("visibility","hidden");
-		  }
-		);
-		//alert(winWidth);
-		var ar_id = "5";
-		// heat map
-		$.ajax({
-			{literal}
-			type: 'GET',
-			url: "leaderboard.php?act=get_heatmap_data&ar_id="+ar_id,
-			dataType: 'json',
-			success: function(res) {
-				if(res)
-				{
-					var html="";
-					$.each(res.emotions,function(key, val){
-						var width=(val.duration/res.totalLength) * 100;
-						console.log(JSON.stringify(val));
-						html=html+'<div class="'+val.emotion+' emotion-inline" style="width:'+width+'%"></div>';
-					});
-					$(".emotion-container").html(html);
-				}else {
-					$(".emotion-container").html('');
-				}
-			},
-			error: function (jqXHR,text_status,err_msg) {
-				alert('ERROR : '+text_status+' '+err_msg);
-			},
-			{/literal}
-		});
-		
-		// get cumulative heat map data
-		var c_id = '{$cf_data.c_id}';
-		$.ajax({
-			{literal}
-			type: 'GET',
-			url: "leaderboard.php?act=get_all_heatmap_data&c_id="+c_id,
-			dataType: 'json',
-			success: function(res) {
-				if(res)
-				{
-					var html="";
-					$.each(res.emotions,function(key, val){
-						var width=(val.duration/res.totalLength) * 100;
-						console.log(JSON.stringify(val));
-						html=html+'<div class="'+val.emotion+' emotion-inline" style="width:'+width+'%"></div>';
-					});
-					$(".allemotion-container").html(html);
-				}else {
-					$(".allemotion-container").html('');
-				}
-			},
-			error: function (jqXHR,text_status,err_msg) {
-				alert('ERROR : '+text_status+' '+err_msg);
-			},
-			{/literal}
-		});});
+                
          </script>
 {/block}
