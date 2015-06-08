@@ -11,6 +11,7 @@ function get_leaderboard_data(){
     //store all the results in order of descending total points
     $get_ordered_results_SQL = "SELECT rp_u_id, points FROM reward_point ORDER BY points DESC";
     eq($get_ordered_results_SQL, $rs);
+    $last_comment=array();
 //    $ordered_data = mfa($rs);
     $rank = 0; 
     while ($row = mfa($rs)){
@@ -37,15 +38,66 @@ function get_leaderboard_data(){
     }
     //data related to cf_id
     $cf_id_data = get_last_cf_id($_COOKIE['UserId']);
+    $SQL="SELECT cf.cf_comment,up.up_fname,up.up_ext FROM `content_feedback` cf JOIN users u ON cf.cf_user_id=u.user_id JOIN uploads up ON u.user_id=up.up_s_id WHERE cf_c_id='{$cf_id_data['c_id']}' AND up.up_s_type='user_profile_photo' ORDER BY cf_date DESC LIMIT 0,2";
+    eq($SQL, $rs);
+    while($data=mfa($rs)){
+        
+        $image="../../uploads/thumb_".$data['up_fname'].$data['up_ext'];
+        $data["image"]=$image;
+        array_push($last_comment,$data);
+    }
+    
     $radar_chart_data = get_radar_chart_from_cf_id($cf_id_data['id']);
-	$user_data=get_current_user_info();
-	$userimage = $user_data['profile_image'];
+    $user_data=get_current_user_info();
+    $userimage = $user_data['profile_image'];
+    $cdate = date('Y-m-d H:i:s');
+    $companies=array();
+    $SQL="select distinct(company_id),company_url,company_name from company,content where company_id=c_company_id order by company_name";
+    eq($SQL,$rs);
+    while($data=mfa($rs))
+    {
+            $comp .= '\''.$data['company_id'].'\''.',';
+            if(get_upload_info($data[company_id],"company_logo",0,$company_logo)>0)
+                    $data[company_logo]=$company_logo[up_thumb_view_path];
+            else
+                    $data[company_logo]='';
+
+
+            if($data['company_id'] == $R['brand'])
+            {
+                    $data['selected'] = 'selected';
+            }else {
+                    $data['selected'] = '';
+            }
+
+            //$data[video_list]=brand_videos($data[company_id],$data[company_url]);	
+            array_push($companies,$data);
+    }
+
+    ## ---------------------------- Count Campaign ---------------------------------------------------
+    $campaigns_sql = "select count(*) as total from campaigns as cmp inner join content as co on cmp.cmp_c_id = co.c_id inner join map_campaign_user as mcu on mcu.map_campaign_id=cmp.cmp_id where cmp.cmp_start <= '{$cdate}' and mcu.map_user_id = '{$_COOKIE[UserId]}'";
+    eq($campaigns_sql,$cmp_count);
+    $cmp = mfa($cmp_count);
+
+    $SQL1 = "SELECT c.c_url FROM content c
+            JOIN campaigns cmp ON c.c_id=cmp.cmp_c_id
+            JOIN map_campaign_user mcu ON mcu.map_campaign_id=cmp.cmp_id
+            WHERE mcu.map_user_id='$_COOKIE[UserId]]'";
+
+    eq($SQL1,$rs1);
+    while($result1 = mfa($rs1)) {
+            if(!check_vid_exist($result1[c_url]))
+                            $cmp[total]--;
+    }
     $smarty = new Smarty;
     $smarty->assign(array("data"=>$board_data,
                      "rating_data"=>get_rating_leaderboard($cf_id_data['c_id']),
                      "user_data"=>$user_data,
                      "cf_data"=>$cf_id_data,
                      "userimage"=>$userimage,
+                     "companies"=>$companies,
+                     "last_comment"=>$last_comment,
+                     "cmp_count"=>$cmp,
                      "radar_chart_data"=>$radar_chart_data,
                      "latest_reward"=>get_latest_reward_info($_COOKIE['UserId'])));
     $smarty->display("leaderboard_debug.tpl");
@@ -73,7 +125,7 @@ function get_current_user_info(){
     $get_image_SQL = "SELECT * FROM `uploads` WHERE up_s_type='user_profile_photo' and up_s_id='$user_id'";
     eq($get_image_SQL, $image);
     $image = mfa($image);
-    $user_image = "../../uploads/thumb_".$image['up_fname'];
+    $user_image = "../../uploads/thumb_".$image['up_fname'].$image['up_ext'];
     
     //rank and points
     $get_ordered_results_SQL = "SELECT points FROM reward_point WHERE rp_u_id='$user_id'";
@@ -91,21 +143,32 @@ function get_current_user_info(){
  * @return $formatted_cf_data  relevant data about the latest cf_id
  */
 function get_last_cf_id($user_id){
-    $get_cf_data_SQL = "SELECT cf_date, cf_id, cf_c_id, cf_comment FROM content_feedback WHERE cf_user_id='$user_id' ORDER BY cf_date DESC";
+    $get_cf_data_SQL = "SELECT cf_date, cf_id, cf_c_id, cf_comment,cf_ep_id FROM content_feedback WHERE cf_user_id='$user_id' AND cf_rating>='0'   ORDER BY cf_date DESC LIMIT 0,1";
     eq($get_cf_data_SQL, $cf_data);
     $cf_data = mfa($cf_data);
     
-    $get_c_url_SQL = "SELECT c_url FROM content WHERE c_id='{$cf_data['cf_c_id']}'";
-    eq($get_c_url_SQL, $c_url_data);
-    $c_url_data= mfa($c_url_data);
-	
+    if($cf_data[cf_ep_id]){
+        $get_c_url_SQL = "SELECT c_url FROM content WHERE c_id='{$cf_data['cf_c_id']}'";
+        eq($get_c_url_SQL, $c_url_data);
+        $c_url_data= mfa($c_url_data);
+    }
+    else
+        $c_url_data["c_url"]="";
+    if($cf_data[cf_ep_id]){
+        $SQL="Select * from emotional_profile where ep_id='$cf_data[cf_ep_id]]'";
+        eq($SQL,$emotion);
+        $emotion=mfa($emotion);
+    }
+    else
+        $emotion="";
+        
     $formatted_cf_data = array();
     $formatted_cf_data["id"] = $cf_data["cf_id"];
     $formatted_cf_data["c_url"] = $c_url_data["c_url"];
     $formatted_cf_data["c_id"] = $cf_data['cf_c_id'];
     $formatted_cf_data["date"] = $cf_data["cf_date"];
     $formatted_cf_data["comment"] = $cf_data["cf_comment"];
-    
+    $formatted_cf_data["emotion"]=$emotion;
     return $formatted_cf_data;
 }
 
@@ -145,6 +208,7 @@ function get_latest_reward_info($user_id){
     $count=eq($get_latest_reward_SQL, $reward_data);
     $reward_data = mfa($reward_data);
     
+    
     $reward_id = $reward_data['rr_r_id'];
     $get_reward_info_SQL = "SELECT * FROM reward WHERE r_id='$reward_id'";
     eq($get_reward_info_SQL, $reward_info);
@@ -154,16 +218,16 @@ function get_latest_reward_info($user_id){
     $reward_subtitle = $reward_info['sub_title'];
     $reward_image = "../../uploads/".$reward_info['r_image'];
     $reward_points = $reward_info['points'];
-    if($count)
-        $formatted_reward_data['count']=$count;
-    else
-        $formatted_reward_data['count']=0;
     
     $formatted_reward_data =array(); 
     $formatted_reward_data["title"] = $reward_title;
     $formatted_reward_data["subtitle"] = $reward_subtitle;
     $formatted_reward_data["image"] = $reward_image;
     $formatted_reward_data["points"] = $reward_points;
+    if($count)
+        $formatted_reward_data['count']=$count;
+    else
+        $formatted_reward_data['count']=0;
     
     return $formatted_reward_data;
 }
@@ -213,21 +277,26 @@ ORDER BY ar_id ASC
 }
 
 function get_rating_leaderboard($c_id){
-    $get_cf_ratings_SQL = "SELECT cf_rating, cf_user_id FROM content_feedback WHERE cf_c_id='$c_id' ORDER BY cf_rating DESC";
+    $get_cf_ratings_SQL = "SELECT cf.cf_rating, cf.cf_user_id,ep.ep_name FROM content_feedback cf JOIN emotional_profile ep ON cf.cf_ep_id=ep.ep_id WHERE cf_c_id='$c_id' ORDER BY cf_rating DESC";
     eq($get_cf_ratings_SQL, $cf_ratings);
     $i=0;
     $rating_leaderboard_data = array();
     while ($cf_rating = mfa($cf_ratings)) {
-        if ($cf_rating > 0 && count($rating_leaderboard_data) <= 5){
+        if ($cf_rating > 0 && count($rating_leaderboard_data) <= 4){
             $current_row = array();
             $get_user_name_for_id = "SELECT user_fname, user_lname, user_id FROM users WHERE user_id='{$cf_rating['cf_user_id']}'";
             eq($get_user_name_for_id, $name);
             $name = mfa($name);
+            
+            
+            
             $user_id = $name["user_id"];
             $name = $name["user_fname"]." ".$name["user_lname"];
             $current_row["name"] = $name;
             $current_row["rating"] = $cf_rating["cf_rating"];
+            $current_row["comment"] = $cf_rating["cf_comment"];
             $current_row["user_id"] = $user_id;
+            $current_row["emotion"] = $cf_rating["ep_name"];
             array_push($rating_leaderboard_data, $current_row);
 			$i++;
         }   
