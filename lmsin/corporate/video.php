@@ -201,7 +201,7 @@ function video_save()
 	if($R[video]==0)
 	{
 		$id = getVideoID($R[c_url]);
-		$videoDetails=getVideoDetails($id);
+		$videoDetails=getnewVideoDetails($R[c_url]);
 		$R[c_length]=sprintf("%0.2f", $videoDetails['length']/60) . " min.";
 		$R[c_youtube_rating]=$videoDetails['rating'];
 		$c_category=addslashes($videoDetails['category']);
