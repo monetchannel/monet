@@ -399,7 +399,7 @@
                         </div>
                     </div>
                 </div>
-                {if $last_comment[1]}
+                {if $last_comment[1].cf_comment !=""}
                     <div class="row">
                         <div class="col-md-3" style="margin-top:25px;">
                             <img class="img-responsive img-circle" src="{$last_comment[1].image}" style="margin-right: 0;width: 30px;height:30px"/>
